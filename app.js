@@ -2,9 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+const authRoutes = require("./routes/auth");
+
 const app = express();
 
-// app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
+
 app.use(bodyParser.json()); // application/json
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -16,6 +18,9 @@ app.use((req, res, next) => {
   next();
 });
 
+//route yang sesunguhnya
+app.use("/auth", authRoutes);
+
 //err handling
 //always jika adda err yang di next
 app.use((error, req, res, next) => {
@@ -24,9 +29,11 @@ app.use((error, req, res, next) => {
   const message = error.message;
   res.status(status).json({ message: message });
 });
+
+//make the server
 mongoose
   .connect(
-    "mongodb+srv://Bahar:6MWAjH8aEzv4RGj4@cluster0.ns6mj.mongodb.net/node-academind?retryWrites=true&w=majority"
+    "mongodb+srv://genbi:MongoDB12@cluster0.enucz.mongodb.net/genbi?retryWrites=true&w=majority"
   )
   .then((result) => {
     app.listen(8080);
