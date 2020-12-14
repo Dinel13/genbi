@@ -33,9 +33,9 @@ app.use((error, req, res, next) => {
 //make the server
 mongoose
   .connect(
-    "mongodb+srv://genbi:MongoDB12@cluster0.enucz.mongodb.net/genbi?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.MONGGODB_USER_PASSWORD}@cluster0.enucz.mongodb.net/genbi?retryWrites=true&w=majority`
   )
   .then((result) => {
-    app.listen(8080);
+    app.listen(process.env.PORT || 8080);
   })
   .catch((err) => console.log(err));
