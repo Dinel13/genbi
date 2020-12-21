@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const Navbar = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
@@ -39,15 +38,17 @@ const Navbar = (props) => {
               </Link>
             </li>
           </ul>
-          <div className="d-flex">
-            <a
-              href="#"
-              data-toggle="modal"
-              data-target={"#register_online"}
-              className="btn btn-sm btn-success"
-            >
-              Register Online
-            </a>
+          <div className="d-flex py-10">
+            <Link to="signup" className="btn btn-sm btn-success">
+              Sign Up
+            </Link>
+            <Link to="login" className="btn btn-sm btn-success">
+              Login
+            </Link>
+            <button onClick={()=>{}}
+             className="btn btn-sm btn-danger">
+              Keluar
+            </button>
           </div>
         </div>
       </div>

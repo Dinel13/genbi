@@ -5,6 +5,7 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import SignUp from "./components/SignUp";
+import Login from "./components/Login";
 import Home from "./Page/Home";
 import Pendaftaran from "./Page/Pendaftaran";
 
@@ -12,13 +13,17 @@ const App = () => {
   return (
     <>
       <Navbar />
-<br/>
-<br/>
-      <SignUp />
-
+      <br />
+      <br />
       <Switch>
         <Route path="/" exact>
           <Home />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/login" exact>
+          <Login />
         </Route>
         <Route path="/pendaftaran" exact>
           <Pendaftaran />

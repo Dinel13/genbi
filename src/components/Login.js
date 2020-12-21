@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function SignUp() {
+export default function Login() {
   return (
     <div>
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="staticBackdropLabel">
-              Register Online
+              Login
             </h5>
-            </div>
+          </div>
           <div className="custom-divider"></div>
           <div className="modal-body">
             <p>
@@ -19,23 +19,15 @@ export default function SignUp() {
             <form>
               <div className="mb-3">
                 <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  placeholder="Nama Lengkap"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <input
                   type="email"
                   className="form-control form-control-sm"
-                  placeholder="Alamat email"
+                  placeholder="Alamat Email"
                   required
                 />
               </div>
               <div className="mb-3">
                 <input
-                  type="password"
+                  type="tel"
                   className="form-control form-control-sm"
                   placeholder="Password"
                   required
@@ -43,17 +35,9 @@ export default function SignUp() {
               </div>
               <div className="mb-3">
                 <input
-                  type="password"
-                  className="form-control form-control-sm"
-                  placeholder="Ulangi Password"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <input
                   type="submit"
                   className="btn btn-success btn-block btn-sm"
-                  value="Sign Up Sekarang"
+                  value="Masuk Sekarang"
                 />
               </div>
             </form>
