@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Home from "./Page/Home";
+import UseForm from "./Page/useForm";
 import Pendaftaran from "./Page/Pendaftaran";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact>
           <Home />
+          <UseForm />
         </Route>
         <Route path="/signup">
           <SignUp />

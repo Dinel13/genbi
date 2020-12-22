@@ -1,131 +1,71 @@
 export const AUTH_WITH_DATA = "AUTH_WITH_DATA";
 export const LOGOUT = "LOGOUT";
 
-let timer;
-
-export const AuthWithData = (userId, token, expDate) => {
+export const AuthWithData = (userId, token) => {
   return (dispatch) => {
-    dispatch(setLogutTimer(expDate));
     dispatch({ type: AUTH_WITH_DATA, token: token, userId: userId });
   };
 };
 
-export const Signup = (email, password) => {
+export const Signup = (email, password, name) => {
   return async (dispatch) => {
-    const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBfdVRzwgssDItRf6Zi8ytfWy0dXBn_E_0",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }),
-      }
-    );
+    const response = await fetch("http://localhost:8080/auth/signup", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+      }),
+    });
 
     if (!response.ok) {
       const errResData = await response.json();
-      const errorId = errResData.error.message;
+      const errorId = errResData.message;
       let pesan = "masalah terjadi di server";
-      if (errorId === "EMAIL_EXISTS") {
-        pesan = "Email sudah digunakan";
+      if (errorId) {
+        pesan = errorId;
       }
       throw new Error(pesan);
     }
 
     const resData = await response.json();
-    console.log(resData);
-    dispatch(
-      AuthWithData(
-        resData.localId,
-        resData.idToken,
-        parseInt(resData.expiresIn) * 1000
-      )
-    );
-    const expirationDate = new Date(
-      //dibungkus Date agar hasil kembali ke objek date
-      new Date().getTime() + parseInt(resData.expiresIn) * 1000 // dikali 1000 agar menjadi milisekon kareana getTime menghasilkan milisekon
-    );
-    saveDataToStrorage(resData.idToken, resData.localId, expirationDate);
+    dispatch(AuthWithData(resData.userId, resData.token));
   };
 };
 
 export const Login = (email, password) => {
   return async (dispatch) => {
-    const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBfdVRzwgssDItRf6Zi8ytfWy0dXBn_E_0",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }),
-      }
-    );
+    const response = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
 
     if (!response.ok) {
       const errResData = await response.json();
-      const errorId = errResData.error.message;
+      const errorId = errResData.message;
       let pesan = "masalah terjadi di server";
-      if (errorId === "EMAIL_NOT_FOUND") {
-        pesan = "Email tidak bisa ditemukan";
-      } else if (errorId === "INVALID_PASSWORD") {
-        pesan = "Passord anda tidak benar";
+      if (errorId) {
+        pesan = errorId;
       }
       throw new Error(pesan);
     }
 
     const resData = await response.json();
-    dispatch(
-      AuthWithData(
-        resData.localId,
-        resData.idToken,
-        parseInt(resData.expiresIn) * 1000
-      )
-    );
-    const expirationDate = new Date(
-      //dibungkus Date agar hasil kembali ke objek date
-      new Date().getTime() + parseInt(resData.expiresIn) * 1000 // dikali 1000 agar menjadi milisekon kareana getTime menghasilkan milisekon
-    );
-    saveDataToStrorage(resData.idToken, resData.localId, expirationDate);
+    dispatch(AuthWithData(resData.userId, resData.token));
   };
 };
 
 export const Logout = () => {
-  clearLOgoutTimer();
-  AsyncStorage.removeItem("userData");
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
   return { type: LOGOUT };
-};
-
-const clearLOgoutTimer = () => {
-  if (timer) {
-    clearTimeout(timer);
-  }
-};
-
-export const setLogutTimer = (expTime) => {
-  return (dispatch) => {
-    timer = setTimeout(() => {
-      dispatch(Logout());
-    }, expTime);
-  };
-};
-
-const saveDataToStrorage = (token, userId, expirationDate) => {
-  AsyncStorage.setItem(
-    "userData", //sebagai keynya
-    JSON.stringify({
-      token: token,
-      userId: userId,
-      expDate: expirationDate.toISOString(),
-    })
-  );
 };
