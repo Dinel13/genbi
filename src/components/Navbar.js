@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
-      <div className="container">
-        <a className="navbar-brand" href="/">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <div className="container-fluid">
+        <a className="navbar-brand ms-3" href="/">
           <img
             src="https://genbiunhas.org/storage/web_assets/genbiUH1.png"
             alt=""
@@ -15,7 +15,7 @@ const Navbar = (props) => {
           GenBI
         </a>
         <button
-          class="navbar-toggler"
+          class="navbar-toggler me-3"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
