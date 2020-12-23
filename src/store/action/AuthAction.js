@@ -8,6 +8,9 @@ export const AuthWithData = (userId, token) => {
 };
 
 export const Signup = (email, password, name) => {
+  if (email) {
+    return console.log(email, password, name);
+  }
   return async (dispatch) => {
     const response = await fetch("http://localhost:8080/auth/signup", {
       method: "PUT",
@@ -37,6 +40,11 @@ export const Signup = (email, password, name) => {
 };
 
 export const Login = (email, password) => {
+  return (dispatch) => {
+    console.log(email, password);
+    dispatch(AuthWithData("asdasd", "dasdas"));
+  };
+  /*
   return async (dispatch) => {
     const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
@@ -61,7 +69,7 @@ export const Login = (email, password) => {
 
     const resData = await response.json();
     dispatch(AuthWithData(resData.userId, resData.token));
-  };
+  }; */
 };
 
 export const Logout = () => {

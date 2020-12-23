@@ -1,18 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useDispatch } from "react-redux";
 
-export default function SignUp() {
+import { Signup } from "../store/action/AuthAction";
+
+export default function FormSignUp() {
+  const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = (values) => {
-    // form is valid
-    console.log(values);
+    dispatch(Signup(values.email, values.password, values.nama));
   };
   return (
     <div className="container mt-3">
       <div className="row justify-content-md-center">
-        <div className="card px-0 col-md-8 col-lg-6">
+        <div className="card px-0 col-md-8 col-lg-6 shadow-lg">
           <div className="card-header text-center">
             <h4>Register Online</h4>
           </div>
@@ -21,7 +24,7 @@ export default function SignUp() {
             <div className="col-lg-12">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group mb-3">
-                  <label >Nama Lengkap</label>
+                  <label>Nama Lengkap</label>
                   <input
                     name="nama"
                     placeholder="Masukkan nama anda"
@@ -40,7 +43,7 @@ export default function SignUp() {
                   />
                 </div>
                 <div className="form-group mb-3">
-                  <label >Alamat E-mail</label>
+                  <label>Alamat E-mail</label>
                   <input
                     name="email"
                     placeholder="Masukkan email anda"
