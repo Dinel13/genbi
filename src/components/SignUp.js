@@ -7,12 +7,14 @@ import { Signup } from "../store/action/AuthAction";
 
 export default function FormSignUp() {
   const dispatch = useDispatch();
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, getValues } = useForm();
 
   const onSubmit = (values) => {
-    dispatch(Signup(values.email, values.password, values.nama));
+    // dispatch(Signup(values.email, values.password, values.nama));    
+    console.log(values);
   };
-  return (
+
+   return (
     <div className="container mt-3">
       <div className="row justify-content-md-center">
         <div className="card px-0 col-md-8 col-lg-6 shadow-lg">
@@ -68,6 +70,7 @@ export default function FormSignUp() {
                 <div className="form-group mb-3">
                   <label className="">Password</label>
                   <input
+                    type="password"
                     name="password"
                     placeholder="Masukkan password"
                     className={`form-control ${
@@ -88,6 +91,37 @@ export default function FormSignUp() {
                     errors={errors}
                   />
                 </div>
+                <div className="form-group mb-3">
+                  <label className="">Ulangi Password</label>
+                  <input
+                    type="password"
+                    name="password2"
+                    placeholder="Masukkan password lagi"
+                    className={`form-control ${
+                      errors.password2 ? "is-invalid" : ""
+                    }`}
+                    ref={register({
+                      required: "Password wajib dimasukkan",
+                      minLength: {
+                        value: 6,
+                        message: "Password minimal 6 karakter",
+                      },
+                      validate: (value) => value === getValues("password"),
+                    })}
+                  />
+                 
+                  <ErrorMessage
+                    className="invalid-feedback"
+                    name="password2"
+                    as="div"
+                    errors={errors}
+                  />
+                  {errors.password2?.type === "validate" && (
+                    <span className="invalid-feedback">
+                      password harus sama
+                    </span>
+                  )}
+                </div>
 
                 <button type="submit" className="btn btn-primary btn-block">
                   Submit
@@ -95,7 +129,7 @@ export default function FormSignUp() {
               </form>
             </div>
           </div>
-        </div>{" "}
+        </div>
       </div>
     </div>
   );

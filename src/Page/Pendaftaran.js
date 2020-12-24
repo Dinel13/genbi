@@ -1,9 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import Note from "../components/Note";
 
 const Daftar = (props) => {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, watch, errors, handleSubmit } = useForm();
+  const watchWali = watch("showWali", ""); // you can supply default value as second argument
+  //const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
+  //const watchFields = watch(["showAge", "number"]); // you can also target specific fields by their names
 
   const onSubmit = (values) => {
     console.log(values);
@@ -11,12 +15,15 @@ const Daftar = (props) => {
 
   return (
     <div className="container">
+      <br />
+
+      <Note />
       <div class="progress my-5">
         <div
           class="progress-bar"
           role="progressbar"
-          style={{ width: "25%" }}
-          aria-valuenow="25"
+          style={{ width: "100%" }}
+          aria-valuenow="100"
           aria-valuemin="0"
           aria-valuemax="100"
         >
@@ -27,15 +34,17 @@ const Daftar = (props) => {
         <h1>Form Pendaftaran beasiswa</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="checkbox" name="showAge" ref={register} />
+        {watchWali && (
+          <input type="number" name="age" ref={register({ min: 50 })} />
+        )}
         <div className="card shadow mb-4 p-0">
           <div className="card-header p-3">
             <h3 className="ms-3">Data Diri</h3>
           </div>
           <div className="card-body px-5 py-3">
             <div className="form-group mb-3 row">
-              <label className="col-2 col-sm-3 col-form-label">
-                Nama Lengkap
-              </label>
+              <label className="col-sm-3 col-form-label">Nama Lengkap</label>
               <div className="col">
                 <input
                   name="nama"
@@ -54,8 +63,10 @@ const Daftar = (props) => {
               </div>
             </div>
             <div className="form-group mb-3 row">
-              <label className=" col-sm-3 col-form-label">Jenis Kelamin</label>
-              <div className="col">
+              <label className=" col-sm-3 col-md-3 col-form-label">
+                Jenis Kelamin
+              </label>
+              <div className="col-sm-9 col-md-3 mb-sm-3">
                 <select
                   name="gender"
                   type="text"
@@ -73,6 +84,35 @@ const Daftar = (props) => {
                 <ErrorMessage
                   className="invalid-feedback"
                   name="gender"
+                  as="div"
+                  errors={errors}
+                />
+              </div>
+              <label className="col-sm-3 col-md-2 col-form-label">
+                Kepercayaan
+              </label>
+              <div className="col-sm-9 col-md-4">
+                <select
+                  name="agama"
+                  type="text"
+                  className={`form-select   ${
+                    errors.agama ? "is-invalid" : ""
+                  }`}
+                  ref={register({
+                    required: "Agama harus diisi",
+                  })}
+                >
+                  <option selected></option>
+                  <option value="islam">Islam</option>
+                  <option value="kristen">Kristen</option>
+                  <option value="hindu">Hindu</option>
+                  <option value="budha">Budha</option>
+                  <option value="konhucu">Konghucu</option>
+                  <option value="lainya">Lainya</option>
+                </select>
+                <ErrorMessage
+                  className="invalid-feedback"
+                  name="agama"
                   as="div"
                   errors={errors}
                 />
@@ -105,6 +145,7 @@ const Daftar = (props) => {
                 <input
                   name="tempatLahir"
                   type="text"
+                  placeholder="Masukkan tempat lahir anda"
                   className={`form-control form-date   ${
                     errors.tempat ? "is-invalid" : ""
                   }`}
@@ -121,8 +162,8 @@ const Daftar = (props) => {
               </div>
             </div>
             <div className="form-group mb-3 row">
-              <label className="col-sm-3 col-form-label">Anak ke</label>
-              <div className="col">
+              <label className="col-sm-3 col-form-label ">Anak ke</label>
+              <div className="col-sm-9 col-md-3 mb-sm-3">
                 <input
                   name="anakKe"
                   type="number"
@@ -145,31 +186,28 @@ const Daftar = (props) => {
                   errors={errors}
                 />
               </div>
-            </div>
-            <div className="form-group mb-3 row">
-              <label className="col-2 col-sm-3 col-form-label">Agama</label>
-              <div className="col">
-                <select
-                  name="agama"
-                  type="text"
-                  className={`form-select   ${
-                    errors.agama ? "is-invalid" : ""
+              <label className="col-md-2 col-sm-3 col-form-label">
+                Jumlah Saudara
+              </label>
+              <div className="col-md-4 col-sm-9 ">
+                <input
+                  name="saudara"
+                  type="number"
+                  placeholder="Jumlah Saudara anda"
+                  className={`form-control ${
+                    errors.saudara ? "is-invalid" : ""
                   }`}
                   ref={register({
-                    required: "Agama harus diisi",
+                    required: "Jumlah saudara wajib dimasukkan",
+                    min: {
+                      value: 0,
+                      message: "data yang dimasukkan harus valid",
+                    },
                   })}
-                >
-                  <option selected></option>
-                  <option value="islam">Islam</option>
-                  <option value="kristen">Kristen</option>
-                  <option value="hindu">Hindu</option>
-                  <option value="budha">Budha</option>
-                  <option value="konhucu">Konghucu</option>
-                  <option value="lainya">Lainya</option>
-                </select>
+                />
                 <ErrorMessage
                   className="invalid-feedback"
-                  name="agama"
+                  name="saudara"
                   as="div"
                   errors={errors}
                 />
@@ -230,7 +268,7 @@ const Daftar = (props) => {
         */}
         <div className="card shadow mb-4 p-0">
           <div className="card-header p-3">
-            <h3 className="ms-3">Data Orangtua </h3>
+            <h3 className="ms-3">Data Orangtua/Wali </h3>
           </div>
           <div className="card-body px-5 py-3">
             {/*data ayah */}
@@ -500,6 +538,39 @@ const Daftar = (props) => {
                 />
               </div>
             </div>
+            <div className="form-group mb-3 row">
+              <label className="col-sm-4 col-form-label">
+                Wali Anda bukan Orangtua
+              </label>
+              <div className="col-sm-2">
+                <input
+                  type="radio"
+                  value="iya"
+                  name="showWali"
+                  ref={register}
+                />
+                <span>Iya</span>
+                </div>
+                <div className="col-sm-2">
+                  <input
+                    type="radio"
+                    value="tidak"
+                    name="showWali"
+                    ref={register}
+                  />
+                  <span>Tidak</span>
+                </div>
+            </div>
+            <div className="form-group mb-3 row">
+              {watchWali === "iya" && (
+                <>
+                  <label className="col-sm-3 col-form-label">
+                    Wali Anda bukan Orangtua
+                  </label>
+                  <input type="number" className="form-control" name="age" />
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -640,9 +711,7 @@ const Daftar = (props) => {
                 <select
                   name="lulus"
                   aria-label="Floating label select example"
-                  className={`form-select ${
-                    errors.lulus ? "is-invalid" : ""
-                  }`}
+                  className={`form-select ${errors.lulus ? "is-invalid" : ""}`}
                   ref={register({
                     required: "Tahun rencana lulus harus diisi",
                   })}
@@ -700,10 +769,10 @@ const Daftar = (props) => {
                   className={`form-control ${errors.ipk ? "is-invalid" : ""}`}
                   ref={register({
                     required: "Nilai IPK anda wajib dimasukkan",
-                    pattern : {
-                      value : "/[1-9]+.[1-9]",
-                      message : 'test'
-                    }
+                    pattern: {
+                      value: "/[1-9]+.[1-9]",
+                      message: "test",
+                    },
                   })}
                 />
                 <ErrorMessage
@@ -854,6 +923,51 @@ const Daftar = (props) => {
             <ErrorMessage
               className="invalid-feedback"
               name="mampu"
+              as="div"
+              errors={errors}
+            />
+          </div>
+        </div>
+        <div className="form-group mb-3 row">
+          <div className="form-check mb-3">
+            <label className="col-form-label col-sm-3">jenis beasiswa</label>
+            <div class="form-check form-check-inline">
+              <input
+                class={`form-check-input ${
+                  errors.jenisBeasiswa ? "is-invalid" : ""
+                }`}
+                type="radio"
+                value="Ungulan"
+                for="inlineCheckbox1"
+                name="jenisBeaiswa"
+                ref={register({
+                  required: "Surat keterangan tidak mampu harus diisi",
+                })}
+              />
+              <label class="form-check-label" for="inlineCheckbox1">
+                Ungulan
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class={`form-check-input ${
+                  errors.jenisBeasiswa ? "is-invalid" : ""
+                }`}
+                type="radio"
+                for="inlineCheckbox2"
+                value="reguler"
+                name="jenisBeaiswa"
+                ref={register({
+                  required: "Surat keterangan tidak mampu harus diisi",
+                })}
+              />
+              <label class="form-check-label" for="inlineCheckbox2">
+                Reguler
+              </label>
+            </div>
+            <ErrorMessage
+              className="invalid-feedback"
+              name="jenisBeasiswa"
               as="div"
               errors={errors}
             />
