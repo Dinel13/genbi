@@ -74,6 +74,18 @@ const Home = (props) => {
 
   return (
     <div className="container">
+       <div class="progress my-5">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          style={{ width: "100%" }}
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          25%
+        </div>
+      </div>
       <div className="row mb-5">
         <div className="col-lg-12 text-center">
           <h1 className="mt-5">React regular form</h1>
