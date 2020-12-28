@@ -1,5 +1,5 @@
 {
-    "env" {
+    "env" : {
         "MONGGODB_USER_PASSWORD" : "genbi:MongoDB12"
     }
 }
