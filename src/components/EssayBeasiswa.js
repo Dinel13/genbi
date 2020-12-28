@@ -8,7 +8,20 @@ const EssayBeasiswa = (props) => {
       <div className="card-header bg-secondary p-3">
         <h3 className="ms-3 my-2 text-white fw-bold">Essay Beasiswa</h3>
       </div>
-      <div className="card-body px-5 py-3">
+      <div className="card-body px-5 pt-4 row">
+        <div className="col-md-10 col-lg-8 mx-auto">
+          <div className="alert alert-warning " role="alert">
+            <h4 className="alert-heading">Perhatian!</h4>
+            <hr />
+            <ul>
+              <li>
+                Essay yang ada masukkan sangat menentukan peluang anda lolos ke
+                tahap berikutnya
+              </li>
+              <li>Setiap field hanya dapat diisi maksimal 300 karakter</li>
+            </ul>
+          </div>
+        </div>
         {watchKampus === "unhas" && (
           <div className="form-group mb-3 row">
             <div className="form-check ps-3">
@@ -47,109 +60,99 @@ const EssayBeasiswa = (props) => {
             </div>
           </div>
         )}
-        <div className="form-group mb-3 row">
-          <label className=" col-sm-3  col-form-label fw-bold">
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            name="motif"
+            placeholder="Masukkan alasan anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.motif ? "is-invalid" : ""}`}
+            style={{ height: "180px" }}
+            ref={register({
+              required: "Alasan anda mendaftar harus diisi",
+              maxLength: {
+                value: 300,
+                message: "maksimal 300 karakter",
+              },
+            })}
+          />
+          <label className=" ps-4 fw-bold">
             Alasan mendaftar beasiswa ini:
           </label>
-          <div className="col">
-            <textarea
-              name="motif"
-              placeholder="Masukkan alasan anda dengan maksimal 300 karakter"
-              className={`form-control ${errors.motif ? "is-invalid" : ""}`}
-              style={{ height: "180px" }}
-              ref={register({
-                required: "Alasan anda mendaftar harus diisi",
-                maxLength: {
-                  value: 300,
-                  message: "maksimal 300 karakter",
-                },
-              })}
-            />
-            <ErrorMessage
-              className="invalid-feedback"
-              name="motif"
-              as="div"
-              errors={errors}
-            />
-          </div>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="motif"
+            as="div"
+            errors={errors}
+          />
         </div>
-        <div className="form-group mb-3 row">
-          <label className="col-sm-3  col-form-label fw-bold">
-            Rencana pengunaan beasiswa:
-          </label>
-          <div className="col">
-            <textarea
-              name="rencana"
-              placeholder="Masukkan rencana anda dengan maksimal 300 karakter"
-              className={`form-control ${errors.rencana ? "is-invalid" : ""}`}
-              style={{ height: "180px" }}
-              ref={register({
-                required: "Rencana pengunaan beasiswaharus diisi",
-                maxLength: {
-                  value: 300,
-                  message: "maksimal 300 karakter",
-                },
-              })}
-            />
-            <ErrorMessage
-              className="invalid-feedback"
-              name="rencana"
-              as="div"
-              errors={errors}
-            />
-          </div>
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            name="rencana"
+            placeholder="Masukkan rencana anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.rencana ? "is-invalid" : ""}`}
+            style={{ height: "180px" }}
+            ref={register({
+              required: "Rencana pengunaan beasiswaharus diisi",
+              maxLength: {
+                value: 300,
+                message: "maksimal 300 karakter",
+              },
+            })}
+          />
+          <label className="ps-4 fw-bold">Rencana pengunaan beasiswa:</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="rencana"
+            as="div"
+            errors={errors}
+          />
         </div>
-        <div className="form-group mb-3 row">
-          <label className="col-sm-3  col-form-label fw-bold">
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            name="pantas"
+            placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.pantas ? "is-invalid" : ""}`}
+            style={{ height: "180px" }}
+            ref={register({
+              required: "Anda harus memasukkan jawaban",
+              maxLength: {
+                value: 300,
+                message: "maksimal 300 karakter",
+              },
+            })}
+          />
+          <label className="ps-4 fw-bold">
             Kenapa anda pantas mendapatkan beasiswa ini:
           </label>
-          <div className="col">
-            <textarea
-              name="pantas"
-              placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
-              className={`form-control ${errors.pantas ? "is-invalid" : ""}`}
-              style={{ height: "180px" }}
-              ref={register({
-                required: "Anda harus memasukkan jawaban",
-                maxLength: {
-                  value: 300,
-                  message: "maksimal 300 karakter",
-                },
-              })}
-            />
-            <ErrorMessage
-              className="invalid-feedback"
-              name="pantas"
-              as="div"
-              errors={errors}
-            />
-          </div>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="pantas"
+            as="div"
+            errors={errors}
+          />
         </div>
-        <div className="form-group mb-3 row">
-          <label className="col-sm-3  col-form-label fw-bold">
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            name="lulus"
+            placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.lulus ? "is-invalid" : ""}`}
+            style={{ height: "180px" }}
+            ref={register({
+              required: "Anda harus memasukkan jawaban",
+              maxLength: {
+                value: 300,
+                message: "maksimal 300 karakter",
+              },
+            })}
+          />
+          <label className="ps-4 fw-bold">
             Rencana anda setelah lulus kuliah:
           </label>
-          <div className="col">
-            <textarea
-              name="lulus"
-              placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
-              className={`form-control ${errors.lulus ? "is-invalid" : ""}`}
-              style={{ height: "180px" }}
-              ref={register({
-                required: "Anda harus memasukkan jawaban",
-                maxLength: {
-                  value: 300,
-                  message: "maksimal 300 karakter",
-                },
-              })}
-            />
-            <ErrorMessage
-              className="invalid-feedback"
-              name="lulus"
-              as="div"
-              errors={errors}
-            />
-          </div>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="lulus"
+            as="div"
+            errors={errors}
+          />
         </div>
       </div>
     </div>

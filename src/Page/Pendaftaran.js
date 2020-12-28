@@ -29,12 +29,15 @@ const Daftar = (props) => {
         <DataKampus errors={errors} register={register} />
         <EssayBeasiswa errors={errors} register={register} watchKampus={watchKampus}/>
         <FilePendukung errors={errors} register={register} watchJenisBeasiswa={watchJenisBeasiswa}/>
+        <div className="col-1 mx-auto">
         <input
           type="submit"
-          className="btn btn-primary col-8 mx-auto"
+          className="btn btn-primary "
           value="Submit"
         />
-        <br />
+        <br/>
+        </div>
+        <br/>
       </form>
     </div>
   );

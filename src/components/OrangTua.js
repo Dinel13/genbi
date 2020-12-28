@@ -28,25 +28,24 @@ const OrangTua = (props) => {
           />
           <label className="ps-4 fw-bold">Nama Ayah</label>
         </div>
+
         <div className="form-floating col-md-6 mb-3">
           <input
-            name="pekerjaanAyah"
-            type="text"
-            placeholder="Masukkan pekerjaan ayah anda"
-            className={`form-control ${
-              errors.pekerjaanAyah ? "is-invalid" : ""
-            }`}
+            name="teleponAyah"
+            type="number"
+            placeholder="Masukkan nomor telepon ayah anda"
+            className={`form-control ${errors.teleponAyah ? "is-invalid" : ""}`}
             ref={register({
-              required: "Pekerjaan ayah anda wajib dimasukkan",
+              required: "Nomor telepon ayah anda wajib dimasukkan",
             })}
           />
+          <label className="ps-4 fw-bold">Nomor Telepon Ayah</label>
           <ErrorMessage
             className="invalid-feedback"
-            name="pekerjaanAyah"
+            name="teleponAyah"
             as="div"
             errors={errors}
           />
-          <label className="ps-4 fw-bold">Pekerjaan Ayah</label>
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -68,21 +67,23 @@ const OrangTua = (props) => {
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
-            name="teleponAyah"
-            type="number"
-            placeholder="Masukkan nomor telepon ayah anda"
-            className={`form-control ${errors.teleponAyah ? "is-invalid" : ""}`}
+            name="pekerjaanAyah"
+            type="text"
+            placeholder="Masukkan pekerjaan ayah anda"
+            className={`form-control ${
+              errors.pekerjaanAyah ? "is-invalid" : ""
+            }`}
             ref={register({
-              required: "Nomor telepon ayah anda wajib dimasukkan",
+              required: "Pekerjaan ayah anda wajib dimasukkan",
             })}
           />
-          <label className="ps-4 fw-bold">Nomor Telepon Ayah</label>
           <ErrorMessage
             className="invalid-feedback"
-            name="teleponAyah"
+            name="pekerjaanAyah"
             as="div"
             errors={errors}
           />
+          <label className="ps-4 fw-bold">Pekerjaan Ayah</label>
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -104,7 +105,10 @@ const OrangTua = (props) => {
             errors={errors}
           />
         </div>
-
+        <br />
+        <br />
+        <hr />
+        <br />
         <div className="form-floating col-md-6 mb-3">
           <input
             name="namaIbu"
@@ -125,20 +129,18 @@ const OrangTua = (props) => {
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
-            name="pekerjaanIbu"
+            name="teleponIbu"
             type="text"
-            placeholder="Masukkan pekerjaan ibu anda"
-            className={`form-control ${
-              errors.pekerjaanIbu ? "is-invalid" : ""
-            }`}
+            placeholder="Masukkan nomor telepon ibu anda"
+            className={`form-control ${errors.teleponIbu ? "is-invalid" : ""}`}
             ref={register({
-              required: "Pekerjaan ibu anda wajib dimasukkan",
+              required: "Nomor telepon ibu anda wajib dimasukkan",
             })}
           />
-          <label className="ps-4 fw-bold">Pekerjaan Ibu</label>
+          <label className="fp-4 fw-bold">Nomor Telepon Ibu</label>
           <ErrorMessage
             className="invalid-feedback"
-            name="pekerjaanIbu"
+            name="teleponIbu"
             as="div"
             errors={errors}
           />
@@ -163,18 +165,20 @@ const OrangTua = (props) => {
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
-            name="teleponIbu"
+            name="pekerjaanIbu"
             type="text"
-            placeholder="Masukkan nomor telepon ibu anda"
-            className={`form-control ${errors.teleponIbu ? "is-invalid" : ""}`}
+            placeholder="Masukkan pekerjaan ibu anda"
+            className={`form-control ${
+              errors.pekerjaanIbu ? "is-invalid" : ""
+            }`}
             ref={register({
-              required: "Nomor telepon ibu anda wajib dimasukkan",
+              required: "Pekerjaan ibu anda wajib dimasukkan",
             })}
           />
-          <label className="fp-4 fw-bold">Nomor Telepon Ibu</label>
+          <label className="ps-4 fw-bold">Pekerjaan Ibu</label>
           <ErrorMessage
             className="invalid-feedback"
-            name="teleponIbu"
+            name="pekerjaanIbu"
             as="div"
             errors={errors}
           />
@@ -202,9 +206,9 @@ const OrangTua = (props) => {
         <div className="form-group mb-3 row">
           <div className="form-check ps-3">
             <label className="col-form-label fw-bold col-sm-3">
-              Orangtua bukan wali anda : 
+              Orangtua bukan wali anda
             </label>
-            <div className="form-check form-check-inline col">
+            <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
                 type="radio"
