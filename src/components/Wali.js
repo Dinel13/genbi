@@ -4,46 +4,43 @@ import { ErrorMessage } from "@hookform/error-message";
 const Wali = (props) => {
   const { register, errors } = props;
   return (
-    <div>
-      <div className="form-group mb-3 row">
-        <label className="col-sm-3 col-form-label">Nama Wali</label>
-        <div className="col-sm-9">
-          <input
-            name="namaWali"
-            type="text"
-            placeholder="Masukkan nama Wali anda"
-            className={`form-control ${errors.namaWali ? "is-invalid" : ""}`}
-            ref={register({
-              required: "Nama Wali anda wajib dimasukkan",
-            })}
-          />
-          <ErrorMessage
-            className="invalid-feedback"
-            name="namaWali"
-            as="div"
-            errors={errors}
-          />
-        </div>
+    <>
+      <hr />
+      <div className="form-floating col-md-6 mb-3">
+        <input
+          name="namaWali"
+          type="text"
+          placeholder="Masukkan nama Wali anda"
+          className={`form-control ${errors.namaWali ? "is-invalid" : ""}`}
+          ref={register({
+            required: "Nama Wali anda wajib dimasukkan",
+          })}
+        />
+        <label className="ps-4 fw-bold">Nama Wali</label>
+        <ErrorMessage
+          className="invalid-feedback"
+          name="namaWali"
+          as="div"
+          errors={errors}
+        />
       </div>
-      <div className="form-group mb-3 row">
-        <label className="col-2 col-sm-3 col-form-label">Alamat wali</label>
-        <div className="col">
-          <textarea
-            style={{ height: "80px" }}
-            name="alamatWali"
-            placeholder="Masukkan alamat rumah wali anda"
-            className={`form-control ${errors.alamatWali ? "is-invalid" : ""}`}
-            ref={register({
-              required: "Alamat rumah wali anda wajib dimasukkan",
-            })}
-          />
-          <ErrorMessage
-            className="invalid-feedback"
-            name="alamatWali"
-            as="div"
-            errors={errors}
-          />
-        </div>
+      <div className="form-floating col-md-6 mb-3">
+        <textarea
+          style={{ height: "100px" }}
+          name="alamatWali"
+          placeholder="Masukkan alamat rumah wali anda"
+          className={`form-control ${errors.alamatWali ? "is-invalid" : ""}`}
+          ref={register({
+            required: "Alamat rumah wali anda wajib dimasukkan",
+          })}
+        />
+        <label className="ps-4 fw-bold">Alamat wali</label>
+        <ErrorMessage
+          className="invalid-feedback"
+          name="alamatWali"
+          as="div"
+          errors={errors}
+        />
       </div>
       <div className="form-group mb-3 row">
         <label className="col-2 col-sm-3 col-form-label">Pekerjaan Wali</label>
@@ -134,8 +131,8 @@ const Wali = (props) => {
             errors={errors}
           />
         </div>
-      </div>{" "}
-    </div>
+      </div>
+    </>
   );
 };
 export default Wali;
