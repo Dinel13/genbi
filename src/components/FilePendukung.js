@@ -25,7 +25,7 @@ const FilePendukung = (props) => {
             </label>
             <div className="col-sm-9 col-md-7">
               <input
-                class={`form-control ${errors.ktm ? "is-invalid" : ""}`}
+                className={`form-control ${errors.ktm ? "is-invalid" : ""}`}
                 type="file"
                 name="ktm"
                 accept=".jpg,.png,.jpeg"
@@ -48,7 +48,7 @@ const FilePendukung = (props) => {
             </label>
             <div className="col-sm-9 col-md-7">
               <input
-                class={`form-control ${errors.nilai ? "is-invalid" : ""}`}
+                className={`form-control ${errors.nilai ? "is-invalid" : ""}`}
                 type="file"
                 name="nilai"
                 accept=".pdf"
@@ -74,7 +74,7 @@ const FilePendukung = (props) => {
                   </label>
                   <div className="col-sm-9 col-md-7">
                     <input
-                      class={`form-control ${
+                      className={`form-control ${
                         errors.rekomendasi ? "is-invalid" : ""
                       }`}
                       type="file"
@@ -99,7 +99,7 @@ const FilePendukung = (props) => {
                   </label>
                   <div className="col-sm-9 col-md-7">
                     <input
-                      class={`form-control ${
+                      className={`form-control ${
                         errors.rekomendasi2 ? "is-invalid" : ""
                       }`}
                       type="file"
@@ -128,7 +128,7 @@ const FilePendukung = (props) => {
                   </label>
                   <div className="col-sm-9 col-md-7">
                     <input
-                      class={`form-control ${
+                      className={`form-control ${
                         errors.rekomendasi ? "is-invalid" : ""
                       }`}
                       type="file"
@@ -153,7 +153,7 @@ const FilePendukung = (props) => {
                   </label>
                   <div className="col-sm-9 col-md-7">
                     <input
-                      class={`form-control ${errors.mampu ? "is-invalid" : ""}`}
+                      className={`form-control ${errors.mampu ? "is-invalid" : ""}`}
                       type="file"
                       name="mampu"
                       accept=".pdf"

@@ -1,11 +1,12 @@
 import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
+import Pemisah from "./Pemisah";
 
 const Wali = (props) => {
   const { register, errors } = props;
   return (
     <>
-      <hr />
+      <Pemisah />
       <div className="form-floating col-md-6 mb-3">
         <input
           name="namaWali"

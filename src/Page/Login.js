@@ -4,6 +4,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch } from "react-redux";
 
 import { Login } from "../store/action/AuthAction";
+import { Link } from "react-router-dom";
 
 export default function FormLogin() {
   const dispatch = useDispatch();
@@ -14,13 +15,13 @@ export default function FormLogin() {
   };
   return (
     <div>
-      <div className="container mt-3">
+      <div className="container mt-3 main">
         <div className="row justify-content-md-center">
           <div className="card px-0 shadow-lg col-md-8 col-lg-6">
             <div className="card-header text-center">
               <h4>Form Login</h4>
             </div>
-            <div className="row card-body">
+            <div className="row card-body px-5">
               <div className="col-lg-12">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="form-group mb-3">
@@ -71,12 +72,19 @@ export default function FormLogin() {
                       errors={errors}
                     />
                   </div>
-                      <button
-                        type="submit"
-                        className="btn btn-primary"
-                      >
-                        Submit
-                      </button>
+                  <div class="row justify-content-center mt-4">
+                    <button
+                      type="submit"
+                      className="btn btn-primary px-4 col-5"
+                    >
+                      LOGIN
+                    </button>
+                      <div className="col-12">
+                        <p className="form-text text-center">
+                          Belum punya akun? <Link to="SignUp">Daftar</Link>
+                        </p>
+                      </div>
+                  </div>
                 </form>
               </div>
             </div>

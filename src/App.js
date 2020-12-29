@@ -4,10 +4,12 @@ import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
 import Navbar from "./components/Navbar";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
+import SignUp from "./Page/SignUp";
+import Login from "./Page/Login";
 import Home from "./Page/Home";
 import Pendaftaran from "./Page/Pendaftaran";
+import Footer from "./components/Footer";
+import Admin from "./Page/Admin";
 
 const App = () => {
   return (
@@ -26,7 +28,11 @@ const App = () => {
         <Route path="/pendaftaran" exact>
           <Pendaftaran />
         </Route>
+        <Route path="/admin" exact>
+          <Admin />
+        </Route>
       </Switch>
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import Wali from "./Wali";
+import Pemisah from "./Pemisah";
 
 const OrangTua = (props) => {
   const { errors, register, watchWali } = props;
@@ -105,10 +106,7 @@ const OrangTua = (props) => {
             errors={errors}
           />
         </div>
-        <br />
-        <br />
-        <hr />
-        <br />
+        <Pemisah />
         <div className="form-floating col-md-6 mb-3">
           <input
             name="namaIbu"

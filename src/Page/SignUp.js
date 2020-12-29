@@ -4,25 +4,26 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch } from "react-redux";
 
 import { Signup } from "../store/action/AuthAction";
+import { Link } from "react-router-dom";
 
 export default function FormSignUp() {
   const dispatch = useDispatch();
   const { register, errors, handleSubmit, getValues } = useForm();
 
   const onSubmit = (values) => {
-    // dispatch(Signup(values.email, values.password, values.nama));    
+    dispatch(Signup(values.email, values.password, values.nama));
     console.log(values);
   };
 
-   return (
-    <div className="container mt-3">
+  return (
+    <div className="container mt-3 main">
       <div className="row justify-content-md-center">
-        <div className="card px-0 col-md-8 col-lg-6 shadow-lg">
+        <div className="card px-0 mt-4 col-md-8 col-lg-6 shadow-lg">
           <div className="card-header text-center">
             <h4>Register Online</h4>
           </div>
 
-          <div className="row card-body">
+          <div className="row card-body px-5">
             <div className="col-lg-12">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group mb-3">
@@ -109,7 +110,7 @@ export default function FormSignUp() {
                       validate: (value) => value === getValues("password"),
                     })}
                   />
-                 
+
                   <ErrorMessage
                     className="invalid-feedback"
                     name="password2"
@@ -123,9 +124,16 @@ export default function FormSignUp() {
                   )}
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">
-                  Submit
-                </button>
+                <div class="row justify-content-center mt-4">
+                  <button type="submit" className="btn btn-primary px-4 col-5">
+                    DAFTAR
+                  </button>
+                  <div className="col-12">
+                    <p className="form-text text-center">
+                      Sudah punya akun? <Link to="Login">Masuk</Link>
+                    </p>
+                  </div>
+                </div>
               </form>
             </div>
           </div>

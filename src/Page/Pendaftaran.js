@@ -19,8 +19,8 @@ const Daftar = (props) => {
 
   return (
     <div className="container">
-      <div className="text-center my-5">
-        <h1 className='text-decoration-underline'>Form Pendaftaran beasiswa</h1>
+      <div className="text-center mt-5 mb-4">
+        <h1 className='text-decoration-underline'>Form Pendaftaran beasiswa Bank Indonesia</h1>
       </div>
       <Note />
       <form onSubmit={handleSubmit(onSubmit)}>

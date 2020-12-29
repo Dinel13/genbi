@@ -187,9 +187,8 @@ const DataKampus = (props) => {
               name="prestasi"
               type="text"
               style={{height : "150px"}}
-              placeholder="Masukkan prestasi yang anda raih selama berkuliah 
-              dengan format 'nama prestasi_penyelengara_tahun diraih' lalu pisahkan 
-              prestasi dengan prestasi lain dengan tanda koma (,). contohnya, Juara 1 lomba kti_kemendikbud_2020 , juara 2 kontes robot_kemendikbud_2020"
+              placeholder="Format penulisan prestasi adalah 'Nama prestasi_Penyelengara_Tahun diraih'. Pisahkan 
+              prestasi dengan prestasi lain dengan tanda koma (,). Contohnya, Juara 1 lomba KTI_Kemendikbud_2020, Juara 2 kontes robot_Kemendikbud_2020"
               className={`form-control ${errors.ipk ? "is-invalid" : ""}`}
               ref={register({
                 required: "Nilai IPK anda wajib dimasukkan",
@@ -212,7 +211,9 @@ const DataKampus = (props) => {
               style={{ height: "150px" }}
               name="organisasi"
               type="text"
-              placeholder="Format penulisan adalah jabatan_Nama orgsanisasi-tahun aktif. contohnya, ketua_pramuka_2018-2020, angota_paskibraka-2018 "
+              placeholder="Format penulisan organisasi adalah 'Jabatan_Nama orgsanisasi_Tahun aktif'.
+               Pisahkan prestasi dengan prestasi lain dengan tanda koma (,).
+               Contohnya, Ketua_pramuka_2018-2020, Angota_Paskibraka-2018 "
               className={`form-control ${errors.ipk ? "is-invalid" : ""}`}
               ref={register({
                 required: "Nilai IPK anda wajib dimasukkan",
