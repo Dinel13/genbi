@@ -1,3 +1,7 @@
 .main {
     min-height: 90vh;
 }
+
+.navbar-brand{
+    background-color: transparent !important;
+}

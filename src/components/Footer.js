@@ -3,10 +3,9 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="container-fluid my-50 text-white bg-dark">
-      <div classNam="position-absolute bottom-0 start-0 mx-auto">
         <div className="row">
           <div className="col-md-6">
-            <p class="mb-1">
+            <p className="mb-1">
               Album example is &copy; Bootstrap, but please download and
               customize it for yourself!
             </p>
@@ -21,7 +20,6 @@ const Footer = () => {
               <li>dasd</li>
             </ul>
           </div>
-        </div>
       </div>
     </footer>
   );

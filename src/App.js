@@ -10,6 +10,7 @@ import Home from "./Page/Home";
 import Pendaftaran from "./Page/Pendaftaran";
 import Footer from "./components/Footer";
 import Admin from "./Page/Admin";
+import Defult from "./Page/404";
 
 const App = () => {
   return (
@@ -22,14 +23,17 @@ const App = () => {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/login" exact>
+        <Route path="/login">
           <Login />
         </Route>
-        <Route path="/pendaftaran" exact>
+        <Route path="/pendaftaran">
           <Pendaftaran />
         </Route>
-        <Route path="/admin" exact>
+        <Route path="/admin">
           <Admin />
+        </Route>
+        <Route path="not">
+          <Defult />
         </Route>
       </Switch>
       <Footer />

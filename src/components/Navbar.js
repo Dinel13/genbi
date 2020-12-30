@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import {Logout} from '../store/action/AuthAction'
+import { Logout } from "../store/action/AuthAction";
 
 const Navbar = (props) => {
   const token = useSelector((state) => state.Auth.token);
-  const dispatch = useDispatch()
-  const [lokasi, setLokasi] = useState("")
-
-  useEffect(() => {
-    if (lokasi === "") {
-      setLokasi("h")
-      
-    }
-  })
+  const dispatch = useDispatch();
 
   return (
-    <nav className={`navbar navbar-expand-lg navbar-dark bg-dark ${lokasi && "d-none"}`}>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
       <div className="container-fluid">
-        <a className="navbar-brand ms-3" href="/">
+        <Link className="navbar-brand ms-3 pe-2" to="/">
           <img
             src="https://genbiunhas.org/storage/web_assets/genbiUH1.png"
             alt=""
@@ -27,7 +19,7 @@ const Navbar = (props) => {
             height="24"
           />
           GenBI
-        </a>
+        </Link>
         <button
           className="navbar-toggler me-3"
           type="button"
@@ -54,7 +46,10 @@ const Navbar = (props) => {
           </ul>
           <div className="d-flex ">
             {token ? (
-              <button onClick={() => dispatch(Logout())} className="btn btn-sm btn-danger me-2">
+              <button
+                onClick={() => dispatch(Logout())}
+                className="btn btn-sm btn-danger me-2"
+              >
                 Keluar
               </button>
             ) : (

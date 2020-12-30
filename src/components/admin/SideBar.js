@@ -1,152 +1,159 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = (props) => {
+  const { url } = props;
   return (
-    <nav
-      id="sidebarMenu"
-      className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
-    >
-      <div className="position-sticky pt-3">
-        <h5 className="d-flex justify-content-start px-3 mb-1 text-bold">
-          <span data-feather="home"></span>
+    <nav className="col-12 col-md-3 col-lg-2 bg-light border-end shadow">
+      <div className="row">
+        <h5 className="col-12 card-title px-3 pt-3 pb-2 mb-0 card-header">
           Pendaftar
         </h5>
-        <ul className="nav flex-column ps-3">
-          <li className="nav-item">
+        <div className="list-group list-group-flush px-0 pb-4">
+          <div className="dropdown">
             <a
-              className="nav-link dropdown-toggle"
+              className="dropdown-toggle list-group-item list-group-item-action"
               href="#"
-              type="button"
-              id="dropdownMenuButton2"
+              id="dropdownMenuButton"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <span data-feather="file"></span>
               Universitas Hasanuddin
             </a>
             <ul
-              class="dropdown-menu dropdown-menu-dark"
-              aria-labelledby="dropdownMenuButton2"
+              className="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="dropdownMenuButton"
             >
               <li>
-                <a class="dropdown-item" href="#">
+                <Link
+                  className="dropdown-item"
+                  to={`${url}/pendaftar-unhas-ungulan`}
+                >
                   Ungulan
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <Link
+                  className="dropdown-item"
+                  to={`${url}/pendaftar-unhas-reguler`}
+                >
                   Reguler
-                </a>
+                </Link>
               </li>
             </ul>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Universitas Negeri Makassar
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <span data-feather="users"></span>
-              Uin Alauddin Makassar
-            </a>
-          </li>
-        </ul>
-        <hr className="dropdown-divider" />
-        <h5 className="d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-bold">
+          </div>
+
+          <Link
+            className="list-group-item list-group-item-action"
+            to={`${url}/pendaftar-unm`}
+          >
+            Universitas Negeri Makassar
+          </Link>
+          <Link
+            className="list-group-item list-group-item-action"
+            to={`${url}/pendaftar-uinam`}
+          >
+            Uin Alauddin Makassar
+          </Link>
+        </div>
+        <h5 className="col-12 card-title px-3 pt-3 pb-2 border-top mb-0 card-header">
           Lolos Berkas
-          <span data-feather="plus-circle"></span>
         </h5>
-        <ul className="nav flex-column ps-3">
-          <li className="nav-item">
+        <div className="list-group list-group-flush px-0 pb-4">
+          <div className="dropdown">
             <a
-              className="nav-link dropdown-toggle"
+              className="dropdown-toggle list-group-item list-group-item-action"
               href="#"
-              type="button"
-              id="dropdownMenuButton2"
+              id="dropdownMenuBerkas"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <span data-feather="file"></span>
               Universitas Hasanuddin
             </a>
             <ul
-              class="dropdown-menu dropdown-menu-dark"
-              aria-labelledby="dropdownMenuButton2"
+              className="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="dropdownMenuBerkas"
             >
               <li>
-                <a class="dropdown-item" href="#">
+                <Link
+                  className="dropdown-item"
+                  to={`${url}/lolos-berkas-unhas-ungulan`}
+                >
                   Ungulan
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <Link
+                  className="dropdown-item"
+                  to={`${url}/lolos-berkas-unhas-reguler`}
+                >
                   Reguler
-                </a>
+                </Link>
               </li>
             </ul>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Universitas Negeri Makassar
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <span data-feather="users"></span>
-              Uin Alauddin Makassar
-            </a>
-          </li>
-        </ul>
-        <hr className="dropdown-divider" />
-        <h5 className="d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-bold">
+          </div>
+          <Link
+            className="list-group-item list-group-item-action"
+            to={`${url}/lolos-berkas-unm`}
+          >
+            Universitas Negeri Makassar
+          </Link>
+          <Link
+            className="list-group-item list-group-item-action"
+            to={`${url}/lolos-berkas-uinam`}
+          >
+            Uin Alauddin Makassar
+          </Link>
+        </div>
+        <h5 className="col-12 card-title px-3 pt-3 pb-2 border-top mb-0 card-header">
           Lolos Wawancara
-          <span data-feather="plus-circle"></span>
         </h5>
-        <ul className="nav flex-column ps-3">
-          <li className="nav-item">
+        <div className="list-group list-group-flush px-0 pb-4">
+          <div className="dropdown">
             <a
-              className="nav-link dropdown-toggle"
+              className="dropdown-toggle list-group-item list-group-item-action"
               href="#"
-              type="button"
-              id="dropdownMenuButton2"
+              id="dropdownMenuWawancara"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <span data-feather="file"></span>
               Universitas Hasanuddin
             </a>
             <ul
-              class="dropdown-menu dropdown-menu-dark"
-              aria-labelledby="dropdownMenuButton2"
+              className="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="dropdownMenuWawancara"
             >
               <li>
-                <a class="dropdown-item" href="#">
+                <Link
+                  className="dropdown-item"
+                  to={`${url}/lolos-wawancara-unhas-ungulan`}
+                >
                   Ungulan
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <Link
+                  className="dropdown-item"
+                  to={`${url}/lolos-wawancara-unhas-reguler`}
+                >
                   Reguler
-                </a>
+                </Link>
               </li>
             </ul>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Universitas Negeri Makassar
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <span data-feather="users"></span>
-              Uin Alauddin Makassar
-            </a>
-          </li>
-        </ul>
+          </div>
+          <Link
+            className="list-group-item list-group-item-action"
+            to={`${url}/lolos-wawancara-unm`}
+          >
+            Universitas Negeri Makassar
+          </Link>
+          <Link
+            className="list-group-item list-group-item-action active"
+            to={`${url}/lolos-wawancara-uinam`}
+          >
+            Uin Alauddin Makassar
+          </Link>
+        </div>
       </div>
     </nav>
   );
