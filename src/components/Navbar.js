@@ -54,10 +54,10 @@ const Navbar = (props) => {
               </button>
             ) : (
               <>
-                <Link to="signup" className="btn btn-sm btn-success me-2">
+                <Link to="/signup" className="btn btn-sm btn-success me-2">
                   Sign Up
                 </Link>
-                <Link to="login" className="btn btn-sm btn-success me-2">
+                <Link to="/login" className="btn btn-sm btn-success me-2">
                   Login
                 </Link>
               </>

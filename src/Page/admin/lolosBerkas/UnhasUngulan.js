@@ -4,10 +4,11 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import Pendaftar from "../pendaftar";
 
 const UnhasUngul = (props) => {
+  const { setActive, setTitle } = props;
   useEffect(() => {
-    props.setActive("berUnh");
-    props.setTitle("Lolos Berkas Universitas Hasanuddin-Ungulan");
-  });
+    setActive("berUnh");
+    setTitle(["Lolos Berkas Universitas Hasanuddin-Ungulan"]);
+  }, [setActive, setTitle]);
 
   let { path, url } = useRouteMatch();
   return (

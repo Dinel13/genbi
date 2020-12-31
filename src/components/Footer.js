@@ -11,9 +11,6 @@ const Footer = () => {
             </p>
           </div>
           <div className="col-md-6">
-            <p className="float-end mb-1">
-              <a href="#">Back to top</a>
-            </p>
             <ul>
               <li>dasd</li>
               <li>dasd</li>

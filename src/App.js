@@ -20,19 +20,19 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/signup">
+        <Route path="/signup" exact>
           <SignUp />
         </Route>
-        <Route path="/login">
+        <Route path="/login" exact>
           <Login />
         </Route>
-        <Route path="/pendaftaran">
+        <Route path="/pendaftaran" exact>
           <Pendaftaran />
         </Route>
         <Route path="/admin">
           <Admin />
         </Route>
-        <Route path="not">
+        <Route path="*">
           <Defult />
         </Route>
       </Switch>

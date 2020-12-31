@@ -20,7 +20,7 @@ const DataDiri = (props) => {
               required: "Nama anda wajib dimasukkan",
             })}
           />
-          <label className="fw-bold ps-4" for="nama">
+          <label className="fw-bold ps-4" htmlFor="nama">
             Nama Lengkap
           </label>
           <ErrorMessage

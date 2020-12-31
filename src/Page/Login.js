@@ -72,7 +72,7 @@ export default function FormLogin() {
                       errors={errors}
                     />
                   </div>
-                  <div class="row justify-content-center mt-4">
+                  <div className="row justify-content-center mt-4">
                     <button
                       type="submit"
                       className="btn btn-primary px-4 col-5"
@@ -91,9 +91,9 @@ export default function FormLogin() {
           </div>
         </div>
       </div>
-      <div class="text-center">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+      <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div>
     </div>

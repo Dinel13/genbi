@@ -4,16 +4,17 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import Pendaftar from "../pendaftar";
 
 const Unm = (props) => {
-  useEffect(() => {
-    props.setActive("wawUnm");
-    props.setTitle("Lolos Wawancara Universitas Negeri Makassar");
-  });
-
   let { path } = useRouteMatch();
+  const { setActive, setTitle } = props;
+  useEffect(() => {
+    setActive("wawUnm");
+    setTitle(["Lolos Wawancara Universitas Negeri Makassar"]);
+  },[setActive, setTitle]);
+
   return (
     <Switch>
       <Route exact path={path}>
-        <div class="table-responsive"></div>
+        <div className="table-responsive"></div>
       </Route>
       <Route path={`${path}/:topicId`}>
         <Pendaftar />

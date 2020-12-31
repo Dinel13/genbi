@@ -124,7 +124,7 @@ export default function FormSignUp() {
                   )}
                 </div>
 
-                <div class="row justify-content-center mt-4">
+                <div className="row justify-content-center mt-4">
                   <button type="submit" className="btn btn-primary px-4 col-5">
                     DAFTAR
                   </button>

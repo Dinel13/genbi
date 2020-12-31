@@ -7,12 +7,14 @@ import Tabel from "../../../components/admin/Pendaftar/tabel";
 
 
 const PendaftarUinam = (props) => {
-  useEffect(() => {
-    props.setActive("dafUinam");
-    props.setTitle("Pendaftar UIN Aalauddin Makassar");
-  });
-
   let { path, url } = useRouteMatch();
+  const { setActive, setTitle } = props;
+
+  useEffect(() => {
+    setActive("dafUinam");
+    setTitle(["Pendaftar UIN Aalauddin Makassar", Unhas.length]);
+  },[setActive, setTitle ]);
+
   return (
     <Switch>
     <Route exact path={path}>

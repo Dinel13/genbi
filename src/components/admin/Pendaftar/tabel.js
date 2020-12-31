@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Tabel = (props) => {
   return (
-    <div class="table-responsive">
+    <div className="table-responsive">
       <table className="table  table-ligh table-hover ">
         <thead>
           <tr className="table-info">
@@ -18,7 +18,7 @@ const Tabel = (props) => {
         </thead>
         <tbody>
           {props.Unhas.map((un, index) => (
-            <tr>
+            <tr key={un.id}>
               <th className="ps-3" scope="row">{index + 1}</th>
               <td className="text-truncate" style={{maxWidth: '120px'}}>{un.nama}</td>
               <td className="text-truncate" style={{maxWidth: '100px'}}>{un.nim}</td>

@@ -14,7 +14,7 @@ const SignIn = (props) => {
             height="57"
           />
           <h1 className="h3 mb-3 text-center fw-normal">Please sign in</h1>
-          <label for="inputEmail" className="visually-hidden">
+          <label htmlFor="inputEmail" className="visually-hidden">
             Alamat email
           </label>
           <input
@@ -23,9 +23,9 @@ const SignIn = (props) => {
             className="form-control"
             placeholder="Email address"
             required
-            autofocus
+            autoFocus
           />
-          <label for="inputPassword" className="visually-hidden">
+          <label htmlFor="inputPassword" className="visually-hidden">
             Password
           </label>
           <input

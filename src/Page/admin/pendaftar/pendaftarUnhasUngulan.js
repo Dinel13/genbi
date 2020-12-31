@@ -6,12 +6,14 @@ import { Unhas } from "../../../Data/PendaftarUnhas";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
 
 const PendaftarUnhasUngulan = (props) => {
-  useEffect(() => {
-    props.setActive("dafUnh");
-    props.setTitle("Pendaftar Universitas Hasanuddin-Ungulan");
-  });
-
   let { path, url } = useRouteMatch();
+
+  const { setActive, setTitle } = props;
+  useEffect(() => {
+    setActive("dafUnh");
+    setTitle(["Pendaftar Universitas Hasanuddin-Ungulan", Unhas.length]);
+  }, [setActive, setTitle]);
+
   return (
     <Switch>
       <Route exact path={path}>

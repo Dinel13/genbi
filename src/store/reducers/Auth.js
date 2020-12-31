@@ -5,7 +5,7 @@ const initState = {
   userId: null,
 };
 
-export default (state = initState, action) => {
+const Auth = (state = initState, action) => {
   switch (action.type) {
     case AUTH_WITH_DATA: {
       return {
@@ -20,3 +20,5 @@ export default (state = initState, action) => {
       return state;
   }
 };
+
+export default Auth
