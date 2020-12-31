@@ -6,6 +6,7 @@ import Pendaftar from "../pendaftar";
 const UnhasUngul = (props) => {
   useEffect(() => {
     props.setActive("berUnh");
+    props.setTitle("Lolos Berkas Universitas Hasanuddin-Ungulan");
   });
 
   let { path, url } = useRouteMatch();

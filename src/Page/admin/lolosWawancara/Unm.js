@@ -1,36 +1,24 @@
 import React, { useEffect } from "react";
-import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import Pendaftar from "../pendaftar";
 
 const Unm = (props) => {
   useEffect(() => {
     props.setActive("wawUnm");
+    props.setTitle("Lolos Wawancara Universitas Negeri Makassar");
   });
 
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
   return (
-    <div>
-      <ul>
-        <li>
-          <Link to={`${url}/rendering`}>Rendering with React</Link>
-        </li>
-        <li>
-          <Link to={`${url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${url}/props-v-state`}>Props v. State</Link>
-        </li>
-      </ul>
-      <Switch>
-        <Route exact path={path}>
-          <h3>Please select a topic.</h3>
-        </Route>
-        <Route path={`${path}/:topicId`}>
-          <Pendaftar />
-        </Route>
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path={path}>
+        <div class="table-responsive"></div>
+      </Route>
+      <Route path={`${path}/:topicId`}>
+        <Pendaftar />
+      </Route>
+    </Switch>
   );
 };
 export default Unm;

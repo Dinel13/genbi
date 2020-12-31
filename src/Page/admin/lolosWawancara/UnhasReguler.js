@@ -6,6 +6,7 @@ import Pendaftar from "../pendaftar";
 const UnhasReguler = (props) => {
   useEffect(() => {
     props.setActive("wawUnh");
+    props.setTitle("Lolos Wawancara Universitas Hasanuddin-Reguler");
   });
 
   let { path, url } = useRouteMatch();

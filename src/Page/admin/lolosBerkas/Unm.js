@@ -6,6 +6,7 @@ import Pendaftar from "../pendaftar";
 const Unm = (props) => {
   useEffect(() => {
     props.setActive("berUnm");
+    props.setTitle("Lolos Berkas Universitas Negeri Makassar");
   });
 
   let { path, url } = useRouteMatch();
