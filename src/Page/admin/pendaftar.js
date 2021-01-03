@@ -1,12 +1,208 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import image from "../../images/sala.jpg";
 
 const Pendaftar = () => {
   let { topicId } = useParams();
 
   return (
-    <div>
-      <h3>{topicId}</h3>
+    <div className="container mt-4">
+      <div className="row">
+        <div className="col-3 order-sm-last ">
+          <div className="sticky-top" style={{ maxWidth: "170px" }}>
+            <figure className="figure p-2 rounded shadow  ">
+              <img
+                src={image}
+                className="figure-img img-fluid rounded"
+                alt="..."
+              />
+              <figcaption className="figure-caption text-center">
+                Pas Foto
+              </figcaption>
+            </figure>
+            <button className="btn btn-success col-12">Terima</button>
+          </div>
+        </div>
+        <div className="col-9">
+          <div className="card shadow rounded list-group list-group-flush mb-5 p-0">
+            <div className="card-header bg-secondary p-3 pb-2 col">
+              <h3 className=" text-white fw-bold">Data Diri</h3>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Nama Lengkap </p>
+              <p className="fw-bold col-9">{topicId}</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Nama Pangilan </p>
+              <p className="fw-bold col-3">huddin</p>
+              <p className="pe-1 col-3">Jenis-Kelamin </p>
+              <p className="fw-bold col-3">Laki-laki</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Agama</p>
+              <p className="fw-bold col-3">Islam</p>
+              <p className="pe-1 col-3">Golongan Darah</p>
+              <p className="fw-bold col-3">0</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Suku Bangsa</p>
+              <p className="fw-bold col-9">Massenrempulu-Enrekang</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Tempat dan tanggal lahir</p>
+              <p className="fw-bold col-9">Larompong, 13 Maret 1998</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Anak ke</p>
+              <p className="pe-1 col-2 fw-bold ">3</p>
+              <p className="pe-1 col-3">Dari Jumlah saudara</p>
+              <p className="fw-bold col-4">4</p>
+            </div>
+
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Hobi</p>
+              <p className="fw-bold col-9">Baca buku, dengar musik</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Cita-cita</p>
+              <p className="fw-bold col-9">ENterprenuer, programer</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Alamat selama berkuliah</p>
+              <p className="fw-bold col-9">
+                Pondok zavair, jl Nangka, Bontomarannu , Gowa
+              </p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Nomor Telepon</p>
+              <p className="pe-1 col-3 fw-bold ">082346462435</p>
+              <p className="pe-1 col-3">Nomor Wa</p>
+              <p className="fw-bold col-3">082346462435</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Akun Instagram</p>
+              <p className="fw-bold col-9">salahuddin_hafid</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Minat atau Bakat</p>
+              <p className="pe-1 col-3 fw-bold ">Programing</p>
+              <p className="pe-1 col-3">Keterampilan hidup</p>
+              <p className="fw-bold col-3">
+                BUat website, buat aplikasi mobile
+              </p>
+            </div>
+          </div>
+          <div className="card shadow rounded list-group list-group-flush mb-5">
+            <div className="card-header bg-secondary p-3 pb-2">
+              <h3 className=" text-white fw-bold">Data Orangtua/Wali</h3>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Nama Ayah</p>
+              <p className="fw-bold col-9">Lahapi</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Nomor Telepon Ayah</p>
+              <p className="fw-bold col-9">082346462345</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Alamat Ayah</p>
+              <p className="fw-bold col-9">
+                Jl. SInergi MUlya, Topamdanmg , BUKIT Sutra
+              </p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Pekerjaan Ayah</p>
+              <p className="pe-1 col-3 fw-bold ">Petani</p>
+              <p className="pe-1 col-3">Penghasilan Ayah</p>
+              <p className="fw-bold col-3">Rp 4.000.000</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Nama ibu</p>
+              <p className="fw-bold col-9">Sanaria</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Nomor Telepon ibu</p>
+              <p className="fw-bold col-9">082346462345</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Alamat ibu</p>
+              <p className="fw-bold col-9">
+                Jl. SInergi MUlya, Topamdanmg , BUKIT Sutra
+              </p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Pekerjaan ibu</p>
+              <p className="pe-1 col-3 fw-bold ">Petani</p>
+              <p className="pe-1 col-3">Penghasilan ibu</p>
+              <p className="fw-bold col-3">Rp 500.000</p>
+            </div>
+          </div>
+          <div className="card shadow rounded list-group list-group-flush mb-5">
+            <div className="card-header bg-secondary p-3 pb-2">
+              <h3 className=" text-white fw-bold">Data akademik</h3>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Perguruan tinggi</p>
+              <p className="fw-bold col-9">Universitas Hasanuddin</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Fakultas</p>
+              <p className="pe-1 col-3 fw-bold ">Teknik</p>
+              <p className="pe-1 col-3">Program Studi</p>
+              <p className="fw-bold col-3">Teknik Informatika</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">NIM</p>
+              <p className="pe-1 col-3 fw-bold ">D121181327</p>
+              <p className="pe-1 col-3">IP semester terakhir</p>
+              <p className="fw-bold col-3">3.54</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Tahun masuk kuliah</p>
+              <p className="pe-1 col-3 fw-bold ">2018</p>
+              <p className="pe-1 col-3">Tahun rencana lulus</p>
+              <p className="fw-bold col-3">2022</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Prestasi selama berkuliah</p>
+              <p className="fw-bold col-9">0vfdv vfvdf fdvv82346462345</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Organisasi yang pernah dan sedang diikuti</p>
+              <p className="fw-bold col-9">gergre brtger bbf bbe bebve bfb</p>
+            </div>
+          </div>
+          <div className="card shadow rounded list-group list-group-flush mb-5">
+            <div className="card-header bg-secondary p-3 pb-2">
+              <h3 className=" text-white fw-bold">Essay Beasiswa</h3>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Alasan mendaftar beasiswa</p>
+              <p className="fw-bold col-9">
+                lorem v fdvfd fdvf fdfvwcwc f dwvd
+              </p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Rencana pengunaan beasiswa</p>
+              <p className="fw-bold col-9">
+                lorem v fdvfd fdvf fdfvwcwc f dwvd
+              </p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3 pe-1">Kenapa pantas mendapatkan beasiswa</p>
+              <p className="fw-bold col-9">
+                lorem v fdvfd fdvf fdfvwcwc f dwvd
+              </p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3 pe-1">Rencana setelah lulus kuliah</p>
+              <p className="fw-bold col-9">
+                lorem v fdvfd fdvf fdfvwcwc f dwvd
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -48,6 +48,45 @@ const DataDiri = (props) => {
           />
         </div>
         <div className="form-floating col-md-6 mb-3">
+          <input
+            name="tangalLahir"
+            type="date"
+            className={`form-control form-date   ${
+              errors.tangalLahir ? "is-invalid" : ""
+            }`}
+            ref={register({
+              required: "Tanggal Lahir harus diisi",
+            })}
+          />
+          <label className="ps-4 fw-bold">Tanggal lahir</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="tangalLahir"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-md-6 mb-3">
+          <input
+            name="tempatLahir"
+            type="text"
+            placeholder="Masukkan tempat lahir anda"
+            className={`form-control form-date   ${
+              errors.tempatLahir ? "is-invalid" : ""
+            }`}
+            ref={register({
+              required: "Tempat Lahir harus diisi",
+            })}
+          />
+          <label className="ps-4 fw-bold">Tempat lahir</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="tempatLahir"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-md-6 mb-3">
           <select
             name="gender"
             type="text"
@@ -95,39 +134,40 @@ const DataDiri = (props) => {
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
-            name="tangalLahir"
-            type="date"
+            name="suku"
+            type="text"
+            placeholder="Masukkan suku anda"
             className={`form-control form-date   ${
-              errors.tangalLahir ? "is-invalid" : ""
+              errors.suku ? "is-invalid" : ""
             }`}
             ref={register({
-              required: "Tanggal Lahir harus diisi",
+              required: "Suku anda harus diisi",
             })}
           />
-          <label className="ps-4 fw-bold">Tanggal lahir</label>
+          <label className="ps-4 fw-bold">Suku bangsa</label>
           <ErrorMessage
             className="invalid-feedback"
-            name="tangalLahir"
+            name="suku"
             as="div"
             errors={errors}
           />
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
-            name="tempatLahir"
+            name="darah"
             type="text"
-            placeholder="Masukkan tempat lahir anda"
+            placeholder="Masukkan golongan darah anda"
             className={`form-control form-date   ${
-              errors.tempatLahir ? "is-invalid" : ""
+              errors.darah ? "is-invalid" : ""
             }`}
             ref={register({
-              required: "Tempat Lahir harus diisi",
+              required: "Golongan darah harus diisi",
             })}
           />
-          <label className="ps-4 fw-bold">Tempat lahir</label>
+          <label className="ps-4 fw-bold">Golongan darah</label>
           <ErrorMessage
             className="invalid-feedback"
-            name="tempatLahir"
+            name="darah"
             as="div"
             errors={errors}
           />
@@ -282,6 +322,38 @@ const DataDiri = (props) => {
             errors={errors}
           />
           <p className="form-text">Akun instagram harus dipublic</p>
+        </div>
+        <div className="form-floating col-md-6 mb-3">
+          <input
+            name="minat"
+            type="text"
+            placeholder="Masukkan minat atau bakat anda"
+            className={`form-control ${errors.minat ? "is-invalid" : ""}`}
+            ref={register({})}
+          />
+          <label className="ps-4 fw-bold">Minat atau bakat</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="minat"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-md-6 mb-3">
+          <input
+            name="skil"
+            type="text"
+            placeholder="Masukkan keterampilan anda"
+            className={`form-control ${errors.skil ? "is-invalid" : ""}`}
+            ref={register({})}
+          />
+          <label className="ps-4 fw-bold">Keterampilan anda</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="skil"
+            as="div"
+            errors={errors}
+          />
         </div>
       </div>
     </div>
