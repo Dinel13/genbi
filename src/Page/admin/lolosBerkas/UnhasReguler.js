@@ -19,7 +19,7 @@ const UnhasReguler = (props) => {
         <Tabel Unhas={Unhas} url={url} />
       </Route>
       <Route path={`${path}/:topicId`}>
-        <Pendaftar />
+        <Pendaftar berkas={true}  />
       </Route>
     </Switch>
   );

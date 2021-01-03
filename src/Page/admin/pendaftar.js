@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import image from "../../images/sala.jpg";
 
-const Pendaftar = () => {
+const Pendaftar = (props) => {
   let { topicId } = useParams();
+  const [nilai1, setNilai1] = useState(undefined);
+  const [nilai2, setNilai2] = useState(undefined);
+  const [error, setError] = useState(false);
+  const [error2, setError2] = useState(false);
+
+  const submitNilaiSatu = (e) => {
+    e.preventDefault();
+    if (!nilai1) {
+      setError("masukkan nilai yang valid");
+      return;
+    }
+    if (nilai1 < 0) {
+      setError("masukkan nilai yang valid");
+      return;
+    }
+    console.log(nilai1);
+  };
+
+  const submitNilaiDua = (e) => {
+    e.preventDefault();
+    if (!nilai2) {
+      setError2("masukkan nilai yang valid");
+      return;
+    }
+    if (nilai2 < 0) {
+      setError2("masukkan nilai yang valid");
+      return;
+    }
+    console.log(nilai2);
+  };
 
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="col-3 order-sm-last ">
-          <div className="sticky-top" style={{ maxWidth: "170px" }}>
-            <figure className="figure p-2 rounded shadow  ">
+          <div className="sticky-top" style={{ maxWidth: "380px" }}>
+            <figure className="figure p-3 rounded shadow  ">
               <img
                 src={image}
                 className="figure-img img-fluid rounded"
@@ -19,8 +49,70 @@ const Pendaftar = () => {
               <figcaption className="figure-caption text-center">
                 Pas Foto
               </figcaption>
+              <hr/>
+            {props.wawancara && <h5 className="text-center"><span className="text-muted">Nilai wawancara</span> 100</h5>}
             </figure>
-            <button className="btn btn-success col-12">Terima</button>
+            {props.berkas && (
+              <>
+                <div className="d-flex-inline row mb-3 align-items-center">
+                  <div className="form-floating pe-0 col-sm-7 ">
+                    <input
+                      name="prodi"
+                      value={nilai1}
+                      onChange={(e) => {
+                        setError(false);
+                        setNilai1(e.target.value);
+                      }}
+                      type="number"
+                      placeholder="Masukkan nilai"
+                      className={`form-control  ${error ? "is-invalid" : ""}`}
+                    />
+                    <label className="ps-4 fw-bold">Niali 1</label>
+                  </div>
+                  <div className="col-sm-5 ps-1">
+                    <button
+                      onClick={submitNilaiSatu}
+                      type="button"
+                      className="w-100 btn btn-sm btn-success"
+                    >
+                      Simpan
+                    </button>
+                  </div>
+                  {error && (
+                    <div className="form-text text-danger">{error}</div>
+                  )}
+                </div>
+                <div className="d-flex-inline row mb-3 align-items-center">
+                  <div className="form-floating pe-0 col-sm-7 ">
+                    <input
+                      name="nilai2"
+                      value={nilai2}
+                      onChange={(e) => {
+                        setError2(false);
+                        setNilai2(e.target.value);
+                      }}
+                      type="number"
+                      placeholder="Masukkan nilai"
+                      className={`form-control  ${error2 ? "is-invalid" : ""}`}
+                    />
+                    <label className="ps-4 fw-bold">Niali 2</label>
+                  </div>
+                  <div className="col-sm-5 ps-1">
+                    <button
+                      onClick={submitNilaiDua}
+                      type="button"
+                      className="w-100 btn btn-sm btn-success"
+                    >
+                      Simpan
+                    </button>
+                  </div>
+                  {error2 && (
+                    <div className="form-text text-danger">{error2}</div>
+                  )}
+                </div>
+              </>
+            )}
+            <button className="btn btn-primary btn-lg col-12">Terima</button>
           </div>
         </div>
         <div className="col-9">
@@ -81,7 +173,9 @@ const Pendaftar = () => {
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Akun Instagram</p>
-              <p className="fw-bold col-9">salahuddin_hafid</p>
+              <p className="fw-bold col-3">salahuddin_hafid</p>
+              <p className="pe-1 col-3">Alamat email</p>
+              <p className="fw-bold pe-1 col-3">salahuddin_hafid@gmail.com</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Minat atau Bakat</p>
@@ -168,7 +262,9 @@ const Pendaftar = () => {
               <p className="fw-bold col-9">0vfdv vfvdf fdvv82346462345</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-              <p className="pe-1 col-3">Organisasi yang pernah dan sedang diikuti</p>
+              <p className="pe-1 col-3">
+                Organisasi yang pernah dan sedang diikuti
+              </p>
               <p className="fw-bold col-9">gergre brtger bbf bbe bebve bfb</p>
             </div>
           </div>
@@ -189,7 +285,9 @@ const Pendaftar = () => {
               </p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-              <p className="pe-1 col-3 pe-1">Kenapa pantas mendapatkan beasiswa</p>
+              <p className="pe-1 col-3 pe-1">
+                Kenapa pantas mendapatkan beasiswa
+              </p>
               <p className="fw-bold col-9">
                 lorem v fdvfd fdvf fdfvwcwc f dwvd
               </p>
