@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-import Card from "../../../components/admin/Card";
+import Card from "../../../components/admin/LolosWawancara/Card";
 
 import Pendaftar from "../pendaftar";
 
