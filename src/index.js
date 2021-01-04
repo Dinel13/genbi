@@ -12,8 +12,8 @@ import "./index.css";
 import App from "./App";
 
 const rootReducer = combineReducers({
-  Auth : authReducer
-})
+  Auth: authReducer,
+});
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 

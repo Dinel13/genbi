@@ -8,7 +8,6 @@ import Tabel from "../../../components/admin/LolosBerkas/Tabel";
 const Uinam = (props) => {
   let { path, url } = useRouteMatch();
   const { setActive, setTitle } = props;
-
   useEffect(() => {
     setActive("berUinam");
     setTitle(["Lolos Berkas UIN Alauddin Makassar"]);
@@ -20,7 +19,7 @@ const Uinam = (props) => {
         <Tabel Unhas={Unhas} url={url} />
       </Route>
       <Route path={`${path}/:topicId`}>
-        <Pendaftar berkas={true}  />
+        <Pendaftar berkas={true} />
       </Route>
     </Switch>
   );
