@@ -6,9 +6,19 @@ const Defult = () => {
 
   return (
     <div className="container main">
-      <h3>
-        No match for <code>{location.pathname}</code>
-      </h3>
+      <br/>
+      <br/>
+      <div className="text-center mt-6">
+        <div className="alert alert-danger">
+          <h3>
+            Alamat <code>{location.pathname}</code> Tidak tersedia
+          </h3>
+          <hr/>
+          <h5 className="text-muted">
+            Periksa kembali alamat url yang anda tuju
+          </h5>
+        </div>
+      </div>
     </div>
   );
 };

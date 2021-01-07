@@ -44,7 +44,7 @@ const Daftar = (props) => {
           register={register}
           watchJenisBeasiswa={watchJenisBeasiswa}
         />
-        <div class="col-12 mb-3">
+        <div className="col-12 mb-3">
           <div className="form-check">
             <input
               className={`form-check-input ${
@@ -70,7 +70,7 @@ const Daftar = (props) => {
             />
           </div>
         </div>
-        <div class="col-12 mb-3">
+        <div className="col-12 mb-3">
           <div className="form-check">
             <input
               className={`form-check-input ${

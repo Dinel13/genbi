@@ -4,7 +4,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import Main from "../components/admin/Main";
 import SideBar from "../components/admin/SideBar";
 import SignIn from "../components/admin/SignIN/SignIn";
-import "./admin.css";
+//import "./admin.css";
 import PendaftarUinam from "./admin/pendaftar/pendaftarUinam";
 import PendaftarUnhasReguler from "./admin/pendaftar/pendaftarUnhasReguler";
 import PendaftarUnhasUngulan from "./admin/pendaftar/pendaftarUnhasUngulan";

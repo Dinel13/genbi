@@ -3,43 +3,27 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch } from "react-redux";
 
-import { Login } from "../store/action/AuthAction";
-import { Link, useHistory } from "react-router-dom";
+import { LoginAdmin } from "../../store/action/AuthAction";
+import { useHistory } from "react-router-dom";
 
-const FormLogin = (props) => {
+export default function FormLogin() {
   const history = useHistory()
   const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = (values) => {
-    dispatch(Login(values.email, values.password));
-    history.replace("/pendaftaran")
+    dispatch(LoginAdmin(values.email, values.password))
+    history.replace("/admin")
+    
   };
+
   return (
     <div>
       <div className="container mt-3 main">
         <div className="row justify-content-md-center">
-          {props.alert && (
-            <div className="row justify-content-md-center">
-              <div className="col-12, col-sm-10 col-md-8 col-lg-6">
-                <div
-                  className="alert alert-warning alert-dismissible fade show shadow mb-4"
-                  role="alert"
-                >
-                  <strong>Mohon maaf!</strong> Anda harus login terlebih dahulu
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                  ></button>
-                </div>
-              </div>
-            </div>
-          )}
-          <div className="card px-0 shadow-lg col-md-8 col-lg-6">
+          <div className="card px-0 shadow-lg col-md-8 col-lg-6 mt-4">
             <div className="card-header text-center">
-              <h4>Form Login</h4>
+              <h4>Login Admin</h4>
             </div>
             <div className="row card-body px-5">
               <div className="col-lg-12">
@@ -99,11 +83,6 @@ const FormLogin = (props) => {
                     >
                       LOGIN
                     </button>
-                    <div className="col-12">
-                      <p className="form-text text-center">
-                        Belum punya akun? <Link to="SignUp">Daftar</Link>
-                      </p>
-                    </div>
                   </div>
                 </form>
               </div>
@@ -111,13 +90,6 @@ const FormLogin = (props) => {
           </div>
         </div>
       </div>
-      <div className="text-center">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
     </div>
   );
-};
-
-export default FormLogin;
+}

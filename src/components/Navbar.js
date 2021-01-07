@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Logout } from "../store/action/AuthAction";
 
 const Navbar = (props) => {
   const token = useSelector((state) => state.Auth.token);
+  const admin = useSelector((state) => state.Auth.admin);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -38,16 +40,25 @@ const Navbar = (props) => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/pendaftaran">
-                Pendaftaran
-              </Link>
-            </li>
+            {!admin && (
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  aria-current="page"
+                  to="/pendaftaran"
+                >
+                  Pendaftaran
+                </Link>
+              </li>
+            )}
           </ul>
           <div className="d-flex ">
-            {token ? (
+            {token || admin ? (
               <button
-                onClick={() => dispatch(Logout())}
+                onClick={() => {
+                  dispatch(Logout());
+                  history.replace("/");
+                }}
                 className="btn btn-sm btn-danger me-2"
               >
                 Keluar
