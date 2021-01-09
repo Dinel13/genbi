@@ -156,7 +156,7 @@ const EssayBeasiswa = (props) => {
         </div>
         <div className="form-group mb-3 row">
           <div className="form-check ps-3">
-            <label className="col-form-label fw-bold col-sm-9">
+            <label className="col-form-label fw-bold col-sm-7">
               Apakah anda siap berperan aktif dalam kepengurusan dan kegiatan
               komunitas penerima beasiswa Bank Indonesia
             </label>

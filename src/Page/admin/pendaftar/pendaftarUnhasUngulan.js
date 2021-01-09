@@ -17,10 +17,18 @@ const PendaftarUnhasUngulan = (props) => {
   return (
     <Switch>
       <Route exact path={path}>
-        <Tabel Unhas={Unhas} url={url} />
+        <Tabel
+          setElementId={props.setElementId}
+          setPdfHeader={props.setPdfHeader}
+          Unhas={Unhas}
+          url={url}
+        />
       </Route>
       <Route path={`${path}/:topicId`}>
-        <Pendaftar />
+        <Pendaftar
+          setElementId={props.setElementId}
+          setPdfHeader={props.setPdfHeader}
+        />
       </Route>
     </Switch>
   );

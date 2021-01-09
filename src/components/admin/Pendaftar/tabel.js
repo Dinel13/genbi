@@ -2,12 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Tabel = (props) => {
+  const { setElementId, setPdfHeader } = props;
+
+  React.useEffect(() => {
+    setElementId("print");
+    setPdfHeader("test - salahuddin");
+  }, [setElementId, setPdfHeader]);
+
   return (
-    <div className="table-responsive">
+    <div className="table-responsive" id="print">
       <table className="table  table-ligh table-hover ">
         <thead>
           <tr className="table-info">
-            <th className="ps-3" scope="col">No</th>
+            <th className="ps-3" scope="col">
+              No
+            </th>
             <th scope="col">Nama</th>
             <th scope="col">NIM</th>
             <th scope="col">Fakultas</th>
@@ -19,12 +28,24 @@ const Tabel = (props) => {
         <tbody>
           {props.Unhas.map((un, index) => (
             <tr key={un.id}>
-              <th className="ps-3" scope="row">{index + 1}</th>
-              <td className="text-truncate" style={{maxWidth: '120px'}}>{un.nama}</td>
-              <td className="text-truncate" style={{maxWidth: '100px'}}>{un.nim}</td>
-              <td className="text-truncate" style={{maxWidth: '120px'}}>{un.fakultas}</td>
-              <td className="text-truncate" style={{maxWidth: '110px'}}>{un.prodi}</td>
-              <td className="text-truncate" style={{maxWidth: '100px'}}>{un.ipk}</td>
+              <th className="ps-3" scope="row">
+                {index + 1}
+              </th>
+              <td className="text-truncate" style={{ maxWidth: "120px" }}>
+                {un.nama}
+              </td>
+              <td className="text-truncate" style={{ maxWidth: "100px" }}>
+                {un.nim}
+              </td>
+              <td className="text-truncate" style={{ maxWidth: "120px" }}>
+                {un.fakultas}
+              </td>
+              <td className="text-truncate" style={{ maxWidth: "110px" }}>
+                {un.prodi}
+              </td>
+              <td className="text-truncate" style={{ maxWidth: "100px" }}>
+                {un.ipk}
+              </td>
               <td>
                 <div
                   className="btn-group"

@@ -9,6 +9,14 @@ const Pendaftar = (props) => {
   const [error, setError] = useState(false);
   const [error2, setError2] = useState(false);
 
+  const { setElementId, setPdfHeader } = props;
+
+  React.useEffect(() => {
+    setElementId("print");
+    setPdfHeader("testy - salahuddin");
+  }, [setElementId, setPdfHeader]);
+
+
   const submitNilaiSatu = (e) => {
     e.preventDefault();
     if (!nilai1) {
@@ -36,8 +44,8 @@ const Pendaftar = (props) => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row">
+    <div className="container mt-4" >
+      <div className="row" >
         <div className="col-3 order-sm-last ">
           <div className="sticky-top" style={{ maxWidth: "380px" }}>
             <figure className="figure p-3 rounded shadow  ">
@@ -115,7 +123,7 @@ const Pendaftar = (props) => {
             <button className="btn btn-primary btn-lg col-12">Terima</button>
           </div>
         </div>
-        <div className="col-9">
+        <div className="col-9" id="print">
           <div className="card shadow rounded list-group list-group-flush mb-5 p-0">
             <div className="card-header bg-secondary p-3 pb-2 col">
               <h3 className=" text-white fw-bold">Data Diri</h3>
