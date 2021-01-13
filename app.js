@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const { graphqlHTTP} = require('express-graphql')
 
-const authRoutes = require("./routes/auth");
+const graphqlSchema = require('./grphql/schema')
+const graphqlResolver = require('./grphql/resolver')
 
 const app = express();
 
@@ -19,8 +21,10 @@ app.use((req, res, next) => {
 });
 
 //route yang sesunguhnya
-app.use("/auth", authRoutes);
-
+app.use('/graphql', graphqlHTTP({
+  schema : graphqlSchema,
+  rootValue : graphqlResolver
+}))
 //err handling
 //always jika adda err yang di next
 app.use((error, req, res, next) => {
