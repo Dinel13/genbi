@@ -29,45 +29,6 @@ export const AuthAdminWithData = (adminId, admin) => {
 };
 
 export const Signup = (email, password, name) => {
-  /*
-  return (dispatch) => {
-    const graphqlQuery = {
-      query: `
-      mutation {
-        createUser(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
-          _id
-          email
-        }
-      }
-    `,
-    };
-    fetch("http://localhost:8080/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(graphqlQuery),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((resData) => {
-        if (resData.errors && resData.errors[0].status === 422) {
-          throw new Error(
-            "Validation failed. Make sure the email address isn't used yet!"
-          );
-        }
-        if (resData.errors) {
-          throw new Error("User creation failed!");
-        }
-        console.log(resData);
-        dispatch(AuthWithData(resData._id, resData.name));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  */
   return async (dispatch) => {
     const graphqlQuery = {
       query: `
@@ -102,36 +63,33 @@ export const Signup = (email, password, name) => {
 };
 
 export const Login = (email, password) => {
-  return (dispatch) => {
-    console.log(email, password);
-    dispatch(AuthWithData("asdasd", "dasdas"));
-  };
-  /*
   return async (dispatch) => {
-    const response = await fetch("http://localhost:8080/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-
-    if (!response.ok) {
-      const errResData = await response.json();
-      const errorId = errResData.message;
-      let pesan = "masalah terjadi di server";
-      if (errorId) {
-        pesan = errorId;
-      }
-      throw new Error(pesan);
+    const graphqlQuery = {
+      query: `
+        query {
+          login(email: "${email}",password:"${password}") {
+            token
+            userId
+            name
+            email
+          }
+        }
+      `,
+    };
+    try {
+      const response = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(graphqlQuery),
+      });
+      const resData = await response.json();
+    dispatch(AuthWithData(resData.data.login.userId, resData.data.login.token));
+    } catch (err) {
+      console.log(err);
     }
-
-    const resData = await response.json();
-    dispatch(AuthWithData(resData.userId, resData.token));
-  }; */
+  };
 };
 
 export const LoginAdmin = (email, password) => {
@@ -139,32 +97,6 @@ export const LoginAdmin = (email, password) => {
     console.log(email, password);
     dispatch(AuthAdminWithData(email, password));
   };
-  /*
-  return async (dispatch) => {
-    const response = await fetch("http://localhost:8080/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-
-    if (!response.ok) {
-      const errResData = await response.json();
-      const errorId = errResData.message;
-      let pesan = "masalah terjadi di server";
-      if (errorId) {
-        pesan = errorId;
-      }
-      throw new Error(pesan);
-    }
-
-    const resData = await response.json();
-    dispatch(AuthWithData(resData.userId, resData.token));
-  }; */
 };
 
 export const Logout = () => {
