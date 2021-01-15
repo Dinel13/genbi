@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useSelector } from "react-redux";
 
 import Note from "../components/Note";
 import DataDiri from "../components/DataDiri";
@@ -11,14 +12,88 @@ import FilePendukung from "../components/FilePendukung";
 import Pemisah from "../components/Pemisah";
 
 const Daftar = (props) => {
+  const token = useSelector((state) => state.Auth.token);
   const { register, watch, errors, handleSubmit } = useForm();
   const watchWali = watch("showWali", ""); // you can supply default value as second argument
   const watchKampus = watch("kampus", "");
   const watchJenisBeasiswa = watch("jenisBeasiswa", "");
   const watchGenbi = watch("genbi", "");
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    const formData = new FormData();
+    formData.append("image", values.ktm[0]);
+    console.log(formData);
+    try {
+      const response = await fetch("http://localhost:8080/post-image", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        body: formData,
+      });
+      const resData = await response.json();
+      const imageUrl = resData.filePath;
+      const graphqlQuery = {
+        query: `
+        mutation {
+            createPendaftar(pendaftarInput: {fakultas: "${values.fakultas}", gender:"${values.gender}" ktm : "${imageUrl}"}) {
+              nama
+              fakultas
+              ktm
+            }
+          }
+        `,
+      };
+      const responseFinish = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(graphqlQuery),
+      });
+      const resDataFinish = await responseFinish.json();
+      if (!resDataFinish.ok) {
+        console.log("bad");
+      }
+      if (resDataFinish.errors) {
+        throw new Error(resDataFinish.errors[0].message);
+      }
+      console.log(resDataFinish);
+    } catch (err) {
+      console.log(err);
+    }
+    /*
+    const graphqlQuery = {
+      query: `
+      mutation {
+          createPendaftar(pendaftarInput: {fakultas: "${values.fakultas}", gender:"${values.gender}"}) {
+            nama
+            fakultas
+          }
+        }
+      `,
+    };
+    try {
+      const response = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(graphqlQuery),
+      });
+      const resData = await response.json();
+      if (!resData.ok) {
+        console.log("bad");
+      }
+      if (resData.errors) {
+        throw new Error(resData.errors[0].message);
+      }
+      console.log(resData);
+    } catch (err) {
+      console.log(err);
+    } */
   };
 
   return (
@@ -98,7 +173,7 @@ const Daftar = (props) => {
             />
           </div>
         </div>
-        <br/>
+        <br />
         <div className="col-6 mx-auto">
           <input
             type="submit"
