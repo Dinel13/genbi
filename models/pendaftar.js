@@ -2,203 +2,206 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const pendaftarSchema = new Schema({
-  agama: {
-    type: String,
-    requireq: true,
+const pendaftarSchema = new Schema(
+  {
+    agama: {
+      type: String,
+      requireq: false,
+    },
+    alamatAyah: {
+      type: String,
+      requireq: false,
+    },
+    alamatIbu: {
+      type: String,
+      requireq: false,
+    },
+    anakKe: {
+      type: String,
+      requireq: false,
+    },
+    angkatan: {
+      type: String,
+      requireq: false,
+    },
+    arahan: {
+      type: Boolean,
+      requireq: false,
+    },
+    cita: {
+      type: String,
+      requireq: false,
+    },
+    darah: {
+      type: String,
+      requireq: false,
+    },
+    fakultas: {
+      type: String,
+      requireq: false,
+    },
+    genbi: {
+      type: String,
+      requireq: false,
+    },
+    gender: {
+      type: String,
+      requireq: false,
+    },
+    hobby: {
+      type: String,
+      requireq: false,
+    },
+    instagram: {
+      type: String,
+      requireq: false,
+    },
+    ipk: {
+      type: String,
+      requireq: false,
+    },
+    kampus: {
+      type: String,
+      requireq: false,
+    },
+    kontribusi: {
+      type: Boolean,
+      requireq: false,
+    },
+    kosan: {
+      type: String,
+      requireq: false,
+    },
+    ktm: {
+      type: String,
+      requireq: false,
+    },
+    lulus: {
+      type: String,
+      requireq: false,
+    },
+    mampu: {
+      type: String,
+      requireq: false,
+    },
+    minat: {
+      type: String,
+      requireq: false,
+    },
+    motif: {
+      type: String,
+      requireq: false,
+    },
+    nama: {
+      type: String,
+      requireq: false,
+    },
+    namaAyah: {
+      type: String,
+      requireq: false,
+    },
+    namaIbu: {
+      type: String,
+      requireq: false,
+    },
+    nilai: {
+      type: String,
+      requireq: false,
+    },
+    nim: {
+      type: String,
+      requireq: false,
+    },
+    nomorHp: {
+      type: String,
+      requireq: false,
+    },
+    nomorWa: {
+      type: String,
+      requireq: false,
+    },
+    organisasi: {
+      type: String,
+      requireq: false,
+    },
+    pangilan: {
+      type: String,
+      requireq: false,
+    },
+    pantas: {
+      type: String,
+      requireq: false,
+    },
+    pekerjaanAyah: {
+      type: String,
+      requireq: false,
+    },
+    pekerjaanIbu: {
+      type: String,
+      requireq: false,
+    },
+    penghasilanAyah: {
+      type: String,
+      requireq: false,
+    },
+    penghasilanIbu: {
+      type: String,
+      requireq: false,
+    },
+    prestasi: {
+      type: String,
+      requireq: false,
+    },
+    prodi: {
+      type: String,
+      requireq: false,
+    },
+    rekomendasi: {
+      type: String,
+      requireq: false,
+    },
+    rencana: {
+      type: String,
+      requireq: false,
+    },
+    saudara: {
+      type: String,
+      requireq: false,
+    },
+    showWali: {
+      type: String,
+      requireq: false,
+    },
+    siapMengurus: {
+      type: String,
+      requireq: false,
+    },
+    skil: {
+      type: String,
+      requireq: false,
+    },
+    suku: {
+      type: String,
+      requireq: false,
+    },
+    tangalLahir: {
+      type: String,
+      requireq: false,
+    },
+    teleponAyah: {
+      type: String,
+      requireq: false,
+    },
+    teleponIbu: {
+      type: String,
+      requireq: false,
+    },
+    tempatLahir: {
+      type: String,
+      requireq: false,
+    },
   },
-  alamatAyah: {
-    type: String,
-    requireq: true,
-  },
-  alamatIbu: {
-    type: String,
-    requireq: true,
-  },
-  anakKe: {
-    type: String,
-    requireq: true,
-  },
-  angkatan: {
-    type: String,
-    requireq: true,
-  },
-  arahan: {
-    type: Boolean,
-    requireq: true,
-  },
-  cita: {
-    type: String,
-    requireq: true,
-  },
-  darah: {
-    type: String,
-    requireq: true,
-  },
-  fakultas: {
-    type: String,
-    requireq: true,
-  },
-  genbi: {
-    type: String,
-    requireq: true,
-  },
-  gender: {
-    type: String,
-    requireq: true,
-  },
-  hobby: {
-    type: String,
-    requireq: true,
-  },
-  instagram: {
-    type: String,
-    requireq: true,
-  },
-  ipk: {
-    type: String,
-    requireq: true,
-  },
-  kampus: {
-    type: String,
-    requireq: true,
-  },
-  kontribusi: {
-    type: Boolean,
-    requireq: true,
-  },
-  kosan: {
-    type: String,
-    requireq: true,
-  },
-  ktm: {
-    type: String,
-    requireq: true,
-  },
-  lulus: {
-    type: String,
-    requireq: true,
-  },
-  mampu: {
-    type: String,
-    requireq: true,
-  },
-  minat: {
-    type: String,
-    requireq: true,
-  },
-  motif: {
-    type: String,
-    requireq: true,
-  },
-  nama: {
-    type: String,
-    requireq: true,
-  },
-  namaAyah: {
-    type: String,
-    requireq: true,
-  },
-  namaIbu: {
-    type: String,
-    requireq: true,
-  },
-  nilai: {
-    type: String,
-    requireq: true,
-  },
-  nim: {
-    type: String,
-    requireq: true,
-  },
-  nomorHp: {
-    type: String,
-    requireq: true,
-  },
-  nomorWa: {
-    type: String,
-    requireq: true,
-  },
-  organisasi: {
-    type: String,
-    requireq: true,
-  },
-  pangilan: {
-    type: String,
-    requireq: true,
-  },
-  pantas: {
-    type: String,
-    requireq: true,
-  },
-  pekerjaanAyah: {
-    type: String,
-    requireq: true,
-  },
-  pekerjaanIbu: {
-    type: String,
-    requireq: true,
-  },
-  penghasilanAyah: {
-    type: String,
-    requireq: true,
-  },
-  penghasilanIbu: {
-    type: String,
-    requireq: true,
-  },
-  prestasi: {
-    type: String,
-    requireq: true,
-  },
-  prodi: {
-    type: String,
-    requireq: true,
-  },
-  rekomendasi: {
-    type: String,
-    requireq: true,
-  },
-  rencana: {
-    type: String,
-    requireq: true,
-  },
-  saudara: {
-    type: String,
-    requireq: true,
-  },
-  showWali: {
-    type: String,
-    requireq: true,
-  },
-  siapMengurus: {
-    type: String,
-    requireq: true,
-  },
-  skil: {
-    type: String,
-    requireq: true,
-  },
-  suku: {
-    type: String,
-    requireq: true,
-  },
-  tangalLahir: {
-    type: String,
-    requireq: true,
-  },
-  teleponAyah: {
-    type: String,
-    requireq: true,
-  },
-  teleponIbu: {
-    type: String,
-    requireq: true,
-  },
-  tempatLahir: {
-    type: String,
-    requireq: true,
-  },
-});
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Pendaftar", pendaftarSchema);

@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 const Admin = require("../models/Admin");
+const Pendaftar = require("../models/pendaftar");
 
 module.exports = {
   createUser: async function ({ userInput }, req) {
@@ -139,4 +140,34 @@ module.exports = {
       name: admin.name,
     };
   },
+  createPendaftar: async function({ pendaftarInput }, req) {
+    if (!req.isAuth) {
+      const error = new Error('Not authenticated!');
+      error.code = 401;
+      throw error;
+    }
+   
+    const user = await User.findById(req.userId);
+    if (!user) {
+      const error = new Error('Invalid user.');
+      error.code = 401;
+      throw error;
+    }
+    const pendaftar = new Pendaftar({
+      fakultas: pendaftarInput.fakultas,
+      gender: pendaftarInput.gender,
+      ktm: pendaftarInput.ktm,
+      nama: user.name
+    });
+    const createdPendaftar = await pendaftar.save();
+    user.pendaftar = createdPendaftar;
+    await user.save();
+    return {
+      ...createdPendaftar._doc,
+      _id: createdPendaftar._id.toString(),
+      nama : createdPendaftar.nama,
+      createdAt: createdPendaftar.createdAt.toISOString(),
+      updatedAt: createdPendaftar.updatedAt.toISOString()
+    };
+  }
 };
