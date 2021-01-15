@@ -5,16 +5,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   email: {
     type: String,
-    requireq: true,
+    required: true,
   },
   password: {
     type: String,
-    requireq: true,
+    required: true,
   },
   name: {
     type: String,
-    requireq: true,
+    required: true,
+  },
+  pendaftar: {
+    type: Schema.Types.ObjectId,
+    ref: "Pendaftar",
   },
 });
-
 module.exports = mongoose.model("User", userSchema);

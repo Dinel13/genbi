@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const adminSchema = new Schema({
+const pendaftarSchema = new Schema({
   agama: {
     type: String,
     requireq: true,
@@ -201,4 +201,4 @@ const adminSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Admin", adminSchema);
+module.exports = mongoose.model("Pendaftar", pendaftarSchema);
