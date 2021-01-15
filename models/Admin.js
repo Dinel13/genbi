@@ -7,6 +7,10 @@ const adminSchema = new Schema({
     type: String,
     requireq: true,
   },
+  name: {
+    type: String,
+    requireq: true,
+  },
   password: {
     type: String,
     requireq: true,
