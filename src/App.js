@@ -25,7 +25,6 @@ const App = () => {
   useEffect(() => {
     const storedDataUser = JSON.parse(localStorage.getItem("userData"));
     const storedDataAdmin = JSON.parse(localStorage.getItem("adminData"));
-    console.log(storedDataAdmin);
     if (storedDataUser && storedDataUser.token) {
       dispatch(AuthWithData(storedDataUser.userId, storedDataUser.token));
     }

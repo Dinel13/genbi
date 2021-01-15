@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch } from "react-redux";
 
-import { Signup } from "../store/action/AuthAction";
+import { Signup , SignupAdmin} from "../store/action/AuthAction";
 import { Link } from "react-router-dom";
 
 export default function FormSignUp() {
@@ -11,7 +11,7 @@ export default function FormSignUp() {
   const { register, errors, handleSubmit, getValues } = useForm();
 
   const onSubmit = (values) => {
-    dispatch(Signup(values.email, values.password, values.nama));
+    dispatch(SignupAdmin(values.email, values.password, values.nama));
     console.log(values);
   };
 
