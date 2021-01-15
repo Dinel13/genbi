@@ -29,34 +29,75 @@ export const AuthAdminWithData = (adminId, admin) => {
 };
 
 export const Signup = (email, password, name) => {
-  if (email) {
-    return console.log(email, password, name);
-  }
-  return async (dispatch) => {
-    const response = await fetch("http://localhost:8080/auth/signup", {
-      method: "PUT",
+  /*
+  return (dispatch) => {
+    const graphqlQuery = {
+      query: `
+      mutation {
+        createUser(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
+          _id
+          email
+        }
+      }
+    `,
+    };
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
-      }),
-    });
-
-    if (!response.ok) {
-      const errResData = await response.json();
-      const errorId = errResData.message;
-      let pesan = "masalah terjadi di server";
-      if (errorId) {
-        pesan = errorId;
+      body: JSON.stringify(graphqlQuery),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((resData) => {
+        if (resData.errors && resData.errors[0].status === 422) {
+          throw new Error(
+            "Validation failed. Make sure the email address isn't used yet!"
+          );
+        }
+        if (resData.errors) {
+          throw new Error("User creation failed!");
+        }
+        console.log(resData);
+        dispatch(AuthWithData(resData._id, resData.name));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  */
+  return async (dispatch) => {
+    const graphqlQuery = {
+      query: `
+        mutation {
+          createUser(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
+            _id
+            email
+          }
+        }
+      `,
+    };
+    try {
+      const response = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(graphqlQuery),
+      });
+      const resData = await response.json();
+      if (resData.errors && resData.errors[0].status === 422) {
+        throw new Error(
+          "Validation failed. Make sure the email address isn't used yet!"
+        );
       }
-      throw new Error(pesan);
+      console.log(resData);
+      // dispatch(AuthWithData(resData.userId, resData.token));
+    } catch (err) {
+      console.log(err);
     }
-
-    const resData = await response.json();
-    dispatch(AuthWithData(resData.userId, resData.token));
   };
 };
 
