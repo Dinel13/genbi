@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer");
 const mongoose = require("mongoose");
 const { graphqlHTTP } = require("express-graphql");
+const nodemailer = require("nodemailer");
 
 const auth = require("./middleware/auth");
 const graphqlSchema = require("./grphql/schema");
@@ -18,7 +19,13 @@ const ktmStorage = multer.diskStorage({
     cb(null, "public/ktm");
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + "-" + new Date().toISOString() + path.extname(file.originalname));
+    cb(
+      null,
+      file.fieldname +
+        "-" +
+        new Date().toISOString() +
+        path.extname(file.originalname)
+    );
   },
 });
 
@@ -69,6 +76,34 @@ app.put(
       .json({ message: "File stored.", filePath: req.file.path });
   }
 );
+
+//eamial
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "fadullah2021@gmail.com",
+    pass: "Dullah2021",
+  },
+});
+
+const mailOptions = {
+  from: "fadullah2021@gmail.com",
+  to: "salahuddin18d@student.unhas.ac.id",
+  subject: "Invoices due",
+  text: "Dudes, we really need your money.",
+};
+
+app.use("/eamil", (req, res, next) => {
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+      return next();
+    } else {
+      console.log("Email sent: " + info.response);
+      return res.status(201).json({ message: "Email sent: " + info.response });
+    }
+  });
+});
 
 //route yang sesunguhnya
 app.use(
