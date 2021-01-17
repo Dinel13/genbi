@@ -29,6 +29,22 @@ const ktmStorage = multer.diskStorage({
   },
 });
 
+const fileStorage = (location) =>
+  multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, `public/${location}`);
+    },
+    filename: (req, file, cb) => {
+      cb(
+        null,
+        file.fieldname +
+          "-" +
+          new Date().toISOString() +
+          path.extname(file.originalname)
+      );
+    },
+  });
+
 const ktmFilter = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
@@ -40,6 +56,15 @@ const ktmFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
+
+const pdfFilter = (req, file, cb) => {
+  if (file.mimetype === "application/pdf") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
 app.use(bodyParser.json()); // application/json
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -74,6 +99,129 @@ app.put(
     return res
       .status(201)
       .json({ message: "File stored.", filePath: req.file.path });
+  }
+);
+
+app.put(
+  "/post-transkip-nilai",
+  multer({ storage: fileStorage("transkip"), fileFilter: pdfFilter }).single(
+    "transkipNilai"
+  ),
+  (req, res, next) => {
+    if (!req.isAuth) {
+      throw new Error("Not authenticated!");
+    }
+    if (!req.file) {
+      return res.status(200).json({ message: "No file provided!" });
+    }
+    if (req.body.oldPath) {
+      clearImage(req.body.oldPath);
+    }
+    console.log("ggg");
+    return res
+      .status(201)
+      .json({ message: "File stored.", filePath: req.file.path });
+  }
+);
+
+app.put(
+  "/post-tidak-mampu",
+  multer({
+    storage: fileStorage("ketTidakMampu"),
+    fileFilter: pdfFilter,
+  }).single("ketTidakMampu"),
+  (req, res, next) => {
+    if (!req.isAuth) {
+      throw new Error("Not authenticated!");
+    }
+    if (!req.file) {
+      return res.status(200).json({ message: "No file provided!" });
+    }
+    if (req.body.oldPath) {
+      clearImage(req.body.oldPath);
+    }
+    return res
+      .status(201)
+      .json({ message: "File stored.", filePath: req.file.path });
+  }
+);
+
+const storageAll = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (file.fieldname === "ktm") {
+      cb(null, "public/ktm");
+    } else if (file.fieldname === "rekomendasi") {
+      cb(null, "public/rekomendasi");
+    } else if (file.fieldname === "rekomendasi2") {
+      cb(null, "public/rekomendasi2");
+    }
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const filterAll = (file, cb) => {
+  if (file.fieldname === "ktm") {
+    console.log("fdsfsd");
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false); // else fails
+    }
+  } else {
+    console.log("fdsfsffffd");
+    if (file.mimetype === "application/pdf") {
+      cb(null, true);
+    } else {
+      cb(null, false); // else fails
+    }
+  }
+};
+
+app.put(
+  "/rekomendasi",
+  multer({
+    storage: storageAll,
+    limits: {
+      fileSize: 1024 * 512,
+    },
+    fileFilter: (req, file, cb) => {
+      filterAll(file, cb);
+    },
+  }).fields([
+    {
+      name: "rekomendasi",
+      maxCount: 1,
+    },
+    {
+      name: "rekomendasi2",
+      maxCount: 1,
+    },
+    {
+      name: "ktm",
+      maxCount: 1,
+    },
+  ]),
+  (req, res, next) => {
+    if (!req.isAuth) {
+      throw new Error("Not authenticated!");
+    }
+    console.log(req.files.rekomendasi[0].path);
+    if (!req.files) {
+      return res.status(200).json({ message: "No file provided!" });
+    }
+    if (req.body.oldPath) {
+      clearImage(req.body.oldPath);
+    }
+    return res.status(201).json({
+      message: "File stored.",
+      filePath: req.files.rekomendasi[0].path,
+    });
   }
 );
 
