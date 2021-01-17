@@ -14,57 +14,6 @@ const graphqlResolver = require("./grphql/resolver");
 
 const app = express();
 
-const ktmStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/ktm");
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname +
-        "-" +
-        new Date().toISOString() +
-        path.extname(file.originalname)
-    );
-  },
-});
-
-const fileStorage = (location) =>
-  multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, `public/${location}`);
-    },
-    filename: (req, file, cb) => {
-      cb(
-        null,
-        file.fieldname +
-          "-" +
-          new Date().toISOString() +
-          path.extname(file.originalname)
-      );
-    },
-  });
-
-const ktmFilter = (req, file, cb) => {
-  if (
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const pdfFilter = (req, file, cb) => {
-  if (file.mimetype === "application/pdf") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
 app.use(bodyParser.json()); // application/json
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -79,71 +28,17 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/public", express.static(path.join(__dirname, "public")));
-
 app.use(auth);
 
-app.put(
-  "/post-ktm",
-  multer({ storage: ktmStorage, fileFilter: ktmFilter }).single("ktm"),
+app.use(
+  "/public",
+  /* try to autententicated but cant work
   (req, res, next) => {
     if (!req.isAuth) {
       throw new Error("Not authenticated!");
     }
-    if (!req.file) {
-      return res.status(200).json({ message: "No file provided!" });
-    }
-    if (req.body.oldPath) {
-      clearImage(req.body.oldPath);
-    }
-    return res
-      .status(201)
-      .json({ message: "File stored.", filePath: req.file.path });
-  }
-);
-
-app.put(
-  "/post-transkip-nilai",
-  multer({ storage: fileStorage("transkip"), fileFilter: pdfFilter }).single(
-    "transkipNilai"
-  ),
-  (req, res, next) => {
-    if (!req.isAuth) {
-      throw new Error("Not authenticated!");
-    }
-    if (!req.file) {
-      return res.status(200).json({ message: "No file provided!" });
-    }
-    if (req.body.oldPath) {
-      clearImage(req.body.oldPath);
-    }
-    console.log("ggg");
-    return res
-      .status(201)
-      .json({ message: "File stored.", filePath: req.file.path });
-  }
-);
-
-app.put(
-  "/post-tidak-mampu",
-  multer({
-    storage: fileStorage("ketTidakMampu"),
-    fileFilter: pdfFilter,
-  }).single("ketTidakMampu"),
-  (req, res, next) => {
-    if (!req.isAuth) {
-      throw new Error("Not authenticated!");
-    }
-    if (!req.file) {
-      return res.status(200).json({ message: "No file provided!" });
-    }
-    if (req.body.oldPath) {
-      clearImage(req.body.oldPath);
-    }
-    return res
-      .status(201)
-      .json({ message: "File stored.", filePath: req.file.path });
-  }
+  }, */
+  express.static(path.join(__dirname, "public"))
 );
 
 const storageAll = multer.diskStorage({
@@ -184,7 +79,7 @@ const filterAll = (file, cb) => {
 };
 
 app.put(
-  "/rekomendasi",
+  "/file",
   multer({
     storage: storageAll,
     limits: {
