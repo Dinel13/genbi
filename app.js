@@ -99,7 +99,8 @@ app.put(
     {
       name: "transkip",
       maxCount: 1,
-    },{
+    },
+    {
       name: "mampu",
       maxCount: 1,
     },
@@ -116,7 +117,6 @@ app.put(
     if (!req.isAuth) {
       throw new Error("Not authenticated!");
     }
-    console.log(req.files.rekomendasi[0].path);
     if (!req.files) {
       return res.status(200).json({ message: "No file provided!" });
     }
@@ -125,7 +125,11 @@ app.put(
     }
     return res.status(201).json({
       message: "File stored.",
-      filePath: req.files.rekomendasi[0].path,
+      ktm: req.files.ktm[0].path,
+      rekomendasi: req.files.rekomendasi[0].path,
+      mampu: req.files.mampu[0].path,
+      transkip: req.files.transkip[0].path,
+      //rekomendasi2: req.files.rekomendasi2[0].path,
     });
   }
 );

@@ -154,10 +154,7 @@ module.exports = {
       throw error;
     }
     const pendaftar = new Pendaftar({
-      fakultas: pendaftarInput.fakultas,
-      gender: pendaftarInput.gender,
-      ktm: pendaftarInput.ktm,
-      nama: user.name
+      ...pendaftarInput
     });
     const createdPendaftar = await pendaftar.save();
     user.pendaftar = createdPendaftar;
@@ -165,7 +162,6 @@ module.exports = {
     return {
       ...createdPendaftar._doc,
       _id: createdPendaftar._id.toString(),
-      nama : createdPendaftar.nama,
       createdAt: createdPendaftar.createdAt.toISOString(),
       updatedAt: createdPendaftar.updatedAt.toISOString()
     };
