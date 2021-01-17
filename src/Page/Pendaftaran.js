@@ -37,14 +37,28 @@ const Daftar = (props) => {
         body: formData,
       });
       const resData = await response.json();
-      const imageUrl = resData.filePath;
+
       const graphqlQuery = {
         query: `
         mutation {
-            createPendaftar(pendaftarInput: {fakultas: "${values.fakultas}", gender:"${values.gender}" ktm : "${imageUrl}"}) {
-              nama
-              fakultas
+            createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}",
+            alamatIbu: "${values.alamatIbu}", anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
+            arahan: ${values.arahan}, cita: "${values.cita}", darah: "${values.darah}", fakultas: "${values.fakultas}",
+            genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", instagram: "${values.instagram}",
+            ipk: "${values.ipk}", kampus: "${values.kampus}", kontribusi:${values.kontribusi}, kosan: "${values.kosan}",
+            ktm: "${resData.ktm}", lulus: "${values.lulus}", mampu: "${resData.mampu}", minat: "${values.minat}",
+            motif: "${values.motif}", nama: "${values.nama}", namaAyah: "${values.namaAyah}", namaIbu: "${values.namaIbu}",
+            nilai: "${resData.transkip}", nim: "${values.nim}", nomorHp: "${values.nomorHp}", nomorWa: "${values.nomorWa}",
+            organisasi: "${values.organisasi}", pangilan: "${values.pangilan}", pantas: "${values.pantas}",
+            pekerjaanAyah: "${values.pekerjaanAyah}", pekerjaanIbu: "${values.pekerjaanIbu}",
+            penghasilanAyah: "${values.penghasilanAyah}", penghasilanIbu: "${values.penghasilanIbu}",
+            prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekomendasi: "${resData.rekomendasi}",
+            rencana: "${values.rencana}", saudara: "${values.saudara}", showWali: "${values.showWali}",
+            siapMengurus: "${values.siapMengurus}", skil: "${values.skil}", suku: "${values.suku}", tangalLahir: "${values.tangalLahir}",
+            teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}", tempatLahir: "${values.tempatLahir}"}) {
               ktm
+              ipk
+              motif
             }
           }
         `,
@@ -68,39 +82,7 @@ const Daftar = (props) => {
     } catch (err) {
       console.log(err);
     }
-    /*
-    const graphqlQuery = {
-      query: `
-      mutation {
-          createPendaftar(pendaftarInput: {fakultas: "${values.fakultas}", gender:"${values.gender}"}) {
-            nama
-            fakultas
-          }
-        }
-      `,
-    };
-    try {
-      const response = await fetch("http://localhost:8080/graphql", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(graphqlQuery),
-      });
-      const resData = await response.json();
-      if (!resData.ok) {
-        console.log("bad");
-      }
-      if (resData.errors) {
-        throw new Error(resData.errors[0].message);
-      }
-      console.log(resData);
-    } catch (err) {
-      console.log(err);
-    } */
-  };
-
+  }
   return (
     <div className="container">
       <div className="text-center mt-5 mb-4">
