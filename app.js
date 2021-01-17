@@ -45,8 +45,12 @@ const storageAll = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === "ktm") {
       cb(null, "public/ktm");
+    } else if (file.fieldname === "transkip") {
+      cb(null, "public/transkip");
     } else if (file.fieldname === "rekomendasi") {
       cb(null, "public/rekomendasi");
+    } else if (file.fieldname === "mampu") {
+      cb(null, "public/mampu");
     } else if (file.fieldname === "rekomendasi2") {
       cb(null, "public/rekomendasi2");
     }
@@ -66,14 +70,13 @@ const filterAll = (file, cb) => {
     ) {
       cb(null, true);
     } else {
-      cb(null, false); // else fails
+      cb(null, false);
     }
   } else {
-    console.log("fdsfsffffd");
     if (file.mimetype === "application/pdf") {
       cb(null, true);
     } else {
-      cb(null, false); // else fails
+      cb(null, false);
     }
   }
 };
@@ -91,6 +94,13 @@ app.put(
   }).fields([
     {
       name: "rekomendasi",
+      maxCount: 1,
+    },
+    {
+      name: "transkip",
+      maxCount: 1,
+    },{
+      name: "mampu",
       maxCount: 1,
     },
     {
