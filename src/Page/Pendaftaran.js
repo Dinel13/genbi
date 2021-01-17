@@ -21,10 +21,17 @@ const Daftar = (props) => {
 
   const onSubmit = async (values) => {
     const formData = new FormData();
-    formData.append("image", values.ktm[0]);
-    console.log(formData);
+    formData.append("ktm", values.ktm[0]);
+    const formDataNilai = new FormData();
+    const formDataRek = new FormData();
+    formDataNilai.append("transkipNilai", values.nilai[0]);
+    formDataRek.append("rekomendasi", values.rekomendasi[0]);
+    formDataRek.append("ktm", values.ktm[0]);
+    formDataRek.append("rekomendasi2", values.rekomendasi2[0]);
+    console.log(formDataRek);
     try {
-      const response = await fetch("http://localhost:8080/post-image", {
+      /*
+      const response = await fetch("http://localhost:8080/post-ktm", {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
@@ -33,6 +40,29 @@ const Daftar = (props) => {
       });
       const resData = await response.json();
       const imageUrl = resData.filePath;
+
+      const responseNilai = await fetch(
+        "http://localhost:8080/post-transkip-nilai",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+          body: formDataNilai,
+        }
+      );
+      const resDataNilai = await responseNilai.json();
+      console.log(resDataNilai); */
+      const responseReq = await fetch("http://localhost:8080/rekomendasi", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        body: formDataRek,
+      });
+      const resDataRek = await responseReq.json();
+      console.log(resDataRek);
+      const imageUrl = "DSADAS";
       const graphqlQuery = {
         query: `
         mutation {
