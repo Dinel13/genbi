@@ -10,16 +10,51 @@ import DataKampus from "../components/DataKampus";
 import EssayBeasiswa from "../components/EssayBeasiswa";
 import FilePendukung from "../components/FilePendukung";
 import Pemisah from "../components/Pemisah";
+import Modal from "../components/Modal/Modal";
+import ErrorModal from "../components/ErrorModal/Error";
+import Loading from "../components/Loading/Loading";
 
 const Daftar = (props) => {
   const token = useSelector((state) => state.Auth.token);
+  const userId = useSelector((state) => state.Auth.userId);
+  const [isRegister, setIsregister] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
   const { register, watch, errors, handleSubmit } = useForm();
   const watchWali = watch("showWali", ""); // you can supply default value as second argument
   const watchKampus = watch("kampus", "");
-  const watchJenisBeasiswa = watch("jenisBeasiswa", "");
+  const watchJenisBeasiswa = watch("jenisBeasiswa", "reguler");
   const watchGenbi = watch("genbi", "");
 
+  //to check if user already registered
+  React.useEffect(() => {
+    setIsLoading(true);
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: ` query { userIsRegister(userId: "${userId}") {isRegister}}`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.errors) {
+          throw data.errors[0].message;
+        }
+        setIsLoading(false);
+        setIsregister(data.data.userIsRegister.isRegister);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setIsError(error);
+      });
+  }, [userId, token]);
+
   const onSubmit = async (values) => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("ktm", values.ktm[0]);
     formData.append("transkip", values.nilai[0]);
@@ -37,7 +72,9 @@ const Daftar = (props) => {
         body: formData,
       });
       const resData = await response.json();
-
+      if (resData.errors) {
+        throw new Error(resData.errors[0].message);
+      }
       const graphqlQuery = {
         query: `
         mutation {
@@ -56,9 +93,7 @@ const Daftar = (props) => {
             rencana: "${values.rencana}", saudara: "${values.saudara}", showWali: "${values.showWali}",
             siapMengurus: "${values.siapMengurus}", skil: "${values.skil}", suku: "${values.suku}", tangalLahir: "${values.tangalLahir}",
             teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}", tempatLahir: "${values.tempatLahir}"}) {
-              ktm
-              ipk
-              motif
+              nama
             }
           }
         `,
@@ -72,18 +107,30 @@ const Daftar = (props) => {
         body: JSON.stringify(graphqlQuery),
       });
       const resDataFinish = await responseFinish.json();
-      if (!resDataFinish.ok) {
-        console.log("bad");
-      }
       if (resDataFinish.errors) {
         throw new Error(resDataFinish.errors[0].message);
       }
-      console.log(resDataFinish);
+      setIsregister(resDataFinish);
+      setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+      setIsError(err);
     }
-  }
-  return (
+  };
+
+  return isError ? (
+    <ErrorModal message={isError.toString()} setModall={setIsError} />
+  ) : isLoading ? (
+    <Loading />
+  ) : isRegister ? (
+    <div className="container">
+      <div className="main">
+        <div className="text-center">
+          anda sudah mendaftar, silahkan menunggu kabar pengumuan
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className="container">
       <div className="text-center mt-5 mb-4">
         <h1 className="text-decoration-underline">

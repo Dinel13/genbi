@@ -88,9 +88,6 @@ export const Login = (email, password) => {
         body: JSON.stringify(graphqlQuery),
       });
       const resData = await response.json();
-      if(!resData.ok) {
-        console.log('bad');
-      }
       if (resData.errors) {
         throw new Error(resData.errors[0].message);
       }
@@ -126,7 +123,7 @@ export const SignupAdmin = (email, password, name) => {
         body: JSON.stringify(graphqlQuery),
       });
       const resData = await response.json();
-      if(!resData.ok) {
+      if (!resData.ok) {
         console.log(resData);
       }
       if (resData.errors && resData.errors[0].status === 422) {
@@ -136,7 +133,10 @@ export const SignupAdmin = (email, password, name) => {
       }
       console.log(resData);
       dispatch(
-        AuthAdminWithData(resData.data.createAdmin._id, resData.data.createAdmin.admin)
+        AuthAdminWithData(
+          resData.data.createAdmin._id,
+          resData.data.createAdmin.admin
+        )
       );
     } catch (err) {
       console.log(err);
@@ -166,15 +166,18 @@ export const LoginAdmin = (email, password) => {
         body: JSON.stringify(graphqlQuery),
       });
       const resData = await response.json();
-      if(!resData.ok) {
-        console.log('bad');
+      if (!resData.ok) {
+        console.log("bad");
       }
       if (resData.errors) {
         throw new Error(resData.errors[0].message);
       }
       console.log(resData);
       dispatch(
-        AuthAdminWithData(resData.data.loginAdmin.adminId, resData.data.loginAdmin.admin)
+        AuthAdminWithData(
+          resData.data.loginAdmin.adminId,
+          resData.data.loginAdmin.admin
+        )
       );
     } catch (err) {
       console.log(err);
