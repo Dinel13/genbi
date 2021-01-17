@@ -44,7 +44,11 @@ module.exports = {
       },
       "genbirahasianegara"
     );
-    return { ...createdUser._doc, _id: createdUser._id.toString(), token : token };
+    return {
+      ...createdUser._doc,
+      _id: createdUser._id.toString(),
+      token: token,
+    };
   },
   login: async function ({ email, password }) {
     const user = await User.findOne({ email: email });
@@ -112,7 +116,11 @@ module.exports = {
       },
       "genbirahasianegara"
     );
-    return { ...createdAdmin._doc, _id: createdAdmin._id.toString(), admin : token };
+    return {
+      ...createdAdmin._doc,
+      _id: createdAdmin._id.toString(),
+      admin: token,
+    };
   },
   loginAdmin: async function ({ email, password }) {
     const admin = await Admin.findOne({ email: email });
@@ -140,21 +148,21 @@ module.exports = {
       name: admin.name,
     };
   },
-  createPendaftar: async function({ pendaftarInput }, req) {
+  createPendaftar: async function ({ pendaftarInput }, req) {
     if (!req.isAuth) {
-      const error = new Error('Not authenticated!');
+      const error = new Error("Not authenticated!");
       error.code = 401;
       throw error;
     }
-   
+
     const user = await User.findById(req.userId);
     if (!user) {
-      const error = new Error('Invalid user.');
+      const error = new Error("Invalid user.");
       error.code = 401;
       throw error;
     }
     const pendaftar = new Pendaftar({
-      ...pendaftarInput
+      ...pendaftarInput,
     });
     const createdPendaftar = await pendaftar.save();
     user.pendaftar = createdPendaftar;
@@ -163,7 +171,22 @@ module.exports = {
       ...createdPendaftar._doc,
       _id: createdPendaftar._id.toString(),
       createdAt: createdPendaftar.createdAt.toISOString(),
-      updatedAt: createdPendaftar.updatedAt.toISOString()
+      updatedAt: createdPendaftar.updatedAt.toISOString(),
     };
-  }
+  },
+  userIsRegister: async function ({ userId }, req) {
+    if (!req.isAuth) {
+      const error = new Error("Not authenticated!");
+      error.code = 401;
+      throw error;
+    }
+    const findUser = await User.findById(userId);
+    if (!findUser) {
+      const error = new Error("user not found");
+      error.code = 404;
+      throw error;
+    } else {
+      return !findUser.pendaftar ? { isRegister: false } : { isRegister: true };
+    }
+  },
 };
