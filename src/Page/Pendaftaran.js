@@ -124,9 +124,20 @@ const Daftar = (props) => {
     <Loading />
   ) : isRegister ? (
     <div className="container">
-      <div className="main">
-        <div className="text-center">
-          anda sudah mendaftar, silahkan menunggu kabar pengumuan
+      <div className="main ">
+        <div className="d-flex justify-content-center ">
+          <div className="border shadow mt-5 rounded-3 bg-white col-sm-11 col-md-9 col-lg-7 col-xl-5">
+            <div className="text-start">
+              <h4 className=" p-4 bg-dark card-header text-white">
+                <strong>Selamat, </strong> Pendaftaran anda berhasil
+              </h4>
+              <p className="p-4">
+                Pengumuman dapat di lihat di laman ini dan email anda pada
+                tanggal 20 Februari 2020
+              </p>
+              <br />
+            </div>
+          </div>
         </div>
       </div>
     </div>

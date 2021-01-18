@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import print from "print-js";
 import Modal from "../components/Modal/Modal";
 import Pemisah from "../components/Pemisah";
+import Beranda from "../components/beranda/Beranda";
 
 const Home = () => {
   const [modall, setModall] = useState(false);
 
   return (
+    <div> <Beranda /> </div>
+      /* 
     <div className="container main" id="iii">
       <Pemisah />
       <div className="ggg">
@@ -33,8 +36,11 @@ const Home = () => {
       >
         Open Mo
       </button>
-      {modall && <Modal modall={modall} setModall={setModall} />}
+      {modall && <Modal modall={modall} setModall={setModall} />} 
     </div>
+    */
+
+      
   );
 };
 export default Home;
