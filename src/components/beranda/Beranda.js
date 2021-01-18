@@ -160,7 +160,7 @@ const Beranda = () => {
             />
           </div>
           <div className="col-lg-6 pt-4 pt-lg-5 align-self">
-            <h1 className="fw-bold lh-lg ">Tentang Generasi Baru Indonesia</h1>
+            <h2 className="fw-bold lh-base">Tentang Generasi Baru Indonesia</h2>
             <p className="lh-base textt text-muted">
               &emsp; &emsp;Generasi Baru Indonesia atau biasa disingkat GenBI
               merupakan sebuah komunitas penerima beasiswa dari Bank Indonesia
@@ -190,7 +190,7 @@ const Beranda = () => {
         <h1 className="fw-bold  text-center mt-5 mb-0">
           Peran Generasi Baru Indonesia
         </h1>
-        <p className="text-center textt text-muted mb-5">
+        <p className="text-center text-muted mb-5">
           Sebagai penerima beasiswa, GenBI memegang tiga peran khusus, yaitu:
         </p>
         <div className="row">
@@ -212,7 +212,7 @@ const Beranda = () => {
               </text>
             </svg>
 
-            <h2 className="fw-bolder mt-3">Front Liners</h2>
+            <h2 className="fw-bolder mb-0 mt-3">Front Liners</h2>
             <p className="text-muted textt">
               Sebagai garda depan Bank Indonesia untuk membantu menyampaikan dan
               menyebarluaskan kebijakan Bank Indonesia.
@@ -235,7 +235,7 @@ const Beranda = () => {
                 140x140
               </text>
             </svg>
-            <h2 className="fw-bolder mt-3">Agent of Change</h2>
+            <h2 className="fw-bolder mb-0 mt-3">Agent of Change</h2>
             <p className="text-muted textt">
               Sebagai agen pembawa perubahan menuju masyarakat yang lebih baik.
             </p>
@@ -257,7 +257,7 @@ const Beranda = () => {
                 140x140
               </text>
             </svg>
-            <h2 className="fw-bolder mt-3">Future Leader</h2>
+            <h2 className="fw-bolder mb-0 mt-3">Future Leader</h2>
             <p className="text-muted textt">
               Sebagai wadah pengembangan diri sehingga mahasiswa mampu menjadi
               pemimpin di masa depan.
@@ -266,7 +266,7 @@ const Beranda = () => {
         </div>
       </div>
 
-      <div className="container-fluid bg-light pt-5">
+      <div className="container-fluid bg-light py-5">
         {/* genbi sulsel */}
         <div className="container-lg mt-3">
           <div className="row">
@@ -279,7 +279,9 @@ const Beranda = () => {
               />
             </div>
             <div className="col-lg-6 pt-3 align-self">
-              <h1 className="fw-bold lh-lg ">Tentang GenBI Sulawesi Selatan</h1>
+              <h2 className="fw-bold lh-base">
+                Tentang GenBI Sulawesi Selatan
+              </h2>
               <p className="lh-base textt text-muted">
                 &emsp; &emsp;GenBI Sulawesi Selatan atau biasa disingkat GenBI
                 Sulsel merupakan sebuah komunitas penerima beasiswa dari Bank
@@ -305,37 +307,45 @@ const Beranda = () => {
 
         {/* visi dan misi */}
         <div className="container-lg peran mt-4">
-          <h1 className="fw-bold text-center mt-5 mb-0">
+          <h1 className="fw-bold text-center mb-4">
             Visi dan Misi GenBI Sulsel
           </h1>
           <div className="row">
-            <div className="col-lg-4 col-md-6">
-              <h1>Visi</h1>
-              <p className="text-muted textt">
+            <div className="col-lg-4 col-md-6 text-start">
+              <h2>Visi</h2>
+              <p className="text-muted ">
                 Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
                 dan menyebarluaskan kebijakan Bank Indonesia.
               </p>
             </div>
-            <div className="col-lg-4 col-md-6">
-              <h1>Misi</h1>
+            <div className="col-lg-4 col-md-6 text-start">
+              <h2>Misi</h2>
               <ol>
-                  <li className="text-muted">
-
-                  </li>
+                <li className="text-muted">
+                  Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
+                  dan menyebarluaskan kebijakan Bank Indonesia.
+                </li>
+                <li className="text-muted">
+                  Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
+                  dan menyebarluaskan kebijakan Bank Indonesia.
+                </li>
+                <li className="text-muted">
+                  Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
+                  dan menyebarluaskan kebijakan Bank Indonesia.
+                </li>
               </ol>
             </div>
-            <div className="col-lg-4 col-md-6">
-              <h1>Misi</h1>
-              <p className="text-muted textt">
+            <div className="col-lg-4 col-md-6 text-start">
+              <h2>Misi</h2>
+              <p className="text-muted ">
                 Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
                 dan menyebarluaskan kebijakan Bank Indonesia.
               </p>
             </div>
           </div>
         </div>
-
-        <hr className="featurette-divider" />
-
+      </div>
+      <div className="container mt-5">
         <div className="row featurette">
           <div className="col-md-7 order-md-2">
             <h2 className="featurette-heading">
@@ -406,8 +416,6 @@ const Beranda = () => {
 
         <hr className="featurette-divider" />
       </div>
-
-     
     </div>
   );
 };
