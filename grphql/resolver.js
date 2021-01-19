@@ -41,6 +41,7 @@ module.exports = {
       {
         userId: createdUser._id.toString(),
         email: createdUser.email,
+        admin : false,
       },
       "genbirahasianegara"
     );
@@ -67,6 +68,7 @@ module.exports = {
       {
         userId: user._id.toString(),
         email: user.email,
+        admin : false,
       },
       "genbirahasianegara"
     );
@@ -113,6 +115,7 @@ module.exports = {
       {
         adminId: createdAdmin._id.toString(),
         email: createdAdmin.email,
+        admin : true,
       },
       "genbirahasianegara"
     );
@@ -139,6 +142,7 @@ module.exports = {
       {
         adminId: admin._id.toString(),
         email: admin.email,
+        admin : true,
       },
       "genbirahasianegara"
     );
@@ -187,6 +191,23 @@ module.exports = {
       throw error;
     } else {
       return !findUser.pendaftar ? { isRegister: false } : { isRegister: true };
+    }
+  },
+  pendaftars: async function ({ adminId, kampus }, req) {
+    if (!req.isAdmin) {
+      const error = new Error("anda bukan admin!");
+      error.code = 401;
+      throw error;
+    }
+    const findAdmin = await Admin.findById(adminId);
+    if (!findAdmin) {
+      const error = new Error("admin tidak ditemukan");
+      error.code = 404;
+      throw error;
+    } else {
+      const findPendaftar = await Pendaftar.find({ kampus: kampus });
+      console.log(findPendaftar);
+      return findPendaftar;
     }
   },
 };

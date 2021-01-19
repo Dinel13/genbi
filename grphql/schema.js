@@ -80,6 +80,7 @@ module.exports = buildSchema(`
         name: String!
         email: String!
         password: String
+        token : String!
         admin : String!
     }
 
@@ -91,6 +92,10 @@ module.exports = buildSchema(`
 
     type isSudahMendaftar { 
         isRegister : Boolean!
+    }
+
+    type Pendaftars {
+        pendaftar : [Pendaftar]
     }
 
     input  AdminInputData {
@@ -155,6 +160,7 @@ module.exports = buildSchema(`
         login(email : String!, password : String!): AuthData!
         loginAdmin(email : String!, password : String!): AdminData!
         userIsRegister(userId : String!): isSudahMendaftar!
+        pendaftars(adminId : String!, kampus : String!): [Pendaftar!]
     }
 
     type RootMutation {
