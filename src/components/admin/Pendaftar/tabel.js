@@ -2,16 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Tabel = (props) => {
+  /* to print pdf
   const { setElementId, setPdfHeader } = props;
 
   React.useEffect(() => {
     setElementId("print");
     setPdfHeader("test - salahuddin");
-  }, [setElementId, setPdfHeader]);
+  }, [setElementId, setPdfHeader]); 
+  */
 
   return (
     <div className="table-responsive" id="print">
-      <table className="table  table-ligh table-hover ">
+      <table className="table table-ligh table-hover ">
         <thead>
           <tr className="table-info">
             <th className="ps-3" scope="col">

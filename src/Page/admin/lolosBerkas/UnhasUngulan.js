@@ -6,23 +6,37 @@ import { Unhas } from "../../../Data/BerkasUnhas";
 import Tabel from "../../../components/admin/LolosBerkas/Tabel";
 
 const UnhasUngul = (props) => {
-  const { setActive, setTitle } = props;
+  const { setActive } = props;
   let { path, url } = useRouteMatch();
 
   useEffect(() => {
     setActive("berUnh");
-    setTitle(["Lolos Berkas Universitas Hasanuddin-Ungulan"]);
-  }, [setActive, setTitle]);
+  }, [setActive]);
 
   return (
-    <Switch>
-      <Route exact path={path}>
-        <Tabel Unhas={Unhas} url={url} />
-      </Route>
-      <Route path={`${path}/:topicId`}>
-        <Pendaftar berkas={true}  />
-      </Route>
-    </Switch>
+    <>
+      <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
+        <h1 className="h2">Lolos Berkas Universitas Hasanuddin-Ungulan</h1>
+        <div className="btn-toolbar mb-2 mb-md-0" id="ggggg">
+          <div className="btn-group me-2">
+            <button type="button" className="btn btn-sm btn-outline-secondary">
+              Jumlah pendaftar <span className="badge bg-primary">100</span>
+            </button>
+            {/* <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => props.export(props.id,props.header)}> 
+      Export
+    </button>*/}
+          </div>
+        </div>
+      </div>
+      <Switch>
+        <Route exact path={path}>
+          <Tabel Unhas={Unhas} url={url} />
+        </Route>
+        <Route path={`${path}/:topicId`}>
+          <Pendaftar berkas={true} />
+        </Route>
+      </Switch>
+    </>
   );
 };
 export default UnhasUngul;

@@ -9,13 +9,13 @@ const Pendaftar = (props) => {
   const [error, setError] = useState(false);
   const [error2, setError2] = useState(false);
 
+  /* to print pdf
   const { setElementId, setPdfHeader } = props;
-
   React.useEffect(() => {
     setElementId("print");
     setPdfHeader("testy - salahuddin");
   }, [setElementId, setPdfHeader]);
-
+*/
 
   const submitNilaiSatu = (e) => {
     e.preventDefault();
@@ -44,8 +44,8 @@ const Pendaftar = (props) => {
   };
 
   return (
-    <div className="container mt-4" >
-      <div className="row" >
+    <div className="container mt-4">
+      <div className="row">
         <div className="col-3 order-sm-last ">
           <div className="sticky-top" style={{ maxWidth: "380px" }}>
             <figure className="figure p-3 rounded shadow  ">
@@ -57,8 +57,12 @@ const Pendaftar = (props) => {
               <figcaption className="figure-caption text-center">
                 Pas Foto
               </figcaption>
-              <hr/>
-            {props.wawancara && <h5 className="text-center"><span className="text-muted">Nilai wawancara</span> 100</h5>}
+              <hr />
+              {props.wawancara && (
+                <h5 className="text-center">
+                  <span className="text-muted">Nilai wawancara</span> 100
+                </h5>
+              )}
             </figure>
             {props.berkas && (
               <>
