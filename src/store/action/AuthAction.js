@@ -33,7 +33,7 @@ export const Signup = (email, password, name) => {
     const graphqlQuery = {
       query: `
         mutation {
-          createUser(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
+          createAdmin(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
             _id
             name
             email
