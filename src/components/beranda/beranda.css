@@ -13,7 +13,7 @@
 }
 
 .testtt{
-  color: #2a0ec9;
+  color: #e5e5e7;
 }
 /* Declare heights because of positioning of img element */
 .carousel-item {
@@ -79,12 +79,18 @@
   }
 
   .featurette-heading {
-    font-size: 50px;
+    font-size: 45px;
+  }
+  .bi {
+    width: 125px;
   }
 }
 
 @media (min-width: 62em) {
   .featurette-heading {
-    margin-top: 7rem;
+    margin-top: 4rem;
+  }
+  .bi {
+    width: 135px;
   }
 }

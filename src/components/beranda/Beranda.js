@@ -5,6 +5,7 @@ import dua from "../../images/dua.jpeg";
 import tiga from "../../images/tiga.jpeg";
 import empat from "../../images/empat.jpeg";
 import sulsel from "../../images/sulsel.png";
+import bi from "../../images/bi.png";
 
 const Beranda = () => {
   return (
@@ -22,7 +23,6 @@ const Beranda = () => {
           ></li>
           <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
           <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-          <li data-bs-target="#myCarousel" data-bs-slide-to="3"></li>
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -34,17 +34,11 @@ const Beranda = () => {
             />
 
             <div className="container">
-              <div className="carousel-caption text-start">
-                <h1>Example headline.</h1>
-                <p>
-                  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                  Donec id elit non mi porta gravida at eget metus. Nullam id
-                  dolor id nibh ultricies vehicula ut id elit.
-                </p>
-                <p>
-                  <a className="btn btn-lg btn-primary" href="#" role="button">
-                    Sign up today
-                  </a>
+              <div className="carousel-caption text-center">
+                <h1 className="fw-bolder">Selamat Datang.</h1>
+                <p className="text-center">
+                  Website GenBI Sulsel adalah salah-satu media yang kami gunakan
+                  untuk menyampaikan informasi dan mengembangkan kreatifitas.
                 </p>
               </div>
             </div>
@@ -58,17 +52,18 @@ const Beranda = () => {
             />
 
             <div className="container">
-              <div className="carousel-caption">
-                <h1>Another example headline.</h1>
+              <div className="carousel-caption text-start">
+                <img
+                  src={bi}
+                  className="img-fluid bi pb-3"
+                  style={{}}
+                  alt="bank indonesia"
+                />
+                <h1 className="fw-bold">Dibina oleh Bank Indonesia.</h1>
                 <p>
-                  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                  Donec id elit non mi porta gravida at eget metus. Nullam id
-                  dolor id nibh ultricies vehicula ut id elit.
-                </p>
-                <p>
-                  <a className="btn btn-lg btn-primary" href="#" role="button">
-                    Learn more
-                  </a>
+                  GenBI Sulsel adalah komunitas penerima Beasiswa Bank Indonesia
+                  yang dibimbing oleh Kantor Perwakilan Bank Indonesi Sulawesi
+                  Selatan.
                 </p>
               </div>
             </div>
@@ -83,39 +78,14 @@ const Beranda = () => {
 
             <div className="container">
               <div className="carousel-caption text-end">
-                <h1>One more for good measure.</h1>
+                <h1 className="fw-bold">Energi Untuk Negeri</h1>
                 <p>
-                  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                  Donec id elit non mi porta gravida at eget metus. Nullam id
-                  dolor id nibh ultricies vehicula ut id elit.
+                  GenBI Sulsel diharapkan menjadi semangat baru menuju indonesia
+                  yang lebih baik melalui kegiatan yang diselenggarakan.
                 </p>
                 <p>
                   <a className="btn btn-lg btn-primary" href="#" role="button">
-                    Browse gallery
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <img
-              src={empat}
-              style={{ filter: "brightness(45%)" }}
-              className="d-block img-fluid"
-              alt="genbi sulsel"
-            />
-
-            <div className="container">
-              <div className="carousel-caption text-end">
-                <h1>One more for good measure.</h1>
-                <p>
-                  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                  Donec id elit non mi porta gravida at eget metus. Nullam id
-                  dolor id nibh ultricies vehicula ut id elit.
-                </p>
-                <p>
-                  <a className="btn btn-lg btn-primary" href="#" role="button">
-                    Browse gallery
+                    Gallery kegiatan
                   </a>
                 </p>
               </div>
@@ -167,17 +137,17 @@ const Beranda = () => {
               yang berdiri sejak tanggal 11 November 2011. GenBI terdiri dari
               mahasiswa/i yang berasal dari perguruan tinggi negeri yang
               tersebar di seluruh Indonesia.{" "}
-              <strong>"Energi untuk Negeri"</strong> adalah slogan kebanggan
+              <strong>"Energi untuk Negeri"</strong> adalah motto kebanggan
               genBI.
               <br />
               <br />
-              &emsp;&emsp; GenBI sendiri salah satu bentuk nyata dari Program
-              Sosial Bank Indonesia (PSBI) dalam meningkatkan kualitas mahasiswa
-              sebagai generasi penerus bangsa, yang dibimbing untuk berbagi
-              energi untuk negeri melalui berbagai kegiatan yang dilibatkan
-              masyarakat umum secara langsung. Agar dapat menjadi komunitas yang
-              kreatif, berwawasan luas, bermanfaat dan peduli terhadap kondisi
-              masyarakat.
+              &emsp;&emsp; GenBI sendiri adalah salah satu bentuk nyata dari
+              Program Sosial Bank Indonesia (PSBI) dalam meningkatkan kualitas
+              mahasiswa sebagai generasi penerus bangsa, yang dibimbing untuk
+              berbagi energi untuk negeri melalui berbagai kegiatan yang
+              dilibatkan masyarakat umum secara langsung. Agar dapat menjadi
+              komunitas yang kreatif, berwawasan luas, bermanfaat dan peduli
+              terhadap kondisi masyarakat.
             </p>
           </div>
         </div>
@@ -266,7 +236,10 @@ const Beranda = () => {
         </div>
       </div>
 
-      <div className="container-fluid bg-light py-5">
+      <div
+        className="container-fluid bg-l py-5"
+        style={{ backgroundColor: "#e5e5e7" }}
+      >
         {/* genbi sulsel */}
         <div className="container-lg mt-3">
           <div className="row">
@@ -285,7 +258,7 @@ const Beranda = () => {
               <p className="lh-base textt text-muted">
                 &emsp; &emsp;GenBI Sulawesi Selatan atau biasa disingkat GenBI
                 Sulsel merupakan sebuah komunitas penerima beasiswa dari Bank
-                Indonesia di Provinsi Wilayah Sulawesi selatan. genBI Sulsel
+                Indonesia di Wilayah Provinsi Sulawesi selatan. genBI Sulsel
                 resmi terbentuk pada tanggal 23 Mei 2013 di Hotel Lamacca
                 Makassar.
                 <br />
@@ -346,11 +319,12 @@ const Beranda = () => {
         </div>
       </div>
       <div className="container mt-5">
-        <div className="row featurette">
+        <div className="row ">
+          <h1 className="fw-bold text-center mb-5">Lima Deputi GenBI Sulsel</h1>
           <div className="col-md-7 order-md-2">
             <h2 className="featurette-heading">
-              Oh yeah, it’s that good.{" "}
-              <span className="text-muted">See for yourself.</span>
+              <span className="text-muted">Deputi </span>
+              Pendidikan
             </h2>
             <p className="lead">
               Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
@@ -359,11 +333,81 @@ const Beranda = () => {
               commodo.
             </p>
           </div>
-          <div className="col-md-5 order-md-1">
+          <div className="col-md-5 order-md-1 text-center">
             <svg
               className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="500"
-              height="500"
+              width="300"
+              height="300"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">
+                300x530
+              </text>
+            </svg>
+          </div>
+        </div>
+
+        <hr className="featurette-divider" />
+
+        <div className="row featurette">
+          <div className="col-md-7">
+            <h2 className="featurette-heading">
+              <span className="text-muted">Deputi </span>
+              Linkungan Hidup
+            </h2>
+            <p className="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div className="col-md-5 text-center">
+            <svg
+              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="300"
+              height="300"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">
+                500x500
+              </text>
+            </svg>
+          </div>
+        </div>
+
+        <hr className="featurette-divider" />
+
+        <div className="row featurette">
+          <div className="col-md-7 order-md-2">
+            <h2 className="featurette-heading">
+              <span className="text-muted">Deputi </span>
+              Kesehatan
+            </h2>
+            <p className="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div className="col-md-5 text-center order-md-1">
+            <svg
+              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="300"
+              height="300"
               xmlns="http://www.w3.org/2000/svg"
               role="img"
               aria-label="Placeholder: 500x500"
@@ -384,8 +428,8 @@ const Beranda = () => {
         <div className="row featurette">
           <div className="col-md-7">
             <h2 className="featurette-heading">
-              And lastly, this one.{" "}
-              <span className="text-muted">Checkmate.</span>
+              <span className="text-muted">Deputi </span>
+              Kewirausahaan
             </h2>
             <p className="lead">
               Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
@@ -394,11 +438,45 @@ const Beranda = () => {
               commodo.
             </p>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-5 text-center">
             <svg
               className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="500"
-              height="500"
+              width="300"
+              height="300"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">
+                500x500
+              </text>
+            </svg>
+          </div>
+        </div>
+        <hr className="featurette-divider" />
+
+        <div className="row featurette">
+          <div className="col-md-7 order-md-2">
+            <h2 className="featurette-heading">
+              <span className="text-muted">Deputi </span>
+              Public Relation and Multimedia
+            </h2>
+            <p className="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div className="col-md-5 text-center order-md-1">
+            <svg
+              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="300"
+              height="300"
               xmlns="http://www.w3.org/2000/svg"
               role="img"
               aria-label="Placeholder: 500x500"
