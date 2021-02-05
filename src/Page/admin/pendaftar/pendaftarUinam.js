@@ -3,7 +3,6 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Pendaftar from "../pendaftar";
-import { Unhas } from "../../../Data/PendaftarUnhas";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
 
 const PendaftarUinam = (props) => {
@@ -26,7 +25,7 @@ const PendaftarUinam = (props) => {
       body: JSON.stringify({
         query: ` 
           query { 
-            pendaftars(adminId: "${adminId}" kampus : "unha") {
+            pendaftars(adminId: "${adminId}" kampus : "uinam" jenis : "reguler") {
               nama
               nim
               fakultas
@@ -34,8 +33,7 @@ const PendaftarUinam = (props) => {
               ipk
               mampu
             }
-          }`
-          ,
+          }`,
       }),
     })
       .then((response) => response.json())
@@ -44,7 +42,7 @@ const PendaftarUinam = (props) => {
         if (data.errors) {
           throw data.errors[0].message;
         }
-        setPendaftar(data)
+        setPendaftar(data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -52,8 +50,8 @@ const PendaftarUinam = (props) => {
         setIsError(error);
         console.log(error);
       });
-  },  [setActive, adminId, admin] );
-//
+  }, [setActive, adminId, admin]);
+  //
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
@@ -61,14 +59,17 @@ const PendaftarUinam = (props) => {
         <div className="btn-toolbar mb-2 mb-md-0" id="ggggg">
           <div className="btn-group me-2">
             <button type="button" className="btn btn-outline-secondary">
-              Jumlah pendaftar <span className="badge bg-primary">100</span>
+              Jumlah pendaftar{" "}
+              <span className="badge bg-primary">
+                {pendaftar}
+              </span>
             </button>
           </div>
         </div>
       </div>
       <Switch>
         <Route exact path={path}>
-          <Tabel Unhas={Unhas} url={url} />
+         {pendaftar ? <Tabel Unhas={pendaftar} url={url} /> : <div>tidak ada data</div>}
         </Route>
         <Route path={`${path}/:topicId`}>
           <Pendaftar />

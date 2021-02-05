@@ -7,14 +7,13 @@ import { LoginAdmin } from "../../store/action/AuthAction";
 import { useHistory } from "react-router-dom";
 
 export default function FormLogin() {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm();
 
-  const onSubmit = (values) => {
-    dispatch(LoginAdmin(values.email, values.password))
-    history.replace("/admin")
-    
+  const onSubmit = async (values) => {
+    const test = await dispatch(LoginAdmin(values.email, values.password));
+    test && history.replace("/admin");
   };
 
   return (

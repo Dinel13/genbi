@@ -1,16 +1,56 @@
 import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Pendaftar from "../pendaftar";
-import { Unhas } from "../../../Data/PendaftarUnhas";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
 
 const PendaftarUnm = (props) => {
+  const admin = useSelector((state) => state.Auth.admin);
+  const adminId = useSelector((state) => state.Auth.adminId);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+  const [pendaftar, setPendaftar] = React.useState(false);
   let { path, url } = useRouteMatch();
   const { setActive } = props;
+
   useEffect(() => {
     setActive("dafUnm");
-  }, [setActive]);
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + admin,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: ` 
+          query { 
+            pendaftars(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
+              nama
+              nim
+              fakultas
+              prodi
+              ipk
+              mampu
+            }
+          }`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.errors) {
+          throw data.errors[0].message;
+        }
+        setPendaftar(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setIsError(error);
+        console.log(error);
+      });
+  }, [setActive, adminId, admin]);
 
   return (
     <>
@@ -21,15 +61,12 @@ const PendaftarUnm = (props) => {
             <button type="button" className="btn btn-sm btn-outline-secondary">
               Jumlah pendaftar <span className="badge bg-primary">100</span>
             </button>
-            {/* <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => props.export(props.id,props.header)}> 
-Export
-</button>*/}
           </div>
         </div>
       </div>
       <Switch>
         <Route exact path={path}>
-          <Tabel Unhas={Unhas} url={url} />
+         {pendaftar ? <Tabel Unhas={pendaftar} url={url} /> : <div>tidak ada data</div>}
         </Route>
         <Route path={`${path}/:topicId`}>
           <Pendaftar />

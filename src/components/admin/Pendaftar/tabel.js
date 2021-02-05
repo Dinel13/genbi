@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Tabel = (props) => {
+  const admin = useSelector((state) => state.Auth.admin);
   /* to print pdf
   const { setElementId, setPdfHeader } = props;
 
@@ -10,6 +12,47 @@ const Tabel = (props) => {
     setPdfHeader("test - salahuddin");
   }, [setElementId, setPdfHeader]); 
   */
+  // to accept the pendaftar
+  const acceptHandler = (pendaftarId) => {
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + admin,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: ` mutattion { lolosBerkas(userId: "${pendaftarId}") {isRegister}}`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.errors) {
+          throw data.errors[0].message;
+        }
+      })
+      .catch((error) => {});
+  };
+
+  // to cancel the pendaftar
+  const cancelHandler = (pendaftarId) => {
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + admin,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: ` mutattion { batalLolosBerkas(userId: "${pendaftarId}") {isRegister}}`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.errors) {
+          throw data.errors[0].message;
+        }
+      })
+      .catch((error) => {});
+  };
 
   return (
     <div className="table-responsive" id="print">
@@ -28,25 +71,25 @@ const Tabel = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.Unhas.map((un, index) => (
-            <tr key={un.id}>
+          {props.Unhas.map((pendaftar, index) => (
+            <tr key={pendaftar.id}>
               <th className="ps-3" scope="row">
                 {index + 1}
               </th>
               <td className="text-truncate" style={{ maxWidth: "120px" }}>
-                {un.nama}
+                {pendaftar.nama}
               </td>
               <td className="text-truncate" style={{ maxWidth: "100px" }}>
-                {un.nim}
+                {pendaftar.nim}
               </td>
               <td className="text-truncate" style={{ maxWidth: "120px" }}>
-                {un.fakultas}
+                {pendaftar.fakultas}
               </td>
               <td className="text-truncate" style={{ maxWidth: "110px" }}>
-                {un.prodi}
+                {pendaftar.prodi}
               </td>
               <td className="text-truncate" style={{ maxWidth: "100px" }}>
-                {un.ipk}
+                {pendaftar.ipk}
               </td>
               <td>
                 <div
@@ -55,18 +98,29 @@ const Tabel = (props) => {
                   aria-label="Basic outlined example"
                 >
                   <Link
-                    to={`${props.url}/${un.id}`}
+                    to={`${props.url}/${pendaftar._id.toString()}`}
                     type="button"
                     className="btn btn-sm btn-outline-success"
                   >
                     Detail
                   </Link>
-                  <button
-                    type="button"
-                    className="btn  btn-sm btn-outline-secondary"
-                  >
-                    Terima
-                  </button>
+                  {pendaftar.lolosWawancara ? (
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-danger"
+                      onClick={() => cancelHandler(pendaftar._id.toString())}
+                    >
+                      Batalkan
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn  btn-sm btn-outline-secondary"
+                      onClick={() => acceptHandler(pendaftar._id.toString())}
+                    >
+                      Terima
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>
