@@ -4,6 +4,26 @@ const Schema = mongoose.Schema;
 
 const pendaftarSchema = new Schema(
   {
+    jenisBeasiswa : {
+      type: String,
+      requireq: false,
+    },
+    lolosBerkas : {
+      type: Boolean,
+      requireq: false,
+    },
+    lolosWawancara : {
+      type: Boolean,
+      requireq: false,
+    },
+    nilaiWawancara1 : {
+      type: Number,
+      requireq: false,
+    },
+    nilaiWawancara2 : {
+      type: Number,
+      requireq: false,
+    },
     agama: {
       type: String,
       requireq: false,

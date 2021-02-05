@@ -193,7 +193,7 @@ module.exports = {
       return !findUser.pendaftar ? { isRegister: false } : { isRegister: true };
     }
   },
-  pendaftars: async function ({ adminId, kampus }, req) {
+  pendaftars: async function ({ adminId, kampus, jenis }, req) {
     if (!req.isAdmin) {
       const error = new Error("anda bukan admin!");
       error.code = 401;
@@ -205,7 +205,7 @@ module.exports = {
       error.code = 404;
       throw error;
     } else {
-      const findPendaftar = await Pendaftar.find({ kampus: kampus });
+      const findPendaftar = await Pendaftar.find({ kampus: kampus, jenis : jenis });
       console.log(findPendaftar);
       return findPendaftar;
     }

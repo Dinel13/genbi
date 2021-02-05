@@ -2,6 +2,12 @@ const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
     type Pendaftar {
+        _id: ID!,
+        jenisBeasiswa : String!,
+        lolosBerkas : Boolean!,
+        lolosWawancara : Boolean!,
+        nilaiWawancara1 : String!,
+        nilaiWawancara2 : String!,
         agama: String!,
         alamatAyah: String!,
         alamatIbu: String!,
@@ -119,6 +125,7 @@ module.exports = buildSchema(`
         hobby: String,
         instagram: String,
         ipk: String,
+        jenisBeasiswa : String!,
         kampus: String,
         kontribusi:Boolean,
         kosan: String,
@@ -160,7 +167,7 @@ module.exports = buildSchema(`
         login(email : String!, password : String!): AuthData!
         loginAdmin(email : String!, password : String!): AdminData!
         userIsRegister(userId : String!): isSudahMendaftar!
-        pendaftars(adminId : String!, kampus : String!): [Pendaftar!]
+        pendaftars(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
     }
 
     type RootMutation {
