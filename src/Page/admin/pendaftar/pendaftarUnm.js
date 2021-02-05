@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Unhas } from "../../../Data/WawancaraUnhas";
 
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
+import Modal from "../../../shared/Modal";
 
 const PendaftarUnm = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
@@ -58,15 +60,25 @@ const PendaftarUnm = (props) => {
         <h1 className="h2">Pendaftar Universitas Negeri Makassar</h1>
         <div className="btn-toolbar mb-2 mb-md-0" id="ggggg">
           <div className="btn-group me-2">
-            <button type="button" className="btn btn-sm btn-outline-secondary">
-              Jumlah pendaftar <span className="badge bg-primary">100</span>
+            <button type="button" className="btn btn-outline-secondary">
+              Jumlah pendaftar{" "}
+              <span className="badge bg-primary">
+                {pendaftar ? pendaftar.length : "0"}
+              </span>
             </button>
           </div>
         </div>
       </div>
       <Switch>
         <Route exact path={path}>
-         {pendaftar ? <Tabel Unhas={pendaftar} url={url} /> : <div>tidak ada data</div>}
+          {Unhas ? (
+            <Tabel Unhas={Unhas} url={url} />
+          ) : (
+            <Modal
+              header="Mohon maaf, Data masih kosong"
+              body="Periksa koneksi jaringan anda dan pastikan data telah tersedia"
+            />
+          )}
         </Route>
         <Route path={`${path}/:topicId`}>
           <Pendaftar />

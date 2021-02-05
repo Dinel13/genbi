@@ -98,9 +98,9 @@ const Tabel = (props) => {
                   aria-label="Basic outlined example"
                 >
                   <Link
-                    to={`${props.url}/${pendaftar._id.toString()}`}
+                    to={`${props.url}/${pendaftar.id.toString()}`}
                     type="button"
-                    className="btn btn-sm btn-outline-success"
+                    className="btn btn-sm btn-outline-primary"
                   >
                     Detail
                   </Link>
@@ -108,15 +108,15 @@ const Tabel = (props) => {
                     <button
                       type="button"
                       className="btn btn-sm btn-danger"
-                      onClick={() => cancelHandler(pendaftar._id.toString())}
+                      onClick={() => cancelHandler(pendaftar.id.toString())}
                     >
                       Batalkan
                     </button>
                   ) : (
                     <button
                       type="button"
-                      className="btn  btn-sm btn-outline-secondary"
-                      onClick={() => acceptHandler(pendaftar._id.toString())}
+                      className="btn  btn-sm btn-outline-success"
+                      onClick={() => acceptHandler(pendaftar.id.toString())}
                     >
                       Terima
                     </button>

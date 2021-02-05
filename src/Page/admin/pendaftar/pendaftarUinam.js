@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
+import Modal from "../../../shared/Modal";
 
 const PendaftarUinam = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
@@ -61,7 +62,7 @@ const PendaftarUinam = (props) => {
             <button type="button" className="btn btn-outline-secondary">
               Jumlah pendaftar{" "}
               <span className="badge bg-primary">
-                {pendaftar}
+                {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
           </div>
@@ -69,7 +70,14 @@ const PendaftarUinam = (props) => {
       </div>
       <Switch>
         <Route exact path={path}>
-         {pendaftar ? <Tabel Unhas={pendaftar} url={url} /> : <div>tidak ada data</div>}
+          {pendaftar ? (
+            <Tabel Unhas={pendaftar} url={url} />
+          ) : (
+            <Modal
+              header="Mohon maaf, Data masih kosong"
+              body="Periksa koneksi jaringan anda dan pastikan data telah tersedia"
+            />
+          )}
         </Route>
         <Route path={`${path}/:topicId`}>
           <Pendaftar />

@@ -7,6 +7,7 @@
       prodi: "informatika",
       ipk: 20,
       id: "55dadasd",
+      lolosWawancara : true
     },
     {
       nama: "huddin",
@@ -15,6 +16,7 @@
       prodi: "infortvdvsdvsdvfvdfgdfgdfgvdsvvika",
       ipk: 35555555555555555,
       id: "55ddasd",
+      lolosWawancara : true
     },
     {
       nama: "Salahu",
@@ -23,6 +25,7 @@
       prodi: "informatika",
       ipk: 40,
       id: "55daasd",
+      lolosWawancara :false
     },
     {
       nama: "ahuddin",
@@ -31,6 +34,7 @@
       prodi: "informatika",
       ipk: 20,
       id: "55dasdasd",
+      lolosWawancara :false
     },
     {
       nama: "Salafffhu",
@@ -39,6 +43,7 @@
       prodi: "informatika",
       ipk: 40,
       id: "55daavvvsd",
+      lolosWawancara :false
     },
     {
       nama: "ahudfffdin",
@@ -47,5 +52,6 @@
       prodi: "informatika",
       ipk: 20,
       id: "55dvvvvasdasd",
+      lolosWawancara :false
     },
   ];

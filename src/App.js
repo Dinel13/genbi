@@ -73,6 +73,9 @@ const App = () => {
         <Route path="/signup" exact>
           <SignUp />
         </Route>
+        <Route path="/admin">
+          <Admin />
+        </Route>
         <Route path="/login" exact>
           <Login />
         </Route>
