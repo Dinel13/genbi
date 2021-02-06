@@ -3,7 +3,7 @@ import "./modal.css";
 
 const Modal = (props) => {
   const [modal, setModal] = useState(false);
-  const {setModall} = props
+  const { setModall } = props;
 
   //to get the id of modal
   useEffect(() => {
@@ -17,7 +17,12 @@ const Modal = (props) => {
         setModall(false);
       }
     };
-  }, [modal,setModall]);
+  }, [modal, setModall]);
+
+  const yakinHandler = () => {
+    props.onYakin();
+    props.setModall(false);
+  };
 
   return (
     <div id="myModall" className="modalll">
@@ -34,7 +39,7 @@ const Modal = (props) => {
               }}
             ></button>
           </div>
-          <div className="modal-body">...</div>
+          <div className="modal-body">{props.body}</div>
           <div className="modal-footer">
             <button
               className="btn btn-secondary"
@@ -44,7 +49,11 @@ const Modal = (props) => {
             >
               Batal
             </button>
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={yakinHandler}
+            >
               Yakin
             </button>
           </div>

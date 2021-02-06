@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import Modal from "../../../components/Modal/Modal";
+import ErrorModal from "../../../components/ErrorModal/Error";
+import Loading from "../../../components/Loading/Loading";
 
 const Tabel = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
   const adminId = useSelector((state) => state.Auth.adminId);
-  const [data, setData] = React.useState(props.data);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [modall, setModall] = useState(false);
+  const [data, setData] = useState(props.data);
+  const [pendaftarId, setPendaftarId] = useState(null);
+  const [terima, setTerima] = useState(null);
   /* to print pdf
   const { setElementId, setPdfHeader } = props;
 
@@ -14,6 +23,30 @@ const Tabel = (props) => {
     setPdfHeader("test - salahuddin");
   }, [setElementId, setPdfHeader]); 
   */
+  const fetchUser = async (pendaftarId, terima) => {
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:8080/graphql",
+        "POST",
+        JSON.stringify({
+          query: ` 
+            mutattion {
+              lolosBerkas(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
+              adminId : "${adminId}", terima : "${terima}"}) {
+                nama
+              }
+            }
+          `,
+        }),
+        {
+          Authorization: "Bearer " + admin,
+          "Content-Type": "application/json",
+        }
+      );
+      setData(responseData.users);
+    } catch (err) {}
+  };
+
   // to handel terima atau batal the pendaftar
   const lolosBerkasHandler = (pendaftarId, terima) => {
     fetch("http://localhost:8080/graphql", {
@@ -47,8 +80,27 @@ const Tabel = (props) => {
       .catch((error) => {});
   };
 
-  return (
+  return error ? (
+    <ErrorModal message={error} setModall={clearError} />
+  ) : isLoading ? (
+    <Loading />
+  ) : !data ? (
+    <Modal
+      header="Mohon maaf, Data masih kosong"
+      body="Periksa koneksi jaringan anda dan pastikan data telah tersedia"
+    />
+  ) : (
     <div className="table-responsive" id="print">
+      {modall && (
+        <Modal
+          header="Apakah anda yakain"
+          body="harap hati-hati"
+          modall={modall}
+          setModall={setModall}
+          onYakin={() => fetchUser(pendaftarId, terima)}
+        />
+      )}
+
       <table className="table table-ligh table-hover ">
         <thead>
           <tr className="table-info">
@@ -101,7 +153,9 @@ const Tabel = (props) => {
                     <button
                       type="button"
                       className="btn btn-sm btn-danger"
-                      onClick={() => lolosBerkasHandler(pendaftar.id.toString(), false)}
+                      onClick={() =>
+                        lolosBerkasHandler(pendaftar.id.toString(), false)
+                      }
                     >
                       Batalkan
                     </button>
@@ -109,7 +163,14 @@ const Tabel = (props) => {
                     <button
                       type="button"
                       className="btn  btn-sm btn-outline-success"
-                      onClick={() => lolosBerkasHandler(pendaftar.id.toString(), true)}
+                      onClick={
+                        () => {
+                          setModall(true);
+                          setPendaftarId(pendaftar.id.toString());
+                          setTerima(true);
+                        }
+                        // fetchUser(pendaftar.id.toString(), true)
+                      }
                     >
                       Terima
                     </button>
