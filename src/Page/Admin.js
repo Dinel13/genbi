@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
-import print from "print-js";
+//import print from "print-js";
 
 import Main from "../components/admin/Main";
 import SideBar from "../components/admin/SideBar";
