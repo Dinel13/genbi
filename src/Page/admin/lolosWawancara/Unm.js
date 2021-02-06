@@ -29,13 +29,14 @@ const Unm = (props) => {
       body: JSON.stringify({
         query: ` 
           query { 
-            pendaftars(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
+            lolosWawancaras(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
               nama
               nim
               fakultas
               prodi
               ipk
               mampu
+              lolosWawancara
             }
           }`,
       }),

@@ -7,6 +7,7 @@
       prodi: "informatika",
       ipk: 20,
       id: "55dadasd",
+      lolosBerkas : true
     },
     {
       nama: "huddin",

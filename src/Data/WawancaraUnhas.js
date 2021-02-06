@@ -7,7 +7,7 @@
       prodi: "informatika",
       ipk: 20,
       id: "55dadasd",
-      lolosWawancara : true
+      lolosWawancara : false
     },
     {
       nama: "huddin",
@@ -52,6 +52,6 @@
       prodi: "informatika",
       ipk: 20,
       id: "55dvvvvasdasd",
-      lolosWawancara :false
+      lolosWawancara :true
     },
   ];

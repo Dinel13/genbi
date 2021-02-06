@@ -10,6 +10,7 @@ import Modal from "../../shared/Modal";
 
 const Pendaftar = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
+  const adminId = useSelector((state) => state.Auth.adminId);
   let { pendaftarId } = useParams();
   const [nilai1, setNilai1] = useState(undefined);
   const [nilai2, setNilai2] = useState(undefined);
@@ -17,7 +18,7 @@ const Pendaftar = (props) => {
   const [error2, setError2] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [pendaftar, setPendaftar] = useState(false);
+  const [pendaftar, setPendaftar] = useState({nilai1 : 3});
 
   /* to print pdf
   const { setElementId, setPdfHeader } = props;
@@ -62,7 +63,7 @@ const Pendaftar = (props) => {
     }
   }, [admin, pendaftarId, from]);
 
-  const submitNilaiSatu = (e) => {
+  const submitNilaiSatu = async (e) => {
     e.preventDefault();
     if (!nilai1) {
       setError("masukkan nilai yang valid");
@@ -73,9 +74,38 @@ const Pendaftar = (props) => {
       return;
     }
     console.log(nilai1);
+    try {
+      setIsLoading(false);
+      const response = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + admin,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: `
+        mutation {
+          addNilaiWawancara(nilaiWawancaraInput: {pendaftarId : "${pendaftarId}",
+          adminId : "${adminId}" untuk : "nilaiWawancara1", nilai : "${nilai1}"}) {
+            ${PENDAFTAR_FIElD}
+          }
+        }
+      `,
+        }),
+      });
+      const resData = await response.json();
+      if (resData.errors) {
+        throw resData.errors[0].message;
+      }
+      setIsLoading(false);
+      setPendaftar(resData.data.pendaftar);
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err);
+    }
   };
 
-  const submitNilaiDua = (e) => {
+  const submitNilaiDua = async (e) => {
     e.preventDefault();
     if (!nilai2) {
       setError2("masukkan nilai yang valid");
@@ -86,6 +116,35 @@ const Pendaftar = (props) => {
       return;
     }
     console.log(nilai2);
+    try {
+      setIsLoading(false);
+      const response = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + admin,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: `
+        mutation {
+          addNilaiWawancara(nilaiWawancaraInput: {pendaftarId : "${pendaftarId}",
+          adminId : "${adminId}" untuk : "nilaiWawancara2", nilai : "${nilai2}"}) {
+            ${PENDAFTAR_FIElD}
+          }
+        }
+      `,
+        }),
+      });
+      const resData = await response.json();
+      if (resData.errors) {
+        throw resData.errors[0].message;
+      }
+      setIsLoading(false);
+      setPendaftar(resData.data.pendaftar);
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err);
+    }
   };
 
   return isError ? (
@@ -120,62 +179,72 @@ const Pendaftar = (props) => {
             </figure>
             {props.berkas && (
               <>
-                <div className="d-flex-inline row mb-3 align-items-center">
-                  <div className="form-floating pe-0 col-sm-7 ">
-                    <input
-                      name="prodi"
-                      value={nilai1}
-                      onChange={(e) => {
-                        setError(false);
-                        setNilai1(e.target.value);
-                      }}
-                      type="number"
-                      placeholder="Masukkan nilai"
-                      className={`form-control  ${error ? "is-invalid" : ""}`}
-                    />
-                    <label className="ps-4 fw-bold">Niali 1</label>
+                {pendaftar.nilai1 ? (
+                  <p>Nilai 1 : <strong className="ps-2 fw-bolder">{pendaftar.nilai1}</strong></p>
+                ) : (
+                  <div className="d-flex-inline row mb-3 align-items-center">
+                    <div className="form-floating pe-0 col-sm-7 ">
+                      <input
+                        name="prodi"
+                        value={nilai1}
+                        onChange={(e) => {
+                          setError(false);
+                          setNilai1(e.target.value);
+                        }}
+                        type="number"
+                        placeholder="Masukkan nilai"
+                        className={`form-control  ${error ? "is-invalid" : ""}`}
+                      />
+                      <label className="ps-4 fw-bold">Nilai 1</label>
+                    </div>
+                    <div className="col-sm-5 ps-1">
+                      <button
+                        onClick={submitNilaiSatu}
+                        type="button"
+                        className="w-100 btn btn-sm btn-success"
+                      >
+                        Simpan
+                      </button>
+                    </div>
+                    {error && (
+                      <div className="form-text text-danger">{error}</div>
+                    )}
                   </div>
-                  <div className="col-sm-5 ps-1">
-                    <button
-                      onClick={submitNilaiSatu}
-                      type="button"
-                      className="w-100 btn btn-sm btn-success"
-                    >
-                      Simpan
-                    </button>
+                )}
+                {pendaftar.nilai2 ? (
+                  <p>Nilai 1 <strong className="ps-2 fw-bolder">{pendaftar.nilai2}</strong></p>
+                ) : (
+                  <div className="d-flex-inline row mb-3 align-items-center">
+                    <div className="form-floating pe-0 col-sm-7 ">
+                      <input
+                        name="nilai2"
+                        value={nilai2}
+                        onChange={(e) => {
+                          setError2(false);
+                          setNilai2(e.target.value);
+                        }}
+                        type="number"
+                        placeholder="Masukkan nilai"
+                        className={`form-control  ${
+                          error2 ? "is-invalid" : ""
+                        }`}
+                      />
+                      <label className="ps-4 fw-bold">Nilai 2</label>
+                    </div>
+                    <div className="col-sm-5 ps-1">
+                      <button
+                        onClick={submitNilaiDua}
+                        type="button"
+                        className="w-100 btn btn-sm btn-success"
+                      >
+                        Simpan
+                      </button>
+                    </div>
+                    {error2 && (
+                      <div className="form-text text-danger">{error2}</div>
+                    )}
                   </div>
-                  {error && (
-                    <div className="form-text text-danger">{error}</div>
-                  )}
-                </div>
-                <div className="d-flex-inline row mb-3 align-items-center">
-                  <div className="form-floating pe-0 col-sm-7 ">
-                    <input
-                      name="nilai2"
-                      value={nilai2}
-                      onChange={(e) => {
-                        setError2(false);
-                        setNilai2(e.target.value);
-                      }}
-                      type="number"
-                      placeholder="Masukkan nilai"
-                      className={`form-control  ${error2 ? "is-invalid" : ""}`}
-                    />
-                    <label className="ps-4 fw-bold">Niali 2</label>
-                  </div>
-                  <div className="col-sm-5 ps-1">
-                    <button
-                      onClick={submitNilaiDua}
-                      type="button"
-                      className="w-100 btn btn-sm btn-success"
-                    >
-                      Simpan
-                    </button>
-                  </div>
-                  {error2 && (
-                    <div className="form-text text-danger">{error2}</div>
-                  )}
-                </div>
+                )}
               </>
             )}
             <button className="btn btn-primary btn-lg col-12">Terima</button>

@@ -29,13 +29,14 @@ const Unm = (props) => {
       body: JSON.stringify({
         query: ` 
           query { 
-            pendaftars(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
+            lolosBerkases(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
               nama
               nim
               fakultas
               prodi
               ipk
               mampu
+              lolosBerkas
             }
           }`,
       }),
@@ -87,7 +88,7 @@ const Unm = (props) => {
           )}
         </Route>
         <Route path={`${path}/:pendaftarId`}>
-          <Pendaftar />
+          <Pendaftar berkas={true}/>
         </Route>
       </Switch>
     </>

@@ -13,7 +13,7 @@ const Modal = (props) => {
   //to hide the modal when clicked outside the modal
   useEffect(() => {
     window.onclick = function (event) {
-      if (event.target == modal) {
+      if (event.target === modal) {
         setModall(false);
       }
     };

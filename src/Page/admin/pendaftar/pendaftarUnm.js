@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Unhas } from "../../../Data/WawancaraUnhas";
+import { Unhas } from "../../../Data/PendaftarUnhas";
 
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";

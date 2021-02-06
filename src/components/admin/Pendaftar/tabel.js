@@ -34,6 +34,12 @@ const Tabel = (props) => {
               lolosBerkas(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
               adminId : "${adminId}", terima : "${terima}"}) {
                 nama
+                nim
+                fakultas
+                prodi
+                ipk
+                mampu
+                lolosBerkas
               }
             }
           `,
@@ -43,7 +49,7 @@ const Tabel = (props) => {
           "Content-Type": "application/json",
         }
       );
-      setData(responseData.users);
+      setData(responseData.data.pendaftar);
     } catch (err) {}
   };
 
@@ -153,8 +159,13 @@ const Tabel = (props) => {
                     <button
                       type="button"
                       className="btn btn-sm btn-danger"
-                      onClick={() =>
-                        lolosBerkasHandler(pendaftar.id.toString(), false)
+                      onClick={
+                        () => {
+                          setModall(true);
+                          setPendaftarId(pendaftar.id.toString());
+                          setTerima(false);
+                        }
+                        // lolosBerkasHandler(pendaftar.id.toString(), false)
                       }
                     >
                       Batalkan

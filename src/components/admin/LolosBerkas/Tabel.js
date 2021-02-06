@@ -27,6 +27,12 @@ const Tabel = (props) => {
               lolosBerkas(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
               adminId : "${adminId}", terima : "${terima}"}) {
                 nama
+                nim
+                fakultas
+                prodi
+                ipk
+                mampu
+                lolosBerkas
               }
             }
           `,
