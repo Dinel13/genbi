@@ -6,6 +6,8 @@ import { Unhas } from "../../../Data/WawancaraUnhas";
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
 import Modal from "../../../shared/Modal";
+import ErrorModal from "../../../components/ErrorModal/Error";
+import Loading from "../../../components/Loading/Loading";
 
 const PendaftarUnm = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
@@ -71,8 +73,12 @@ const PendaftarUnm = (props) => {
       </div>
       <Switch>
         <Route exact path={path}>
-          {Unhas ? (
-            <Tabel Unhas={Unhas} url={url} />
+          {isError ? (
+            <ErrorModal message={isError.toString()} setModall={setIsError} />
+          ) : isLoading ? (
+            <Loading />
+          ) : Unhas ? (
+            <Tabel data={Unhas} url={url} />
           ) : (
             <Modal
               header="Mohon maaf, Data masih kosong"

@@ -10,11 +10,11 @@ import DataKampus from "../components/DataKampus";
 import EssayBeasiswa from "../components/EssayBeasiswa";
 import FilePendukung from "../components/FilePendukung";
 import Pemisah from "../components/Pemisah";
-import Modal from "../components/Modal/Modal";
 import ErrorModal from "../components/ErrorModal/Error";
 import Loading from "../components/Loading/Loading";
 import Pendaftar from "./admin/pendaftar";
 import { PENDAFTAR_FIElD } from "../constant/pendaftarField";
+import Modal from "../shared/Modal";
 
 const Daftar = (props) => {
   const token = useSelector((state) => state.Auth.token);

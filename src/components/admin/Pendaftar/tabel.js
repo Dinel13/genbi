@@ -71,7 +71,7 @@ const Tabel = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.Unhas.map((pendaftar, index) => (
+          {props.data.map((pendaftar, index) => (
             <tr key={pendaftar.id}>
               <th className="ps-3" scope="row">
                 {index + 1}

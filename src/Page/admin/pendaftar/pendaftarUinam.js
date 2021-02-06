@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
 import Modal from "../../../shared/Modal";
+import ErrorModal from "../../../components/ErrorModal/Error";
+import Loading from "../../../components/Loading/Loading";
 
 const PendaftarUinam = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
@@ -70,8 +72,12 @@ const PendaftarUinam = (props) => {
       </div>
       <Switch>
         <Route exact path={path}>
-          {pendaftar ? (
-            <Tabel Unhas={pendaftar} url={url} />
+          {isError ? (
+            <ErrorModal message={isError.toString()} setModall={setIsError} />
+          ) : isLoading ? (
+            <Loading />
+          ) : pendaftar ? (
+            <Tabel data={pendaftar} url={url} />
           ) : (
             <Modal
               header="Mohon maaf, Data masih kosong"
