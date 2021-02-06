@@ -184,13 +184,32 @@ module.exports = {
       error.code = 401;
       throw error;
     }
-    const findUser = await User.findById(userId);
-    if (!findUser) {
-      const error = new Error("user not found");
-      error.code = 404;
+    //try to get data pendaftar of user
+    try {
+      const findUser = await User.findById(userId);
+      if (!findUser) {
+        const error = new Error("user tidak ditemukan");
+        error.code = 404;
+        throw error;
+      } else {
+        //!findUser.pendaftar ? isRegister: false  :  isRegister: true ;
+        if (!findUser.pendaftar) {
+          const error = new Error("user belum mendaftar");
+          error.code = 404;
+          throw error;
+        } else {
+          const pendaftar = await Pendaftar.findById(findUser.pendaftar);
+          if (!pendaftar) {
+            const error = new Error("pendaftar not found");
+            error.code = 404;
+            throw error;
+          } else {
+            return pendaftar;
+          }
+        }
+      }
+    } catch (error) {
       throw error;
-    } else {
-      return !findUser.pendaftar ? { isRegister: false } : { isRegister: true };
     }
   },
   pendaftar: async function ({ pendaftarId }, req) {

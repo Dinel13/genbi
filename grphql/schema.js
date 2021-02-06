@@ -2,7 +2,7 @@ const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
     type Pendaftar {
-        _id: ID!,
+        id: ID!,
         jenisBeasiswa : String!,
         lolosBerkas : Boolean!,
         lolosWawancara : Boolean!,
