@@ -167,6 +167,7 @@ module.exports = buildSchema(`
         login(email : String!, password : String!): AuthData!
         loginAdmin(email : String!, password : String!): AdminData!
         userIsRegister(userId : String!): isSudahMendaftar!
+        pendaftar(pendaftarId : String!): Pendaftar!
         pendaftars(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
     }
 

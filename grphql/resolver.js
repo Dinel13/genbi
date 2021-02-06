@@ -41,7 +41,7 @@ module.exports = {
       {
         userId: createdUser._id.toString(),
         email: createdUser.email,
-        admin : false,
+        admin: false,
       },
       "genbirahasianegara"
     );
@@ -68,7 +68,7 @@ module.exports = {
       {
         userId: user._id.toString(),
         email: user.email,
-        admin : false,
+        admin: false,
       },
       "genbirahasianegara"
     );
@@ -115,7 +115,7 @@ module.exports = {
       {
         adminId: createdAdmin._id.toString(),
         email: createdAdmin.email,
-        admin : true,
+        admin: true,
       },
       "genbirahasianegara"
     );
@@ -142,7 +142,7 @@ module.exports = {
       {
         adminId: admin._id.toString(),
         email: admin.email,
-        admin : true,
+        admin: true,
       },
       "genbirahasianegara"
     );
@@ -193,6 +193,21 @@ module.exports = {
       return !findUser.pendaftar ? { isRegister: false } : { isRegister: true };
     }
   },
+  pendaftar: async function ({ pendaftarId }, req) {
+    if (!req.isAuth || !req.isAdmin) {
+      const error = new Error("Not authenticated!");
+      error.code = 401;
+      throw error;
+    }
+    const findPendaftar = await Pendaftar.findById(pendaftarId);
+    if (!findPendaftar) {
+      const error = new Error("pendaftar not found");
+      error.code = 404;
+      throw error;
+    } else {
+      return findPendaftar;
+    }
+  },
   pendaftars: async function ({ adminId, kampus, jenis }, req) {
     if (!req.isAdmin) {
       const error = new Error("anda bukan admin!");
@@ -205,9 +220,17 @@ module.exports = {
       error.code = 404;
       throw error;
     } else {
-      const findPendaftar = await Pendaftar.find({ kampus: kampus, jenis : jenis });
-      console.log(findPendaftar);
-      return findPendaftar;
+      const findPendaftar = await Pendaftar.find({
+        kampus: kampus,
+        jenis: jenis,
+      });
+      if (!findPendaftar) {
+        const error = new Error("pendaftar tidak ditemukan");
+        error.code = 404;
+        throw error;
+      } else {
+        return findPendaftar;
+      }
     }
   },
 };
