@@ -18,7 +18,7 @@ const Tabel = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.Unhas.map((un, index) => (
+          {props.data.map((un, index) => (
             <tr key={un.id}>
               <th className="ps-3" scope="row">{index + 1}</th>
               <td className="text-truncate" style={{maxWidth: '120px'}}>{un.nama}</td>

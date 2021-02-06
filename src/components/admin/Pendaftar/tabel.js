@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 
 const Tabel = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
+  const adminId = useSelector((state) => state.Auth.adminId);
+  const [data, setData] = React.useState(props.data);
   /* to print pdf
   const { setElementId, setPdfHeader } = props;
 
@@ -12,8 +14,8 @@ const Tabel = (props) => {
     setPdfHeader("test - salahuddin");
   }, [setElementId, setPdfHeader]); 
   */
-  // to accept the pendaftar
-  const acceptHandler = (pendaftarId) => {
+  // to handel terima atau batal the pendaftar
+  const lolosBerkasHandler = (pendaftarId, terima) => {
     fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
@@ -21,7 +23,14 @@ const Tabel = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        query: ` mutattion { lolosBerkas(userId: "${pendaftarId}") {isRegister}}`,
+        query: ` 
+          mutattion {
+            lolosBerkas(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
+            adminId : "${adminId}", terima : "${terima}"}) {
+              nama
+            }
+          }
+        `,
       }),
     })
       .then((response) => response.json())
@@ -29,27 +38,11 @@ const Tabel = (props) => {
         if (data.errors) {
           throw data.errors[0].message;
         }
-      })
-      .catch((error) => {});
-  };
-
-  // to cancel the pendaftar
-  const cancelHandler = (pendaftarId) => {
-    fetch("http://localhost:8080/graphql", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + admin,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: ` mutattion { batalLolosBerkas(userId: "${pendaftarId}") {isRegister}}`,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.errors) {
-          throw data.errors[0].message;
-        }
+        //map, filter, foreach
+        const newData = data.map((item) => {
+          return item.id === data.id.toString() && data.data.pendaftar;
+        });
+        setData(newData);
       })
       .catch((error) => {});
   };
@@ -71,7 +64,7 @@ const Tabel = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.data.map((pendaftar, index) => (
+          {data.map((pendaftar, index) => (
             <tr key={pendaftar.id}>
               <th className="ps-3" scope="row">
                 {index + 1}
@@ -104,11 +97,11 @@ const Tabel = (props) => {
                   >
                     Detail
                   </Link>
-                  {pendaftar.lolosWawancara ? (
+                  {pendaftar.lolosBerkas ? (
                     <button
                       type="button"
                       className="btn btn-sm btn-danger"
-                      onClick={() => cancelHandler(pendaftar.id.toString())}
+                      onClick={() => lolosBerkasHandler(pendaftar.id.toString(), false)}
                     >
                       Batalkan
                     </button>
@@ -116,7 +109,7 @@ const Tabel = (props) => {
                     <button
                       type="button"
                       className="btn  btn-sm btn-outline-success"
-                      onClick={() => acceptHandler(pendaftar.id.toString())}
+                      onClick={() => lolosBerkasHandler(pendaftar.id.toString(), true)}
                     >
                       Terima
                     </button>
