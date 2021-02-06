@@ -18,7 +18,7 @@ const Pendaftar = (props) => {
   const [error2, setError2] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [pendaftar, setPendaftar] = useState({nilai1 : 3});
+  const [pendaftar, setPendaftar] = useState({ nilai1: 3 , pangilan : "udin"});
 
   /* to print pdf
   const { setElementId, setPdfHeader } = props;
@@ -168,19 +168,34 @@ const Pendaftar = (props) => {
                 alt="..."
               />
               <figcaption className="figure-caption text-center">
-                Pas Foto
+                Pas Foto <span className="fw-bold">{pendaftar.pangilan}</span>
               </figcaption>
-              <hr />
               {props.wawancara && (
                 <h5 className="text-center">
+                  <hr />
                   <span className="text-muted">Nilai wawancara</span> 100
                 </h5>
               )}
             </figure>
+            {!props.wawancara && !props.berkas && (
+              <button className="btn btn-primary btn-lg col-12">
+                lolos Berkas
+              </button>
+            )}
+            {props.wawancara && (
+              <button className="btn btn-primary btn-lg col-12">
+                Batalkan lolos Wawancara
+              </button>
+            )}
             {props.berkas && (
               <>
                 {pendaftar.nilai1 ? (
-                  <p>Nilai 1 : <strong className="ps-2 fw-bolder">{pendaftar.nilai1}</strong></p>
+                  <p>
+                    Nilai 1 :{" "}
+                    <strong className="ps-2 fw-bolder">
+                      {pendaftar.nilai1}
+                    </strong>
+                  </p>
                 ) : (
                   <div className="d-flex-inline row mb-3 align-items-center">
                     <div className="form-floating pe-0 col-sm-7 ">
@@ -212,7 +227,12 @@ const Pendaftar = (props) => {
                   </div>
                 )}
                 {pendaftar.nilai2 ? (
-                  <p>Nilai 1 <strong className="ps-2 fw-bolder">{pendaftar.nilai2}</strong></p>
+                  <p>
+                    Nilai 1{" "}
+                    <strong className="ps-2 fw-bolder">
+                      {pendaftar.nilai2}
+                    </strong>
+                  </p>
                 ) : (
                   <div className="d-flex-inline row mb-3 align-items-center">
                     <div className="form-floating pe-0 col-sm-7 ">
@@ -245,9 +265,11 @@ const Pendaftar = (props) => {
                     )}
                   </div>
                 )}
+                <button className="btn btn-primary btn-lg col-12">
+                  Lolos Wawancara
+                </button>
               </>
             )}
-            <button className="btn btn-primary btn-lg col-12">Terima</button>
           </div>
         </div>
         <div className="col-9" id="print">
