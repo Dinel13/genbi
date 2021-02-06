@@ -23,7 +23,7 @@ const Tabel = (props) => {
     setPdfHeader("test - salahuddin");
   }, [setElementId, setPdfHeader]); 
   */
-  const fetchUser = async (pendaftarId, terima) => {
+  const lolosBerkasHandler = async (pendaftarId, terima) => {
     try {
       const responseData = await sendRequest(
         "http://localhost:8080/graphql",
@@ -47,7 +47,7 @@ const Tabel = (props) => {
     } catch (err) {}
   };
 
-  // to handel terima atau batal the pendaftar
+  /* to handel terima atau batal the pendaftar
   const lolosBerkasHandler = (pendaftarId, terima) => {
     fetch("http://localhost:8080/graphql", {
       method: "POST",
@@ -79,7 +79,7 @@ const Tabel = (props) => {
       })
       .catch((error) => {});
   };
-
+*/
   return error ? (
     <ErrorModal message={error} setModall={clearError} />
   ) : isLoading ? (
@@ -97,7 +97,7 @@ const Tabel = (props) => {
           body="harap hati-hati"
           modall={modall}
           setModall={setModall}
-          onYakin={() => fetchUser(pendaftarId, terima)}
+          onYakin={() => lolosBerkasHandler(pendaftarId, terima)}
         />
       )}
 

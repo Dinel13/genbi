@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { Unhas } from "../../../Data/WawancaraUnhas";
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/LolosBerkas/Tabel";
 import Modal from "../../../shared/Modal";
@@ -76,8 +77,8 @@ const Unm = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : pendaftar ? (
-            <Tabel data={pendaftar} url={url} />
+          ) : Unhas ? (
+            <Tabel data={Unhas} url={url} />
           ) : (
             <Modal
               header="Mohon maaf, Data masih kosong"
