@@ -169,12 +169,21 @@ module.exports = buildSchema(`
         terima : String!
     }
 
+    input nilaiWawancaraData {
+        pendaftarId : String!
+        adminId : String!
+        untuk : String!
+        nilai : Number!
+    }
+
     type RootQuery {
         login(email : String!, password : String!): AuthData!
         loginAdmin(email : String!, password : String!): AdminData!
         userIsRegister(userId : String!): Pendaftar!
         pendaftar(pendaftarId : String!): Pendaftar!
         pendaftars(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
+        lolosBerkases(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
+        lolosWawancaras(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
     }
 
     type RootMutation {
@@ -182,6 +191,8 @@ module.exports = buildSchema(`
         createAdmin(adminInput: AdminInputData): Admin!
         createPendaftar(pendaftarInput: pendaftarInputData): Pendaftar!
         lolosBerkas(pendaftarAndAdminInput: pendaftarAndAdminData): Pendaftar!
+        addNilaiWawancara(nilaiWawancaraInput: nilaiWawancaraData): Pendaftar!
+        lolosWawancara(pendaftarAndAdminInput: pendaftarAndAdminData): Pendaftar!
     }
 
     schema {

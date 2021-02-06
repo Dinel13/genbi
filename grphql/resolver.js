@@ -252,6 +252,61 @@ module.exports = {
       }
     }
   },
+  //to fetch all lolosberkas
+  lolosBerkases: async function ({ adminId, kampus, jenis }, req) {
+    if (!req.isAdmin) {
+      const error = new Error("anda bukan admin!");
+      error.code = 401;
+      throw error;
+    }
+    const findAdmin = await Admin.findById(adminId);
+    if (!findAdmin) {
+      const error = new Error("admin tidak ditemukan");
+      error.code = 404;
+      throw error;
+    } else {
+      const findPendaftar = await Pendaftar.find({
+        kampus: kampus,
+        jenis: jenis,
+        lolosBerkas: true,
+      });
+      if (!findPendaftar) {
+        const error = new Error("pendaftar tidak ditemukan");
+        error.code = 404;
+        throw error;
+      } else {
+        return findPendaftar;
+      }
+    }
+  },
+  //to fetch all lolosberkas
+  lolosWawancaras: async function ({ adminId, kampus, jenis }, req) {
+    if (!req.isAdmin) {
+      const error = new Error("anda bukan admin!");
+      error.code = 401;
+      throw error;
+    }
+    const findAdmin = await Admin.findById(adminId);
+    if (!findAdmin) {
+      const error = new Error("admin tidak ditemukan");
+      error.code = 404;
+      throw error;
+    } else {
+      const findPendaftar = await Pendaftar.find({
+        kampus: kampus,
+        jenis: jenis,
+        lolosWawancara: true,
+      });
+      if (!findPendaftar) {
+        const error = new Error("pendaftar tidak ditemukan");
+        error.code = 404;
+        throw error;
+      } else {
+        return findPendaftar;
+      }
+    }
+  },
+  //to make pendaftar lolos berkas or not
   lolosBerkas: async function ({ pendaftarId, adminId, terima }, req) {
     if (!req.isAdmin) {
       const error = new Error("anda bukan admin!");
@@ -272,6 +327,68 @@ module.exports = {
           throw error;
         } else {
           findPendaftar.lolosBerkas = terima;
+          const result = await findPendaftar.save();
+          return result;
+        }
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+  //to add nilai Wawancara
+  addNilaiWawancara: async function ({ pendaftarId, adminId, untuk, nilai }, req) {
+    if (!req.isAdmin) {
+      const error = new Error("anda bukan admin!");
+      error.code = 401;
+      throw error;
+    }
+    try {
+      const findAdmin = await Admin.findById(adminId);
+      if (!findAdmin) {
+        const error = new Error("admin tidak ditemukan");
+        error.code = 404;
+        throw error;
+      } else {
+        const findPendaftar = await Pendaftar.findById(pendaftarId);
+        if (!findPendaftar) {
+          const error = new Error("pendaftar tidak ditemukan");
+          error.code = 404;
+          throw error;
+        } else {
+          if (untuk === "nilaiWawancara1") {
+            findPendaftar.nilaiWawancara1 = nilai;
+          } else {
+            findPendaftar.nilaiWawancara2 = nilai;
+          }
+          const result = await findPendaftar.save();
+          return result;
+        }
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+  //to make pendaftar lolos Wawancara or not
+  lolosWawancara: async function ({ pendaftarId, adminId, terima }, req) {
+    if (!req.isAdmin) {
+      const error = new Error("anda bukan admin!");
+      error.code = 401;
+      throw error;
+    }
+    try {
+      const findAdmin = await Admin.findById(adminId);
+      if (!findAdmin) {
+        const error = new Error("admin tidak ditemukan");
+        error.code = 404;
+        throw error;
+      } else {
+        const findPendaftar = await Pendaftar.findById(pendaftarId);
+        if (!findPendaftar) {
+          const error = new Error("pendaftar tidak ditemukan");
+          error.code = 404;
+          throw error;
+        } else {
+          findPendaftar.lolosWawancara = terima;
           const result = await findPendaftar.save();
           return result;
         }
