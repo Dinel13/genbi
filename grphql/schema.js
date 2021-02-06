@@ -163,10 +163,16 @@ module.exports = buildSchema(`
         tempatLahir: String,
     }
 
+    input pendaftarAndAdminData {
+        pendaftarId : String!
+        adminId : String!
+        terima : String!
+    }
+
     type RootQuery {
         login(email : String!, password : String!): AuthData!
         loginAdmin(email : String!, password : String!): AdminData!
-        userIsRegister(userId : String!): isSudahMendaftar!
+        userIsRegister(userId : String!): Pendaftar!
         pendaftar(pendaftarId : String!): Pendaftar!
         pendaftars(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
     }
@@ -175,6 +181,7 @@ module.exports = buildSchema(`
         createUser(userInput: UserInputData): User!
         createAdmin(adminInput: AdminInputData): Admin!
         createPendaftar(pendaftarInput: pendaftarInputData): Pendaftar!
+        lolosBerkas(pendaftarAndAdminInput: pendaftarAndAdminData): Pendaftar!
     }
 
     schema {

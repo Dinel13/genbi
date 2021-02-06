@@ -252,4 +252,32 @@ module.exports = {
       }
     }
   },
+  lolosBerkas: async function ({ pendaftarId, adminId, terima }, req) {
+    if (!req.isAdmin) {
+      const error = new Error("anda bukan admin!");
+      error.code = 401;
+      throw error;
+    }
+    try {
+      const findAdmin = await Admin.findById(adminId);
+      if (!findAdmin) {
+        const error = new Error("admin tidak ditemukan");
+        error.code = 404;
+        throw error;
+      } else {
+        const findPendaftar = await Pendaftar.findById(pendaftarId);
+        if (!findPendaftar) {
+          const error = new Error("pendaftar tidak ditemukan");
+          error.code = 404;
+          throw error;
+        } else {
+          findPendaftar.lolosBerkas = terima;
+          const result = await findPendaftar.save();
+          return result;
+        }
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
 };
