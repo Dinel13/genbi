@@ -3,6 +3,11 @@ import { useParams } from "react-router-dom";
 import image from "../../images/sala.jpg";
 import { useSelector } from "react-redux";
 
+import { PENDAFTAR_FIElD } from "../../constant/pendaftarField";
+import ErrorModal from "../../components/ErrorModal/Error";
+import Loading from "../../components/Loading/Loading";
+import Modal from "../../shared/Modal";
+
 const Pendaftar = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
   let { pendaftarId } = useParams();
@@ -38,61 +43,7 @@ const Pendaftar = (props) => {
         },
         body: JSON.stringify({
           query: ` query { pendaftar(pendaftarId: "${pendaftarId}") {
-        id
-        jenisBeasiswa  
-        lolosBerkas : Boolean!,
-        lolosWawancara : Boolean!,
-        nilaiWawancara1  
-        nilaiWawancara2  
-        agama 
-        alamatAyah 
-        alamatIbu 
-        anakKe 
-        angkatan 
-        arahan:  Boolean,
-        cita 
-        darah 
-        fakultas 
-        genbi 
-        gender 
-        hobby 
-        instagram 
-        ipk 
-        kampus 
-        kontribusi:Boolean!,
-        kosan 
-        ktm 
-        lulus 
-        mampu 
-        minat 
-        motif 
-        nama 
-        namaAyah 
-        namaIbu 
-        nilai 
-        nim 
-        nomorHp 
-        nomorWa 
-        organisasi 
-        pangilan 
-        pantas 
-        pekerjaanAyah 
-        pekerjaanIbu 
-        penghasilanAyah 
-        penghasilanIbu 
-        prestasi 
-        prodi 
-        rekomendasi 
-        rencana 
-        saudara 
-        showWali 
-        siapMengurus 
-        skil 
-        suku 
-        tangalLahir 
-        teleponAyah 
-        teleponIbu 
-        tempatLahir 
+            ${PENDAFTAR_FIElD}
       }}`,
         }),
       })
@@ -137,7 +88,16 @@ const Pendaftar = (props) => {
     console.log(nilai2);
   };
 
-  return (
+  return isError ? (
+    <ErrorModal message={isError.toString()} setModall={setIsError} />
+  ) : isLoading ? (
+    <Loading />
+  ) : !pendaftar ? (
+    <Modal
+      header="Mohon maaf"
+      body="Pendaftar tidak bisa ditemukan, periksa koneksi anda atau coba lagi nanti"
+    />
+  ) : (
     <div className="container mt-4">
       <div className="row">
         <div className="col-3 order-sm-last ">

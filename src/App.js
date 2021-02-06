@@ -76,6 +76,9 @@ const App = () => {
         <Route path="/admin">
           <Admin />
         </Route>
+        <Route path="/pendaftaran" exact>
+          <Pendaftaran />
+        </Route>
         <Route path="/login" exact>
           <Login />
         </Route>

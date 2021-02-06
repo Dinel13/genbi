@@ -1,4 +1,4 @@
-import React , {useState}from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useSelector } from "react-redux";
@@ -14,11 +14,11 @@ import Modal from "../components/Modal/Modal";
 import ErrorModal from "../components/ErrorModal/Error";
 import Loading from "../components/Loading/Loading";
 import Pendaftar from "./admin/pendaftar";
+import { PENDAFTAR_FIElD } from "../constant/pendaftarField";
 
 const Daftar = (props) => {
   const token = useSelector((state) => state.Auth.token);
   const userId = useSelector((state) => state.Auth.userId);
-  const [isRegister, setIsregister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [pendaftar, setPendaftar] = useState(false);
@@ -38,7 +38,7 @@ const Daftar = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        query: ` query { userIsRegister(userId: "${userId}") {isRegister}}`,
+        query: ` query { userIsRegister(userId: "${userId}") {${PENDAFTAR_FIElD}}}`,
       }),
     })
       .then((response) => response.json())
@@ -47,9 +47,10 @@ const Daftar = (props) => {
           throw data.errors[0].message;
         }
         setIsLoading(false);
-        setIsregister(data.data.userIsRegister.isRegister);
+        setPendaftar(data.data.userIsRegister);
       })
       .catch((error) => {
+        setPendaftar(false);
         setIsLoading(false);
         setIsError(error);
       });
@@ -95,61 +96,7 @@ const Daftar = (props) => {
             rencana: "${values.rencana}", saudara: "${values.saudara}", showWali: "${values.showWali}",
             siapMengurus: "${values.siapMengurus}", skil: "${values.skil}", suku: "${values.suku}", tangalLahir: "${values.tangalLahir}",
             teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}", tempatLahir: "${values.tempatLahir}"}) {
-              id
-        jenisBeasiswa  
-        lolosBerkas : Boolean!,
-        lolosWawancara : Boolean!,
-        nilaiWawancara1  
-        nilaiWawancara2  
-        agama 
-        alamatAyah 
-        alamatIbu 
-        anakKe 
-        angkatan 
-        arahan:  Boolean,
-        cita 
-        darah 
-        fakultas 
-        genbi 
-        gender 
-        hobby 
-        instagram 
-        ipk 
-        kampus 
-        kontribusi:Boolean!,
-        kosan 
-        ktm 
-        lulus 
-        mampu 
-        minat 
-        motif 
-        nama 
-        namaAyah 
-        namaIbu 
-        nilai 
-        nim 
-        nomorHp 
-        nomorWa 
-        organisasi 
-        pangilan 
-        pantas 
-        pekerjaanAyah 
-        pekerjaanIbu 
-        penghasilanAyah 
-        penghasilanIbu 
-        prestasi 
-        prodi 
-        rekomendasi 
-        rencana 
-        saudara 
-        showWali 
-        siapMengurus 
-        skil 
-        suku 
-        tangalLahir 
-        teleponAyah 
-        teleponIbu 
-        tempatLahir 
+              ${PENDAFTAR_FIElD}
             }
           }
         `,
@@ -166,10 +113,10 @@ const Daftar = (props) => {
       if (resDataFinish.errors) {
         throw new Error(resDataFinish.errors[0].message);
       }
-      setIsregister(resDataFinish);
+      setPendaftar(resDataFinish.data.pendaftar);
       setIsLoading(false);
-      setPendaftar(resDataFinish)
     } catch (err) {
+      setPendaftar(false);
       setIsLoading(false);
       setIsError(err);
     }
@@ -179,14 +126,14 @@ const Daftar = (props) => {
     <ErrorModal message={isError.toString()} setModall={setIsError} />
   ) : isLoading ? (
     <Loading />
-  ) : isRegister ? (
+  ) : pendaftar ? (
     <>
       <Modal
         header="Selamat, Pendaftaran anda berhasil"
         body="Pengumuman dapat di lihat di laman ini dan email anda pada
     tanggal 20 Februari 2020"
       />
-      <Pendaftar from={pendaftar}/>
+      <Pendaftar from={pendaftar} />
     </>
   ) : (
     <div className="container">
