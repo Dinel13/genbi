@@ -79,7 +79,7 @@ const PendaftarUinam = (props) => {
             />
           )}
         </Route>
-        <Route path={`${path}/:topicId`}>
+        <Route path={`${path}/:pendaftarId`}>
           <Pendaftar />
         </Route>
       </Switch>

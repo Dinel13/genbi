@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Unhas } from "../../../Data/WawancaraUnhas";
@@ -10,9 +10,9 @@ import Modal from "../../../shared/Modal";
 const PendaftarUnm = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
   const adminId = useSelector((state) => state.Auth.adminId);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isError, setIsError] = React.useState(false);
-  const [pendaftar, setPendaftar] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [pendaftar, setPendaftar] = useState(false);
   let { path, url } = useRouteMatch();
   const { setActive } = props;
 
@@ -80,7 +80,7 @@ const PendaftarUnm = (props) => {
             />
           )}
         </Route>
-        <Route path={`${path}/:topicId`}>
+        <Route path={`${path}/:pendaftarId`}>
           <Pendaftar />
         </Route>
       </Switch>

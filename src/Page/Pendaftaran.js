@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState}from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useSelector } from "react-redux";
@@ -13,13 +13,15 @@ import Pemisah from "../components/Pemisah";
 import Modal from "../components/Modal/Modal";
 import ErrorModal from "../components/ErrorModal/Error";
 import Loading from "../components/Loading/Loading";
+import Pendaftar from "./admin/pendaftar";
 
 const Daftar = (props) => {
   const token = useSelector((state) => state.Auth.token);
   const userId = useSelector((state) => state.Auth.userId);
-  const [isRegister, setIsregister] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isError, setIsError] = React.useState(false);
+  const [isRegister, setIsregister] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [pendaftar, setPendaftar] = useState(false);
   const { register, watch, errors, handleSubmit } = useForm();
   const watchWali = watch("showWali", ""); // you can supply default value as second argument
   const watchKampus = watch("kampus", "");
@@ -93,7 +95,61 @@ const Daftar = (props) => {
             rencana: "${values.rencana}", saudara: "${values.saudara}", showWali: "${values.showWali}",
             siapMengurus: "${values.siapMengurus}", skil: "${values.skil}", suku: "${values.suku}", tangalLahir: "${values.tangalLahir}",
             teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}", tempatLahir: "${values.tempatLahir}"}) {
-              nama
+              id
+        jenisBeasiswa  
+        lolosBerkas : Boolean!,
+        lolosWawancara : Boolean!,
+        nilaiWawancara1  
+        nilaiWawancara2  
+        agama 
+        alamatAyah 
+        alamatIbu 
+        anakKe 
+        angkatan 
+        arahan:  Boolean,
+        cita 
+        darah 
+        fakultas 
+        genbi 
+        gender 
+        hobby 
+        instagram 
+        ipk 
+        kampus 
+        kontribusi:Boolean!,
+        kosan 
+        ktm 
+        lulus 
+        mampu 
+        minat 
+        motif 
+        nama 
+        namaAyah 
+        namaIbu 
+        nilai 
+        nim 
+        nomorHp 
+        nomorWa 
+        organisasi 
+        pangilan 
+        pantas 
+        pekerjaanAyah 
+        pekerjaanIbu 
+        penghasilanAyah 
+        penghasilanIbu 
+        prestasi 
+        prodi 
+        rekomendasi 
+        rencana 
+        saudara 
+        showWali 
+        siapMengurus 
+        skil 
+        suku 
+        tangalLahir 
+        teleponAyah 
+        teleponIbu 
+        tempatLahir 
             }
           }
         `,
@@ -112,6 +168,7 @@ const Daftar = (props) => {
       }
       setIsregister(resDataFinish);
       setIsLoading(false);
+      setPendaftar(resDataFinish)
     } catch (err) {
       setIsLoading(false);
       setIsError(err);
@@ -123,11 +180,14 @@ const Daftar = (props) => {
   ) : isLoading ? (
     <Loading />
   ) : isRegister ? (
-    <Modal
-      header="Selamat, Pendaftaran anda berhasil"
-      body="Pengumuman dapat di lihat di laman ini dan email anda pada
+    <>
+      <Modal
+        header="Selamat, Pendaftaran anda berhasil"
+        body="Pengumuman dapat di lihat di laman ini dan email anda pada
     tanggal 20 Februari 2020"
-    />
+      />
+      <Pendaftar from={pendaftar}/>
+    </>
   ) : (
     <div className="container">
       <div className="text-center mt-5 mb-4">
