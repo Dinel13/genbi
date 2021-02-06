@@ -1,17 +1,60 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Pendaftar from "../pendaftar";
 import { Unhas } from "../../../Data/WawancaraUnhas";
 import Card from "../../../components/admin/LolosWawancara/Card";
 import image from "../../../images/sala.jpg";
+import Modal from "../../../shared/Modal";
+import ErrorModal from "../../../components/ErrorModal/Error";
+import Loading from "../../../components/Loading/Loading";
 
 const Unm = (props) => {
   let { path, url } = useRouteMatch();
-  const { setActive} = props;
+  const admin = useSelector((state) => state.Auth.admin);
+  const adminId = useSelector((state) => state.Auth.adminId);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [pendaftar, setPendaftar] = useState(false);
+  const { setActive } = props;
   useEffect(() => {
     setActive("wawUnm");
-  }, [setActive]);
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + admin,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: ` 
+          query { 
+            pendaftars(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
+              nama
+              nim
+              fakultas
+              prodi
+              ipk
+              mampu
+            }
+          }`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.errors) {
+          throw data.errors[0].message;
+        }
+        setPendaftar(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setIsError(error);
+        console.log(error);
+      });
+  }, [setActive, adminId, admin]);
 
   return (
     <>
@@ -19,24 +62,35 @@ const Unm = (props) => {
         <h1 className="h2">Lolos Wawancara Universitas Negeri Makassar</h1>
         <div className="btn-toolbar mb-2 mb-md-0" id="ggggg">
           <div className="btn-group me-2">
-            <button type="button" className="btn btn-sm btn-outline-secondary">
-              Jumlah pendaftar <span className="badge bg-primary">100</span>
+            <button type="button" className="btn btn-outline-secondary">
+              Jumlah pendaftar{" "}
+              <span className="badge bg-primary">
+                {pendaftar ? pendaftar.length : "0"}
+              </span>
             </button>
-            {/* <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => props.export(props.id,props.header)}> 
-Export
-</button>*/}
           </div>
         </div>
       </div>
       <Switch>
         <Route exact path={path}>
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2  row-cols-lg-3 g-3">
-            {Unhas.map((unhas) => (
-              <Card Unhas={unhas} key={unhas.id} url={url} image={image} />
-            ))}
-          </div>
+          {isError ? (
+            <ErrorModal message={isError.toString()} setModall={setIsError} />
+          ) : isLoading ? (
+            <Loading />
+          ) : Unhas ? (
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2  row-cols-lg-3 g-3">
+              {Unhas.map((item) => (
+                <Card data={item} key={item.id} url={url} image={image} />
+              ))}
+            </div>
+          ) : (
+            <Modal
+              header="Mohon maaf, Data masih kosong"
+              body="Periksa koneksi jaringan anda dan pastikan data telah tersedia"
+            />
+          )}
         </Route>
-        <Route path={`${path}/:topicId`}>
+        <Route path={`${path}/:pendaftarId`}>
           <Pendaftar wawancara={true} />
         </Route>
       </Switch>
