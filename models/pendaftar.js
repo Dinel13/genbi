@@ -40,6 +40,18 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    alumni: {
+      type: String,
+      requireq: false,
+    },
+    alumniJabatan: {
+      type: String,
+      requireq: false,
+    },
+    alumniThn: {
+      type: String,
+      requireq: false,
+    },
     anakKe: {
       type: String,
       requireq: false,
@@ -49,6 +61,10 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     arahan: {
+      type: Boolean,
+      requireq: false,
+    },
+    bergenbi: {
       type: Boolean,
       requireq: false,
     },
@@ -77,6 +93,10 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     hobby: {
+      type: String,
+      requireq: false,
+    },
+    ikatan: {
       type: String,
       requireq: false,
     },
@@ -208,7 +228,15 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    saran: {
+      type: String,
+      requireq: false,
+    },
     saudara: {
+      type: String,
+      requireq: false,
+    },
+    semester: {
       type: String,
       requireq: false,
     },
@@ -225,6 +253,10 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     sks: {
+      type: String,
+      requireq: false,
+    },
+    sosial: {
       type: String,
       requireq: false,
     },
