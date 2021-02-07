@@ -22,11 +22,13 @@ const Daftar = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [pendaftar, setPendaftar] = useState(false);
-  const { register, watch, errors, handleSubmit } = useForm();
+  const [dataSaveOnLocal, setDataSaveOnLocal] = useState({});
+  const { register, watch, errors, handleSubmit, setValue } = useForm();
   const watchWali = watch("showWali", ""); // you can supply default value as second argument
   const watchKampus = watch("kampus", "");
   const watchJenisBeasiswa = watch("jenisBeasiswa", "reguler");
   const watchGenbi = watch("genbi", "");
+  const watchAll = watch();
 
   //to check if user already registered
   React.useEffect(() => {
@@ -115,12 +117,50 @@ const Daftar = (props) => {
       }
       setPendaftar(resDataFinish.data.pendaftar);
       setIsLoading(false);
+      localStorage.removeItem("dataPendaftar");
     } catch (err) {
       setPendaftar(false);
       setIsLoading(false);
       setIsError(err);
     }
   };
+  const test = () => localStorage.removeItem("dataPendaftar");
+  //to save data form to local storage
+  const simpanHandler = async () => {
+    localStorage.setItem(
+      "dataPendaftar",
+      JSON.stringify({
+        watchAll,
+      })
+    );
+  };
+
+  // to get data from local storage
+  // setValue not work
+  React.useEffect(() => {
+    const storedDataPendaftar = JSON.parse(
+      localStorage.getItem("dataPendaftar")
+    );
+    if (storedDataPendaftar && storedDataPendaftar.watchAll) {
+      const dataPendaftar = storedDataPendaftar.watchAll;
+      for (const item in dataPendaftar) {
+        if (item !== "ktm") {
+          if (item !== "mampu") {
+            if (item !== "nilai") {
+              if (item !== "rekomendasi") {
+                if (dataPendaftar[item]) {
+                  setDataSaveOnLocal((prevState) => ({
+                    ...prevState,
+                    [item]: dataPendaftar[item],
+                  }));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }, [setValue]);
 
   return isError ? (
     <ErrorModal message={isError.toString()} setModall={setIsError} />
@@ -137,6 +177,14 @@ const Daftar = (props) => {
     </>
   ) : (
     <div className="container">
+      <button onClick={test}>test</button>
+      <div className="position-fixed bottom-0 end-0">
+        <div className="pe-4 pb-4">
+          <button className="btn btn-primary" onClick={simpanHandler}>
+            simpan
+          </button>
+        </div>
+      </div>
       <div className="text-center mt-5 mb-4">
         <h1 className="text-decoration-underline">
           Form Pendaftaran beasiswa Bank Indonesia
@@ -144,14 +192,24 @@ const Daftar = (props) => {
       </div>
       <Note />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DataDiri errors={errors} register={register} />
-        <OrangTua errors={errors} register={register} watchWali={watchWali} />
-        <DataKampus errors={errors} register={register} />
+        <DataDiri errors={errors} register={register} dataSaveOnLocal={dataSaveOnLocal} />
+        <OrangTua
+          errors={errors}
+          register={register}
+          watchWali={watchWali}
+          dataSaveOnLocal={dataSaveOnLocal}
+        />
+        <DataKampus
+          errors={errors}
+          register={register}
+          dataSaveOnLocal={dataSaveOnLocal}
+        />
         <EssayBeasiswa
           errors={errors}
           register={register}
           watchKampus={watchKampus}
           watchGenbi={watchGenbi}
+          dataSaveOnLocal={dataSaveOnLocal}
         />
         <FilePendukung
           errors={errors}

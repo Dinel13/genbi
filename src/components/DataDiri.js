@@ -15,6 +15,7 @@ const DataDiri = (props) => {
             name="nama"
             placeholder="Masukkan nama sesuai KTP"
             id="nama"
+            defaultValue={props.dataSaveOnLocal.nama}
             className={`form-control ${errors.nama ? "is-invalid" : ""}`}
             ref={register({
               required: "Nama anda wajib dimasukkan",
@@ -33,6 +34,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-5 mb-3">
           <input
             name="pangilan"
+            defaultValue={props.dataSaveOnLocal.pangilan}
             placeholder="Masukkan nama pangilan anda"
             className={`form-control ${errors.pangilan ? "is-invalid" : ""}`}
             ref={register({
@@ -51,6 +53,7 @@ const DataDiri = (props) => {
           <input
             name="tangalLahir"
             type="date"
+            defaultValue={props.dataSaveOnLocal.tangalLahir}
             className={`form-control form-date   ${
               errors.tangalLahir ? "is-invalid" : ""
             }`}
@@ -69,6 +72,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="tempatLahir"
+            defaultValue={props.dataSaveOnLocal.tempatLahir}
             type="text"
             placeholder="Masukkan tempat lahir anda"
             className={`form-control form-date   ${
@@ -89,6 +93,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <select
             name="gender"
+            defaultValue={props.dataSaveOnLocal.gender}
             type="text"
             className={`form-select ${errors.gender ? "is-invalid" : ""}`}
             ref={register({
@@ -110,6 +115,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <select
             name="agama"
+            defaultValue={props.dataSaveOnLocal.agama}
             type="text"
             className={`form-select   ${errors.agama ? "is-invalid" : ""}`}
             ref={register({
@@ -135,6 +141,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="suku"
+            defaultValue={props.dataSaveOnLocal.suku}
             type="text"
             placeholder="Masukkan suku anda"
             className={`form-control form-date   ${
@@ -155,6 +162,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="darah"
+            defaultValue={props.dataSaveOnLocal.darah}
             type="text"
             placeholder="Masukkan golongan darah anda"
             className={`form-control form-date   ${
@@ -175,6 +183,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="anakKe"
+            defaultValue={props.dataSaveOnLocal.anakKe}
             type="number"
             placeholder="Anda anak keberapa"
             className={`form-control ${errors.anakKe ? "is-invalid" : ""}`}
@@ -198,6 +207,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="saudara"
+            defaultValue={props.dataSaveOnLocal.saudara}
             type="number"
             placeholder="Jumlah Saudara anda"
             className={`form-control ${errors.saudara ? "is-invalid" : ""}`}
@@ -221,6 +231,7 @@ const DataDiri = (props) => {
           <textarea
             style={{ height: "100px" }}
             name="kosan"
+            defaultValue={props.dataSaveOnLocal.kosan}
             placeholder="Masukkan alamat selama berkuliah"
             className={`form-control ${errors.kosan ? "is-invalid" : ""}`}
             ref={register({
@@ -238,6 +249,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="hobby"
+            defaultValue={props.dataSaveOnLocal.hobby}
             type="text"
             placeholder="Masukkan hobi anda"
             className={`form-control ${errors.hobby ? "is-invalid" : ""}`}
@@ -254,6 +266,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="cita"
+            defaultValue={props.dataSaveOnLocal.cita}
             type="text"
             placeholder="Masukkan cita-cita"
             className={`form-control ${errors.cita ? "is-invalid" : ""}`}
@@ -270,6 +283,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-4 mb-3">
           <input
             name="nomorWa"
+            defaultValue={props.dataSaveOnLocal.nomorWa}
             type="number"
             placeholder="Masukkan nomor wa"
             className={`form-control ${errors.nomorWa ? "is-invalid" : ""}`}
@@ -288,6 +302,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-4 mb-3">
           <input
             name="nomorHp"
+            defaultValue={props.dataSaveOnLocal.nomorHp}
             type="number"
             placeholder="Masukkan nomor telepon"
             className={`form-control ${errors.nomorHp ? "is-invalid" : ""}`}
@@ -307,6 +322,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-4 mb-3">
           <input
             name="instagram"
+            defaultValue={props.dataSaveOnLocal.instagram}
             type="text"
             placeholder="Masukkan akun instagram"
             className={`form-control ${errors.instagram ? "is-invalid" : ""}`}
@@ -327,6 +343,7 @@ const DataDiri = (props) => {
           <input
             name="minat"
             type="text"
+            defaultValue={props.dataSaveOnLocal.minat}
             placeholder="Masukkan minat atau bakat anda"
             className={`form-control ${errors.minat ? "is-invalid" : ""}`}
             ref={register({})}
@@ -342,6 +359,7 @@ const DataDiri = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="skil"
+            defaultValue={props.dataSaveOnLocal.skil}
             type="text"
             placeholder="Masukkan keterampilan anda"
             className={`form-control ${errors.skil ? "is-invalid" : ""}`}
