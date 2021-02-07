@@ -1,8 +1,11 @@
 import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
+import { useSelector } from "react-redux";
 
 const DataDiri = (props) => {
   const { errors, register } = props;
+  const email = useSelector((state) => state.Auth.userEmail);
+  const name = useSelector((state) => state.Auth.userName);
 
   return (
     <div className="card shadow mb-5 p-0">
@@ -15,7 +18,9 @@ const DataDiri = (props) => {
             name="nama"
             placeholder="Masukkan nama sesuai KTP"
             id="nama"
-            defaultValue={props.dataSaveOnLocal.nama}
+            defaultValue={
+              props.dataSaveOnLocal.nama ? props.dataSaveOnLocal.nama : name
+            }
             className={`form-control ${errors.nama ? "is-invalid" : ""}`}
             ref={register({
               required: "Nama anda wajib dimasukkan",
@@ -138,13 +143,13 @@ const DataDiri = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-6 mb-3">
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
             name="suku"
             defaultValue={props.dataSaveOnLocal.suku}
             type="text"
             placeholder="Masukkan suku anda"
-            className={`form-control form-date   ${
+            className={`form-control ${
               errors.suku ? "is-invalid" : ""
             }`}
             ref={register({
@@ -159,13 +164,13 @@ const DataDiri = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-6 mb-3">
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
             name="darah"
             defaultValue={props.dataSaveOnLocal.darah}
             type="text"
             placeholder="Masukkan golongan darah anda"
-            className={`form-control form-date   ${
+            className={`form-control ${
               errors.darah ? "is-invalid" : ""
             }`}
             ref={register({
@@ -176,6 +181,46 @@ const DataDiri = (props) => {
           <ErrorMessage
             className="invalid-feedback"
             name="darah"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
+          <input
+            name="email"
+            defaultValue={
+              props.dataSaveOnLocal.email ? props.dataSaveOnLocal.email : email
+            }
+            type="text"
+            placeholder="Masukkan alamat email anda"
+            className={`form-control ${errors.email ? "is-invalid" : ""}`}
+            ref={register({
+              required: "Alamat email harus diisi",
+            })}
+          />
+          <label className="ps-4 fw-bold">Alamat email</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="email"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            style={{ height: "100px" }}
+            name="kosan"
+            defaultValue={props.dataSaveOnLocal.kosan}
+            placeholder="Masukkan alamat selama berkuliah"
+            className={`form-control ${errors.kosan ? "is-invalid" : ""}`}
+            ref={register({
+              required: "Alamat kosan wajib dimasukkan",
+            })}
+          />
+          <label className="ps-4 fw-bold">Alamat selama berkuliah</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="kosan"
             as="div"
             errors={errors}
           />
@@ -227,25 +272,7 @@ const DataDiri = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-12 mb-3">
-          <textarea
-            style={{ height: "100px" }}
-            name="kosan"
-            defaultValue={props.dataSaveOnLocal.kosan}
-            placeholder="Masukkan alamat selama berkuliah"
-            className={`form-control ${errors.kosan ? "is-invalid" : ""}`}
-            ref={register({
-              required: "Alamat kosan wajib dimasukkan",
-            })}
-          />
-          <label className="ps-4 fw-bold">Alamat selama berkuliah</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="kosan"
-            as="div"
-            errors={errors}
-          />
-        </div>
+
         <div className="form-floating col-md-6 mb-3">
           <input
             name="hobby"

@@ -138,6 +138,7 @@ const Daftar = (props) => {
   // to get data from local storage
   // setValue not work
   React.useEffect(() => {
+    setValue("email")
     const storedDataPendaftar = JSON.parse(
       localStorage.getItem("dataPendaftar")
     );
@@ -160,7 +161,7 @@ const Daftar = (props) => {
         }
       }
     }
-  }, [setValue]);
+  }, []);
 
   return isError ? (
     <ErrorModal message={isError.toString()} setModall={setIsError} />
