@@ -16,6 +16,7 @@ const DataKampus = (props) => {
           <div className="col">
             <select
               name="kampus"
+              defaultValue={props.dataSaveOnLocal.kampus}
               type="text"
               className={`form-select   ${errors.kampus ? "is-invalid" : ""}`}
               ref={register({
@@ -38,6 +39,7 @@ const DataKampus = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="fakultas"
+            defaultValue={props.dataSaveOnLocal.fakultas}
             type="text"
             placeholder="Masukkan Fakultas anda"
             className={`form-control ${errors.fakultas ? "is-invalid" : ""}`}
@@ -56,6 +58,7 @@ const DataKampus = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="prodi"
+            defaultValue={props.dataSaveOnLocal.prodi}
             type="text"
             placeholder="Masukkan Program studi anda"
             className={`form-control ${errors.prodi ? "is-invalid" : ""}`}
@@ -71,9 +74,10 @@ const DataKampus = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-6 mb-3">
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
             name="nim"
+            defaultValue={props.dataSaveOnLocal.nim}
             type="text"
             placeholder="Masukkan nomor induk mahasiswa anda"
             className={`form-control ${errors.nim ? "is-invalid" : ""}`}
@@ -89,10 +93,11 @@ const DataKampus = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-6 mb-3">
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
             name="ipk"
             type="decimal"
+            defaultValue={props.dataSaveOnLocal.ipk}
             placeholder="Masukkan nilai ipk anda, contohnya 3.8"
             className={`form-control ${errors.ipk ? "is-invalid" : ""}`}
             ref={register({
@@ -111,9 +116,29 @@ const DataKampus = (props) => {
             errors={errors}
           />
         </div>
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
+          <input
+            name="sks"
+            type="number"
+            defaultValue={props.dataSaveOnLocal.sks}
+            placeholder="Masukkan sks yang telah dilulusi"
+            className={`form-control ${errors.sks ? "is-invalid" : ""}`}
+            ref={register({
+              required: "SKS yang telah dilulusi anda wajib dimasukkan",
+            })}
+          />
+          <label className="ps-4 fw-bold">SKS yang telah dilulusi</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="sks"
+            as="div"
+            errors={errors}
+          />
+        </div>
         <div className="form-floating col-md-6 mb-3">
           <select
             name="angkatan"
+            defaultValue={props.dataSaveOnLocal.angkatan}
             aria-label="Floating label select example"
             className={`form-select ${errors.angkatan ? "is-invalid" : ""}`}
             ref={register({
@@ -135,22 +160,23 @@ const DataKampus = (props) => {
         </div>
         <div className="form-floating col-md-6 mb-3">
           <select
-            name="lulus"
-            aria-label="Floating label select example"
-            className={`form-select ${errors.lulus ? "is-invalid" : ""}`}
+            name="thnLulus"
+            defaultValue={props.dataSaveOnLocal.thnLulus}
+            type="text"
+            className={`form-select ${errors.ThnLulus ? "is-invalid" : ""}`}
             ref={register({
               required: "Tahun rencana lulus harus diisi",
             })}
           >
             <option selected></option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
           </select>
-          <label className="ps-4 fw-bold">Tahun rencana lulus</label>
+          <label className="ps-4 fw-bold">Tahun Rencana Lulus</label>
           <ErrorMessage
             className="invalid-feedback"
-            name="lulus"
+            name="thnLulus"
             as="div"
             errors={errors}
           />
@@ -186,17 +212,18 @@ const DataKampus = (props) => {
             <textarea
               name="prestasi"
               type="text"
-              style={{height : "150px"}}
+              defaultValue={props.dataSaveOnLocal.prestasi}
+              style={{ height: "150px" }}
               placeholder="Format penulisan prestasi adalah 'Nama prestasi_Penyelengara_Tahun diraih'. Pisahkan 
               prestasi dengan prestasi lain dengan tanda koma (,). Contohnya, Juara 1 lomba KTI_Kemendikbud_2020, Juara 2 kontes robot_Kemendikbud_2020"
-              className={`form-control ${errors.ipk ? "is-invalid" : ""}`}
+              className={`form-control ${errors.prestasi ? "is-invalid" : ""}`}
               ref={register({
-                required: "Nilai IPK anda wajib dimasukkan",
+                required: "Jika tidak memiliki prestasi masukkan angka 0",
               })}
             />
             <ErrorMessage
               className="invalid-feedback"
-              name="ipk"
+              name="prestasi"
               as="div"
               errors={errors}
             />
@@ -210,18 +237,21 @@ const DataKampus = (props) => {
             <textarea
               style={{ height: "150px" }}
               name="organisasi"
+              defaultValue={props.dataSaveOnLocal.organisasi}
               type="text"
               placeholder="Format penulisan organisasi adalah 'Jabatan_Nama orgsanisasi_Tahun aktif'.
                Pisahkan prestasi dengan prestasi lain dengan tanda koma (,).
                Contohnya, Ketua_pramuka_2018-2020, Angota_Paskibraka-2018 "
-              className={`form-control ${errors.ipk ? "is-invalid" : ""}`}
+              className={`form-control ${
+                errors.organisasi ? "is-invalid" : ""
+              }`}
               ref={register({
-                required: "Nilai IPK anda wajib dimasukkan",
+                required: "Jika tidak memiliki Organisasi, masukkan anggka 0",
               })}
             />
             <ErrorMessage
               className="invalid-feedback"
-              name="ipk"
+              name="organisasi"
               as="div"
               errors={errors}
             />

@@ -63,6 +63,7 @@ const EssayBeasiswa = (props) => {
         <div className="form-floating col-12 mb-3">
           <textarea
             name="motif"
+            defaultValue={props.dataSaveOnLocal.motif}
             placeholder="Masukkan alasan anda dengan maksimal 300 karakter"
             className={`form-control ${errors.motif ? "is-invalid" : ""}`}
             style={{ height: "180px" }}
@@ -87,6 +88,7 @@ const EssayBeasiswa = (props) => {
         <div className="form-floating col-12 mb-3">
           <textarea
             name="rencana"
+            defaultValue={props.dataSaveOnLocal.rencana}
             placeholder="Masukkan rencana anda dengan maksimal 300 karakter"
             className={`form-control ${errors.rencana ? "is-invalid" : ""}`}
             style={{ height: "180px" }}
@@ -109,6 +111,7 @@ const EssayBeasiswa = (props) => {
         <div className="form-floating col-12 mb-3">
           <textarea
             name="pantas"
+            defaultValue={props.dataSaveOnLocal.pantas}
             placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
             className={`form-control ${errors.pantas ? "is-invalid" : ""}`}
             style={{ height: "180px" }}
@@ -133,6 +136,7 @@ const EssayBeasiswa = (props) => {
         <div className="form-floating col-12 mb-3">
           <textarea
             name="lulus"
+            defaultValue={props.dataSaveOnLocal.lulus}
             placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
             className={`form-control ${errors.lulus ? "is-invalid" : ""}`}
             style={{ height: "180px" }}
@@ -150,6 +154,31 @@ const EssayBeasiswa = (props) => {
           <ErrorMessage
             className="invalid-feedback"
             name="lulus"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            name="kelemahan"
+            defaultValue={props.dataSaveOnLocal.kelemahan}
+            placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.kelemahan ? "is-invalid" : ""}`}
+            style={{ height: "150px" }}
+            ref={register({
+              required: "Anda harus memasukkan jawaban",
+              maxLength: {
+                value: 300,
+                message: "maksimal 300 karakter",
+              },
+            })}
+          />
+          <label className="ps-4 fw-bold">
+            Kelemahan yang anda miliki:
+          </label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="kelemahan"
             as="div"
             errors={errors}
           />
@@ -195,6 +224,7 @@ const EssayBeasiswa = (props) => {
           <div className="form-floating col-12 mb-3">
             <textarea
               name="siapMengurus"
+            defaultValue={props.dataSaveOnLocal.siapMengurus}
               placeholder={`Masukkan alasan anda ${watchGenbi} mengurus dan mengikuti kegiatan`}
               className={`form-control ${
                 errors.siapMengurus ? "is-invalid" : ""
@@ -209,7 +239,7 @@ const EssayBeasiswa = (props) => {
               })}
             />
             <label className="ps-4 fw-bold">
-              {`Masukkan alasan anda ${watchGenbi} mengurus dan mengikuti kegiatan komunitas penerima beasiswa Bank Indonesia`}
+              {`Masukkan alasan kenapa anda ${watchGenbi} `}
             </label>
             <ErrorMessage
               className="invalid-feedback"

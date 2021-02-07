@@ -23,7 +23,11 @@ const Daftar = (props) => {
   const [isError, setIsError] = useState(false);
   const [pendaftar, setPendaftar] = useState(false);
   const [dataSaveOnLocal, setDataSaveOnLocal] = useState({});
-  const { register, watch, errors, handleSubmit, setValue } = useForm();
+  const { register, watch, errors, handleSubmit } = useForm({
+    defaultValues: {
+      jenisBeasiswa: "reguler",
+    },
+  });
   const watchWali = watch("showWali", ""); // you can supply default value as second argument
   const watchKampus = watch("kampus", "");
   const watchJenisBeasiswa = watch("jenisBeasiswa", "reguler");
@@ -83,21 +87,21 @@ const Daftar = (props) => {
       const graphqlQuery = {
         query: `
         mutation {
-            createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}",
+            createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}, alamatWali: "${values.alamatWali}, alamatKtp: "${values.alamatKtp}",
             alamatIbu: "${values.alamatIbu}", anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
-            arahan: ${values.arahan}, cita: "${values.cita}", darah: "${values.darah}", fakultas: "${values.fakultas}",
+            arahan: ${values.arahan}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}",
             genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", instagram: "${values.instagram}",
-            ipk: "${values.ipk}", kampus: "${values.kampus}", kontribusi:${values.kontribusi}, kosan: "${values.kosan}",
-            ktm: "${resData.ktm}", lulus: "${values.lulus}", mampu: "${resData.mampu}", minat: "${values.minat}",
-            motif: "${values.motif}", nama: "${values.nama}", namaAyah: "${values.namaAyah}", namaIbu: "${values.namaIbu}",
+            ipk: "${values.ipk}", jenisBeasiswa: "${values.jenisBeasiswa}", kampus: "${values.kampus}",  kelemahan: "${values.kelemahan}", kontribusi:${values.kontribusi}, kosan: "${values.kosan}",
+            ktm: "${resData.ktm}",lulus: "${values.lulus}",  mampu: "${resData.mampu}", minat: "${values.minat}",
+            motif: "${values.motif}", nama: "${values.nama}", namaAyah: "${values.namaAyah}", namaIbu: "${values.namaIbu}", namaWali: "${values.namaWali}",
             nilai: "${resData.transkip}", nim: "${values.nim}", nomorHp: "${values.nomorHp}", nomorWa: "${values.nomorWa}",
             organisasi: "${values.organisasi}", pangilan: "${values.pangilan}", pantas: "${values.pantas}",
-            pekerjaanAyah: "${values.pekerjaanAyah}", pekerjaanIbu: "${values.pekerjaanIbu}",
-            penghasilanAyah: "${values.penghasilanAyah}", penghasilanIbu: "${values.penghasilanIbu}",
+            pekerjaanAyah: "${values.pekerjaanAyah}", pekerjaanIbu: "${values.pekerjaanIbu}", pekerjaanWali: "${values.pekerjaanWali}",
+            penghasilanAyah: "${values.penghasilanAyah}", penghasilanIbu: "${values.penghasilanIbu}", penghasilanWali: "${values.penghasilanWali}",
             prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekomendasi: "${resData.rekomendasi}",
             rencana: "${values.rencana}", saudara: "${values.saudara}", showWali: "${values.showWali}",
-            siapMengurus: "${values.siapMengurus}", skil: "${values.skil}", suku: "${values.suku}", tangalLahir: "${values.tangalLahir}",
-            teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}", tempatLahir: "${values.tempatLahir}"}) {
+            siapMengurus: "${values.siapMengurus}", skil: "${values.skil}",  sks: "${values.sks}", suku: "${values.suku}",  tangalLahir: "${values.tangalLahir}",
+            teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}",  teleponWali: "${values.teleponWali}", tempatLahir: "${values.tempatLahir}", thnLulus: "${values.thnLulus}", usia: "${values.usia}",}) {
               ${PENDAFTAR_FIElD}
             }
           }
@@ -138,7 +142,6 @@ const Daftar = (props) => {
   // to get data from local storage
   // setValue not work
   React.useEffect(() => {
-    setValue("email")
     const storedDataPendaftar = JSON.parse(
       localStorage.getItem("dataPendaftar")
     );
@@ -193,7 +196,11 @@ const Daftar = (props) => {
       </div>
       <Note />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DataDiri errors={errors} register={register} dataSaveOnLocal={dataSaveOnLocal} />
+        <DataDiri
+          errors={errors}
+          register={register}
+          dataSaveOnLocal={dataSaveOnLocal}
+        />
         <OrangTua
           errors={errors}
           register={register}

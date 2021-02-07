@@ -99,7 +99,7 @@ const DataDiri = (props) => {
           <input
             name="usia"
             defaultValue={props.dataSaveOnLocal.usia}
-            type="text"
+            type="number"
             placeholder="Masukkan usia anda"
             className={`form-control ${
               errors.usia ? "is-invalid" : ""

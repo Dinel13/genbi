@@ -103,7 +103,9 @@ const OrangTua = (props) => {
               required: "Penghasilan ayah anda wajib dimasukkan",
             })}
           />
-          <label className="ps-4 fw-bold">Penghasilan Ayah</label>
+          <label className="ps-4 fw-bold ">
+            Penghasilan Ayah<span className="text-muted fw-light"> (Rp. /perbulan)</span>
+          </label>
           <ErrorMessage
             className="invalid-feedback"
             name="penghasilanAyah"
@@ -142,7 +144,7 @@ const OrangTua = (props) => {
               required: "Nomor telepon ibu anda wajib dimasukkan",
             })}
           />
-          <label className="fp-4 fw-bold">Nomor Telepon Ibu</label>
+          <label className="ps-4 fw-bold">Nomor Telepon Ibu</label>
           <ErrorMessage
             className="invalid-feedback"
             name="teleponIbu"
@@ -203,7 +205,9 @@ const OrangTua = (props) => {
               required: "Penghasilan ibu anda wajib dimasukkan",
             })}
           />
-          <label className="ps-4 fw-bold">Penghasilan Ibu</label>
+          <label className="ps-4 fw-bold ">
+            Penghasilan Ibu<span className="text-muted fw-light"> (Rp. /perbulan)</span>
+          </label>
           <ErrorMessage
             className="invalid-feedback"
             name="penghasilanIbu"
@@ -218,7 +222,7 @@ const OrangTua = (props) => {
             </label>
             <div className="form-check form-check-inline">
               <input
-                className="form-check-input"
+                className="form-check-input c"
                 type="radio"
                 value="iya"
                 name="showWali"
@@ -235,6 +239,7 @@ const OrangTua = (props) => {
                 type="radio"
                 value="tidak"
                 name="showWali"
+                defaultValue={props.dataSaveOnLocal.showWali}
                 ref={register({
                   required: "Field ini harus dipilih",
                 })}
@@ -247,7 +252,7 @@ const OrangTua = (props) => {
             {errors.showWali && "Field ini harus dipilih"}
           </div>
         </div>
-        {watchWali === "iya" && <Wali errors={errors} register={register} />}
+        {watchWali === "iya" && <Wali errors={errors} dataSaveOnLocal={props.dataSaveOnLocal} register={register} />}
       </div>
     </div>
   );

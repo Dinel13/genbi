@@ -96,7 +96,9 @@ const Wali = (props) => {
             required: "Penghasilan wali anda wajib dimasukkan",
           })}
         />
-        <label className="ps-4 fw-bold">Penghasilan Wali</label>
+        <label className="ps-4 fw-bold ">
+            Penghasilan wali<span className="text-muted fw-light"> (Rp. /perbulan)</span>
+          </label>
         <ErrorMessage
           className="invalid-feedback"
           name="penghasilanWali"
