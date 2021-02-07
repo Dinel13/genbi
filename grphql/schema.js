@@ -11,11 +11,13 @@ module.exports = buildSchema(`
         agama: String!,
         alamatAyah: String!,
         alamatIbu: String!,
+        alamatWali: String!,
         anakKe: String!,
         angkatan: String!,
         arahan:  Boolean,
         cita: String!,
         darah: String!,
+        email: String!,
         fakultas: String!,
         genbi: String!,
         gender: String!,
@@ -23,6 +25,7 @@ module.exports = buildSchema(`
         instagram: String!,
         ipk: String!,
         kampus: String!,
+        kelemahan: String!,
         kontribusi:Boolean!,
         kosan: String!,
         ktm: String!,
@@ -33,6 +36,7 @@ module.exports = buildSchema(`
         nama: String!,
         namaAyah: String!,
         namaIbu: String!,
+        namaWali: String!,
         nilai: String!,
         nim: String!,
         nomorHp: String!,
@@ -42,8 +46,10 @@ module.exports = buildSchema(`
         pantas: String!,
         pekerjaanAyah: String!,
         pekerjaanIbu: String!,
+        pekerjaanWali: String!,
         penghasilanAyah: String!,
         penghasilanIbu: String!,
+        penghasilanWali: String!,
         prestasi: String!,
         prodi: String!,
         rekomendasi: String!,
@@ -52,11 +58,14 @@ module.exports = buildSchema(`
         showWali: String!,
         siapMengurus: String!,
         skil: String!,
+        sks: String!,
         suku: String!,
         tangalLahir: String!,
         teleponAyah: String!,
         teleponIbu: String!,
         tempatLahir: String!,
+        thnLulus: String,
+        usia: String!,
     }
 
     type User {
@@ -66,6 +75,7 @@ module.exports = buildSchema(`
         password: String
         pendaftar: Pendaftar!
         token : String!
+        userId : String!
     }
 
     type AuthData { 
@@ -114,6 +124,7 @@ module.exports = buildSchema(`
         agama: String,
         alamatAyah: String,
         alamatIbu: String,
+        alamatWali: String,
         anakKe: String,
         angkatan: String,
         arahan:  Boolean,
@@ -127,6 +138,7 @@ module.exports = buildSchema(`
         ipk: String,
         jenisBeasiswa : String!,
         kampus: String,
+        kelemahan: String,
         kontribusi:Boolean,
         kosan: String,
         ktm: String,
@@ -137,6 +149,7 @@ module.exports = buildSchema(`
         nama: String,
         namaAyah: String,
         namaIbu: String,
+        namaWali: String,
         nilai: String,
         nim: String,
         nomorHp: String,
@@ -146,8 +159,10 @@ module.exports = buildSchema(`
         pantas: String,
         pekerjaanAyah: String,
         pekerjaanIbu: String,
+        pekerjaanWali: String,
         penghasilanAyah: String,
         penghasilanIbu: String,
+        penghasilanWali: String,
         prestasi: String,
         prodi: String,
         rekomendasi: String,
@@ -156,11 +171,15 @@ module.exports = buildSchema(`
         showWali: String,
         siapMengurus: String,
         skil: String,
+        sks: String,
         suku: String,
         tangalLahir: String,
         teleponAyah: String,
         teleponIbu: String,
+        teleponWali: String,
         tempatLahir: String,
+        thnLulus: String,
+        usia: String,
     }
 
     input pendaftarAndAdminData {
@@ -173,7 +192,7 @@ module.exports = buildSchema(`
         pendaftarId : String!
         adminId : String!
         untuk : String!
-        nilai : Number!
+        nilai : String!
     }
 
     type RootQuery {

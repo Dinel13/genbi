@@ -36,6 +36,10 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    alamatWali: {
+      type: String,
+      requireq: false,
+    },
     anakKe: {
       type: String,
       requireq: false,
@@ -53,6 +57,10 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     darah: {
+      type: String,
+      requireq: false,
+    },
+    email: {
       type: String,
       requireq: false,
     },
@@ -81,6 +89,10 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     kampus: {
+      type: String,
+      requireq: false,
+    },
+    kelemahan: {
       type: String,
       requireq: false,
     },
@@ -124,6 +136,10 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    namaWali: {
+      type: String,
+      requireq: false,
+    },
     nilai: {
       type: String,
       requireq: false,
@@ -160,11 +176,19 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    pekerjaanWali: {
+      type: String,
+      requireq: false,
+    },
     penghasilanAyah: {
       type: String,
       requireq: false,
     },
     penghasilanIbu: {
+      type: String,
+      requireq: false,
+    },
+    penghasilanWali: {
       type: String,
       requireq: false,
     },
@@ -200,6 +224,10 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    sks: {
+      type: String,
+      requireq: false,
+    },
     suku: {
       type: String,
       requireq: false,
@@ -216,8 +244,20 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    teleponWali: {
+      type: String,
+      requireq: false,
+    },
     tempatLahir: {
       type: String,
+      requireq: false,
+    },
+    ThnLulus: {
+      type: String,
+      requireq: false,
+    },
+    usia: {
+      type: Number,
       requireq: false,
     },
   },
