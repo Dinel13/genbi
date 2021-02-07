@@ -95,7 +95,28 @@ const DataDiri = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-6 mb-3">
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
+          <input
+            name="usia"
+            defaultValue={props.dataSaveOnLocal.usia}
+            type="text"
+            placeholder="Masukkan usia anda"
+            className={`form-control ${
+              errors.usia ? "is-invalid" : ""
+            }`}
+            ref={register({
+              required: "Usia harus diisi",
+            })}
+          />
+          <label className="ps-4 fw-bold">Usia</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="usia"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
           <select
             name="gender"
             defaultValue={props.dataSaveOnLocal.gender}
@@ -117,7 +138,7 @@ const DataDiri = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-6 mb-3">
+        <div className="form-floating col-md-4 col-sm-6 mb-3">
           <select
             name="agama"
             defaultValue={props.dataSaveOnLocal.agama}
@@ -202,6 +223,25 @@ const DataDiri = (props) => {
           <ErrorMessage
             className="invalid-feedback"
             name="email"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            style={{ height: "100px" }}
+            name="alamatKtp"
+            defaultValue={props.dataSaveOnLocal.alamatKtp}
+            placeholder="Masukkan alamat sesuai KTP"
+            className={`form-control ${errors.alamatKtp ? "is-invalid" : ""}`}
+            ref={register({
+              required: "Alamat sesuai KTP wajib dimasukkan",
+            })}
+          />
+          <label className="ps-4 fw-bold">Alamat sesuai KTP anda</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="alamatKtp"
             as="div"
             errors={errors}
           />
