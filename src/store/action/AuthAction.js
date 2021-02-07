@@ -2,29 +2,43 @@ export const AUTH_WITH_DATA = "AUTH_WITH_DATA";
 export const AUTH_ADMIN_WITH_DATA = "AUTH_ADMIN_WITH_DATA";
 export const LOGOUT = "LOGOUT";
 
-export const AuthWithData = (userId, token) => {
+export const AuthWithData = (userId, token, name, email) => {
   return (dispatch) => {
     localStorage.setItem(
       "userData",
       JSON.stringify({
         userId: userId,
         token: token,
+        userName: name,
+        userEmail: email,
       })
     );
-    dispatch({ type: AUTH_WITH_DATA, token: token, userId: userId });
+    dispatch({
+      type: AUTH_WITH_DATA,
+      token: token,
+      userId: userId,
+      userName: name,
+      userEmail: email,
+    });
   };
 };
 
-export const AuthAdminWithData = (adminId, admin) => {
+export const AuthAdminWithData = (adminId, admin, name) => {
   return (dispatch) => {
     localStorage.setItem(
       "adminData",
       JSON.stringify({
         adminId: adminId,
         admin: admin,
+        adminName: name,
       })
     );
-    dispatch({ type: AUTH_ADMIN_WITH_DATA, admin: admin, adminId: adminId });
+    dispatch({
+      type: AUTH_ADMIN_WITH_DATA,
+      admin: admin,
+      adminId: adminId,
+      adminName: name,
+    });
   };
 };
 
@@ -57,7 +71,12 @@ export const Signup = (email, password, name) => {
         );
       }
       dispatch(
-        AuthWithData(resData.data.createUser._id, resData.data.createUser.token)
+        AuthWithData(
+          resData.data.createUser._id,
+          resData.data.createUser.token,
+          resData.data.login.name,
+          resData.data.login.email
+        )
       );
     } catch (err) {
       console.log(err);
@@ -92,7 +111,12 @@ export const Login = (email, password) => {
         throw new Error(resData.errors[0].message);
       }
       dispatch(
-        AuthWithData(resData.data.login.userId, resData.data.login.token)
+        AuthWithData(
+          resData.data.login.userId,
+          resData.data.login.token,
+          resData.data.login.name,
+          resData.data.login.email
+        )
       );
     } catch (err) {
       console.log(err);
@@ -135,7 +159,8 @@ export const SignupAdmin = (email, password, name) => {
       dispatch(
         AuthAdminWithData(
           resData.data.createAdmin._id,
-          resData.data.createAdmin.admin
+          resData.data.createAdmin.admin,
+          resData.data.loginAdmin.name
         )
       );
     } catch (err) {
@@ -176,7 +201,8 @@ export const LoginAdmin = (email, password) => {
       dispatch(
         AuthAdminWithData(
           resData.data.loginAdmin.adminId,
-          resData.data.loginAdmin.admin
+          resData.data.loginAdmin.admin,
+          resData.data.loginAdmin.name
         )
       );
     } catch (err) {
