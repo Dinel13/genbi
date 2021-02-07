@@ -30,6 +30,7 @@ const Daftar = (props) => {
   });
   const watchWali = watch("showWali", ""); // you can supply default value as second argument
   const watchKampus = watch("kampus", "");
+  const watchAlumni = watch("alumni", "");
   const watchJenisBeasiswa = watch("jenisBeasiswa", "reguler");
   const watchGenbi = watch("genbi", "");
   const watchAll = watch();
@@ -87,10 +88,11 @@ const Daftar = (props) => {
       const graphqlQuery = {
         query: `
         mutation {
-            createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}, alamatWali: "${values.alamatWali}, alamatKtp: "${values.alamatKtp}",
-            alamatIbu: "${values.alamatIbu}", anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
-            arahan: ${values.arahan}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}",
-            genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", instagram: "${values.instagram}",
+            createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}, alamatIbu: "${values.alamatIbu}",
+            alamatKtp: "${values.alamatKtp}", alamatWali: "${values.alamatWali}, alumni: "${values.alumni}, alumniJabatan: "${values.alumniJabatan}, alumniThn: "${values.alumniThn},
+             anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
+            arahan: ${values.arahan}, bergenbi: ${values.bergenbi}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}",
+            genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", ikatan: "${values.ikatan}", instagram: "${values.instagram}",
             ipk: "${values.ipk}", jenisBeasiswa: "${values.jenisBeasiswa}", kampus: "${values.kampus}",  kelemahan: "${values.kelemahan}", kontribusi:${values.kontribusi}, kosan: "${values.kosan}",
             ktm: "${resData.ktm}",lulus: "${values.lulus}",  mampu: "${resData.mampu}", minat: "${values.minat}",
             motif: "${values.motif}", nama: "${values.nama}", namaAyah: "${values.namaAyah}", namaIbu: "${values.namaIbu}", namaWali: "${values.namaWali}",
@@ -99,8 +101,8 @@ const Daftar = (props) => {
             pekerjaanAyah: "${values.pekerjaanAyah}", pekerjaanIbu: "${values.pekerjaanIbu}", pekerjaanWali: "${values.pekerjaanWali}",
             penghasilanAyah: "${values.penghasilanAyah}", penghasilanIbu: "${values.penghasilanIbu}", penghasilanWali: "${values.penghasilanWali}",
             prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekomendasi: "${resData.rekomendasi}",
-            rencana: "${values.rencana}", saudara: "${values.saudara}", showWali: "${values.showWali}",
-            siapMengurus: "${values.siapMengurus}", skil: "${values.skil}",  sks: "${values.sks}", suku: "${values.suku}",  tangalLahir: "${values.tangalLahir}",
+            rencana: "${values.rencana}",saran: "${values.saran}", saudara: "${values.saudara}", semester: "${values.semester}",  showWali: "${values.showWali}",
+            siapMengurus: "${values.siapMengurus}", skil: "${values.skil}",  sks: "${values.sks}",sosial: "${values.sosial}",  suku: "${values.suku}",  tangalLahir: "${values.tangalLahir}",
             teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}",  teleponWali: "${values.teleponWali}", tempatLahir: "${values.tempatLahir}", thnLulus: "${values.thnLulus}", usia: "${values.usia}",}) {
               ${PENDAFTAR_FIElD}
             }
@@ -217,6 +219,7 @@ const Daftar = (props) => {
           register={register}
           watchKampus={watchKampus}
           watchGenbi={watchGenbi}
+          watchAlumni={watchAlumni}
           dataSaveOnLocal={dataSaveOnLocal}
         />
         <FilePendukung

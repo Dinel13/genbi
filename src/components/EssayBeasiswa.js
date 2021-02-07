@@ -2,7 +2,7 @@ import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
 
 const EssayBeasiswa = (props) => {
-  const { errors, register, watchKampus, watchGenbi } = props;
+  const { errors, register, watchKampus, watchGenbi, watchAlumni } = props;
   return (
     <div className="card shadow mb-5 p-0">
       <div className="card-header bg-secondary p-3">
@@ -26,7 +26,7 @@ const EssayBeasiswa = (props) => {
           <div className="form-group mb-3 row">
             <div className="form-check ps-3">
               <label className="col-form-label fw-bold col-sm-3">
-                Jenis beasiswa
+                Skema beasiswa
               </label>
               <div className="form-check form-check-inline">
                 <input
@@ -60,15 +60,155 @@ const EssayBeasiswa = (props) => {
             </div>
           </div>
         )}
+
+        <div className="form-group mb-3 row">
+          <div className="form-check ps-3">
+            <label className="col-form-label fw-bold col-md-6">
+              Tidak Sedang Menerima Beasiswa atau Ikatan Dinas
+            </label>
+            <div className="form-check form-check-inline">
+              <input
+                className={`form-check-input ${
+                  errors.ikatan ? "is-invalid" : ""
+                }`}
+                type="radio"
+                value="ya"
+                name="ikatan"
+                ref={register({
+                  required: "Field ini harus dipilih",
+                })}
+              />
+              <label className="form-check-label">Ya</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className={`form-check-input ${
+                  errors.ikatan ? "is-invalid" : ""
+                }`}
+                type="radio"
+                value="tidak"
+                name="ikatan"
+                ref={register({
+                  required: "Field ini harus dipilih",
+                })}
+              />
+              <label className="form-check-label">Tidak</label>
+            </div>
+            {errors.ikatan && "Field ini harus dipilih"}
+          </div>
+        </div>
+        <div className="form-group mb-3 row">
+          <div className="form-check ps-3">
+            <label className="col-form-label fw-bold col-md-6">
+              Pernah menerima beasiswa Bank Indonesia
+            </label>
+            <div className="form-check form-check-inline">
+              <input
+                className={`form-check-input ${
+                  errors.alumni ? "is-invalid" : ""
+                }`}
+                type="radio"
+                value="ya"
+                name="alumni"
+                ref={register({
+                  required: "Field ini harus dipilih",
+                })}
+              />
+              <label className="form-check-label">Ya</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className={`form-check-input ${
+                  errors.alumni ? "is-invalid" : ""
+                }`}
+                type="radio"
+                value="tidak"
+                name="alumni"
+                ref={register({
+                  required: "Field ini harus dipilih",
+                })}
+              />
+              <label className="form-check-label">Tidak</label>
+            </div>
+            {errors.alumni && "Field ini harus dipilih"}
+          </div>
+        </div>
+        {watchAlumni === "ya" && (
+          <>
+            <div className="form-floating col-md-6 mb-3">
+              <input
+                name="alumniThn"
+                type="text"
+                defaultValue={props.dataSaveOnLocal.alumniThn}
+                placeholder="Masukkan tahun anda diterima"
+                className={`form-control ${
+                  errors.alumniThn ? "is-invalid" : ""
+                }`}
+                ref={register({})}
+              />
+              <label className="ps-4 fw-bold">Tahun menerima beasiswa BI</label>
+              <ErrorMessage
+                className="invalid-feedback"
+                name="alumniThn"
+                as="div"
+                errors={errors}
+              />
+            </div>
+            <div className="form-floating col-md-6 mb-3">
+              <input
+                name="alumniJabatan"
+                defaultValue={props.dataSaveOnLocal.alumniJabatan}
+                type="text"
+                placeholder="Masukkan jabatan anda"
+                className={`form-control ${
+                  errors.alumniJabatan ? "is-invalid" : ""
+                }`}
+                ref={register({})}
+              />
+              <label className="ps-4 fw-bold">Jabatan di Genbi</label>
+              <ErrorMessage
+                className="invalid-feedback"
+                name="alumniJabatan"
+                as="div"
+                errors={errors}
+              />
+            </div>
+            <div className="form-floating col-12 mb-3">
+              <textarea
+                name="motif"
+                defaultValue={props.dataSaveOnLocal.motif}
+                placeholder="Masukkan alasan anda dengan maksimal 300 karakter"
+                className={`form-control ${errors.motif ? "is-invalid" : ""}`}
+                style={{ height: "180px" }}
+                ref={register({
+                  required: "Alasan anda mendaftar harus diisi",
+                  maxLength: {
+                    value: 300,
+                    message: "maksimal 300 karakter",
+                  },
+                })}
+              />
+              <label className=" ps-4 fw-bold">
+                Alasan mendaftar beasiswa ini:
+              </label>
+              <ErrorMessage
+                className="invalid-feedback"
+                name="motif"
+                as="div"
+                errors={errors}
+              />
+            </div>
+          </>
+        )}
         <div className="form-floating col-12 mb-3">
           <textarea
-            name="motif"
-            defaultValue={props.dataSaveOnLocal.motif}
-            placeholder="Masukkan alasan anda dengan maksimal 300 karakter"
-            className={`form-control ${errors.motif ? "is-invalid" : ""}`}
+            name="bergenbi"
+            defaultValue={props.dataSaveOnLocal.bergenbi}
+            placeholder="Masukkan pengalaman menerima beasiswa BI"
+            className={`form-control ${errors.bergenbi ? "is-invalid" : ""}`}
             style={{ height: "180px" }}
             ref={register({
-              required: "Alasan anda mendaftar harus diisi",
+              required: "Pengalaman anda harus diisi",
               maxLength: {
                 value: 300,
                 message: "maksimal 300 karakter",
@@ -76,11 +216,11 @@ const EssayBeasiswa = (props) => {
             })}
           />
           <label className=" ps-4 fw-bold">
-            Alasan mendaftar beasiswa ini:
+            Pengalaman menerima beasiswa Bank Indonesia:
           </label>
           <ErrorMessage
             className="invalid-feedback"
-            name="motif"
+            name="bergenbi"
             as="div"
             errors={errors}
           />
@@ -160,13 +300,14 @@ const EssayBeasiswa = (props) => {
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
-            name="kelemahan"
-            defaultValue={props.dataSaveOnLocal.kelemahan}
+            name="sosial"
+            defaultValue={props.dataSaveOnLocal.sosial}
             placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
-            className={`form-control ${errors.kelemahan ? "is-invalid" : ""}`}
-            style={{ height: "150px" }}
+            className={`form-control ${errors.sosial ? "is-invalid" : ""}`}
+            style={{ height: "180px" }}
             ref={register({
-              required: "Anda harus memasukkan jawaban",
+              required:
+                "jika tidak memimiliki aktivitas sosial masukkan angka 0",
               maxLength: {
                 value: 300,
                 message: "maksimal 300 karakter",
@@ -174,8 +315,56 @@ const EssayBeasiswa = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">
-            Kelemahan yang anda miliki:
+            Aktivitas sosial yang biasa di lakukan
           </label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="sosial"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            name="saran"
+            defaultValue={props.dataSaveOnLocal.saran}
+            placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.saran ? "is-invalid" : ""}`}
+            style={{ height: "180px" }}
+            ref={register({
+              required: "jika tidak memimiliki saran masukkan angka 0",
+              maxLength: {
+                value: 300,
+                message: "maksimal 300 karakter",
+              },
+            })}
+          />
+          <label className="ps-4 fw-bold">
+            Saran untuk peneriam Beasiswa Bank Indonesia:
+          </label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="saran"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-12 mb-3">
+          <textarea
+            name="kelemahan"
+            defaultValue={props.dataSaveOnLocal.kelemahan}
+            placeholder="Masukkan jawaban anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.kelemahan ? "is-invalid" : ""}`}
+            style={{ height: "150px" }}
+            ref={register({
+              required: "jika tidak memimiliki kelemahan masukkan angka 0",
+              maxLength: {
+                value: 300,
+                message: "maksimal 300 karakter",
+              },
+            })}
+          />
+          <label className="ps-4 fw-bold">Kelemahan yang anda miliki:</label>
           <ErrorMessage
             className="invalid-feedback"
             name="kelemahan"
@@ -224,7 +413,7 @@ const EssayBeasiswa = (props) => {
           <div className="form-floating col-12 mb-3">
             <textarea
               name="siapMengurus"
-            defaultValue={props.dataSaveOnLocal.siapMengurus}
+              defaultValue={props.dataSaveOnLocal.siapMengurus}
               placeholder={`Masukkan alasan anda ${watchGenbi} mengurus dan mengikuti kegiatan`}
               className={`form-control ${
                 errors.siapMengurus ? "is-invalid" : ""

@@ -16,7 +16,6 @@ const DataKampus = (props) => {
           <div className="col">
             <select
               name="kampus"
-              defaultValue={props.dataSaveOnLocal.kampus}
               type="text"
               className={`form-select   ${errors.kampus ? "is-invalid" : ""}`}
               ref={register({
@@ -74,7 +73,7 @@ const DataKampus = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-4 col-sm-6 mb-3">
+        <div className="form-floating col-md-6 mb-3">
           <input
             name="nim"
             defaultValue={props.dataSaveOnLocal.nim}
@@ -93,7 +92,7 @@ const DataKampus = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-4 col-sm-6 mb-3">
+        <div className="form-floating col-md-6 mb-3">
           <input
             name="ipk"
             type="decimal"
@@ -116,7 +115,7 @@ const DataKampus = (props) => {
             errors={errors}
           />
         </div>
-        <div className="form-floating col-md-4 col-sm-6 mb-3">
+        <div className="form-floating col-md-6 mb-3">
           <input
             name="sks"
             type="number"
@@ -131,6 +130,25 @@ const DataKampus = (props) => {
           <ErrorMessage
             className="invalid-feedback"
             name="sks"
+            as="div"
+            errors={errors}
+          />
+        </div>
+        <div className="form-floating col-md-6 mb-3">
+          <input
+            name="semester"
+            type="number"
+            defaultValue={props.dataSaveOnLocal.semester}
+            placeholder="Masukkan semester anda sekarang"
+            className={`form-control ${errors.semester ? "is-invalid" : ""}`}
+            ref={register({
+              required: "Semester anda wajib dimasukkan",
+            })}
+          />
+          <label className="ps-4 fw-bold">Semester saat ini</label>
+          <ErrorMessage
+            className="invalid-feedback"
+            name="semester"
             as="div"
             errors={errors}
           />
