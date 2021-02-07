@@ -14,6 +14,7 @@ const OrangTua = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="namaAyah"
+            defaultValue={props.dataSaveOnLocal.namaAyah}
             type="text"
             placeholder="Masukkan nama ayah anda"
             className={`form-control ${errors.namaAyah ? "is-invalid" : ""}`}
@@ -33,6 +34,7 @@ const OrangTua = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="teleponAyah"
+            defaultValue={props.dataSaveOnLocal.teleponAyah}
             type="number"
             placeholder="Masukkan nomor telepon ayah anda"
             className={`form-control ${errors.teleponAyah ? "is-invalid" : ""}`}
@@ -52,6 +54,7 @@ const OrangTua = (props) => {
           <textarea
             style={{ height: "100px" }}
             name="alamatAyah"
+            defaultValue={props.dataSaveOnLocal.alamatAyah}
             placeholder="Masukkan alamat rumah ayah anda"
             className={`form-control ${errors.alamatAyah ? "is-invalid" : ""}`}
             ref={register({
@@ -70,6 +73,7 @@ const OrangTua = (props) => {
           <input
             name="pekerjaanAyah"
             type="text"
+            defaultValue={props.dataSaveOnLocal.pekerjaanAyah}
             placeholder="Masukkan pekerjaan ayah anda"
             className={`form-control ${
               errors.pekerjaanAyah ? "is-invalid" : ""
@@ -90,6 +94,7 @@ const OrangTua = (props) => {
           <input
             name="penghasilanAyah"
             type="text"
+            defaultValue={props.dataSaveOnLocal.penghasilanAyah}
             placeholder="Penghasilan ayah perbulan"
             className={`form-control ${
               errors.penghasilanAyah ? "is-invalid" : ""
@@ -110,6 +115,7 @@ const OrangTua = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="namaIbu"
+            defaultValue={props.dataSaveOnLocal.namaIbu}
             type="text"
             placeholder="Masukkan nama ibu anda"
             className={`form-control ${errors.namaIbu ? "is-invalid" : ""}`}
@@ -128,6 +134,7 @@ const OrangTua = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="teleponIbu"
+            defaultValue={props.dataSaveOnLocal.teleponIbu}
             type="text"
             placeholder="Masukkan nomor telepon ibu anda"
             className={`form-control ${errors.teleponIbu ? "is-invalid" : ""}`}
@@ -146,6 +153,7 @@ const OrangTua = (props) => {
         <div className="form-floating col-12 mb-3">
           <textarea
             style={{ height: "100px" }}
+            defaultValue={props.dataSaveOnLocal.alamatIbu}
             name="alamatIbu"
             placeholder="Masukkan alamat rumah ibu anda"
             className={`form-control ${errors.alamatIbu ? "is-invalid" : ""}`}
@@ -164,6 +172,7 @@ const OrangTua = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="pekerjaanIbu"
+            defaultValue={props.dataSaveOnLocal.pekerjaanIbu}
             type="text"
             placeholder="Masukkan pekerjaan ibu anda"
             className={`form-control ${
@@ -184,6 +193,7 @@ const OrangTua = (props) => {
         <div className="form-floating col-md-6 mb-3">
           <input
             name="penghasilanIbu"
+            defaultValue={props.dataSaveOnLocal.penghasilanIbu}
             type="text"
             placeholder="Masukkan penghasilan ibu anda perbulan"
             className={`form-control ${
@@ -212,6 +222,7 @@ const OrangTua = (props) => {
                 type="radio"
                 value="iya"
                 name="showWali"
+                defaultValue={props.dataSaveOnLocal.showWali}
                 ref={register({
                   required: "Field ini harus dipilih",
                 })}
