@@ -65,8 +65,10 @@ const FilePendukung = (props) => {
               <p className="form-text">file harus bertipe pdf</p>
             </div>
           </div>
-          <div className="form-group mb-3 row">
-            {watchJenisBeasiswa === "ungulan" && (
+            {/*
+            to update if schema beasiswa cahnge 
+            */}
+            {watchJenisBeasiswa === "ungulan" ? (
               <>
                 <div className="form-group mb-3 row">
                   <label className="col-form-label fw-bold col-sm-3">
@@ -118,9 +120,33 @@ const FilePendukung = (props) => {
                     <p className="form-text">file harus bertipe pdf</p>
                   </div>
                 </div>
+                <div className="form-group mb-3 row">
+                  <label className="col-form-label fw-bold col-sm-3">
+                    Sertifikat TOEFL
+                  </label>
+                  <div className="col-sm-9 col-md-7">
+                    <input
+                      className={`form-control ${
+                        errors.toeflFile ? "is-invalid" : ""
+                      }`}
+                      type="file"
+                      name="toeflFile"
+                      accept=".pdf"
+                      ref={register({
+                        required: "Sertifikat TOEFL harus diisi",
+                      })}
+                    />
+                    <ErrorMessage
+                      className="invalid-feedback"
+                      name="toeflFile"
+                      as="div"
+                      errors={errors}
+                    />
+                    <p className="form-text">file harus bertipe pdf</p>
+                  </div>
+                </div>
               </>
-            )}
-            {watchJenisBeasiswa !== "ungulan" && (
+            ) : (
               <>
                 <div className="form-group mb-3 row">
                   <label className="col-form-label fw-bold col-sm-3">
@@ -153,7 +179,9 @@ const FilePendukung = (props) => {
                   </label>
                   <div className="col-sm-9 col-md-7">
                     <input
-                      className={`form-control ${errors.mampu ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.mampu ? "is-invalid" : ""
+                      }`}
                       type="file"
                       name="mampu"
                       accept=".pdf"
@@ -175,7 +203,6 @@ const FilePendukung = (props) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

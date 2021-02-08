@@ -2,7 +2,14 @@ import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
 
 const EssayBeasiswa = (props) => {
-  const { errors, register, watchKampus, watchGenbi, watchAlumni } = props;
+  const {
+    errors,
+    register,
+    watchKampus,
+    watchGenbi,
+    watchAlumni,
+    watchJenisBeasiswa,
+  } = props;
   return (
     <div className="card shadow mb-5 p-0">
       <div className="card-header bg-secondary p-3">
@@ -24,7 +31,7 @@ const EssayBeasiswa = (props) => {
         </div>
         {watchKampus === "unhas" && (
           <div className="form-group mb-3 row">
-            <div className="form-check ps-3">
+            <div className="form-check col-md-8 ps-3">
               <label className="col-form-label fw-bold col-sm-3">
                 Skema beasiswa
               </label>
@@ -58,6 +65,31 @@ const EssayBeasiswa = (props) => {
               </div>
               {errors.jenisBeasiswa && "Jenis beasiswa harus diisi"}
             </div>
+
+            {
+              //to update if scema beasiswa is ungulan
+              watchJenisBeasiswa === "ungulan" && (
+                <div className="form-floating col-sm-6 col-md-4">
+                  <input
+                    name="toeflNilai"
+                    type="text"
+                    defaultValue={props.dataSaveOnLocal.toeflNilai}
+                    placeholder="Masukkan Nilai Toefl anda"
+                    className={`form-control ${
+                      errors.toeflNilai ? "is-invalid" : ""
+                    }`}
+                    ref={register({})}
+                  />
+                  <label className="ps-4 fw-bold">Nilai Toefl</label>
+                  <ErrorMessage
+                    className="invalid-feedback"
+                    name="toeflNilai"
+                    as="div"
+                    errors={errors}
+                  />
+                </div>
+              )
+            }
           </div>
         )}
 
@@ -199,6 +231,27 @@ const EssayBeasiswa = (props) => {
               />
             </div>
           </>
+        )}
+        {watchJenisBeasiswa === "ungulan" && (
+          <div className="form-floating col-md-6 mb-3">
+            <input
+              name="toeflNilai"
+              type="text"
+              defaultValue={props.dataSaveOnLocal.toeflNilai}
+              placeholder="Masukkan Nilai Toefl anda"
+              className={`form-control ${
+                errors.toeflNilai ? "is-invalid" : ""
+              }`}
+              ref={register({})}
+            />
+            <label className="ps-4 fw-bold">Nilai Toefl</label>
+            <ErrorMessage
+              className="invalid-feedback"
+              name="toeflNilai"
+              as="div"
+              errors={errors}
+            />
+          </div>
         )}
         <div className="form-floating col-12 mb-3">
           <textarea

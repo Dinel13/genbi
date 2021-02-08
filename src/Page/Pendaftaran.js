@@ -103,7 +103,8 @@ const Daftar = (props) => {
             prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekomendasi: "${resData.rekomendasi}",
             rencana: "${values.rencana}",saran: "${values.saran}", saudara: "${values.saudara}", semester: "${values.semester}",  showWali: "${values.showWali}",
             siapMengurus: "${values.siapMengurus}", skil: "${values.skil}",  sks: "${values.sks}",sosial: "${values.sosial}",  suku: "${values.suku}",  tangalLahir: "${values.tangalLahir}",
-            teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}",  teleponWali: "${values.teleponWali}", tempatLahir: "${values.tempatLahir}", thnLulus: "${values.thnLulus}", usia: "${values.usia}",}) {
+            teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}",  teleponWali: "${values.teleponWali}", tempatLahir: "${values.tempatLahir}",
+            thnLulus: "${values.thnLulus}", toeflFile: "${values.toeflFile}", toeflNilai: "${values.toeflNilai}", usia: "${values.usia}",}) {
               ${PENDAFTAR_FIElD}
             }
           }
@@ -220,6 +221,7 @@ const Daftar = (props) => {
           watchKampus={watchKampus}
           watchGenbi={watchGenbi}
           watchAlumni={watchAlumni}
+          watchJenisBeasiswa={watchJenisBeasiswa}
           dataSaveOnLocal={dataSaveOnLocal}
         />
         <FilePendukung
