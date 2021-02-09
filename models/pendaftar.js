@@ -4,23 +4,23 @@ const Schema = mongoose.Schema;
 
 const pendaftarSchema = new Schema(
   {
-    jenisBeasiswa : {
+    jenisBeasiswa: {
       type: String,
       requireq: false,
     },
-    lolosBerkas : {
+    lolosBerkas: {
       type: Boolean,
       requireq: false,
     },
-    lolosWawancara : {
+    lolosWawancara: {
       type: Boolean,
       requireq: false,
     },
-    nilaiWawancara1 : {
+    nilaiWawancara1: {
       type: Number,
       requireq: false,
     },
-    nilaiWawancara2 : {
+    nilaiWawancara2: {
       type: Number,
       requireq: false,
     },
@@ -84,6 +84,10 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    foto: {
+      type: String,
+      requireq: false,
+    },
     genbi: {
       type: String,
       requireq: false,
@@ -125,6 +129,10 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     ktm: {
+      type: String,
+      requireq: false,
+    },
+    ktp: {
       type: String,
       requireq: false,
     },
@@ -224,6 +232,14 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    rekomendasi2: {
+      type: String,
+      requireq: false,
+    },
+    rekening: {
+      type: String,
+      requireq: false,
+    },
     rencana: {
       type: String,
       requireq: false,
@@ -285,6 +301,14 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     ThnLulus: {
+      type: String,
+      requireq: false,
+    },
+    toeflFile: {
+      type: String,
+      requireq: false,
+    },
+    toeflNilai: {
       type: String,
       requireq: false,
     },
