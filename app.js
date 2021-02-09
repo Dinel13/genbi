@@ -47,12 +47,22 @@ const storageAll = multer.diskStorage({
       cb(null, "public/ktm");
     } else if (file.fieldname === "transkip") {
       cb(null, "public/transkip");
+    } else if (file.fieldname === "foto") {
+      cb(null, "public/foto");
+    } else if (file.fieldname === "ktp") {
+      cb(null, "public/ktp");
+    } else if (file.fieldname === "transkip") {
+      cb(null, "public/transkip");
+    } else if (file.fieldname === "rekening") {
+      cb(null, "public/rekening");
     } else if (file.fieldname === "rekomendasi") {
       cb(null, "public/rekomendasi");
     } else if (file.fieldname === "mampu") {
       cb(null, "public/mampu");
     } else if (file.fieldname === "rekomendasi2") {
       cb(null, "public/rekomendasi2");
+    } else if (file.fieldname === "toeflFile") {
+      cb(null, "public/toefl");
     }
   },
   filename: (req, file, cb) => {
@@ -61,8 +71,11 @@ const storageAll = multer.diskStorage({
 });
 
 const filterAll = (file, cb) => {
-  if (file.fieldname === "ktm") {
-    console.log("fdsfsd");
+  if (
+    file.fieldname === "ktm" ||
+    file.fieldname === "ktp" ||
+    file.fieldname === "foto"
+  ) {
     if (
       file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
@@ -97,11 +110,87 @@ app.put(
       maxCount: 1,
     },
     {
+      name: "foto",
+      maxCount: 1,
+    },
+    {
+      name: "ktp",
+      maxCount: 1,
+    },
+    {
+      name: "rekening",
+      maxCount: 1,
+    },
+    {
       name: "transkip",
       maxCount: 1,
     },
     {
       name: "mampu",
+      maxCount: 1,
+    },
+    {
+      name: "ktm",
+      maxCount: 1,
+    },
+  ]),
+  (req, res, next) => {
+    if (!req.isAuth) {
+      throw new Error("Not authenticated!");
+    }
+    if (!req.files) {
+      return res.status(200).json({ message: "No file provided!" });
+    }
+    if (req.body.oldPath) {
+      clearImage(req.body.oldPath);
+    }
+    return res.status(201).json({
+      message: "File stored.",
+      ktm: req.files.ktm[0].path,
+      ktp: req.files.ktp[0].path,
+      foto: req.files.foto[0].path,
+      rekening: req.files.rekening[0].path,
+      rekomendasi: req.files.rekomendasi[0].path,
+      mampu: req.files.mampu[0].path,
+      transkip: req.files.transkip[0].path,
+    });
+  }
+);
+
+//to unggulan
+app.put(
+  "/unggulan",
+  multer({
+    storage: storageAll,
+    limits: {
+      fileSize: 1024 * 512,
+    },
+    fileFilter: (req, file, cb) => {
+      filterAll(file, cb);
+    },
+  }).fields([
+    {
+      name: "rekomendasi",
+      maxCount: 1,
+    },
+    {
+      name: "foto",
+      maxCount: 1,
+    },
+    {
+      name: "ktp",
+      maxCount: 1,
+    },
+    {
+      name: "rekening",
+      maxCount: 1,
+    },
+    {
+      name: "transkip",
+      maxCount: 1,
+    },
+    {
+      name: "toeflFile",
       maxCount: 1,
     },
     {
@@ -126,10 +215,13 @@ app.put(
     return res.status(201).json({
       message: "File stored.",
       ktm: req.files.ktm[0].path,
+      ktp: req.files.ktp[0].path,
+      foto: req.files.foto[0].path,
+      rekening: req.files.rekening[0].path,
+      toeflFile: req.files.toeflFile[0].path,
       rekomendasi: req.files.rekomendasi[0].path,
-      mampu: req.files.mampu[0].path,
+      rekomendasi2: req.files.rekomendasi2[0].path,
       transkip: req.files.transkip[0].path,
-      //rekomendasi2: req.files.rekomendasi2[0].path,
     });
   }
 );
