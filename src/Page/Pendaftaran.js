@@ -70,13 +70,14 @@ const Daftar = (props) => {
     formData.append("ktm", values.ktm[0]);
     formData.append("ktp", values.ktp[0]);
     formData.append("foto", values.foto[0]);
+    formData.append("rekening", values.rekening[0]);
     formData.append("transkip", values.nilai[0]);
     formData.append("rekomendasi", values.rekomendasi[0]);
     if (values.jenisBeasiswa === "reguler") {
-      formData.append("mampu", values.mampu[0])
+      formData.append("mampu", values.mampu[0]);
     } else {
-      formData.append("rekomendasi2", values.rekomendasi2[0])
-      formData.append("sertifikat", values.rekomendasi2[0])
+      formData.append("rekomendasi2", values.rekomendasi2[0]);
+      formData.append("sertifikat", values.rekomendasi2[0]);
     }
 
     try {
