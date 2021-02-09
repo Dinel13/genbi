@@ -165,6 +165,11 @@ const EssayBeasiswa = (props) => {
             {errors.alumni && "Field ini harus dipilih"}
           </div>
         </div>
+        {watchJenisBeasiswa === "ungulan" && (
+          <h4 >
+            Semua essay harus diisi dengan bahasa ingris
+          </h4>
+        )}
         {watchAlumni === "ya" && (
           <>
             <div className="form-floating col-md-6 mb-3">
