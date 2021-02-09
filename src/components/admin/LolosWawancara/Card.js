@@ -84,6 +84,7 @@ const Card = (props) => {
             <div
               className="btn-group  w-100"
               role="group"
+              id="notExport"
               aria-label="Basic outlined example"
             >
               <Link

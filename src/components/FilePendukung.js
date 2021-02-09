@@ -1,5 +1,4 @@
 import React from "react";
-import { ErrorMessage } from "@hookform/error-message";
 
 const FilePendukung = (props) => {
   const { errors, register, watchJenisBeasiswa } = props;
@@ -42,14 +41,26 @@ const FilePendukung = (props) => {
                   ref={register({
                     required:
                       "Pas foto harus diisi dan memiliki ukuran dibawah 500 Kb",
+                    validate: {
+                      maxSize: (value) => value[0].size < 500000,
+                    },
                   })}
                 />
-                <ErrorMessage
-                  className="invalid-feedback"
-                  name="foto"
-                  as="div"
-                  errors={errors}
-                />
+                {errors.foto?.type === "maxSize" && (
+                  <div className="invalid-feedback">
+                    Ukuran file anda (
+                    {Math.round(props.watchAll.foto[0].size / 1000)} Kb )
+                    terlalu besar
+                  </div>
+                )}
+                {
+                  //to validate required
+                  errors.foto && (
+                    <div className="invalid-feedback">
+                      {errors.foto.message}
+                    </div>
+                  )
+                }
                 <p className="form-text">
                   file harus bertipe jpg, jpeg atau png
                 </p>
@@ -67,15 +78,25 @@ const FilePendukung = (props) => {
                   accept=".jpg,.png,.jpeg"
                   ref={register({
                     required:
-                      "Kartu tanda pendudukharus diisi dan memiliki ukuran dibawah 500 Kb",
+                      "Kartu tanda penduduk harus diisi dan memiliki ukuran dibawah 500 Kb",
+                    validate: {
+                      maxSize: (value) => value[0].size < 500000,
+                    },
                   })}
                 />
-                <ErrorMessage
-                  className="invalid-feedback"
-                  name="ktp"
-                  as="div"
-                  errors={errors}
-                />
+                {errors.ktp?.type === "maxSize" && (
+                  <div className="invalid-feedback">
+                    Ukuran file anda (
+                    {Math.round(props.watchAll.ktp[0].size / 1000)} Kb ) terlalu
+                    besar
+                  </div>
+                )}
+                {
+                  //to validate required
+                  errors.ktp && (
+                    <div className="invalid-feedback">{errors.ktp.message}</div>
+                  )
+                }
                 <p className="form-text">
                   file harus bertipe jpg, jpeg atau png
                 </p>
@@ -94,14 +115,24 @@ const FilePendukung = (props) => {
                   ref={register({
                     required:
                       "Kartu tanda mahasiswa harus diisi dan memiliki ukuran dibawah 500 Kb",
+                    validate: {
+                      maxSize: (value) => value[0].size < 500000,
+                    },
                   })}
                 />
-                <ErrorMessage
-                  className="invalid-feedback"
-                  name="ktm"
-                  as="div"
-                  errors={errors}
-                />
+                {errors.ktm?.type === "maxSize" && (
+                  <div className="invalid-feedback">
+                    Ukuran file anda (
+                    {Math.round(props.watchAll.ktm[0].size / 1000)} Kb ) terlalu
+                    besar
+                  </div>
+                )}
+                {
+                  //to validate required
+                  errors.ktm && (
+                    <div className="invalid-feedback">{errors.ktm.message}</div>
+                  )
+                }
                 <p className="form-text">
                   file harus bertipe jpg, jpeg atau png
                 </p>
@@ -120,14 +151,26 @@ const FilePendukung = (props) => {
                   ref={register({
                     required:
                       "transkip nilai harus diisi dan memiliki ukuran dibawah 500 Kb",
+                    validate: {
+                      maxSize: (value) => value[0].size < 500000,
+                    },
                   })}
                 />
-                <ErrorMessage
-                  className="invalid-feedback"
-                  name="nilai"
-                  as="div"
-                  errors={errors}
-                />
+                {errors.nilai?.type === "maxSize" && (
+                  <div className="invalid-feedback">
+                    Ukuran file anda (
+                    {Math.round(props.watchAll.nilai[0].size / 1000)} Kb )
+                    terlalu besar
+                  </div>
+                )}
+                {
+                  //to validate required
+                  errors.nilai && (
+                    <div className="invalid-feedback">
+                      {errors.nilai.message}
+                    </div>
+                  )
+                }
                 <p className="form-text">file harus bertipe pdf</p>
               </div>
             </div>
@@ -146,14 +189,26 @@ const FilePendukung = (props) => {
                   ref={register({
                     required:
                       "scan buku rekening harus diisi dan memiliki ukuran dibawah 500 Kb",
+                    validate: {
+                      maxSize: (value) => value[0].size < 500000,
+                    },
                   })}
                 />
-                <ErrorMessage
-                  className="invalid-feedback"
-                  name="rekening"
-                  as="div"
-                  errors={errors}
-                />
+                {errors.rekening?.type === "maxSize" && (
+                  <div className="invalid-feedback">
+                    Ukuran file anda (
+                    {Math.round(props.watchAll.rekening[0].size / 1000)} Kb )
+                    terlalu besar
+                  </div>
+                )}
+                {
+                  //to validate required
+                  errors.rekening && (
+                    <div className="invalid-feedback">
+                      {errors.rekening.message}
+                    </div>
+                  )
+                }
                 <p className="form-text">file harus bertipe pdf</p>
               </div>
             </div>
@@ -172,14 +227,64 @@ const FilePendukung = (props) => {
                   ref={register({
                     required:
                       "Surat keterangan tidak sedang menerima beasiswa lain harus diisi dan memiliki ukuran dibawah 500 Kb",
+                    validate: {
+                      maxSize: (value) => value[0].size < 500000,
+                    },
                   })}
                 />
-                <ErrorMessage
-                  className="invalid-feedback"
-                  name="beasiswaLain"
-                  as="div"
-                  errors={errors}
+                {errors.beasiswaLain?.type === "maxSize" && (
+                  <div className="invalid-feedback">
+                    Ukuran file anda (
+                    {Math.round(props.watchAll.beasiswaLain[0].size / 1000)} Kb
+                    ) terlalu besar
+                  </div>
+                )}
+                {
+                  //to validate required
+                  errors.beasiswaLain && (
+                    <div className="invalid-feedback">
+                      {errors.beasiswaLain.message}
+                    </div>
+                  )
+                }
+                <p className="form-text">file harus bertipe pdf</p>
+              </div>
+            </div>
+            <div className="form-group mb-3 row">
+              <label className="col-form-label fw-bold col-md-4">
+                Surat Rekomendasi satu
+              </label>
+              <div className="col">
+                <input
+                  className={`form-control ${
+                    errors.rekomendasi ? "is-invalid" : ""
+                  }`}
+                  type="file"
+                  name="rekomendasi"
+                  accept=".pdf"
+                  ref={register({
+                    required:
+                      "Surat rekomendasi harus diisi dan memiliki ukuran dibawah 500 Kb",
+                    validate: {
+                      maxSize: (value) => value[0].size < 500000,
+                    },
+                  })}
                 />
+                {errors.rekomendasi?.type === "maxSize" && (
+                  <div className="invalid-feedback">
+                    Ukuran file anda (
+                    {Math.round(props.watchAll.rekomendasi[0].size / 1000)} Kb )
+                    terlalu besar
+                  </div>
+                )}
+                {
+                  //to validate required
+                  errors.rekomendasi && (
+                    <div className="invalid-feedback">
+                      {errors.rekomendasi.message}
+                    </div>
+                  )
+                }
                 <p className="form-text">file harus bertipe pdf</p>
               </div>
             </div>
@@ -188,32 +293,6 @@ const FilePendukung = (props) => {
             */}
             {watchJenisBeasiswa === "ungulan" ? (
               <>
-                <div className="form-group mb-3 row">
-                  <label className="col-form-label fw-bold col-md-4">
-                    Surat Rekomendasi satu
-                  </label>
-                  <div className="col">
-                    <input
-                      className={`form-control ${
-                        errors.rekomendasi ? "is-invalid" : ""
-                      }`}
-                      type="file"
-                      name="rekomendasi"
-                      accept=".pdf"
-                      ref={register({
-                        required:
-                          "Surat rekomendasi harus diisi dan memiliki ukuran dibawah 500 Kb",
-                      })}
-                    />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="rekomendasi"
-                      as="div"
-                      errors={errors}
-                    />
-                    <p className="form-text">file harus bertipe pdf</p>
-                  </div>
-                </div>
                 <div className="form-group mb-3 row">
                   <label className="col-form-label fw-bold col-md-4">
                     Surat Rekomendasi dua
@@ -229,14 +308,26 @@ const FilePendukung = (props) => {
                       ref={register({
                         required:
                           "Surat rekomendasi harus diisi dan memiliki ukuran dibawah 500 Kb",
+                        validate: {
+                          maxSize: (value) => value[0].size < 500000,
+                        },
                       })}
                     />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="rekomendasi2"
-                      as="div"
-                      errors={errors}
-                    />
+                    {errors.rekomendasi2?.type === "maxSize" && (
+                      <div className="invalid-feedback">
+                        Ukuran file anda (
+                        {Math.round(props.watchAll.rekomendasi2[0].size / 1000)}{" "}
+                        Kb ) terlalu besar
+                      </div>
+                    )}
+                    {
+                      //to validate required
+                      errors.rekomendasi2 && (
+                        <div className="invalid-feedback">
+                          {errors.rekomendasi2.message}
+                        </div>
+                      )
+                    }
                     <p className="form-text">file harus bertipe pdf</p>
                   </div>
                 </div>
@@ -255,73 +346,69 @@ const FilePendukung = (props) => {
                       ref={register({
                         required:
                           "Sertifikat TOEFL harus diisi dan memiliki ukuran dibawah 500 Kb",
+                        validate: {
+                          maxSize: (value) => value[0].size < 500000,
+                        },
                       })}
                     />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="toeflFile"
-                      as="div"
-                      errors={errors}
-                    />
+                    {errors.toeflFile?.type === "maxSize" && (
+                      <div className="invalid-feedback">
+                        Ukuran file anda (
+                        {Math.round(props.watchAll.toeflFile[0].size / 1000)} Kb
+                        ) terlalu besar
+                      </div>
+                    )}
+                    {
+                      //to validate required
+                      errors.toeflFile && (
+                        <div className="invalid-feedback">
+                          {errors.toeflFile.message}
+                        </div>
+                      )
+                    }
                     <p className="form-text">file harus bertipe pdf</p>
                   </div>
                 </div>
               </>
             ) : (
-              <>
-                <div className="form-group mb-3 row">
-                  <label className="col-form-label fw-bold col-md-4">
-                    Surat Rekomendasi
-                  </label>
-                  <div className="col">
-                    <input
-                      className={`form-control ${
-                        errors.rekomendasi ? "is-invalid" : ""
-                      }`}
-                      type="file"
-                      name="rekomendasi"
-                      accept=".pdf"
-                      ref={register({
-                        required:
-                          "Surat rekomendasi harus diisi dan memiliki ukuran dibawah 500 Kb",
-                      })}
-                    />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="rekomendasi"
-                      as="div"
-                      errors={errors}
-                    />
-                    <p className="form-text">file harus bertipe pdf</p>
-                  </div>
+              <div className="form-group mb-3 row">
+                <label className="col-form-label fw-bold col-md-4">
+                  Surat keterangan tidak mampu
+                </label>
+                <div className="col">
+                  <input
+                    className={`form-control ${
+                      errors.mampu ? "is-invalid" : ""
+                    }`}
+                    type="file"
+                    name="mampu"
+                    accept=".pdf"
+                    ref={register({
+                      required:
+                        "Surat keterangan tidak mampu harus diisi dan memiliki ukuran dibawah 500 Kb",
+                      validate: {
+                        maxSize: (value) => value[0].size < 500000,
+                      },
+                    })}
+                  />
+                  {errors.mampu?.type === "maxSize" && (
+                    <div className="invalid-feedback">
+                      Ukuran file anda (
+                      {Math.round(props.watchAll.mampu[0].size / 1000)} Kb )
+                      terlalu besar
+                    </div>
+                  )}
+                  {
+                    //to validate required
+                    errors.mampu && (
+                      <div className="invalid-feedback">
+                        {errors.mampu.message}
+                      </div>
+                    )
+                  }
+                  <p className="form-text">file harus bertipe pdf</p>
                 </div>
-                <div className="form-group mb-3 row">
-                  <label className="col-form-label fw-bold col-md-4">
-                    Surat keterangan tidak mampu
-                  </label>
-                  <div className="col">
-                    <input
-                      className={`form-control ${
-                        errors.mampu ? "is-invalid" : ""
-                      }`}
-                      type="file"
-                      name="mampu"
-                      accept=".pdf"
-                      ref={register({
-                        required:
-                          "Surat keterangan tidak mampu harus diisi dan memiliki ukuran dibawah 500 Kb",
-                      })}
-                    />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="mampu"
-                      as="div"
-                      errors={errors}
-                    />
-                    <p className="form-text">file harus bertipe pdf</p>
-                  </div>
-                </div>
-              </>
+              </div>
             )}
             <div className="form-group mb-3 row">
               <label className="col-sm-6 col-md-5 col-lg-4 col-form-label fw-bold">
@@ -337,14 +424,16 @@ const FilePendukung = (props) => {
                   ref={register({
                     required:
                       "jika tidak memiliki sertifikat prestasi masukkan angka 0",
+                    setValueAs: (value) => parseInt(value),
                   })}
                 />
-                <ErrorMessage
-                  className="invalid-feedback"
-                  name="sertifikat"
-                  as="div"
-                  errors={errors}
-                />
+                {
+                  errors.sertifikat && (
+                    <div className="invalid-feedback">
+                      {errors.sertifikat.message}
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>

@@ -64,8 +64,9 @@ const Daftar = (props) => {
   }, [userId, token]);
 
   const onSubmit = async (values) => {
+    console.log(values.ktm.size);
     setIsLoading(true);
-    let endpoint = "file"
+    let endpoint = "file";
     const formData = new FormData();
     formData.append("jenisBeasiswa", values.jenisBeasiswa);
     formData.append("ktm", values.ktm[0]);
@@ -75,13 +76,13 @@ const Daftar = (props) => {
     formData.append("transkip", values.nilai[0]);
     formData.append("rekomendasi", values.rekomendasi[0]);
     formData.append("beasiswaLain", values.beasiswaLain[0]);
-    if (values.jenisBeasiswa === "reguler") {
-      formData.append("mampu", values.mampu[0]);
-      endpoint = "file"
-    } else {
-      endpoint = "unggulan"
+    if (values.jenisBeasiswa === "ungulan") {
+      endpoint = "unggulan";
       formData.append("rekomendasi2", values.rekomendasi2[0]);
-      formData.append("sertifikat", values.rekomendasi2[0]);
+      formData.append("sertifikat", values.sertifikat[0]);
+    } else {
+      formData.append("mampu", values.mampu[0]);
+      endpoint = "file";
     }
 
     try {
@@ -198,6 +199,15 @@ const Daftar = (props) => {
       <button onClick={test}>test</button>
       <div className="position-fixed bottom-0 end-0">
         <div className="pe-4 pb-4">
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              console.log(Math.round(watchAll.ktp[0].size / 1000));
+              console.log(watchAll.sertifikat)
+            }}
+          >
+            cek
+          </button>
           <button className="btn btn-primary" onClick={simpanHandler}>
             simpan
           </button>
@@ -238,6 +248,7 @@ const Daftar = (props) => {
         <FilePendukung
           errors={errors}
           register={register}
+          watchAll={watchAll}
           watchJenisBeasiswa={watchJenisBeasiswa}
         />
         <div className="col-12 mb-3">

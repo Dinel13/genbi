@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import print from "print-js";
 
 import Pendaftar from "../pendaftar";
 import { Unhas } from "../../../Data/WawancaraUnhas";
@@ -57,6 +58,24 @@ const Unm = (props) => {
       });
   }, [setActive, adminId, admin]);
 
+  const exportToPdf = () => {
+    const UnhasData = Unhas.map((item, index) => ( {
+     
+      ...item,
+      [item.No]: index,
+    }));
+
+    console.log(UnhasData);
+    print({
+      printable: UnhasData,
+      properties: ["nama", "fakultas", "prodi", "ipk", "No"],
+      type: "json",
+      header: "Lolos Wawancara Universitas Negeri Makassar",
+      documentTitle: "pendaftar_Universitas_Negeri_Makassar",
+      ignoreElements: ["notExport", "notExport1"],
+    });
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
@@ -69,6 +88,11 @@ const Unm = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
+            {Unhas && (
+              <button className="btn btn-dark" onClick={() => exportToPdf()}>
+                cetak
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -79,10 +103,12 @@ const Unm = (props) => {
           ) : isLoading ? (
             <Loading />
           ) : Unhas ? (
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2  row-cols-lg-3 g-3">
-              {Unhas.map((item) => (
-                <Card data={item} key={item.id} url={url} image={image} />
-              ))}
+            <div id="toCetak">
+              <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2  row-cols-lg-3 g-3">
+                {Unhas.map((item) => (
+                  <Card data={item} key={item.id} url={url} image={image} />
+                ))}
+              </div>
             </div>
           ) : (
             <Modal

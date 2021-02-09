@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import print from 'print-js';
 
 import Pendaftar from "../pendaftar";
 import { Unhas } from "../../../Data/PendaftarUnhas";
@@ -55,6 +56,16 @@ const PendaftarUnhasUngulan = (props) => {
       });
   }, [setActive, adminId, admin]);
 
+  const exportToPdf = () => {
+    print({
+      printable: "tabelku",
+      type: "html",
+      header: "pendaftar Universitas Hasanuddin-Unggulan",
+      documentTitle: "pendaftarGenbi",
+      ignoreElements: ["notExport", "notExport1"],
+    });
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
@@ -67,10 +78,10 @@ const PendaftarUnhasUngulan = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
+            {pendaftar && <button className="btn btn-dark" onClick={() => exportToPdf()}>
+              cetak
+            </button>}
           </div>
-          {/* <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => props.export(props.id,props.header)}> 
-                  Export
-                </button>*/}
         </div>
       </div>
       <Switch>

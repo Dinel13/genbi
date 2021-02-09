@@ -67,91 +67,96 @@ const Tabel = (props) => {
         />
       )}
       <div className="table-responsive">
-        <table className="table  table-ligh table-hover ">
-          <thead>
-            <tr className="table-info">
-              <th className="ps-3" scope="col">
-                No
-              </th>
-              <th scope="col">Nama</th>
-              <th scope="col">NIM</th>
-              <th scope="col">Fakultas</th>
-              <th scope="col">Nilai 1</th>
-              <th scope="col">Nilai 2</th>
-              <th scope="col">Total</th>
-              <th scope="col">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((pendaftar, index) => (
-              <tr key={pendaftar.id}>
-                <th className="ps-3" scope="row">
-                  {index + 1}
+        <div id="tabelku">
+          <table className="table  table-ligh table-hover ">
+            <thead>
+              <tr className="table-info">
+                <th className="ps-3" scope="col">
+                  No
                 </th>
-                <td className="text-truncate" style={{ maxWidth: "120px" }}>
-                  {pendaftar.nama}
-                </td>
-                <td className="text-truncate" style={{ maxWidth: "100px" }}>
-                  {pendaftar.nim}
-                </td>
-                <td className="text-truncate" style={{ maxWidth: "120px" }}>
-                  {pendaftar.fakultas}
-                </td>
-                <td className="text-truncate" style={{ maxWidth: "110px" }}>
-                  {pendaftar.nilai1}
-                </td>
-                <td className="text-truncate" style={{ maxWidth: "100px" }}>
-                  {pendaftar.nilai2}
-                </td>
-                <td className="text-truncate" style={{ maxWidth: "100px" }}>
-                  {pendaftar.nilai1 + pendaftar.nilai2}
-                </td>
-                <td>
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic outlined example"
-                  >
-                    <Link
-                      to={`${props.url}/${pendaftar.id.toString()}`}
-                      type="button"
-                      className="btn btn-sm btn-outline-primary"
+                <th scope="col">Nama</th>
+                <th scope="col">NIM</th>
+                <th scope="col">Fakultas</th>
+                <th scope="col">Nilai 1</th>
+                <th scope="col">Nilai 2</th>
+                <th scope="col">Total</th>
+                <th scope="col" id="notExport">
+                  Aksi
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((pendaftar, index) => (
+                <tr key={pendaftar.id}>
+                  <th className="ps-3" scope="row">
+                    {index + 1}
+                  </th>
+                  <td className="text-truncate" style={{ maxWidth: "120px" }}>
+                    {pendaftar.nama}
+                  </td>
+                  <td className="text-truncate" style={{ maxWidth: "100px" }}>
+                    {pendaftar.nim}
+                  </td>
+                  <td className="text-truncate" style={{ maxWidth: "120px" }}>
+                    {pendaftar.fakultas}
+                  </td>
+                  <td className="text-truncate" style={{ maxWidth: "110px" }}>
+                    {pendaftar.nilai1}
+                  </td>
+                  <td className="text-truncate" style={{ maxWidth: "100px" }}>
+                    {pendaftar.nilai2}
+                  </td>
+                  <td className="text-truncate" style={{ maxWidth: "100px" }}>
+                    {pendaftar.nilai1 + pendaftar.nilai2}
+                  </td>
+                  <td id="notExport1">
+                    <div
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic outlined example"
                     >
-                      Detail
-                    </Link>
-                    {pendaftar.lolosBerkas ? (
-                      <button
+                      <Link
+                        to={`${props.url}/${pendaftar.id.toString()}`}
                         type="button"
-                        className="btn btn-sm btn-danger"
-                        onClick={() => {
-                          setModall(true);
-                          setPendaftarId(pendaftar.id.toString());
-                          setTerima(false);
-                        }}
+                        className="btn btn-sm btn-outline-primary"
                       >
-                        Batalkan
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        className="btn  btn-sm btn-outline-success"
-                        onClick={() => {
+                        Detail
+                      </Link>
+                      {pendaftar.lolosBerkas ? (
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-danger"
+                          onClick={() => {
                             setModall(true);
                             setPendaftarId(pendaftar.id.toString());
-                            setTerima(true);
+                            setTerima(false);
+                          }}
+                        >
+                          Batalkan
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="btn  btn-sm btn-outline-success"
+                          onClick={
+                            () => {
+                              setModall(true);
+                              setPendaftarId(pendaftar.id.toString());
+                              setTerima(true);
+                            }
+                            // fetchUser(pendaftar.id.toString(), true)
                           }
-                          // fetchUser(pendaftar.id.toString(), true)
-                        }
-                      >
-                        Terima
-                      </button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                        >
+                          Terima
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

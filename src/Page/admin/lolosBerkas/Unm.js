@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import print from "print-js";
 
 import { Unhas } from "../../../Data/WawancaraUnhas";
 import Pendaftar from "../pendaftar";
@@ -57,6 +58,16 @@ const Unm = (props) => {
       });
   }, [setActive, adminId, admin]);
 
+  const exportToPdf = () => {
+    print({
+      printable: "tabelku",
+      type: "html",
+      header: "Lolos Berkas Universitas Negeri Makassar",
+      documentTitle: "pendaftar_Universitas_Negeri_Makassar",
+      ignoreElements: ["notExport", "notExport1"],
+    });
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
@@ -69,6 +80,11 @@ const Unm = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
+            {Unhas && (
+              <button className="btn btn-dark" onClick={() => exportToPdf()}>
+                cetak
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -88,7 +104,7 @@ const Unm = (props) => {
           )}
         </Route>
         <Route path={`${path}/:pendaftarId`}>
-          <Pendaftar berkas={true}/>
+          <Pendaftar berkas={true} />
         </Route>
       </Switch>
     </>

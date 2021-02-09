@@ -60,8 +60,9 @@ const PendaftarUinam = (props) => {
     print({
       printable: "tabelku",
       type: "html",
-      header: "pendaftar UNM",
-      style: ".actionku{display : none, color:red};} ",
+      header: "pendaftar UIN Alauddin Makassar",
+      documentTitle: "pendaftarGenbi",
+      ignoreElements: ["notExport", "notExport1"],
     });
   };
 
@@ -77,9 +78,9 @@ const PendaftarUinam = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            <button className="btn btn-dark" onClick={() => exportToPdf()}>
+            {pendaftar && <button className="btn btn-dark" onClick={() => exportToPdf()}>
               cetak
-            </button>
+            </button>}
           </div>
         </div>
       </div>

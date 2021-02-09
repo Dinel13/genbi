@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import print from "print-js";
 
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/LolosBerkas/Tabel";
@@ -16,7 +17,7 @@ const UnhasReguler = (props) => {
   const [pendaftar, setPendaftar] = useState(false);
   let { path, url } = useRouteMatch();
   const { setActive } = props;
-  
+
   useEffect(() => {
     setActive("berUnh");
     fetch("http://localhost:8080/graphql", {
@@ -56,6 +57,16 @@ const UnhasReguler = (props) => {
       });
   }, [setActive, adminId, admin]);
 
+  const exportToPdf = () => {
+    print({
+      printable: "tabelku",
+      type: "html",
+      header: "Lolos Berkas Universitas Hasanuddin-Reguler",
+      documentTitle: "pendaftarGenbi",
+      ignoreElements: ["notExport", "notExport1"],
+    });
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
@@ -68,6 +79,11 @@ const UnhasReguler = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
+            {pendaftar && (
+              <button className="btn btn-dark" onClick={() => exportToPdf()}>
+                cetak
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -87,7 +103,7 @@ const UnhasReguler = (props) => {
           )}
         </Route>
         <Route path={`${path}/:pendaftarId`}>
-          <Pendaftar  berkas={true} />
+          <Pendaftar berkas={true} />
         </Route>
       </Switch>
     </>
