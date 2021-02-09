@@ -10,7 +10,7 @@ const DataKampus = (props) => {
       </div>
       <div className="card-body px-5 pt-4 row">
         <div className="form-group mb-3 row">
-          <label className="col-2 col-sm-3 col-form-label fw-bold">
+          <label className="col-3 col-sm-3 col-form-label fw-bold">
             Perguruan Tinggi
           </label>
           <div className="col">

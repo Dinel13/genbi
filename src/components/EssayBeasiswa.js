@@ -166,9 +166,11 @@ const EssayBeasiswa = (props) => {
           </div>
         </div>
         {watchJenisBeasiswa === "ungulan" && (
-          <h4 >
-            Semua essay harus diisi dengan bahasa ingris
-          </h4>
+          <div className="alert alert-danger text-center" role="alert">
+            <h4 className="fw-bold">
+              Semua essay harus diisi dengan bahasa inggris
+            </h4>
+          </div>
         )}
         {watchAlumni === "ya" && (
           <>
@@ -212,13 +214,15 @@ const EssayBeasiswa = (props) => {
             </div>
             <div className="form-floating col-12 mb-3">
               <textarea
-                name="motif"
-                defaultValue={props.dataSaveOnLocal.motif}
-                placeholder="Masukkan alasan anda dengan maksimal 300 karakter"
-                className={`form-control ${errors.motif ? "is-invalid" : ""}`}
+                name="bergenbi"
+                defaultValue={props.dataSaveOnLocal.bergenbi}
+                placeholder="Masukkan pengalaman menerima beasiswa BI"
+                className={`form-control ${
+                  errors.bergenbi ? "is-invalid" : ""
+                }`}
                 style={{ height: "180px" }}
                 ref={register({
-                  required: "Alasan anda mendaftar harus diisi",
+                  required: "Pengalaman anda harus diisi",
                   maxLength: {
                     value: 300,
                     message: "maksimal 300 karakter",
@@ -226,47 +230,26 @@ const EssayBeasiswa = (props) => {
                 })}
               />
               <label className=" ps-4 fw-bold">
-                Alasan mendaftar beasiswa ini:
+                Pengalaman menerima beasiswa Bank Indonesia:
               </label>
               <ErrorMessage
                 className="invalid-feedback"
-                name="motif"
+                name="bergenbi"
                 as="div"
                 errors={errors}
               />
             </div>
           </>
         )}
-        {watchJenisBeasiswa === "ungulan" && (
-          <div className="form-floating col-md-6 mb-3">
-            <input
-              name="toeflNilai"
-              type="text"
-              defaultValue={props.dataSaveOnLocal.toeflNilai}
-              placeholder="Masukkan Nilai Toefl anda"
-              className={`form-control ${
-                errors.toeflNilai ? "is-invalid" : ""
-              }`}
-              ref={register({})}
-            />
-            <label className="ps-4 fw-bold">Nilai Toefl</label>
-            <ErrorMessage
-              className="invalid-feedback"
-              name="toeflNilai"
-              as="div"
-              errors={errors}
-            />
-          </div>
-        )}
         <div className="form-floating col-12 mb-3">
           <textarea
-            name="bergenbi"
-            defaultValue={props.dataSaveOnLocal.bergenbi}
-            placeholder="Masukkan pengalaman menerima beasiswa BI"
-            className={`form-control ${errors.bergenbi ? "is-invalid" : ""}`}
+            name="motif"
+            defaultValue={props.dataSaveOnLocal.motif}
+            placeholder="Masukkan alasan anda dengan maksimal 300 karakter"
+            className={`form-control ${errors.motif ? "is-invalid" : ""}`}
             style={{ height: "180px" }}
             ref={register({
-              required: "Pengalaman anda harus diisi",
+              required: "Alasan anda mendaftar harus diisi",
               maxLength: {
                 value: 300,
                 message: "maksimal 300 karakter",
@@ -274,15 +257,16 @@ const EssayBeasiswa = (props) => {
             })}
           />
           <label className=" ps-4 fw-bold">
-            Pengalaman menerima beasiswa Bank Indonesia:
+            Alasan mendaftar beasiswa ini:
           </label>
           <ErrorMessage
             className="invalid-feedback"
-            name="bergenbi"
+            name="motif"
             as="div"
             errors={errors}
           />
         </div>
+
         <div className="form-floating col-12 mb-3">
           <textarea
             name="rencana"

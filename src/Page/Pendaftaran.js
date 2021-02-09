@@ -66,12 +66,18 @@ const Daftar = (props) => {
   const onSubmit = async (values) => {
     setIsLoading(true);
     const formData = new FormData();
+    formData.append("jenisBeasiswa", values.jenisBeasiswa);
     formData.append("ktm", values.ktm[0]);
+    formData.append("ktp", values.ktp[0]);
+    formData.append("foto", values.foto[0]);
     formData.append("transkip", values.nilai[0]);
     formData.append("rekomendasi", values.rekomendasi[0]);
-    values.jenisBeasiswa === "reguler"
-      ? formData.append("mampu", values.mampu[0])
-      : formData.append("rekomendasi2", values.rekomendasi2[0]);
+    if (values.jenisBeasiswa === "reguler") {
+      formData.append("mampu", values.mampu[0])
+    } else {
+      formData.append("rekomendasi2", values.rekomendasi2[0])
+      formData.append("sertifikat", values.rekomendasi2[0])
+    }
 
     try {
       const response = await fetch("http://localhost:8080/file", {
@@ -91,20 +97,20 @@ const Daftar = (props) => {
             createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}, alamatIbu: "${values.alamatIbu}",
             alamatKtp: "${values.alamatKtp}", alamatWali: "${values.alamatWali}, alumni: "${values.alumni}, alumniJabatan: "${values.alumniJabatan}, alumniThn: "${values.alumniThn},
              anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
-            arahan: ${values.arahan}, bergenbi: ${values.bergenbi}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}",
+            arahan: ${values.arahan}, bergenbi: ${values.bergenbi}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}", foto: "${resData.foto}",
             genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", ikatan: "${values.ikatan}", instagram: "${values.instagram}",
             ipk: "${values.ipk}", jenisBeasiswa: "${values.jenisBeasiswa}", kampus: "${values.kampus}",  kelemahan: "${values.kelemahan}", kontribusi:${values.kontribusi}, kosan: "${values.kosan}",
-            ktm: "${resData.ktm}",lulus: "${values.lulus}",  mampu: "${resData.mampu}", minat: "${values.minat}",
+            ktm: "${resData.ktm}", ktp: "${resData.ktp}", lulus: "${values.lulus}",  mampu: "${resData.mampu}", minat: "${values.minat}",
             motif: "${values.motif}", nama: "${values.nama}", namaAyah: "${values.namaAyah}", namaIbu: "${values.namaIbu}", namaWali: "${values.namaWali}",
             nilai: "${resData.transkip}", nim: "${values.nim}", nomorHp: "${values.nomorHp}", nomorWa: "${values.nomorWa}",
             organisasi: "${values.organisasi}", pangilan: "${values.pangilan}", pantas: "${values.pantas}",
             pekerjaanAyah: "${values.pekerjaanAyah}", pekerjaanIbu: "${values.pekerjaanIbu}", pekerjaanWali: "${values.pekerjaanWali}",
             penghasilanAyah: "${values.penghasilanAyah}", penghasilanIbu: "${values.penghasilanIbu}", penghasilanWali: "${values.penghasilanWali}",
-            prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekomendasi: "${resData.rekomendasi}",
-            rencana: "${values.rencana}",saran: "${values.saran}", saudara: "${values.saudara}", semester: "${values.semester}",  showWali: "${values.showWali}",
+            prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekening: "${resData.rekening}", rekomendasi: "${resData.rekomendasi}", rekomendasi2: "${resData.rekomendasi2}",
+            rencana: "${values.rencana}",saran: "${values.saran}", saudara: "${values.saudara}", semester: "${values.semester}", sertifikat: "${values.sertifikat}",  showWali: "${values.showWali}",
             siapMengurus: "${values.siapMengurus}", skil: "${values.skil}",  sks: "${values.sks}",sosial: "${values.sosial}",  suku: "${values.suku}",  tangalLahir: "${values.tangalLahir}",
             teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}",  teleponWali: "${values.teleponWali}", tempatLahir: "${values.tempatLahir}",
-            thnLulus: "${values.thnLulus}", toeflFile: "${values.toeflFile}", toeflNilai: "${values.toeflNilai}", usia: "${values.usia}",}) {
+            thnLulus: "${values.thnLulus}", toeflFile: "${resData.toeflFile}", toeflNilai: "${values.toeflNilai}", usia: "${values.usia}",}) {
               ${PENDAFTAR_FIElD}
             }
           }
