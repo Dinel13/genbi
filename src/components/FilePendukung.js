@@ -167,7 +167,7 @@ const FilePendukung = (props) => {
                     errors.beasiswaLain ? "is-invalid" : ""
                   }`}
                   type="file"
-                  name="beasiswaLain "
+                  name="beasiswaLain"
                   accept=".pdf"
                   ref={register({
                     required:

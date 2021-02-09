@@ -65,6 +65,7 @@ const Daftar = (props) => {
 
   const onSubmit = async (values) => {
     setIsLoading(true);
+    let endpoint = "file"
     const formData = new FormData();
     formData.append("jenisBeasiswa", values.jenisBeasiswa);
     formData.append("ktm", values.ktm[0]);
@@ -73,15 +74,18 @@ const Daftar = (props) => {
     formData.append("rekening", values.rekening[0]);
     formData.append("transkip", values.nilai[0]);
     formData.append("rekomendasi", values.rekomendasi[0]);
+    formData.append("beasiswaLain", values.beasiswaLain[0]);
     if (values.jenisBeasiswa === "reguler") {
       formData.append("mampu", values.mampu[0]);
+      endpoint = "file"
     } else {
+      endpoint = "unggulan"
       formData.append("rekomendasi2", values.rekomendasi2[0]);
       formData.append("sertifikat", values.rekomendasi2[0]);
     }
 
     try {
-      const response = await fetch("http://localhost:8080/file", {
+      const response = await fetch(`http://localhost:8080/${endpoint}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
@@ -98,7 +102,7 @@ const Daftar = (props) => {
             createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}, alamatIbu: "${values.alamatIbu}",
             alamatKtp: "${values.alamatKtp}", alamatWali: "${values.alamatWali}, alumni: "${values.alumni}, alumniJabatan: "${values.alumniJabatan}, alumniThn: "${values.alumniThn},
              anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
-            arahan: ${values.arahan}, bergenbi: ${values.bergenbi}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}", foto: "${resData.foto}",
+            arahan: ${values.arahan}, beasiswaLain: ${resData.beasiswaLain} bergenbi: ${values.bergenbi}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}", foto: "${resData.foto}",
             genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", ikatan: "${values.ikatan}", instagram: "${values.instagram}",
             ipk: "${values.ipk}", jenisBeasiswa: "${values.jenisBeasiswa}", kampus: "${values.kampus}",  kelemahan: "${values.kelemahan}", kontribusi:${values.kontribusi}, kosan: "${values.kosan}",
             ktm: "${resData.ktm}", ktp: "${resData.ktp}", lulus: "${values.lulus}",  mampu: "${resData.mampu}", minat: "${values.minat}",

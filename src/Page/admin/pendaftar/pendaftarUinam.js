@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import print from "print-js";
 
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
@@ -54,7 +55,16 @@ const PendaftarUinam = (props) => {
         console.log(error);
       });
   }, [setActive, adminId, admin]);
-  //
+  
+  const exportToPdf = () => {
+    print({
+      printable: "tabelku",
+      type: "html",
+      header: "pendaftar UNM",
+      style: ".actionku{display : none, color:red};} ",
+    });
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
@@ -66,6 +76,9 @@ const PendaftarUinam = (props) => {
               <span className="badge bg-primary">
                 {pendaftar ? pendaftar.length : "0"}
               </span>
+            </button>
+            <button className="btn btn-dark" onClick={() => exportToPdf()}>
+              cetak
             </button>
           </div>
         </div>
