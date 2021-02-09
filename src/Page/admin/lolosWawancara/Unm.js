@@ -59,16 +59,18 @@ const Unm = (props) => {
   }, [setActive, adminId, admin]);
 
   const exportToPdf = () => {
-    const UnhasData = Unhas.map((item, index) => ( {
-     
-      ...item,
-      [item.No]: index,
-    }));
+    const UnhasData = Unhas.map((item, index) => {
+      console.log( index);
+        item.no = index+1
+        return {
+        ...item,
+      };
+    });
 
     console.log(UnhasData);
     print({
       printable: UnhasData,
-      properties: ["nama", "fakultas", "prodi", "ipk", "No"],
+      properties: ["no","nama", "fakultas", "prodi", "ipk"],
       type: "json",
       header: "Lolos Wawancara Universitas Negeri Makassar",
       documentTitle: "pendaftar_Universitas_Negeri_Makassar",
