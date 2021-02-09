@@ -48,8 +48,21 @@ const Card = (props) => {
     }
   };
 
-  const kirimEmail = () => {
-    console.log("gg");
+  const kirimEmail = async (pendaftarId) => {
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:8080/email",
+        "POST",
+        JSON.stringify({ pendaftarId }),
+        {
+          Authorization: "Bearer " + admin,
+          "Content-Type": "application/json",
+        }
+      );
+      console.log(responseData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return error ? (
@@ -125,6 +138,9 @@ const Card = (props) => {
                 onClick={() => {
                   setModall(true);
                   setPendaftarId(data.id.toString());
+                  setNama(data.nama);
+                  setModalBody(`Anda akan mengirim email ke ${data.nama}`);
+                  setModalYakin("email");
                 }}
               >
                 Email

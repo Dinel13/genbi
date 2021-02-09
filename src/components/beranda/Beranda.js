@@ -3,7 +3,6 @@ import "./beranda.css";
 import satu from "../../images/satu.jpeg";
 import dua from "../../images/dua.jpeg";
 import tiga from "../../images/tiga.jpeg";
-import empat from "../../images/empat.jpeg";
 import sulsel from "../../images/sulsel.png";
 import bi from "../../images/bi.png";
 
