@@ -1,5 +1,4 @@
 import React from "react";
-import { ErrorMessage } from "@hookform/error-message";
 import Pemisah from "./Pemisah";
 
 const Wali = (props) => {
@@ -18,12 +17,12 @@ const Wali = (props) => {
           })}
         />
         <label className="ps-4 fw-bold">Nama Wali</label>
-        <ErrorMessage
-          className="invalid-feedback"
-          name="namaWali"
-          as="div"
-          errors={errors}
-        />
+        {
+            //to validate required
+            errors.namaWali && (
+              <div className="invalid-feedback">{errors.namaWali.message}</div>
+            )
+          }
       </div>
       <div className="form-floating col-md-6 mb-3">
         <input
@@ -37,12 +36,12 @@ const Wali = (props) => {
           })}
         />
         <label className="ps-4 fw-bold">Nomor Telepon Wali</label>
-        <ErrorMessage
-          className="invalid-feedback"
-          name="teleponWali"
-          as="div"
-          errors={errors}
-        />
+        {
+            //to validate required
+            errors.teleponWali && (
+              <div className="invalid-feedback">{errors.teleponWali.message}</div>
+            )
+          }
       </div>
       <div className="form-floating col-12 mb-3">
         <textarea
@@ -56,12 +55,12 @@ const Wali = (props) => {
           })}
         />
         <label className="ps-4 fw-bold">Alamat wali</label>
-        <ErrorMessage
-          className="invalid-feedback"
-          name="alamatWali"
-          as="div"
-          errors={errors}
-        />
+        {
+            //to validate required
+            errors.alamatWali && (
+              <div className="invalid-feedback">{errors.alamatWali.message}</div>
+            )
+          }
       </div>
       <div className="form-floating col-md-6 mb-3">
         <input
@@ -75,12 +74,12 @@ const Wali = (props) => {
           })}
         />
         <label className="ps-4 fw-bold">Pekerjaan Wali</label>
-        <ErrorMessage
-          className="invalid-feedback"
-          name="pekerjaanWali"
-          as="div"
-          errors={errors}
-        />
+        {
+            //to validate required
+            errors.pekerjaanWali && (
+              <div className="invalid-feedback">{errors.pekerjaanWali.message}</div>
+            )
+          }
       </div>
 
       <div className="form-floating col-md-6 mb-3">
@@ -99,12 +98,12 @@ const Wali = (props) => {
         <label className="ps-4 fw-bold ">
             Penghasilan wali<span className="text-muted fw-light"> (Rp. /perbulan)</span>
           </label>
-        <ErrorMessage
-          className="invalid-feedback"
-          name="penghasilanWali"
-          as="div"
-          errors={errors}
-        />
+          {
+            //to validate required
+            errors.penghasilanWali && (
+              <div className="invalid-feedback">{errors.penghasilanWali.message}</div>
+            )
+          }
       </div>
     </>
   );

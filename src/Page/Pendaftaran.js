@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { useSelector } from "react-redux";
 
 import Note from "../components/Note";
@@ -203,7 +202,7 @@ const Daftar = (props) => {
             className="btn btn-primary"
             onClick={() => {
               console.log(Math.round(watchAll.ktp[0].size / 1000));
-              console.log(watchAll.sertifikat)
+              console.log(watchAll.sertifikat);
             }}
           >
             cek
@@ -261,7 +260,7 @@ const Daftar = (props) => {
               name="arahan"
               id="gridCheck"
               ref={register({
-                required: "Pilihan ini garus di centang",
+                required: "Pilihan ini harus dicentang",
               })}
             />
             <label className="form-check-label" htmlFor="gridCheck">
@@ -269,12 +268,12 @@ const Daftar = (props) => {
               ketentuan, peraturan dan arahan yang berlaku dalam program
               Beasiswa Bank Indonesia
             </label>
-            <ErrorMessage
-              className="invalid-feedback"
-              name="arahan"
-              as="div"
-              errors={errors}
-            />
+            {
+              //to validate required
+              errors.arahan && (
+                <div className="invalid-feedback">{errors.arahan.message}</div>
+              )
+            }
           </div>
         </div>
         <div className="col-12 mb-3">
@@ -287,7 +286,7 @@ const Daftar = (props) => {
               name="kontribusi"
               id="griCheck"
               ref={register({
-                required: "Pilihan ini garus di centang",
+                required: "Pilihan ini harus dicentang",
               })}
             />
             <label className="form-check-label" htmlFor="griCheck">
@@ -297,12 +296,14 @@ const Daftar = (props) => {
               Indonesia sebagai bentuk tanggung jawab moral sebagai insan
               akademis yang bermoral
             </label>
-            <ErrorMessage
-              className="invalid-feedback"
-              name="kontribusi"
-              as="div"
-              errors={errors}
-            />
+            {
+              //to validate required
+              errors.kontribusi && (
+                <div className="invalid-feedback">
+                  {errors.kontribusi.message}
+                </div>
+              )
+            }
           </div>
         </div>
         <br />

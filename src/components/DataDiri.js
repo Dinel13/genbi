@@ -1,5 +1,4 @@
 import React from "react";
-import { ErrorMessage } from "@hookform/error-message";
 import { useSelector } from "react-redux";
 
 const DataDiri = (props) => {
@@ -29,12 +28,12 @@ const DataDiri = (props) => {
           <label className="fw-bold ps-4" htmlFor="nama">
             Nama Lengkap
           </label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="nama"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.nama && (
+              <div className="invalid-feedback">{errors.nama.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-5 mb-3">
           <input
@@ -47,12 +46,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="fw-bold ps-4">Nama pangilan</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="pangilan"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.pangilan && (
+              <div className="invalid-feedback">{errors.pangilan.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -67,12 +66,14 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Tanggal lahir</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="tangalLahir"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.tangalLahir && (
+              <div className="invalid-feedback">
+                {errors.tangalLahir.message}
+              </div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -88,12 +89,14 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Tempat lahir</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="tempatLahir"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.tempatLahir && (
+              <div className="invalid-feedback">
+                {errors.tempatLahir.message}
+              </div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
@@ -101,20 +104,18 @@ const DataDiri = (props) => {
             defaultValue={props.dataSaveOnLocal.usia}
             type="number"
             placeholder="Masukkan usia anda"
-            className={`form-control ${
-              errors.usia ? "is-invalid" : ""
-            }`}
+            className={`form-control ${errors.usia ? "is-invalid" : ""}`}
             ref={register({
               required: "Usia harus diisi",
             })}
           />
           <label className="ps-4 fw-bold">Usia</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="usia"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.usia && (
+              <div className="invalid-feedback">{errors.usia.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 col-sm-6 mb-3">
           <select
@@ -131,12 +132,12 @@ const DataDiri = (props) => {
             <option value="wanita">Wanita</option>
           </select>
           <label className="ps-4 fw-bold ">Jenis Kelamin</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="gender"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.gender && (
+              <div className="invalid-feedback">{errors.gender.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 col-sm-6 mb-3">
           <select
@@ -157,12 +158,12 @@ const DataDiri = (props) => {
             <option value="lainya">Lainya</option>
           </select>
           <label className="fw-bold ps-4">Kepercayaan</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="agama"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.agama && (
+              <div className="invalid-feedback">{errors.agama.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
@@ -170,20 +171,18 @@ const DataDiri = (props) => {
             defaultValue={props.dataSaveOnLocal.suku}
             type="text"
             placeholder="Masukkan suku anda"
-            className={`form-control ${
-              errors.suku ? "is-invalid" : ""
-            }`}
+            className={`form-control ${errors.suku ? "is-invalid" : ""}`}
             ref={register({
               required: "Suku anda harus diisi",
             })}
           />
           <label className="ps-4 fw-bold">Suku bangsa</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="suku"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.suku && (
+              <div className="invalid-feedback">{errors.suku.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
@@ -191,20 +190,18 @@ const DataDiri = (props) => {
             defaultValue={props.dataSaveOnLocal.darah}
             type="text"
             placeholder="Masukkan golongan darah anda"
-            className={`form-control ${
-              errors.darah ? "is-invalid" : ""
-            }`}
+            className={`form-control ${errors.darah ? "is-invalid" : ""}`}
             ref={register({
               required: "Golongan darah harus diisi",
             })}
           />
           <label className="ps-4 fw-bold">Golongan darah</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="darah"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.darah && (
+              <div className="invalid-feedback">{errors.darah.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 col-sm-6 mb-3">
           <input
@@ -220,12 +217,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Alamat email</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="email"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.email && (
+              <div className="invalid-feedback">{errors.email.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -239,12 +236,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Alamat sesuai KTP anda</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="alamatKtp"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.alamatKtp && (
+              <div className="invalid-feedback">{errors.alamatKtp.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -258,12 +255,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Alamat selama berkuliah</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="kosan"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.kosan && (
+              <div className="invalid-feedback">{errors.kosan.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -282,12 +279,12 @@ const DataDiri = (props) => {
           />
           <label className="ps-4 fw-bold ">Anak ke</label>
 
-          <ErrorMessage
-            className="invalid-feedback"
-            name="anakKe"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.anakKe && (
+              <div className="invalid-feedback">{errors.anakKe.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -305,12 +302,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Jumlah Saudara</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="saudara"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.saudara && (
+              <div className="invalid-feedback">{errors.saudara.message}</div>
+            )
+          }
         </div>
 
         <div className="form-floating col-md-6 mb-3">
@@ -323,12 +320,12 @@ const DataDiri = (props) => {
             ref={register({})}
           />
           <label className="ps-4 fw-bold">Hobby</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="hobby"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.hobby && (
+              <div className="invalid-feedback">{errors.hobby.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -340,12 +337,12 @@ const DataDiri = (props) => {
             ref={register({})}
           />
           <label className="ps-4 fw-bold">Cita-cita</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="cita"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.cita && (
+              <div className="invalid-feedback">{errors.cita.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 mb-3">
           <input
@@ -359,12 +356,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Nomor Wa:</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="nomorWa"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.nomorWa && (
+              <div className="invalid-feedback">{errors.nomorWa.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-4 mb-3">
           <input
@@ -378,12 +375,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Nomor Telepon:</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="nomorHp"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.nomorHp && (
+              <div className="invalid-feedback">{errors.nomorHp.message}</div>
+            )
+          }
         </div>
 
         <div className="form-floating col-md-4 mb-3">
@@ -398,12 +395,12 @@ const DataDiri = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Akun Instagram:</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="instagram"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.instagram && (
+              <div className="invalid-feedback">{errors.instagram.message}</div>
+            )
+          }
           <p className="form-text">Akun instagram harus dipublic</p>
         </div>
         <div className="form-floating col-md-6 mb-3">
@@ -413,15 +410,17 @@ const DataDiri = (props) => {
             defaultValue={props.dataSaveOnLocal.minat}
             placeholder="Masukkan minat atau bakat anda"
             className={`form-control ${errors.minat ? "is-invalid" : ""}`}
-            ref={register({})}
+            ref={register({
+              required: "Minat atau bakat anda wajib dimasukkan",
+            })}
           />
           <label className="ps-4 fw-bold">Minat atau bakat</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="minat"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.minat && (
+              <div className="invalid-feedback">{errors.minat.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -430,15 +429,17 @@ const DataDiri = (props) => {
             type="text"
             placeholder="Masukkan keterampilan anda"
             className={`form-control ${errors.skil ? "is-invalid" : ""}`}
-            ref={register({})}
+            ref={register({
+              required: "Keterampilan anda wajib dimasukkan",
+            })}
           />
           <label className="ps-4 fw-bold">Keterampilan anda</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="skil"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.skil && (
+              <div className="invalid-feedback">{errors.skil.message}</div>
+            )
+          }
         </div>
       </div>
     </div>

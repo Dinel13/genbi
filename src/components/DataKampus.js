@@ -1,5 +1,4 @@
 import React from "react";
-import { ErrorMessage } from "@hookform/error-message";
 
 const DataKampus = (props) => {
   const { errors, register } = props;
@@ -27,12 +26,12 @@ const DataKampus = (props) => {
               <option value="unm">Universitas Negri Makassar</option>
               <option value="uin">UIN Alauddin Makassar</option>
             </select>
-            <ErrorMessage
-              className="invalid-feedback"
-              name="angkatan"
-              as="div"
-              errors={errors}
-            />
+            {
+            //to validate required
+            errors.kampus && (
+              <div className="invalid-feedback">{errors.kampus.message}</div>
+            )
+          }
           </div>
         </div>
         <div className="form-floating col-md-6 mb-3">
@@ -47,12 +46,12 @@ const DataKampus = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Fakultas</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="fakultas"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.fakultas && (
+              <div className="invalid-feedback">{errors.fakultas.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -66,12 +65,12 @@ const DataKampus = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Program studi</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="prodi"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.prodi && (
+              <div className="invalid-feedback">{errors.prodi.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -85,12 +84,12 @@ const DataKampus = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Nomor induk mahasiswa</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="nim"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.nim && (
+              <div className="invalid-feedback">{errors.nim.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -108,12 +107,12 @@ const DataKampus = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Nilai IPK terakhir</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="ipk"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.ipk && (
+              <div className="invalid-feedback">{errors.ipk.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -127,12 +126,12 @@ const DataKampus = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">SKS yang telah dilulusi</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="sks"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.sks && (
+              <div className="invalid-feedback">{errors.sks.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <input
@@ -146,12 +145,12 @@ const DataKampus = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Semester saat ini</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="semester"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.semester && (
+              <div className="invalid-feedback">{errors.semester.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <select
@@ -169,19 +168,19 @@ const DataKampus = (props) => {
             <option value="2019">2019</option>
           </select>
           <label className="ps-4 fw-bold">Tahun Masuk Kuliah</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="angkatan"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.angkatan && (
+              <div className="invalid-feedback">{errors.angkatan.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-md-6 mb-3">
           <select
             name="thnLulus"
             defaultValue={props.dataSaveOnLocal.thnLulus}
             type="text"
-            className={`form-select ${errors.ThnLulus ? "is-invalid" : ""}`}
+            className={`form-select ${errors.thnLulus ? "is-invalid" : ""}`}
             ref={register({
               required: "Tahun rencana lulus harus diisi",
             })}
@@ -192,12 +191,12 @@ const DataKampus = (props) => {
             <option value="2019">2019</option>
           </select>
           <label className="ps-4 fw-bold">Tahun Rencana Lulus</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="thnLulus"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.thnLulus && (
+              <div className="invalid-feedback">{errors.thnLulus.message}</div>
+            )
+          }
         </div>
         {/*<div className="form-floating col-md-6 mb-3">
           <select
@@ -239,12 +238,12 @@ const DataKampus = (props) => {
                 required: "Jika tidak memiliki prestasi masukkan angka 0",
               })}
             />
-            <ErrorMessage
-              className="invalid-feedback"
-              name="prestasi"
-              as="div"
-              errors={errors}
-            />
+             {
+            //to validate required
+            errors.prestasi && (
+              <div className="invalid-feedback">{errors.prestasi.message}</div>
+            )
+          }
           </div>
         </div>
         <div className="form-group mb-3 row">
@@ -267,12 +266,12 @@ const DataKampus = (props) => {
                 required: "Jika tidak memiliki Organisasi, masukkan anggka 0",
               })}
             />
-            <ErrorMessage
-              className="invalid-feedback"
-              name="organisasi"
-              as="div"
-              errors={errors}
-            />
+            {
+            //to validate required
+            errors.organisasi && (
+              <div className="invalid-feedback">{errors.organisasi.message}</div>
+            )
+          }
           </div>
         </div>
       </div>

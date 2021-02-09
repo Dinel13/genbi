@@ -1,5 +1,4 @@
 import React from "react";
-import { ErrorMessage } from "@hookform/error-message";
 
 const EssayBeasiswa = (props) => {
   const {
@@ -63,7 +62,11 @@ const EssayBeasiswa = (props) => {
                 />
                 <label className="form-check-label">Reguler</label>
               </div>
-              {errors.jenisBeasiswa && "Jenis beasiswa harus diisi"}
+              {errors.jenisBeasiswa && (
+                <div className="text-danger">
+                  Jenis beasiswa harus diisi
+                </div>
+              )}
             </div>
 
             {
@@ -81,12 +84,14 @@ const EssayBeasiswa = (props) => {
                     ref={register({})}
                   />
                   <label className="ps-4 fw-bold">Nilai Toefl</label>
-                  <ErrorMessage
-                    className="invalid-feedback"
-                    name="toeflNilai"
-                    as="div"
-                    errors={errors}
-                  />
+                  {
+                    //to validate required
+                    errors.toeflNilai && (
+                      <div className="invalid-feedback">
+                        {errors.toeflNilai.message}
+                      </div>
+                    )
+                  }
                 </div>
               )
             }
@@ -126,7 +131,9 @@ const EssayBeasiswa = (props) => {
               />
               <label className="form-check-label">Tidak</label>
             </div>
-            {errors.ikatan && "Field ini harus dipilih"}
+            {errors.ikatan && (
+              <span className="text-danger"> Field ini harus dipilih</span>
+            )}
           </div>
         </div>
         <div className="form-group mb-3 row">
@@ -162,7 +169,9 @@ const EssayBeasiswa = (props) => {
               />
               <label className="form-check-label">Tidak</label>
             </div>
-            {errors.alumni && "Field ini harus dipilih"}
+            {errors.alumni && (
+              <span className="text-danger"> Field ini harus dipilih</span>
+            )}
           </div>
         </div>
         {watchJenisBeasiswa === "ungulan" && (
@@ -186,12 +195,14 @@ const EssayBeasiswa = (props) => {
                 ref={register({})}
               />
               <label className="ps-4 fw-bold">Tahun menerima beasiswa BI</label>
-              <ErrorMessage
-                className="invalid-feedback"
-                name="alumniThn"
-                as="div"
-                errors={errors}
-              />
+              {
+                //to validate required
+                errors.alumniThn && (
+                  <div className="invalid-feedback">
+                    {errors.alumniThn.message}
+                  </div>
+                )
+              }
             </div>
             <div className="form-floating col-md-6 mb-3">
               <input
@@ -205,12 +216,14 @@ const EssayBeasiswa = (props) => {
                 ref={register({})}
               />
               <label className="ps-4 fw-bold">Jabatan di Genbi</label>
-              <ErrorMessage
-                className="invalid-feedback"
-                name="alumniJabatan"
-                as="div"
-                errors={errors}
-              />
+              {
+                //to validate required
+                errors.alumniJabatan && (
+                  <div className="invalid-feedback">
+                    {errors.alumniJabatan.message}
+                  </div>
+                )
+              }
             </div>
             <div className="form-floating col-12 mb-3">
               <textarea
@@ -232,12 +245,14 @@ const EssayBeasiswa = (props) => {
               <label className=" ps-4 fw-bold">
                 Pengalaman menerima beasiswa Bank Indonesia:
               </label>
-              <ErrorMessage
-                className="invalid-feedback"
-                name="bergenbi"
-                as="div"
-                errors={errors}
-              />
+              {
+                //to validate required
+                errors.bergenbi && (
+                  <div className="invalid-feedback">
+                    {errors.bergenbi.message}
+                  </div>
+                )
+              }
             </div>
           </>
         )}
@@ -259,12 +274,12 @@ const EssayBeasiswa = (props) => {
           <label className=" ps-4 fw-bold">
             Alasan mendaftar beasiswa ini:
           </label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="motif"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.motif && (
+              <div className="invalid-feedback">{errors.motif.message}</div>
+            )
+          }
         </div>
 
         <div className="form-floating col-12 mb-3">
@@ -283,12 +298,12 @@ const EssayBeasiswa = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Rencana pengunaan beasiswa:</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="rencana"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.rencana && (
+              <div className="invalid-feedback">{errors.rencana.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -308,12 +323,12 @@ const EssayBeasiswa = (props) => {
           <label className="ps-4 fw-bold">
             Kenapa anda pantas mendapatkan beasiswa ini:
           </label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="pantas"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.pantas && (
+              <div className="invalid-feedback">{errors.pantas.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -333,12 +348,12 @@ const EssayBeasiswa = (props) => {
           <label className="ps-4 fw-bold">
             Rencana anda setelah lulus kuliah:
           </label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="lulus"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.lulus && (
+              <div className="invalid-feedback">{errors.lulus.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -359,12 +374,12 @@ const EssayBeasiswa = (props) => {
           <label className="ps-4 fw-bold">
             Aktivitas sosial yang biasa di lakukan
           </label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="sosial"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.sosial && (
+              <div className="invalid-feedback">{errors.sosial.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -384,12 +399,12 @@ const EssayBeasiswa = (props) => {
           <label className="ps-4 fw-bold">
             Saran untuk peneriam Beasiswa Bank Indonesia:
           </label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="saran"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.saran && (
+              <div className="invalid-feedback">{errors.saran.message}</div>
+            )
+          }
         </div>
         <div className="form-floating col-12 mb-3">
           <textarea
@@ -407,12 +422,12 @@ const EssayBeasiswa = (props) => {
             })}
           />
           <label className="ps-4 fw-bold">Kelemahan yang anda miliki:</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="kelemahan"
-            as="div"
-            errors={errors}
-          />
+          {
+            //to validate required
+            errors.kelemahan && (
+              <div className="invalid-feedback">{errors.kelemahan.message}</div>
+            )
+          }
         </div>
         <div className="form-group mb-3 row">
           <div className="form-check ps-3">
@@ -446,10 +461,14 @@ const EssayBeasiswa = (props) => {
                   required: "pilihan ini harus dipilih",
                 })}
               />
-              <label className="form-check-label">Tidak bersedia</label>
+              <label className="form-check-label">Tidak</label>
+
             </div>
-            {errors.genbi && "Jenis beasiswa harus diisi"}
+            {errors.genbi && (
+              <span className="text-danger">Jenis beasiswa harus diisi</span>
+            )}
           </div>
+         
         </div>
         {watchGenbi && (
           <div className="form-floating col-12 mb-3">
@@ -472,12 +491,14 @@ const EssayBeasiswa = (props) => {
             <label className="ps-4 fw-bold">
               {`Masukkan alasan kenapa anda ${watchGenbi} `}
             </label>
-            <ErrorMessage
-              className="invalid-feedback"
-              name="siapMengurus"
-              as="div"
-              errors={errors}
-            />
+            {
+              //to validate required
+              errors.siapMengurus && (
+                <div className="invalid-feedback">
+                  {errors.siapMengurus.message}
+                </div>
+              )
+            }
           </div>
         )}
       </div>
