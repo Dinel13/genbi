@@ -68,6 +68,11 @@ const pendaftarSchema = new Schema(
       type: Boolean,
       requireq: false,
     },
+
+    beasiswaLain: {
+      type: String,
+      requireq: false,
+    },
     cita: {
       type: String,
       requireq: false,

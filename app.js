@@ -55,6 +55,8 @@ const storageAll = multer.diskStorage({
       cb(null, "public/transkip");
     } else if (file.fieldname === "rekening") {
       cb(null, "public/rekening");
+    } else if (file.fieldname === "beasiswaLain") {
+      cb(null, "public/beasiswaLain");
     } else if (file.fieldname === "rekomendasi") {
       cb(null, "public/rekomendasi");
     } else if (file.fieldname === "mampu") {
