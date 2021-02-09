@@ -17,8 +17,9 @@ const Unm = (props) => {
   const adminId = useSelector((state) => state.Auth.adminId);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [pendaftar, setPendaftar] = useState(false);
+  const [pendaftar, setPendaftar] = useState(Unhas);
   const { setActive } = props;
+  
   useEffect(() => {
     setActive("wawUnm");
     fetch("http://localhost:8080/graphql", {
@@ -60,22 +61,24 @@ const Unm = (props) => {
 
   const exportToPdf = () => {
     const UnhasData = Unhas.map((item, index) => {
-      console.log( index);
-        item.no = index+1
-        return {
+      item.no = index + 1;
+      return {
         ...item,
       };
     });
-
-    console.log(UnhasData);
     print({
       printable: UnhasData,
-      properties: ["no","nama", "fakultas", "prodi", "ipk"],
+      properties: ["no", "nama", "fakultas", "prodi", "ipk"],
       type: "json",
       header: "Lolos Wawancara Universitas Negeri Makassar",
-      documentTitle: "pendaftar_Universitas_Negeri_Makassar",
-      ignoreElements: ["notExport", "notExport1"],
     });
+  };
+
+  //to remove data without fecth from  backend
+  const removeFromData = (id) => {
+    let baru = [];
+    pendaftar.map((item) => item.id !== id && baru.push(item));
+    setPendaftar(baru);
   };
 
   return (
@@ -104,11 +107,17 @@ const Unm = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : Unhas ? (
+          ) : pendaftar ? (
             <div id="toCetak">
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2  row-cols-lg-3 g-3">
-                {Unhas.map((item) => (
-                  <Card data={item} key={item.id} url={url} image={image} />
+                {pendaftar.map((item) => (
+                  <Card
+                    data={item}
+                    key={item.id}
+                    url={url}
+                    image={image}
+                    removeFromData={() => removeFromData(item.id)}
+                  />
                 ))}
               </div>
             </div>

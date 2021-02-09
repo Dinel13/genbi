@@ -12,11 +12,14 @@ const Card = (props) => {
   const adminId = useSelector((state) => state.Auth.adminId);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [modall, setModall] = useState(false);
-  const [terima, setTerima] = useState(null);
-  const [data, setData] = useState(props.data);
+  const [nama, setNama] = useState("");
+  const [modalBody, setModalBody] = useState("");
+  const [modalYakin, setModalYakin] = useState("");
   const [pendaftarId, setPendaftarId] = useState(null);
 
-  const batalkanLolosWawancara = async (pendaftarId, terima) => {
+  const { data } = props;
+
+  const batalkanLolosWawancara = async (pendaftarId) => {
     try {
       const responseData = await sendRequest(
         "http://localhost:8080/graphql",
@@ -25,14 +28,8 @@ const Card = (props) => {
           query: ` 
             mutattion {
               lolosWawancara(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
-              adminId : "${adminId}", terima : "${terima}"}) {
+              adminId : "${adminId}", terima : "${false}"}) {
                 nama
-                nim
-                fakultas
-                prodi
-                ipk
-                mampu
-                lolosWawancara
               }
             }
           `,
@@ -42,10 +39,17 @@ const Card = (props) => {
           "Content-Type": "application/json",
         }
       );
-      //induk data harus berubah dan rerender
       console.log(responseData);
-      setData(responseData.data.pendaftar);
-    } catch (err) {}
+      props.removeFromData();
+    } catch (err) {
+      //sementara
+      props.removeFromData();
+      console.log(err);
+    }
+  };
+
+  const kirimEmail = () => {
+    console.log("gg");
   };
 
   return error ? (
@@ -56,11 +60,15 @@ const Card = (props) => {
     <div className="col">
       {modall && (
         <Modal
-          header="Apakah anda yakain"
-          body="harap hati-hati"
+          header="Apakah anda yakin"
+          body={modalBody}
           modall={modall}
           setModall={setModall}
-          onYakin={() => batalkanLolosWawancara(pendaftarId, terima)}
+          onYakin={() => {
+            modalYakin === "batal"
+              ? batalkanLolosWawancara(pendaftarId)
+              : kirimEmail();
+          }}
         />
       )}
       <div className="card shadow">
@@ -81,6 +89,8 @@ const Card = (props) => {
             <p className="card-text">
               <small className="text-muted">{data.ipk}</small>
             </p>
+          </div>
+          <div className="row">
             <div
               className="btn-group  w-100"
               role="group"
@@ -88,37 +98,37 @@ const Card = (props) => {
               aria-label="Basic outlined example"
             >
               <Link
-                to={`${props.url}/${data.id.toString()}`}
+                to={`${props.url}/${data.id?.toString()}`}
                 type="button"
                 className="btn btn-sm  btn-primary"
               >
                 Detail
               </Link>
-              {data.lolosWawancara ? (
-                <button
-                  type="button"
-                  className="btn btn-sm btn-danger"
-                  onClick={() => {
-                    setModall(true);
-                    setPendaftarId(data.id.toString());
-                    setTerima(false);
-                  }}
-                >
-                  Batalkan
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn-sm btn-success"
-                  onClick={() => {
-                    setModall(true);
-                    setPendaftarId(data.id.toString());
-                    setTerima(true);
-                  }}
-                >
-                  Terima
-                </button>
-              )}
+              <button
+                type="button"
+                className="btn btn-sm btn-danger"
+                onClick={() => {
+                  setModall(true);
+                  setPendaftarId(data.id.toString());
+                  setNama(data.nama);
+                  setModalBody(
+                    `Anda akan membatalkan ${data.nama} dari lolos wawancara`
+                  );
+                  setModalYakin("batal");
+                }}
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-success"
+                onClick={() => {
+                  setModall(true);
+                  setPendaftarId(data.id.toString());
+                }}
+              >
+                Email
+              </button>
             </div>
           </div>
         </div>
