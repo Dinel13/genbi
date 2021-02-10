@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Modal from "../../../components/Modal/Modal";
 import ErrorModal from "../../../components/ErrorModal/Error";
 import Loading from "../../../components/Loading/Loading";
@@ -10,44 +9,57 @@ import Loading from "../../../components/Loading/Loading";
 const Tabel = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
   const adminId = useSelector((state) => state.Auth.adminId);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [modall, setModall] = useState(false);
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(props.data);
   const [pendaftarId, setPendaftarId] = useState(null);
   const [terima, setTerima] = useState(null);
 
-  const lolosBerkasHandler = async (pendaftarId, terima) => {
-    try {
-      const responseData = await sendRequest(
-        "http://localhost:8080/graphql",
-        "POST",
-        JSON.stringify({
-          query: ` 
-            mutattion {
-              lolosBerkas(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
-              adminId : "${adminId}", terima : "${terima}"}) {
-                nama
-                nim
-                fakultas
-                prodi
-                ipk
-                mampu
-                lolosBerkas
-              }
+  /* to handel terima atau batal the pendaftar*/
+  const lolosWawancaraHandler = (pendaftarId, terima) => {
+    setIsLoading(true);
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + admin,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: ` 
+          mutation {
+            lolosWawancara(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
+            adminId : "${adminId}", terima : "${terima}"}) {
+              id lolosWawancara
             }
-          `,
-        }),
-        {
-          Authorization: "Bearer " + admin,
-          "Content-Type": "application/json",
+          }
+        `,
+      }),
+    })
+      .then((response) => response.json())
+      .then((resData) => {
+        if (resData.errors) {
+          throw resData.errors[0].message;
         }
-      );
-      setData(responseData.users);
-    } catch (err) {}
+        //to update the whole data with new lolosBerkas data item
+        const newData = data.map((item) => {
+          if (item.id === resData.data.lolosWawancara.id.toString()) {
+            item.lolosBerkas = resData.data.lolosWawancara.lolosWawancara;
+          }
+          return {
+            ...item,
+          };
+        });
+        setData(newData);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(setIsLoading(false));
   };
 
   return error ? (
-    <ErrorModal message={error} setModall={clearError} />
+    <ErrorModal message={error} setModall={setError} />
   ) : isLoading ? (
     <Loading />
   ) : !data ? (
@@ -63,7 +75,7 @@ const Tabel = (props) => {
           body="harap hati-hati"
           modall={modall}
           setModall={setModall}
-          onYakin={() => lolosBerkasHandler(pendaftarId, terima)}
+          onYakin={() => lolosWawancaraHandler(pendaftarId, terima)}
         />
       )}
       <div className="table-responsive">
@@ -144,7 +156,6 @@ const Tabel = (props) => {
                               setPendaftarId(pendaftar.id.toString());
                               setTerima(true);
                             }
-                            // fetchUser(pendaftar.id.toString(), true)
                           }
                         >
                           Terima

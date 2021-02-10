@@ -3,7 +3,6 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import print from "print-js";
 
-import { Unhas } from "../../../Data/WawancaraUnhas";
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/LolosBerkas/Tabel";
 import Modal from "../../../shared/Modal";
@@ -31,30 +30,22 @@ const Unm = (props) => {
         query: ` 
           query { 
             lolosBerkases(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
-              nama
-              nim
-              fakultas
-              prodi
-              ipk
-              mampu
-              lolosBerkas
+              nama nim fakultas nilaiWawancara1 nilaiWawancara2 lolosWawancara id
             }
           }`,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.errors) {
           throw data.errors[0].message;
         }
-        setPendaftar(data);
+        setPendaftar(data.data.lolosBerkases);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
         setIsError(error);
-        console.log(error);
       });
   }, [setActive, adminId, admin]);
 
@@ -63,7 +54,6 @@ const Unm = (props) => {
       printable: "tabelku",
       type: "html",
       header: "Lolos Berkas Universitas Negeri Makassar",
-      documentTitle: "pendaftar_Universitas_Negeri_Makassar",
       ignoreElements: ["notExport", "notExport1"],
     });
   };
@@ -80,11 +70,11 @@ const Unm = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            {Unhas && (
+            {pendaftar.length ? (
               <button className="btn btn-dark" onClick={() => exportToPdf()}>
                 cetak
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
@@ -94,8 +84,8 @@ const Unm = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : Unhas ? (
-            <Tabel data={Unhas} url={url} />
+          ) : pendaftar.length ? (
+            <Tabel data={pendaftar} url={url} />
           ) : (
             <Modal
               header="Mohon maaf, Data masih kosong"

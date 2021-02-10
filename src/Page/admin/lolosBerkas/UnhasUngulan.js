@@ -30,30 +30,22 @@ const UnhasUngul = (props) => {
         query: ` 
           query { 
             lolosBerkases(adminId: "${adminId}" kampus : "unhas" jenis : "ungulan") {
-              nama
-              nim
-              fakultas
-              prodi
-              ipk
-              mampu
-              lolosBerkas
+              nama nim fakultas nilaiWawancara1 nilaiWawancara2 lolosWawancara id
             }
           }`,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.errors) {
           throw data.errors[0].message;
         }
-        setPendaftar(data);
+        setPendaftar(data.data.lolosBerkases);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
         setIsError(error);
-        console.log(error);
       });
   }, [setActive, adminId, admin]);
 
@@ -62,11 +54,10 @@ const UnhasUngul = (props) => {
       printable: "tabelku",
       type: "html",
       header: "Lolos Berkas Universitas Hasanuddin-Unggulan",
-      documentTitle: "pendaftarGenbi",
       ignoreElements: ["notExport", "notExport1"],
     });
   };
-  
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap card-header m  flex-md-nowrap align-items-center py-3  ps-3 pe-4 border-bottom shadow-sm">
@@ -79,11 +70,11 @@ const UnhasUngul = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            {pendaftar && (
+            {pendaftar.length ? (
               <button className="btn btn-dark" onClick={() => exportToPdf()}>
                 cetak
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
@@ -93,7 +84,7 @@ const UnhasUngul = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : pendaftar ? (
+          ) : pendaftar.length ? (
             <Tabel data={pendaftar} url={url} />
           ) : (
             <Modal
@@ -103,7 +94,7 @@ const UnhasUngul = (props) => {
           )}
         </Route>
         <Route path={`${path}/:pendaftarId`}>
-          <Pendaftar  berkas={true}/>
+          <Pendaftar berkas={true} />
         </Route>
       </Switch>
     </>

@@ -29,7 +29,7 @@ const PendaftarUnhasUngulan = (props) => {
         query: ` 
           query { 
             pendaftars(adminId: "${adminId}", kampus : "unhas", jenis : "ungulan") {
-              nama lolosBerkas nim fakultas prodi ipk lolosBerkas id
+              nama nim fakultas prodi ipk lolosBerkas id
             }
           }`,
       }),

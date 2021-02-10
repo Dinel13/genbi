@@ -30,7 +30,7 @@ const PendaftarUnm = (props) => {
         query: ` 
           query { 
             pendaftars(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
-              nama lolosBerkas nim fakultas prodi ipk lolosBerkas
+              nama nim fakultas prodi ipk lolosBerkas id
             }
           }`,
       }),

@@ -30,30 +30,22 @@ const UnhasReguler = (props) => {
         query: ` 
           query { 
             lolosBerkases(adminId: "${adminId}" kampus : "unhas" jenis : "reguler") {
-              nama
-              nim
-              fakultas
-              prodi
-              ipk
-              mampu
-              lolosBerkas
+              nama nim fakultas nilaiWawancara1 nilaiWawancara2 lolosWawancara id
             }
           }`,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.errors) {
           throw data.errors[0].message;
         }
-        setPendaftar(data);
+        setPendaftar(data.data.lolosBerkases);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
         setIsError(error);
-        console.log(error);
       });
   }, [setActive, adminId, admin]);
 
@@ -79,11 +71,11 @@ const UnhasReguler = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            {pendaftar && (
+            {pendaftar.length ? (
               <button className="btn btn-dark" onClick={() => exportToPdf()}>
                 cetak
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
@@ -93,7 +85,7 @@ const UnhasReguler = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : pendaftar ? (
+          ) : pendaftar.length ? (
             <Tabel data={pendaftar} url={url} />
           ) : (
             <Modal
