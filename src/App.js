@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route , Redirect} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./App.css";
@@ -33,7 +33,7 @@ const App = () => {
         AuthAdminWithData(storedDataAdmin.adminId, storedDataAdmin.admin)
       );
     }
-  },[dispatch]);
+  }, [dispatch]);
 
   let routes;
   if (token) {
@@ -44,6 +44,12 @@ const App = () => {
         </Route>
         <Route path="/pendaftaran" exact>
           <Pendaftaran />
+        </Route>
+        <Route path="/signup" exact>
+          <Redirect to="/pendaftaran" />
+        </Route>
+        <Route path="/login" exact>
+          <Redirect to="/pendaftaran" />
         </Route>
         <Route path="*">
           <Defult />
@@ -59,6 +65,9 @@ const App = () => {
         <Route path="/admin">
           <Admin />
         </Route>
+        <Route path="/login-admin" exact>
+          <Redirect to="/admin"/>
+        </Route>
         <Route path="*">
           <Defult />
         </Route>
@@ -72,12 +81,6 @@ const App = () => {
         </Route>
         <Route path="/signup" exact>
           <SignUp />
-        </Route>
-        <Route path="/admin">
-          <Admin />
-        </Route>
-        <Route path="/pendaftaran" exact>
-          <Pendaftaran />
         </Route>
         <Route path="/login" exact>
           <Login />

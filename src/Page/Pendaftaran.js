@@ -63,7 +63,7 @@ const Daftar = (props) => {
   }, [userId, token]);
 
   const onSubmit = async (values) => {
-    console.log(values.ktm.size);
+    console.log(values);
     setIsLoading(true);
     let endpoint = "file";
     const formData = new FormData();
@@ -99,23 +99,37 @@ const Daftar = (props) => {
       const graphqlQuery = {
         query: `
         mutation {
-            createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: "${values.alamatAyah}, alamatIbu: "${values.alamatIbu}",
-            alamatKtp: "${values.alamatKtp}", alamatWali: "${values.alamatWali}, alumni: "${values.alumni}, alumniJabatan: "${values.alumniJabatan}, alumniThn: "${values.alumniThn},
-             anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
-            arahan: ${values.arahan}, beasiswaLain: ${resData.beasiswaLain} bergenbi: ${values.bergenbi}, cita: "${values.cita}", darah: "${values.darah}", email: "${values.email}", fakultas: "${values.fakultas}", foto: "${resData.foto}",
-            genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", ikatan: "${values.ikatan}", instagram: "${values.instagram}",
-            ipk: "${values.ipk}", jenisBeasiswa: "${values.jenisBeasiswa}", kampus: "${values.kampus}",  kelemahan: "${values.kelemahan}", kontribusi:${values.kontribusi}, kosan: "${values.kosan}",
-            ktm: "${resData.ktm}", ktp: "${resData.ktp}", lulus: "${values.lulus}",  mampu: "${resData.mampu}", minat: "${values.minat}",
-            motif: "${values.motif}", nama: "${values.nama}", namaAyah: "${values.namaAyah}", namaIbu: "${values.namaIbu}", namaWali: "${values.namaWali}",
-            nilai: "${resData.transkip}", nim: "${values.nim}", nomorHp: "${values.nomorHp}", nomorWa: "${values.nomorWa}",
-            organisasi: "${values.organisasi}", pangilan: "${values.pangilan}", pantas: "${values.pantas}",
-            pekerjaanAyah: "${values.pekerjaanAyah}", pekerjaanIbu: "${values.pekerjaanIbu}", pekerjaanWali: "${values.pekerjaanWali}",
-            penghasilanAyah: "${values.penghasilanAyah}", penghasilanIbu: "${values.penghasilanIbu}", penghasilanWali: "${values.penghasilanWali}",
-            prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekening: "${resData.rekening}", rekomendasi: "${resData.rekomendasi}", rekomendasi2: "${resData.rekomendasi2}",
-            rencana: "${values.rencana}",saran: "${values.saran}", saudara: "${values.saudara}", semester: "${values.semester}", sertifikat: "${values.sertifikat}",  showWali: "${values.showWali}",
-            siapMengurus: "${values.siapMengurus}", skil: "${values.skil}",  sks: "${values.sks}",sosial: "${values.sosial}",  suku: "${values.suku}",  tangalLahir: "${values.tangalLahir}",
-            teleponAyah: "${values.teleponAyah}", teleponIbu: "${values.teleponIbu}",  teleponWali: "${values.teleponWali}", tempatLahir: "${values.tempatLahir}",
-            thnLulus: "${values.thnLulus}", toeflFile: "${resData.toeflFile}", toeflNilai: "${values.toeflNilai}", usia: "${values.usia}",}) {
+            createPendaftar(pendaftarInput: {agama: "${values.agama}", alamatAyah: 
+            "${values.alamatAyah}", alamatIbu: "${values.alamatIbu}", alamatKtp: 
+            "${values.alamatKtp}", alamatWali: "${values.alamatWali}", alumni: 
+            "${values.alumni}", alumniJabatan: "${values.alumniJabatan}", alumniThn: 
+            "${values.alumniThn}", anakKe: "${values.anakKe}", angkatan: "${values.angkatan}",
+            arahan: "${values.arahan}", beasiswaLain: "${resData.beasiswaLain}", bergenbi: 
+            "${values.bergenbi}", cita: "${values.cita}", darah: "${values.darah}", email: 
+            "${values.email}", fakultas: "${values.fakultas}", foto: "${resData.foto}",
+            genbi: "${values.genbi}", gender: "${values.gender}", hobby: "${values.hobby}", 
+            ikatan: "${values.ikatan}", instagram: "${values.instagram}", ipk: "${values.ipk}", 
+            jenisBeasiswa: "${values.jenisBeasiswa}", kampus: "${values.kampus}",  kelemahan: 
+            "${values.kelemahan}", kontribusi: "${values.kontribusi}", kosan: "${values.kosan}",
+            ktm: "${resData.ktm}", ktp: "${resData.ktp}", lulus: "${values.lulus}",  mampu: 
+            "${resData.mampu}", minat: "${values.minat}", motif: "${values.motif}", nama: 
+            "${values.nama}", namaAyah: "${values.namaAyah}", namaIbu: "${values.namaIbu}", 
+            namaWali: "${values.namaWali}", nilai: "${resData.transkip}", nim: "${values.nim}", 
+            nomorHp: "${values.nomorHp}", nomorWa: "${values.nomorWa}", organisasi: 
+            "${values.organisasi}", pangilan: "${values.pangilan}", pantas: "${values.pantas}",
+            pekerjaanAyah: "${values.pekerjaanAyah}", pekerjaanIbu: "${values.pekerjaanIbu}", 
+            pekerjaanWali: "${values.pekerjaanWali}", penghasilanAyah: "${values.penghasilanAyah}", 
+            penghasilanIbu: "${values.penghasilanIbu}", penghasilanWali: "${values.penghasilanWali}",
+            prestasi: "${values.prestasi}", prodi: "${values.prodi}", rekening: "${resData.rekening}", 
+            rekomendasi: "${resData.rekomendasi}", rekomendasi2: "${resData.rekomendasi2}",
+            rencana: "${values.rencana}", saran: "${values.saran}", saudara: "${values.saudara}", 
+            semester: "${values.semester}", sertifikat: "${values.sertifikat}",  showWali: 
+            "${values.showWali}", siapMengurus: "${values.siapMengurus}", skil: "${values.skil}",  
+            sks: "${values.sks}",sosial: "${values.sosial}",  suku: "${values.suku}",  tangalLahir: 
+            "${values.tangalLahir}", teleponAyah: "${values.teleponAyah}", teleponIbu: 
+           "${values.teleponIbu}",  teleponWali: "${values.teleponWali}", tempatLahir: 
+           "${values.tempatLahir}", thnLulus: "${values.thnLulus}", toeflFile: 
+            "${resData.toeflFile}", toeflNilai: "${values.toeflNilai}", usia: "${values.usia}"}) {
               ${PENDAFTAR_FIElD}
             }
           }

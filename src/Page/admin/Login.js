@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch } from "react-redux";
 
 import { LoginAdmin } from "../../store/action/AuthAction";
@@ -44,12 +43,14 @@ export default function FormLogin() {
                         },
                       })}
                     />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="email"
-                      as="div"
-                      errors={errors}
-                    />
+                     {
+                    //to validate required
+                    errors.email && (
+                      <div className="invalid-feedback">
+                        {errors.email.message}
+                      </div>
+                    )
+                  }
                   </div>
                   <div className="form-group mb-3">
                     <label>Password</label>
@@ -68,12 +69,14 @@ export default function FormLogin() {
                         },
                       })}
                     />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="password"
-                      as="div"
-                      errors={errors}
-                    />
+                     {
+                    //to validate required
+                    errors.password && (
+                      <div className="invalid-feedback">
+                        {errors.password.message}
+                      </div>
+                    )
+                  }
                   </div>
                   <div className="row justify-content-center mt-4">
                     <button

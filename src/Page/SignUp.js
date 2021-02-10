@@ -1,9 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch } from "react-redux";
 
-import { Signup , SignupAdmin} from "../store/action/AuthAction";
+import { Signup, SignupAdmin } from "../store/action/AuthAction";
 import { Link } from "react-router-dom";
 
 export default function FormSignUp() {
@@ -11,7 +10,7 @@ export default function FormSignUp() {
   const { register, errors, handleSubmit, getValues } = useForm();
 
   const onSubmit = (values) => {
-    dispatch(SignupAdmin(values.email, values.password, values.nama));
+    dispatch(Signup(values.email, values.password, values.nama));
     console.log(values);
   };
 
@@ -38,12 +37,14 @@ export default function FormSignUp() {
                       required: "Mama anda wajib dimasukkan",
                     })}
                   />
-                  <ErrorMessage
-                    className="invalid-feedback"
-                    name="nama"
-                    as="div"
-                    errors={errors}
-                  />
+                  {
+                    //to validate required
+                    errors.nama && (
+                      <div className="invalid-feedback">
+                        {errors.nama.message}
+                      </div>
+                    )
+                  }
                 </div>
                 <div className="form-group mb-3">
                   <label>Alamat E-mail</label>
@@ -61,12 +62,14 @@ export default function FormSignUp() {
                       },
                     })}
                   />
-                  <ErrorMessage
-                    className="invalid-feedback"
-                    name="email"
-                    as="div"
-                    errors={errors}
-                  />
+                  {
+                    //to validate required
+                    errors.email && (
+                      <div className="invalid-feedback">
+                        {errors.email.message}
+                      </div>
+                    )
+                  }
                 </div>
                 <div className="form-group mb-3">
                   <label className="">Password</label>
@@ -85,12 +88,14 @@ export default function FormSignUp() {
                       },
                     })}
                   />
-                  <ErrorMessage
-                    className="invalid-feedback"
-                    name="password"
-                    as="div"
-                    errors={errors}
-                  />
+                  {
+                    //to validate required
+                    errors.password && (
+                      <div className="invalid-feedback">
+                        {errors.nama.password}
+                      </div>
+                    )
+                  }
                 </div>
                 <div className="form-group mb-3">
                   <label className="">Ulangi Password</label>
@@ -111,12 +116,14 @@ export default function FormSignUp() {
                     })}
                   />
 
-                  <ErrorMessage
-                    className="invalid-feedback"
-                    name="password2"
-                    as="div"
-                    errors={errors}
-                  />
+                  {
+                    //to validate required
+                    errors.password2 && (
+                      <div className="invalid-feedback">
+                        {errors.nama.password2}
+                      </div>
+                    )
+                  }
                   {errors.password2?.type === "validate" && (
                     <span className="invalid-feedback">
                       password harus sama

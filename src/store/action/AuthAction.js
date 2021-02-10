@@ -47,7 +47,7 @@ export const Signup = (email, password, name) => {
     const graphqlQuery = {
       query: `
         mutation {
-          createAdmin(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
+          createUser(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
             _id
             name
             email
@@ -74,8 +74,8 @@ export const Signup = (email, password, name) => {
         AuthWithData(
           resData.data.createUser._id,
           resData.data.createUser.token,
-          resData.data.login.name,
-          resData.data.login.email
+          resData.data.createUser.name,
+          resData.data.createUser.email
         )
       );
     } catch (err) {
@@ -160,7 +160,7 @@ export const SignupAdmin = (email, password, name) => {
         AuthAdminWithData(
           resData.data.createAdmin._id,
           resData.data.createAdmin.admin,
-          resData.data.loginAdmin.name
+          resData.data.createAdmin.name
         )
       );
     } catch (err) {

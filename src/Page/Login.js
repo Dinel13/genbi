@@ -1,19 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch } from "react-redux";
 
 import { Login } from "../store/action/AuthAction";
 import { Link, useHistory } from "react-router-dom";
 
 const FormLogin = (props) => {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = (values) => {
     dispatch(Login(values.email, values.password));
-    history.replace("/pendaftaran")
+    history.replace("/pendaftaran");
   };
   return (
     <div>
@@ -61,12 +60,14 @@ const FormLogin = (props) => {
                         },
                       })}
                     />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="email"
-                      as="div"
-                      errors={errors}
-                    />
+                    {
+                      //to validate required
+                      errors.email && (
+                        <div className="invalid-feedback">
+                          {errors.email.message}
+                        </div>
+                      )
+                    }
                   </div>
                   <div className="form-group mb-3">
                     <label>Password</label>
@@ -85,12 +86,14 @@ const FormLogin = (props) => {
                         },
                       })}
                     />
-                    <ErrorMessage
-                      className="invalid-feedback"
-                      name="password"
-                      as="div"
-                      errors={errors}
-                    />
+                    {
+                      //to validate required
+                      errors.password && (
+                        <div className="invalid-feedback">
+                          {errors.password.email}
+                        </div>
+                      )
+                    }
                   </div>
                   <div className="row justify-content-center mt-4">
                     <button
