@@ -36,6 +36,10 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    alamatKtp: {
+      type: String,
+      requireq: false,
+    },
     alamatWali: {
       type: String,
       requireq: false,
@@ -65,7 +69,7 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     bergenbi: {
-      type: Boolean,
+      type: String,
       requireq: false,
     },
 
@@ -258,6 +262,10 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     semester: {
+      type: String,
+      requireq: false,
+    },
+    sertifikat: {
       type: String,
       requireq: false,
     },

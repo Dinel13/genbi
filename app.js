@@ -51,12 +51,10 @@ const storageAll = multer.diskStorage({
       cb(null, "public/foto");
     } else if (file.fieldname === "ktp") {
       cb(null, "public/ktp");
-    } else if (file.fieldname === "transkip") {
-      cb(null, "public/transkip");
-    } else if (file.fieldname === "rekening") {
+    }  else if (file.fieldname === "rekening") {
       cb(null, "public/rekening");
     } else if (file.fieldname === "beasiswaLain") {
-      cb(null, "public/beasiswaLain");
+      cb(null, "public/blain");
     } else if (file.fieldname === "rekomendasi") {
       cb(null, "public/rekomendasi");
     } else if (file.fieldname === "mampu") {
@@ -109,6 +107,18 @@ app.put(
   }).fields([
     {
       name: "rekomendasi",
+      maxCount: 1,
+    },
+    {
+      name: "rekomendasi2",
+      maxCount: 1,
+    },
+    {
+      name: "toeflFile",
+      maxCount: 1,
+    },
+    {
+      name: "beasiswaLain",
       maxCount: 1,
     },
     {
@@ -204,8 +214,9 @@ app.put(
       maxCount: 1,
     },
   ]),
-  (req, res, next) => {
-    if (!req.isAuth) {
+  (error, req, res, next) => {
+    console.log(error);
+    if (!req.isAuth) { 
       throw new Error("Not authenticated!");
     }
     if (!req.files) {
@@ -244,7 +255,7 @@ const mailOptions = {
   text: "Dudes, we really need your money.",
 };
 
-app.use("/eamil", (req, res, next) => {
+app.use("/email", (req, res, next) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
@@ -284,9 +295,12 @@ app.use((error, req, res, next) => {
 });
 
 //make the server
+const url = 'mongodb://127.0.0.1:27017/genbi';
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.MONGGODB_USER_PASSWORD}@cluster0.enucz.mongodb.net/genbi?retryWrites=true&w=majority`
+  .connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true}
+  //  `mongodb+srv://${process.env.MONGGODB_USER_PASSWORD}@cluster0.enucz.mongodb.net/genbi?retryWrites=true&w=majority`
   )
   .then((result) => {
     app.listen(process.env.PORT || 8080);

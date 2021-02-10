@@ -8,6 +8,7 @@ const Pendaftar = require("../models/pendaftar");
 
 module.exports = {
   createUser: async function ({ userInput }, req) {
+    console.log(userInput.name);
     const errors = [];
     if (!validator.isEmail(userInput.email)) {
       errors.push({ message: "E-Mail is invalid." });
@@ -159,24 +160,28 @@ module.exports = {
       throw error;
     }
 
-    const user = await User.findById(req.userId);
-    if (!user) {
-      const error = new Error("Invalid user.");
-      error.code = 401;
-      throw error;
+    try {
+      const user = await User.findById(req.userId);
+      if (!user) {
+        const error = new Error("Invalid user.");
+        error.code = 401;
+        throw error;
+      }
+      const pendaftar = new Pendaftar({
+        ...pendaftarInput,
+      });
+      const createdPendaftar = await pendaftar.save();
+      user.pendaftar = createdPendaftar;
+      await user.save();
+      return {
+        ...createdPendaftar._doc,
+        id: createdPendaftar._id.toString(),
+        createdAt: createdPendaftar.createdAt.toISOString(),
+        updatedAt: createdPendaftar.updatedAt.toISOString(),
+      };
+    } catch (error) {
+      console.log(error);
     }
-    const pendaftar = new Pendaftar({
-      ...pendaftarInput,
-    });
-    const createdPendaftar = await pendaftar.save();
-    user.pendaftar = createdPendaftar;
-    await user.save();
-    return {
-      ...createdPendaftar._doc,
-      _id: createdPendaftar._id.toString(),
-      createdAt: createdPendaftar.createdAt.toISOString(),
-      updatedAt: createdPendaftar.updatedAt.toISOString(),
-    };
   },
   userIsRegister: async function ({ userId }, req) {
     if (!req.isAuth) {
@@ -336,7 +341,10 @@ module.exports = {
     }
   },
   //to add nilai Wawancara
-  addNilaiWawancara: async function ({ pendaftarId, adminId, untuk, nilai }, req) {
+  addNilaiWawancara: async function (
+    { pendaftarId, adminId, untuk, nilai },
+    req
+  ) {
     if (!req.isAdmin) {
       const error = new Error("anda bukan admin!");
       error.code = 401;
