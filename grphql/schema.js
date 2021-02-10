@@ -236,7 +236,7 @@ module.exports = buildSchema(`
         loginAdmin(email : String!, password : String!): AdminData!
         userIsRegister(userId : String!): Pendaftar!
         pendaftar(pendaftarId : String!): Pendaftar!
-        pendaftars(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
+        pendaftars(adminId : String!, kampus : String!, jenis : String!): [Pendaftar!]
         lolosBerkases(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
         lolosWawancaras(adminId : String!, kampus : String!, jenis : String): [Pendaftar!]
     }

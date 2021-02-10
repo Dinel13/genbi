@@ -218,7 +218,7 @@ module.exports = {
     }
   },
   pendaftar: async function ({ pendaftarId }, req) {
-    if (!req.isAuth || !req.isAdmin) {
+    if (!req.isAdmin) {
       const error = new Error("Not authenticated!");
       error.code = 401;
       throw error;
@@ -246,7 +246,7 @@ module.exports = {
     } else {
       const findPendaftar = await Pendaftar.find({
         kampus: kampus,
-        jenis: jenis,
+        jenisBeasiswa: jenis,
       });
       if (!findPendaftar) {
         const error = new Error("pendaftar tidak ditemukan");
@@ -312,31 +312,37 @@ module.exports = {
     }
   },
   //to make pendaftar lolos berkas or not
-  lolosBerkas: async function ({ pendaftarId, adminId, terima }, req) {
+  lolosBerkas: async function ({ pendaftarAndAdminInput }, req) {
     if (!req.isAdmin) {
       const error = new Error("anda bukan admin!");
       error.code = 401;
       throw error;
     }
     try {
-      const findAdmin = await Admin.findById(adminId);
+      const findAdmin = await Admin.findById(pendaftarAndAdminInput.adminId);
       if (!findAdmin) {
         const error = new Error("admin tidak ditemukan");
         error.code = 404;
         throw error;
       } else {
-        const findPendaftar = await Pendaftar.findById(pendaftarId);
+        const findPendaftar = await Pendaftar.findById(
+          pendaftarAndAdminInput.pendaftarId
+        );
         if (!findPendaftar) {
           const error = new Error("pendaftar tidak ditemukan");
           error.code = 404;
           throw error;
         } else {
-          findPendaftar.lolosBerkas = terima;
+          findPendaftar.lolosBerkas = pendaftarAndAdminInput.terima;
           const result = await findPendaftar.save();
-          return result;
+          return {
+            ...result._doc,
+            id: result._id.toString(),
+          };
         }
       }
     } catch (error) {
+      console.log(error);
       throw error;
     }
   },
