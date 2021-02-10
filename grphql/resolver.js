@@ -244,10 +244,17 @@ module.exports = {
       error.code = 404;
       throw error;
     } else {
-      const findPendaftar = await Pendaftar.find({
-        kampus: kampus,
-        jenisBeasiswa: jenis,
-      });
+      let findPendaftar;
+      if (kampus === "unhas") {
+        findPendaftar = await Pendaftar.find({
+          kampus: kampus,
+          jenisBeasiswa: jenis,
+        });
+      } else {
+        findPendaftar = await Pendaftar.find({
+          kampus: kampus,
+        });
+      }
       if (!findPendaftar) {
         const error = new Error("pendaftar tidak ditemukan");
         error.code = 404;
@@ -270,11 +277,19 @@ module.exports = {
       error.code = 404;
       throw error;
     } else {
-      const findPendaftar = await Pendaftar.find({
-        kampus: kampus,
-        jenis: jenis,
-        lolosBerkas: true,
-      });
+      let findPendaftar;
+      if (kampus === "unhas") {
+        findPendaftar = await Pendaftar.find({
+          kampus: kampus,
+          jenisBeasiswa: jenis,
+          lolosBerkas: true,
+        });
+      } else {
+        findPendaftar = await Pendaftar.find({
+          kampus: kampus,
+          lolosBerkas: true,
+        });
+      }
       if (!findPendaftar) {
         const error = new Error("pendaftar tidak ditemukan");
         error.code = 404;
@@ -297,11 +312,20 @@ module.exports = {
       error.code = 404;
       throw error;
     } else {
-      const findPendaftar = await Pendaftar.find({
-        kampus: kampus,
-        jenis: jenis,
-        lolosWawancara: true,
-      });
+      let findPendaftar;
+      if (kampus === "unhas") {
+        findPendaftar = await Pendaftar.find({
+          kampus: kampus,
+          jenis: jenis,
+          lolosWawancara: true,
+        });
+      } else {
+        findPendaftar = await Pendaftar.find({
+          kampus: kampus,
+          lolosWawancara: true,
+        });
+      }
+
       if (!findPendaftar) {
         const error = new Error("pendaftar tidak ditemukan");
         error.code = 404;
@@ -348,7 +372,7 @@ module.exports = {
   },
   //to add nilai Wawancara
   addNilaiWawancara: async function (
-    { pendaftarId, adminId, untuk, nilai },
+    { nilaiWawancaraInput},
     req
   ) {
     if (!req.isAdmin) {
@@ -357,22 +381,22 @@ module.exports = {
       throw error;
     }
     try {
-      const findAdmin = await Admin.findById(adminId);
+      const findAdmin = await Admin.findById(nilaiWawancaraInput.adminId);
       if (!findAdmin) {
         const error = new Error("admin tidak ditemukan");
         error.code = 404;
         throw error;
       } else {
-        const findPendaftar = await Pendaftar.findById(pendaftarId);
+        const findPendaftar = await Pendaftar.findById(nilaiWawancaraInput.pendaftarId);
         if (!findPendaftar) {
           const error = new Error("pendaftar tidak ditemukan");
           error.code = 404;
           throw error;
         } else {
           if (untuk === "nilaiWawancara1") {
-            findPendaftar.nilaiWawancara1 = nilai;
+            findPendaftar.nilaiWawancara1 = nilaiWawancaraInput.nilai;
           } else {
-            findPendaftar.nilaiWawancara2 = nilai;
+            findPendaftar.nilaiWawancara2 = nilaiWawancaraInput.nilai;
           }
           const result = await findPendaftar.save();
           return result;
@@ -383,26 +407,26 @@ module.exports = {
     }
   },
   //to make pendaftar lolos Wawancara or not
-  lolosWawancara: async function ({ pendaftarId, adminId, terima }, req) {
+  lolosWawancara: async function ({  pendaftarAndAdminInput }, req) {
     if (!req.isAdmin) {
       const error = new Error("anda bukan admin!");
       error.code = 401;
       throw error;
     }
     try {
-      const findAdmin = await Admin.findById(adminId);
+      const findAdmin = await Admin.findById( pendaftarAndAdminInput.adminId);
       if (!findAdmin) {
         const error = new Error("admin tidak ditemukan");
         error.code = 404;
         throw error;
       } else {
-        const findPendaftar = await Pendaftar.findById(pendaftarId);
+        const findPendaftar = await Pendaftar.findById( pendaftarAndAdminInput.pendaftarId);
         if (!findPendaftar) {
           const error = new Error("pendaftar tidak ditemukan");
           error.code = 404;
           throw error;
         } else {
-          findPendaftar.lolosWawancara = terima;
+          findPendaftar.lolosWawancara =  pendaftarAndAdminInput.terima;
           const result = await findPendaftar.save();
           return result;
         }

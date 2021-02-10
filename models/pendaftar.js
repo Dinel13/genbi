@@ -181,6 +181,14 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
+    nilaiWawancara1: {
+      type: Number,
+      requireq: false,
+    },
+    nilaiWawancara2: {
+      type: Number,
+      requireq: false,
+    },
     nim: {
       type: String,
       requireq: false,
