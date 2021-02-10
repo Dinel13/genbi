@@ -18,7 +18,7 @@ const Pendaftar = (props) => {
   const [error2, setError2] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [pendaftar, setPendaftar] = useState({ nilai1: 3 , pangilan : "udin"});
+  const [pendaftar, setPendaftar] = useState({ nilai1: 3, pangilan: "udin" });
 
   /* to print pdf
   const { setElementId, setPdfHeader } = props;
@@ -163,9 +163,9 @@ const Pendaftar = (props) => {
           <div className="sticky-top" style={{ maxWidth: "380px" }}>
             <figure className="figure p-3 rounded shadow  ">
               <img
-                src={image}
+                src={"http://localhost:8080/" + pendaftar.foto}
                 className="figure-img img-fluid rounded"
-                alt="..."
+                alt={pendaftar.nama}
               />
               <figcaption className="figure-caption text-center">
                 Pas Foto <span className="fw-bold">{pendaftar.pangilan}</span>
@@ -294,12 +294,14 @@ const Pendaftar = (props) => {
               <p className="fw-bold col-3">{pendaftar.darah}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Usia</p>
+              <p className="fw-bold col-3">{pendaftar.usia}</p>
               <p className="pe-1 col-3">Suku Bangsa</p>
-              <p className="fw-bold col-9">{pendaftar.suku}</p>
+              <p className="fw-bold col-3">{pendaftar.suku}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-              <p className="pe-1 col-3">Tempat dan tanggal lahir</p>
-              <p className="fw-bold col-9">
+              <p className="pe-1 col-4">Tempat dan tanggal lahir</p>
+              <p className="fw-bold col-8">
                 {pendaftar.tempatLahir},{pendaftar.tangalLahir}
               </p>
             </div>
@@ -312,27 +314,33 @@ const Pendaftar = (props) => {
 
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Hobi</p>
-              <p className="fw-bold col-9">{pendaftar.hobby}</p>
-            </div>
-            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="fw-bold col-3">
+                {pendaftar.hobby + "fsdfsd fdsfsdffsaf fasf"}
+              </p>
               <p className="pe-1 col-3">Cita-cita</p>
-              <p className="fw-bold col-9">{pendaftar.cita}</p>
+              <p className="fw-bold col-3">
+                {pendaftar.cita + "sfgsdfs dsfas"}
+              </p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Alamat selama berkuliah</p>
               <p className="fw-bold col-9">{pendaftar.kosan}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Alamat selama berkuliah</p>
+              <p className="fw-bold col-9">{pendaftar.alamatKtp}</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Nomor Telepon</p>
-              <p className="pe-1 col-3 fw-bold ">{pendaftar.noHp}</p>
+              <p className="pe-1 col-3 fw-bold ">{pendaftar.nomorHp}</p>
               <p className="pe-1 col-3">Nomor Wa</p>
-              <p className="fw-bold col-3">{pendaftar.noWa}</p>
+              <p className="fw-bold col-3">{pendaftar.nomorWa}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Akun Instagram</p>
               <p className="fw-bold col-3">{pendaftar.instagram}</p>
               <p className="pe-1 col-3">Alamat email</p>
-              <p className="fw-bold pe-1 col-3">salahuddin_hafid@gmail.com</p>
+              <p className="fw-bold pe-1 col-3">{pendaftar.email}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Minat atau Bakat</p>
@@ -369,7 +377,7 @@ const Pendaftar = (props) => {
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Nomor Telepon ibu</p>
-              <p className="fw-bold col-9">{pendaftar.teleonIbu}</p>
+              <p className="fw-bold col-9">{pendaftar.teleponIbu}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Alamat ibu</p>
@@ -381,6 +389,36 @@ const Pendaftar = (props) => {
               <p className="pe-1 col-3">Penghasilan ibu</p>
               <p className="fw-bold col-3">{pendaftar.penghasilanIbu}</p>
             </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Orangtua bukan wali</p>
+              <p className="pe-1 col-9 fw-bold ">
+                {pendaftar.showWali === "iya" ? "Benar" : "Tidak"}
+              </p>
+            </div>
+            {pendaftar.showWali === "iya" && (
+              <>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Nama Wali</p>
+                  <p className="fw-bold col-9">{pendaftar.namaWali}</p>
+                </div>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Nomor Telepon Wali</p>
+                  <p className="fw-bold col-9">{pendaftar.teleponWali}</p>
+                </div>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Alamat Wali</p>
+                  <p className="fw-bold col-9">{pendaftar.alamatWali}</p>
+                </div>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Pekerjaan Wali</p>
+                  <p className="pe-1 col-3 fw-bold ">
+                    {pendaftar.pekerjaanWali}
+                  </p>
+                  <p className="pe-1 col-3">Penghasilan Wali</p>
+                  <p className="fw-bold col-3">{pendaftar.penghasilanWali}</p>
+                </div>
+              </>
+            )}
           </div>
           <div className="card shadow rounded list-group list-group-flush mb-5">
             <div className="card-header bg-secondary p-3 pb-2">
@@ -403,10 +441,16 @@ const Pendaftar = (props) => {
               <p className="fw-bold col-3">{pendaftar.ipk}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Semester sekarang</p>
+              <p className="pe-1 col-3 fw-bold ">{pendaftar.semester}</p>
+              <p className="pe-1 col-3">SKS yang dilulusi</p>
+              <p className="fw-bold col-3">{pendaftar.sks}</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Tahun masuk kuliah</p>
-              <p className="pe-1 col-3 fw-bold ">2018</p>
+              <p className="pe-1 col-3 fw-bold ">{pendaftar.angkatan}</p>
               <p className="pe-1 col-3">Tahun rencana lulus</p>
-              <p className="fw-bold col-3">{pendaftar.lulus}</p>
+              <p className="fw-bold col-3">{pendaftar.thnLulus}</p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Prestasi selama berkuliah</p>
@@ -424,6 +468,44 @@ const Pendaftar = (props) => {
               <h3 className=" text-white fw-bold">Essay Beasiswa</h3>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              {pendaftar.kampus === "unhas" && (
+                <>
+                  <p className="pe-1 col-3">Schema Beasiswa</p>
+                  <p className="pe-1 col-3 fw-bold ">
+                    {pendaftar.jenisBeasiswa}
+                  </p>
+                </>
+              )}
+              {pendaftar.jenisBeasiswa === "ungulan" && (
+                <>
+                  <p className="pe-1 col-3">Nilai toefl</p>
+                  <p className="pe-1 col-3 fw-bold ">{pendaftar.toeflNilai}</p>
+                </>
+              )}
+              <p className="pe-1 col-4">
+                Sedang Menerima Beasiswa lain atau Ikatan Dinas
+              </p>
+              <p className="fw-bold col-2 text-uppercase">{pendaftar.ikatan}</p>
+              <p className="pe-1 col-4">
+                Pernah menerima beasiswa Bank Indonesia
+              </p>
+              <p className="fw-bold col-2 text-uppercase">{pendaftar.alumni}</p>
+            </div>
+            {pendaftar.alumni === "ya" && (
+              <>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Tahun menerima beasiswa BI</p>
+                  <p className="pe-1 col-3 fw-bold ">{pendaftar.alumniThn}</p>
+                  <p className="pe-1 col-3">Jabatan di Genbi</p>
+                  <p className="fw-bold col-3">{pendaftar.alumniJabatan}</p>
+                </div>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Pengalaman menerima Beasiswa BI</p>
+                  <p className="fw-bold col-9">{pendaftar.bergenbi}</p>
+                </div>
+              </>
+            )}
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Alasan mendaftar beasiswa</p>
               <p className="fw-bold col-9">{pendaftar.motif}</p>
             </div>
@@ -439,9 +521,128 @@ const Pendaftar = (props) => {
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3 pe-1">Rencana setelah lulus kuliah</p>
-              <p className="fw-bold col-9">
-                lorem v fdvfd fdvf fdfvwcwc f dwvd
+              <p className="fw-bold col-9">{pendaftar.lulus}</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3 pe-1">
+                Aktivitas sosial yang biasa di lakukan
               </p>
+              <p className="fw-bold col-9">{pendaftar.sosial}</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3 pe-1">
+                Saran untuk peneriam Beasiswa Bank Indonesia
+              </p>
+              <p className="fw-bold col-9">{pendaftar.saran}</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3 pe-1">Kelemahan yang anda miliki</p>
+              <p className="fw-bold col-9">{pendaftar.kelemahan}</p>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3 pe-1">
+                Alasan {pendaftar.genbi} mengurus di Genbi
+              </p>
+              <p className="fw-bold col-9">{pendaftar.siapMengurus}</p>
+            </div>
+          </div>
+          <div className="card shadow rounded list-group list-group-flush mb-5">
+            <div className="card-header bg-secondary p-3 pb-2">
+              <h3 className=" text-white fw-bold">File Pendukung</h3>
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">KTP</p>
+              <img
+                src={"http://localhost:8080/" + pendaftar.ktp}
+                className="figure-img img-fluid rounded col-9"
+                alt={pendaftar.nama}
+              />
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">KTM</p>
+              <img
+                src={"http://localhost:8080/" + pendaftar.ktm}
+                className="figure-img img-fluid rounded col-9"
+                alt={pendaftar.nama}
+              />
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Transkip Nilai</p>
+              <img
+                src={"http://localhost:8080/" + pendaftar.nilai}
+                className="figure-img img-fluid rounded col-9"
+                alt={pendaftar.nama}
+              />
+            </div>
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Buku rekening</p>
+              <img
+                src={"http://localhost:8080/" + pendaftar.rekening}
+                className="figure-img img-fluid rounded col-9"
+                alt={pendaftar.nama}
+              />
+            </div>{" "}
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Surat tidak menerima beasiswa lain</p>
+              <img
+                src={"http://localhost:8080/" + pendaftar.beasiswaLain}
+                className="figure-img img-fluid rounded col-9"
+                alt={pendaftar.nama}
+              />
+            </div>
+            {pendaftar.jenisBeasiswa === "ungulan" ? (
+              <>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Surat rekomendasi satu</p>
+                  <img
+                    src={"http://localhost:8080/" + pendaftar.rekomendasi}
+                    className="figure-img img-fluid rounded col-9"
+                    alt={pendaftar.nama}
+                  />
+                </div>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Surat rekomendasi dua</p>
+                  <img
+                    src={"http://localhost:8080/" + pendaftar.dua}
+                    className="figure-img img-fluid rounded col-9"
+                    alt={pendaftar.nama}
+                  />
+                </div>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Sertifikat toefl</p>
+                  <img
+                    src={"http://localhost:8080/" + pendaftar.toeflFile}
+                    className="figure-img img-fluid rounded col-9"
+                    alt={pendaftar.nama}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Surat Rekomendasi</p>
+                  <img
+                    src={"http://localhost:8080/" + pendaftar.rekomendasi}
+                    className="figure-img img-fluid rounded col-9"
+                    alt={pendaftar.nama}
+                  />
+                  <a href={"http://localhost:8080/" + pendaftar.rekomendasi}>
+                    link
+                  </a>
+                </div>
+                <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+                  <p className="pe-1 col-3">Surat Keterangan tidak mampu</p>
+                  <img
+                    src={"http://localhost:8080/" + pendaftar.mampu}
+                    className="figure-img img-fluid rounded col-9"
+                    alt={pendaftar.nama}
+                  />
+                </div>
+              </>
+            )}
+            <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
+              <p className="pe-1 col-3">Link sertifikat prestasi</p>
+              <p className="fw-bold col-9">{pendaftar.sertifikat}</p>
             </div>
           </div>
         </div>

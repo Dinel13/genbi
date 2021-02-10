@@ -417,6 +417,7 @@ const FilePendukung = (props) => {
               <div className="col">
                 <input
                   name="sertifikat"
+                  type="text"
                   placeholder="Link sertifikat  prestasi"
                   className={`form-control ${
                     errors.sertifikat ? "is-invalid" : ""
@@ -424,7 +425,6 @@ const FilePendukung = (props) => {
                   ref={register({
                     required:
                       "jika tidak memiliki sertifikat prestasi masukkan angka 0",
-                    setValueAs: (value) => parseInt(value),
                   })}
                 />
                 {

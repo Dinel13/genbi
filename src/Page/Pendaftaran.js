@@ -200,7 +200,7 @@ const Daftar = (props) => {
     <Loading />
   ) : pendaftar ? (
     <>
-      <Modal
+      <Modal notFull={true}
         header="Selamat, Pendaftaran anda berhasil"
         body="Pengumuman dapat di lihat di laman ini dan email anda pada
     tanggal 20 Februari 2020"

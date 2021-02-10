@@ -1,56 +1,82 @@
 export const PENDAFTAR_FIElD = `
-    id
-    jenisBeasiswa  
-    lolosBerkas
-    lolosWawancara
-    nilaiWawancara1  
-    nilaiWawancara2  
-    agama 
-    alamatAyah 
-    alamatIbu 
-    anakKe 
-    angkatan 
-    arahan
-    cita 
-    darah 
-    fakultas 
-    genbi 
-    gender 
-    hobby 
-    instagram 
-    ipk 
-    kampus 
-    kontribusi
-    kosan 
-    ktm 
-    lulus 
-    mampu 
-    minat 
-    motif 
-    nama 
-    namaAyah 
-    namaIbu 
-    nilai 
-    nim 
-    nomorHp 
-    nomorWa 
-    organisasi 
-    pangilan 
-    pantas 
-    pekerjaanAyah 
-    pekerjaanIbu 
-    penghasilanAyah 
-    penghasilanIbu 
-    prestasi 
-    prodi 
-    rekomendasi 
-    rencana 
-    saudara 
-    showWali 
-    siapMengurus 
-    skil 
-    suku 
-    tangalLahir 
-    teleponAyah 
-    teleponIbu 
-    tempatLahir `;
+id jenisBeasiswa 
+lolosBerkas 
+lolosWawancara
+nilaiWawancara1
+nilaiWawancara2
+agama
+alamatAyah
+alamatIbu
+alamatKtp
+alamatWali
+alumni
+alumniJabatan
+alumniThn
+anakKe
+angkatan
+arahan
+beasiswaLain
+bergenbi
+cita
+darah
+email
+fakultas
+foto
+genbi
+gender
+hobby
+ikatan
+instagram
+ipk
+kampus
+kelemahan
+kontribusi
+kosan
+ktm
+ktp
+lulus
+mampu
+minat
+motif
+nama
+namaAyah
+namaIbu
+namaWali
+nilai
+nim
+nomorHp
+nomorWa
+organisasi
+pangilan
+pantas
+pekerjaanAyah
+pekerjaanIbu
+pekerjaanWali
+penghasilanAyah
+penghasilanIbu
+penghasilanWali
+prestasi
+prodi
+rekomendasi
+rekomendasi2
+rekening
+rencana
+saran
+saudara
+sertifikat
+semester
+showWali
+siapMengurus
+skil
+sks
+sosial
+suku
+tangalLahir
+teleponAyah
+teleponIbu
+teleponWali
+tempatLahir
+thnLulus
+toeflNilai
+toeflFile 
+usia`;

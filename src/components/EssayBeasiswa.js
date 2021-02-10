@@ -101,7 +101,7 @@ const EssayBeasiswa = (props) => {
         <div className="form-group mb-3 row">
           <div className="form-check ps-3">
             <label className="col-form-label fw-bold col-md-6">
-              Tidak Sedang Menerima Beasiswa atau Ikatan Dinas
+              Sedang menerima beasiswa lain atau ikatan dinas
             </label>
             <div className="form-check form-check-inline">
               <input
@@ -465,7 +465,7 @@ const EssayBeasiswa = (props) => {
 
             </div>
             {errors.genbi && (
-              <span className="text-danger">Jenis beasiswa harus diisi</span>
+              <span className="text-danger">Hrus memilih salah-satu</span>
             )}
           </div>
          

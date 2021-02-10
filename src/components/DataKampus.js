@@ -186,9 +186,10 @@ const DataKampus = (props) => {
             })}
           >
             <option selected></option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
           </select>
           <label className="ps-4 fw-bold">Tahun Rencana Lulus</label>
           {
@@ -197,31 +198,7 @@ const DataKampus = (props) => {
               <div className="invalid-feedback">{errors.thnLulus.message}</div>
             )
           }
-        </div>
-        {/*<div className="form-floating col-md-6 mb-3">
-          <select
-            name="jenjang"
-            aria-label="Floating label select example"
-            className={`form-select ${errors.jenjang ? "is-invalid" : ""}`}
-            ref={register({
-              required: "Tahun rencana lulus harus diisi",
-            })}
-          >
-            <option selected></option>
-            <option value="S1">S1</option>
-            <option value="D-III">D-III</option>
-            <option value="D-IV">D-IV</option>
-          </select>
-          <label className="ps-4 fw-bold">Jenjang pendidikan</label>
-          <ErrorMessage
-            className="invalid-feedback"
-            name="jenjang"
-            as="div"
-            errors={errors}
-          />
-          </div>*/}
-
-        <div className="form-group mb-3 row">
+        </div> <div className="form-group mb-3 row">
           <label className="col-sm-3 col-form-label fw-bold">
             Prestasi selama berkuliah
           </label>
