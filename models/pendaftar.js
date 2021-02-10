@@ -313,7 +313,7 @@ const pendaftarSchema = new Schema(
       type: String,
       requireq: false,
     },
-    ThnLulus: {
+    thnLulus: {
       type: String,
       requireq: false,
     },

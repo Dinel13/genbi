@@ -78,6 +78,7 @@ module.exports = buildSchema(`
         tangalLahir: String!,
         teleponAyah: String!,
         teleponIbu: String!,
+        teleponWali: String,
         tempatLahir: String!,
         thnLulus: String,
         toeflNilai: String!,
