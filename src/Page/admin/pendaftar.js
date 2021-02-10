@@ -22,14 +22,6 @@ const Pendaftar = (props) => {
   const [confirmTo, setConfirmTo] = useState("");
   const [pendaftar, setPendaftar] = useState(undefined);
 
-  /* to print pdf
-  const { setElementId, setPdfHeader } = props;
-  React.useEffect(() => {
-    setElementId("print");
-    setPdfHeader("testy - salahuddin");
-  }, [setElementId, setPdfHeader]);
-*/
-
   const { from } = props;
 
   //to fetch the data of pendaftar
@@ -58,13 +50,48 @@ const Pendaftar = (props) => {
           }
           setIsLoading(false);
           setPendaftar(data.data.pendaftar);
-        })
+      })
         .catch((error) => {
           setIsLoading(false);
           setIsError(error);
         });
     }
   }, [admin, pendaftarId, from]);
+
+  const lolosWawancaraHandler = (pendaftarId, terima) => {
+    setIsLoading(true);
+    fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + admin,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: ` 
+          mutation {
+            lolosWawancara(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
+            adminId : "${adminId}", terima : "${terima}"}) {
+              lolosWawancara
+            }
+          }
+        `,
+      }),
+    })
+      .then((response) => response.json())
+      .then((resData) => {
+        if (resData.errors) {
+          throw resData.errors[0].message;
+        }
+        //to update the whole data with new lolosBerkas data item
+        let newPendaftar = {...pendaftar}
+        newPendaftar.lolosWawancara = resData.data.lolosWawancara.lolosWawancara
+        setPendaftar(newPendaftar);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(setIsLoading(false));
+  };
 
   //to vlidate input nilai 1
   //if pass will show modal confirm to save nilai
@@ -289,9 +316,21 @@ const Pendaftar = (props) => {
                     )}
                   </div>
                 )}
-                <button className="btn btn-primary btn-lg col-12">
-                  Lolos Wawancara
-                </button>
+                {pendaftar.lolosWawancara === false ? (
+                  <button
+                    onClick={() => lolosWawancaraHandler(pendaftarId, true)}
+                    className="btn btn-primary btn-lg col-12"
+                  >
+                    Lolos Wawancara
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => lolosWawancaraHandler(pendaftarId, false)}
+                    className="btn btn-danger btn-lg col-12"
+                  >
+                    Batal lolos Wawancara
+                  </button>
+                )}
               </>
             )}
           </div>
