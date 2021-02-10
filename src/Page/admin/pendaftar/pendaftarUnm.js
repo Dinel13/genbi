@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import print from "print-js";
-import { Unhas } from "../../../Data/PendaftarUnhas";
 
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
@@ -31,29 +30,22 @@ const PendaftarUnm = (props) => {
         query: ` 
           query { 
             pendaftars(adminId: "${adminId}" kampus : "unm" jenis : "reguler") {
-              nama
-              nim
-              fakultas
-              prodi
-              ipk
-              mampu
+              nama lolosBerkas nim fakultas prodi ipk lolosBerkas
             }
           }`,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.errors) {
           throw data.errors[0].message;
         }
-        setPendaftar(data);
+        setPendaftar(data.data.pendaftars);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
         setIsError(error);
-        console.log(error);
       });
   }, [setActive, adminId, admin]);
 
@@ -79,9 +71,11 @@ const PendaftarUnm = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            {Unhas && <button className="btn btn-dark" onClick={() => exportToPdf()}>
-              cetak
-            </button>}
+            {pendaftar.length ? (
+              <button className="btn btn-dark" onClick={() => exportToPdf()}>
+                cetak
+              </button> ): null
+            }
           </div>
         </div>
       </div>
@@ -91,8 +85,8 @@ const PendaftarUnm = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : Unhas ? (
-            <Tabel data={Unhas} url={url} />
+          ) : pendaftar.length ? (
+            <Tabel data={pendaftar} url={url} />
           ) : (
             <Modal
               header="Mohon maaf, Data masih kosong"

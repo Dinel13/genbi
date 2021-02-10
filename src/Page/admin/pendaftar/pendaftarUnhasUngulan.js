@@ -29,20 +29,13 @@ const PendaftarUnhasUngulan = (props) => {
         query: ` 
           query { 
             pendaftars(adminId: "${adminId}", kampus : "unhas", jenis : "ungulan") {
-              nama
-              id
-              nim
-              fakultas
-              prodi
-              ipk
-              lolosBerkas
+              nama lolosBerkas nim fakultas prodi ipk lolosBerkas id
             }
           }`,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data.pendaftars);
         if (data.errors) {
           throw data.errors[0].message;
         }
@@ -52,7 +45,6 @@ const PendaftarUnhasUngulan = (props) => {
       .catch((error) => {
         setIsLoading(false);
         setIsError(error);
-        console.log(error);
       });
   }, [setActive, adminId, admin]);
 
@@ -61,7 +53,6 @@ const PendaftarUnhasUngulan = (props) => {
       printable: "tabelku",
       type: "html",
       header: "pendaftar Universitas Hasanuddin-Unggulan",
-      documentTitle: "pendaftarGenbi",
       ignoreElements: ["notExport", "notExport1"],
     });
   };
@@ -78,11 +69,11 @@ const PendaftarUnhasUngulan = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            {pendaftar && (
+            {pendaftar.length ? (
               <button className="btn btn-dark" onClick={() => exportToPdf()}>
                 cetak
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

@@ -91,7 +91,7 @@ const Tabel = (props) => {
               <th scope="col">Fakultas</th>
               <th scope="col">Prodi</th>
               <th scope="col">Ipk</th>
-              <th scope="col" className="actionku">
+              <th scope="col" id="notExport" className="actionku">
                 Aksi
               </th>
             </tr>
@@ -117,7 +117,7 @@ const Tabel = (props) => {
                 <td className="text-truncate" style={{ maxWidth: "100px" }}>
                   {pendaftar.ipk}
                 </td>
-                <td>
+                <td id="notExport1">
                   <div
                     className="btn-group actionku"
                     role="group"

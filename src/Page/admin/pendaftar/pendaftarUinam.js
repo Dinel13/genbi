@@ -30,38 +30,30 @@ const PendaftarUinam = (props) => {
         query: ` 
           query { 
             pendaftars(adminId: "${adminId}" kampus : "uinam" jenis : "reguler") {
-              nama
-              nim
-              fakultas
-              prodi
-              ipk
-              mampu
+             id nama lolosBerkas nim fakultas prodi ipk lolosBerkas
             }
           }`,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.errors) {
           throw data.errors[0].message;
         }
-        setPendaftar(data);
+        setPendaftar(data.data.pendaftars);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
         setIsError(error);
-        console.log(error);
       });
   }, [setActive, adminId, admin]);
-  
+
   const exportToPdf = () => {
     print({
       printable: "tabelku",
       type: "html",
       header: "pendaftar UIN Alauddin Makassar",
-      documentTitle: "pendaftarGenbi",
       ignoreElements: ["notExport", "notExport1"],
     });
   };
@@ -78,9 +70,11 @@ const PendaftarUinam = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            {pendaftar && <button className="btn btn-dark" onClick={() => exportToPdf()}>
-              cetak
-            </button>}
+            {pendaftar.length ? (
+              <button className="btn btn-dark" onClick={() => exportToPdf()}>
+                cetak
+              </button>
+            ) : null}
           </div>
         </div>
       </div>
@@ -90,7 +84,7 @@ const PendaftarUinam = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : pendaftar ? (
+          ) : pendaftar.length ? (
             <Tabel data={pendaftar} url={url} />
           ) : (
             <Modal
