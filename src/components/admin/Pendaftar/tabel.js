@@ -144,7 +144,7 @@ const Tabel = (props) => {
                     aria-label="Basic outlined example"
                   >
                     <Link
-                      to={`${props.url}/${pendaftar.id.toString()}`}
+                      to={`${props.url}/${pendaftar.id?.toString()}`}
                       type="button"
                       className="btn btn-sm btn-outline-primary"
                     >
@@ -175,7 +175,6 @@ const Tabel = (props) => {
                             setPendaftarId(pendaftar.id.toString());
                             setTerima(true);
                           }
-                          // fetchUser(pendaftar.id.toString(), true)
                         }
                       >
                         Terima

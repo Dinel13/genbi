@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import print from 'print-js';
 
 import Pendaftar from "../pendaftar";
-import { Unhas } from "../../../Data/PendaftarUnhas";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
 import Modal from "../../../shared/Modal";
 import ErrorModal from "../../../components/ErrorModal/Error";
@@ -29,8 +28,9 @@ const PendaftarUnhasUngulan = (props) => {
       body: JSON.stringify({
         query: ` 
           query { 
-            pendaftars(adminId: "${adminId}" kampus : "unhas" jenis : "ungulan") {
+            pendaftars(adminId: "${adminId}", kampus : "unhas", jenis : "ungulan") {
               nama
+              id
               nim
               fakultas
               prodi
@@ -42,11 +42,11 @@ const PendaftarUnhasUngulan = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data.data.pendaftars);
         if (data.errors) {
           throw data.errors[0].message;
         }
-        setPendaftar(data);
+        setPendaftar(data.data.pendaftars);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -90,8 +90,8 @@ const PendaftarUnhasUngulan = (props) => {
             <ErrorModal message={isError.toString()} setModall={setIsError} />
           ) : isLoading ? (
             <Loading />
-          ) : Unhas ? (
-            <Tabel data={Unhas} url={url} />
+          ) : pendaftar.length ? (
+            <Tabel data={pendaftar} url={url} />
           ) : (
             <Modal
               header="Mohon maaf, Data masih kosong"

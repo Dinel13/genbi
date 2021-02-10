@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import image from "../../images/sala.jpg";
 import { useSelector } from "react-redux";
 
 import { PENDAFTAR_FIElD } from "../../constant/pendaftarField";
@@ -29,9 +28,10 @@ const Pendaftar = (props) => {
 */
 
   const { from } = props;
+
   //to fetch the data of pendaftar
   React.useEffect(() => {
-    //if this component from pendaftar just take pendaftar from props
+    //if this component from pendaftaran just take pendaftar from props
     if (from) {
       setPendaftar(from);
     } else {
@@ -54,6 +54,7 @@ const Pendaftar = (props) => {
             throw data.errors[0].message;
           }
           setIsLoading(false);
+          console.log(data);
           setPendaftar(data.data.pendaftar);
         })
         .catch((error) => {
@@ -567,81 +568,118 @@ const Pendaftar = (props) => {
               />
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-              <p className="pe-1 col-3">Transkip Nilai</p>
-              <img
-                src={"http://localhost:8080/" + pendaftar.nilai}
-                className="figure-img img-fluid rounded col-9"
-                alt={pendaftar.nama}
-              />
+              <p className="pe-1 col-4">Transkip Nilai</p>
+              {pendaftar.nilai ? (
+                <a
+                  className="stretched-link fw-bold"
+                  href={"http://localhost:8080/" + pendaftar.nilai}
+                >
+                  Lihat file
+                </a>
+              ) : (
+                <p className="fw-bold text-danger">Tidak ada data !</p>
+              )}
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-              <p className="pe-1 col-3">Buku rekening</p>
-              <img
-                src={"http://localhost:8080/" + pendaftar.rekening}
-                className="figure-img img-fluid rounded col-9"
-                alt={pendaftar.nama}
-              />
-            </div>{" "}
+              <p className="pe-1 col-4">Buku rekening</p>
+              {pendaftar.rekening ? (
+                <a
+                  className="stretched-link fw-bold"
+                  href={"http://localhost:8080/" + pendaftar.rekening}
+                >
+                  Lihat file
+                </a>
+              ) : (
+                <p className="fw-bold text-danger">Tidak ada data !</p>
+              )}
+            </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-              <p className="pe-1 col-3">Surat tidak menerima beasiswa lain</p>
-              <img
-                src={"http://localhost:8080/" + pendaftar.beasiswaLain}
-                className="figure-img img-fluid rounded col-9"
-                alt={pendaftar.nama}
-              />
+              <p className="pe-1 col-4">Surat tidak menerima beasiswa lain</p>
+              {pendaftar.beasiswaLain ? (
+                <a
+                  className="stretched-link fw-bold"
+                  href={"http://localhost:8080/" + pendaftar.beasiswaLain}
+                >
+                  Lihat file
+                </a>
+              ) : (
+                <p className="fw-bold text-danger">Tidak ada data !</p>
+              )}
             </div>
             {pendaftar.jenisBeasiswa === "ungulan" ? (
               <>
                 <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
                   <p className="pe-1 col-3">Surat rekomendasi satu</p>
-                  <img
-                    src={"http://localhost:8080/" + pendaftar.rekomendasi}
-                    className="figure-img img-fluid rounded col-9"
-                    alt={pendaftar.nama}
-                  />
+                  {pendaftar.rekomendasi ? (
+                    <a
+                      className="stretched-link fw-bold"
+                      href={"http://localhost:8080/" + pendaftar.rekomendasi}
+                    >
+                      Lihat file
+                    </a>
+                  ) : (
+                    <p className="fw-bold text-danger">Tidak ada data !</p>
+                  )}
                 </div>
                 <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
                   <p className="pe-1 col-3">Surat rekomendasi dua</p>
-                  <img
-                    src={"http://localhost:8080/" + pendaftar.dua}
-                    className="figure-img img-fluid rounded col-9"
-                    alt={pendaftar.nama}
-                  />
+                  {pendaftar.rekomendasi2 ? (
+                    <a
+                      className="stretched-link fw-bold"
+                      href={"http://localhost:8080/" + pendaftar.rekomendasi2}
+                    >
+                      Lihat file
+                    </a>
+                  ) : (
+                    <p className="fw-bold text-danger">Tidak ada data !</p>
+                  )}
                 </div>
                 <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-                  <p className="pe-1 col-3">Sertifikat toefl</p>
-                  <img
-                    src={"http://localhost:8080/" + pendaftar.toeflFile}
-                    className="figure-img img-fluid rounded col-9"
-                    alt={pendaftar.nama}
-                  />
+                  <p className="pe-1 col-4">Sertifikat toefl</p>
+                  {pendaftar.toeflFile ? (
+                    <a
+                      className="stretched-link fw-bold"
+                      href={"http://localhost:8080/" + pendaftar.toeflFile}
+                    >
+                      Lihat file
+                    </a>
+                  ) : (
+                    <p className="fw-bold text-danger">Tidak ada data !</p>
+                  )}
                 </div>
               </>
             ) : (
               <>
                 <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-                  <p className="pe-1 col-3">Surat Rekomendasi</p>
-                  <img
-                    src={"http://localhost:8080/" + pendaftar.rekomendasi}
-                    className="figure-img img-fluid rounded col-9"
-                    alt={pendaftar.nama}
-                  />
-                  <a href={"http://localhost:8080/" + pendaftar.rekomendasi}>
-                    link
-                  </a>
+                  <p className="pe-1 col-4">Surat Rekomendasi</p>
+                  {pendaftar.rekomendasi ? (
+                    <a
+                      className="stretched-link fw-bold"
+                      href={"http://localhost:8080/" + pendaftar.rekomendasi}
+                    >
+                      Lihat file
+                    </a>
+                  ) : (
+                    <p className="fw-bold text-danger">Tidak ada data !</p>
+                  )}
                 </div>
                 <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-                  <p className="pe-1 col-3">Surat Keterangan tidak mampu</p>
-                  <img
-                    src={"http://localhost:8080/" + pendaftar.mampu}
-                    className="figure-img img-fluid rounded col-9"
-                    alt={pendaftar.nama}
-                  />
+                  <p className="pe-1 col-4">Surat Keterangan tidak mampu</p>
+                  {pendaftar.mampu ? (
+                    <a
+                      className="stretched-link fw-bold"
+                      href={"http://localhost:8080/" + pendaftar.mampu}
+                    >
+                      Lihat file
+                    </a>
+                  ) : (
+                    <p className="fw-bold text-danger">Tidak ada data !</p>
+                  )}
                 </div>
               </>
             )}
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
-              <p className="pe-1 col-3">Link sertifikat prestasi</p>
+              <p className="pe-1 col-4">Link sertifikat prestasi</p>
               <p className="fw-bold col-9">{pendaftar.sertifikat}</p>
             </div>
           </div>
