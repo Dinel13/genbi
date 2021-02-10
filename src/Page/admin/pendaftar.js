@@ -6,6 +6,7 @@ import { PENDAFTAR_FIElD } from "../../constant/pendaftarField";
 import ErrorModal from "../../components/ErrorModal/Error";
 import Loading from "../../components/Loading/Loading";
 import Modal from "../../shared/Modal";
+import ModalConfirm from "../../components/Modal/Modal";
 
 const Pendaftar = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
@@ -17,7 +18,9 @@ const Pendaftar = (props) => {
   const [error2, setError2] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [pendaftar, setPendaftar] = useState({ nilai1: 3, pangilan: "udin" });
+  const [isNeedConfirm, setIsNeedCOnfirm] = useState(false);
+  const [confirmTo, setConfirmTo] = useState("");
+  const [pendaftar, setPendaftar] = useState(undefined);
 
   /* to print pdf
   const { setElementId, setPdfHeader } = props;
@@ -54,7 +57,6 @@ const Pendaftar = (props) => {
             throw data.errors[0].message;
           }
           setIsLoading(false);
-          console.log(data);
           setPendaftar(data.data.pendaftar);
         })
         .catch((error) => {
@@ -64,8 +66,9 @@ const Pendaftar = (props) => {
     }
   }, [admin, pendaftarId, from]);
 
-  const submitNilaiSatu = async (e) => {
-    e.preventDefault();
+  //to vlidate input nilai 1
+  //if pass will show modal confirm to save nilai
+  const validateSatu = () => {
     if (!nilai1) {
       setError("masukkan nilai yang valid");
       return;
@@ -74,40 +77,11 @@ const Pendaftar = (props) => {
       setError("masukkan nilai yang valid");
       return;
     }
-    console.log(nilai1);
-    try {
-      setIsLoading(false);
-      const response = await fetch("http://localhost:8080/graphql", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + admin,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query: `
-        mutation {
-          addNilaiWawancara(nilaiWawancaraInput: {pendaftarId : "${pendaftarId}",
-          adminId : "${adminId}" untuk : "nilaiWawancara1", nilai : "${nilai1}"}) {
-            ${PENDAFTAR_FIElD}
-          }
-        }
-      `,
-        }),
-      });
-      const resData = await response.json();
-      if (resData.errors) {
-        throw resData.errors[0].message;
-      }
-      setIsLoading(false);
-      setPendaftar(resData.data.pendaftar);
-    } catch (err) {
-      setIsLoading(false);
-      console.log(err);
-    }
+    setConfirmTo("nilai1");
+    setIsNeedCOnfirm(true);
   };
 
-  const submitNilaiDua = async (e) => {
-    e.preventDefault();
+  const validateDua = () => {
     if (!nilai2) {
       setError2("masukkan nilai yang valid");
       return;
@@ -116,7 +90,10 @@ const Pendaftar = (props) => {
       setError2("masukkan nilai yang valid");
       return;
     }
-    console.log(nilai2);
+    setConfirmTo("nilai2");
+    setIsNeedCOnfirm(true);
+  };
+  const submitNilaiSatu = async () => {
     try {
       setIsLoading(false);
       const response = await fetch("http://localhost:8080/graphql", {
@@ -129,7 +106,7 @@ const Pendaftar = (props) => {
           query: `
         mutation {
           addNilaiWawancara(nilaiWawancaraInput: {pendaftarId : "${pendaftarId}",
-          adminId : "${adminId}" untuk : "nilaiWawancara2", nilai : "${nilai2}"}) {
+          adminId : "${adminId}", untuk : "nilaiWawancara1", nilai : "${nilai1}"}) {
             ${PENDAFTAR_FIElD}
           }
         }
@@ -141,10 +118,42 @@ const Pendaftar = (props) => {
         throw resData.errors[0].message;
       }
       setIsLoading(false);
-      setPendaftar(resData.data.pendaftar);
+      setPendaftar(resData.data.addNilaiWawancara);
     } catch (err) {
       setIsLoading(false);
-      console.log(err);
+      setIsError(err);
+    }
+  };
+
+  const submitNilaiDua = async () => {
+    try {
+      setIsLoading(false);
+      const response = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + admin,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: `
+        mutation {
+          addNilaiWawancara(nilaiWawancaraInput: {pendaftarId : "${pendaftarId}",
+          adminId : "${adminId}", untuk : "nilaiWawancara2", nilai : "${nilai2}"}) {
+            ${PENDAFTAR_FIElD}
+          }
+        }
+      `,
+        }),
+      });
+      const resData = await response.json();
+      if (resData.errors) {
+        throw resData.errors[0].message;
+      }
+      setIsLoading(false);
+      setPendaftar(resData.data.addNilaiWawancara);
+    } catch (err) {
+      setIsLoading(false);
+      setIsError(err);
     }
   };
 
@@ -152,6 +161,20 @@ const Pendaftar = (props) => {
     <ErrorModal message={isError.toString()} setModall={setIsError} />
   ) : isLoading ? (
     <Loading />
+  ) : isNeedConfirm ? (
+    <ModalConfirm
+      header="Apakah anda yakain"
+      body={
+        confirmTo === "nilai1"
+          ? `Anda akan memberi ${nilai1} point untuk nilai wawancara satu`
+          : `Anda akan memberi ${nilai2} point untuk nilai wawancara dua`
+      }
+      modall={isNeedConfirm}
+      setModall={setIsNeedCOnfirm}
+      onYakin={() => {
+        confirmTo === "nilai1" ? submitNilaiSatu() : submitNilaiDua();
+      }}
+    />
   ) : !pendaftar ? (
     <Modal
       header="Mohon maaf"
@@ -190,11 +213,11 @@ const Pendaftar = (props) => {
             )}
             {props.berkas && (
               <>
-                {pendaftar.nilai1 ? (
+                {pendaftar.nilaiWawancara1 ? (
                   <p>
                     Nilai 1 :{" "}
                     <strong className="ps-2 fw-bolder">
-                      {pendaftar.nilai1}
+                      {pendaftar.nilaiWawancara1}
                     </strong>
                   </p>
                 ) : (
@@ -215,7 +238,7 @@ const Pendaftar = (props) => {
                     </div>
                     <div className="col-sm-5 ps-1">
                       <button
-                        onClick={submitNilaiSatu}
+                        onClick={() => validateSatu()}
                         type="button"
                         className="w-100 btn btn-sm btn-success"
                       >
@@ -227,11 +250,11 @@ const Pendaftar = (props) => {
                     )}
                   </div>
                 )}
-                {pendaftar.nilai2 ? (
+                {pendaftar.nilaiWawancara2 ? (
                   <p>
-                    Nilai 1{" "}
+                    Nilai 2{" "}
                     <strong className="ps-2 fw-bolder">
-                      {pendaftar.nilai2}
+                      {pendaftar.nilaiWawancara2}
                     </strong>
                   </p>
                 ) : (
@@ -254,7 +277,7 @@ const Pendaftar = (props) => {
                     </div>
                     <div className="col-sm-5 ps-1">
                       <button
-                        onClick={submitNilaiDua}
+                        onClick={() => validateDua()}
                         type="button"
                         className="w-100 btn btn-sm btn-success"
                       >
