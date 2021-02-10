@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Modal from "../../../components/Modal/Modal";
 import ErrorModal from "../../../components/ErrorModal/Error";
 import Loading from "../../../components/Loading/Loading";
@@ -10,44 +9,17 @@ import Loading from "../../../components/Loading/Loading";
 const Tabel = (props) => {
   const admin = useSelector((state) => state.Auth.admin);
   const adminId = useSelector((state) => state.Auth.adminId);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [modall, setModall] = useState(false);
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(props.data);
   const [pendaftarId, setPendaftarId] = useState(null);
   const [terima, setTerima] = useState(null);
-  
-  const lolosBerkasHandler = async (pendaftarId, terima) => {
-    try {
-      const responseData = await sendRequest(
-        "http://localhost:8080/graphql",
-        "POST",
-        JSON.stringify({
-          query: ` 
-            mutattion {
-              lolosBerkas(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
-              adminId : "${adminId}", terima : "${terima}"}) {
-                nama
-                nim
-                fakultas
-                prodi
-                ipk
-                mampu
-                lolosBerkas
-              }
-            }
-          `,
-        }),
-        {
-          Authorization: "Bearer " + admin,
-          "Content-Type": "application/json",
-        }
-      );
-      setData(responseData.data.pendaftar);
-    } catch (err) {}
-  };
 
-  /* to handel terima atau batal the pendaftar
+
+  /* to handel terima atau batal the pendaftar*/
   const lolosBerkasHandler = (pendaftarId, terima) => {
+    setIsLoading(true);
     fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
@@ -56,31 +28,39 @@ const Tabel = (props) => {
       },
       body: JSON.stringify({
         query: ` 
-          mutattion {
+          mutation {
             lolosBerkas(pendaftarAndAdminInput: {pendaftarId: "${pendaftarId}",
             adminId : "${adminId}", terima : "${terima}"}) {
-              nama
+              id lolosBerkas
             }
           }
         `,
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data.errors) {
-          throw data.errors[0].message;
+      .then((resData) => {
+        if (resData.errors) {
+          throw resData.errors[0].message;
         }
-        //map, filter, foreach
+        //to update the whole data with new lolosBerkas data item
         const newData = data.map((item) => {
-          return item.id === data.id.toString() && data.data.pendaftar;
+          if (item.id === resData.data.lolosBerkas.id.toString()) {
+            item.lolosBerkas = resData.data.lolosBerkas.lolosBerkas;
+          }
+          return {
+            ...item,
+          };
         });
         setData(newData);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        setError(error)
+      })
+      .finally(setIsLoading(false));
   };
-*/
+
   return error ? (
-    <ErrorModal message={error} setModall={clearError} />
+    <ErrorModal message={error} setModall={setError} />
   ) : isLoading ? (
     <Loading />
   ) : !data ? (
@@ -154,14 +134,11 @@ const Tabel = (props) => {
                       <button
                         type="button"
                         className="btn btn-sm btn-danger"
-                        onClick={
-                          () => {
-                            setModall(true);
-                            setPendaftarId(pendaftar.id.toString());
-                            setTerima(false);
-                          }
-                          // lolosBerkasHandler(pendaftar.id.toString(), false)
-                        }
+                        onClick={() => {
+                          setModall(true);
+                          setPendaftarId(pendaftar.id.toString());
+                          setTerima(false);
+                        }}
                       >
                         Batalkan
                       </button>
@@ -169,13 +146,11 @@ const Tabel = (props) => {
                       <button
                         type="button"
                         className="btn  btn-sm btn-outline-success"
-                        onClick={
-                          () => {
-                            setModall(true);
-                            setPendaftarId(pendaftar.id.toString());
-                            setTerima(true);
-                          }
-                        }
+                        onClick={() => {
+                          setModall(true);
+                          setPendaftarId(pendaftar.id.toString());
+                          setTerima(true);
+                        }}
                       >
                         Terima
                       </button>

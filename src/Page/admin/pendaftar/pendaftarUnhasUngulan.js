@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
-import print from 'print-js';
+import print from "print-js";
 
 import Pendaftar from "../pendaftar";
 import Tabel from "../../../components/admin/Pendaftar/tabel";
@@ -35,7 +35,7 @@ const PendaftarUnhasUngulan = (props) => {
               fakultas
               prodi
               ipk
-              mampu
+              lolosBerkas
             }
           }`,
       }),
@@ -78,9 +78,11 @@ const PendaftarUnhasUngulan = (props) => {
                 {pendaftar ? pendaftar.length : "0"}
               </span>
             </button>
-            {pendaftar && <button className="btn btn-dark" onClick={() => exportToPdf()}>
-              cetak
-            </button>}
+            {pendaftar && (
+              <button className="btn btn-dark" onClick={() => exportToPdf()}>
+                cetak
+              </button>
+            )}
           </div>
         </div>
       </div>

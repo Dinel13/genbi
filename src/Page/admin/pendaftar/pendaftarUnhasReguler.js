@@ -36,7 +36,7 @@ const PendaftarUnhasReguler = (props) => {
               fakultas
               prodi
               ipk
-              mampu
+              lolosBerkas
             }
           }`,
       }),
