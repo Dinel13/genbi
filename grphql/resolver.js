@@ -393,7 +393,7 @@ module.exports = {
           error.code = 404;
           throw error;
         } else {
-          if (untuk === "nilaiWawancara1") {
+          if (nilaiWawancaraInput.untuk === "nilaiWawancara1") {
             findPendaftar.nilaiWawancara1 = nilaiWawancaraInput.nilai;
           } else {
             findPendaftar.nilaiWawancara2 = nilaiWawancaraInput.nilai;
