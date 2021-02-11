@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-import { Signup} from "../store/action/AuthAction";
+import {  SignupAdmin } from "../store/action/AuthAction";
 import { Link } from "react-router-dom";
 
 export default function FormSignUp() {
@@ -10,7 +10,7 @@ export default function FormSignUp() {
   const { register, errors, handleSubmit, getValues } = useForm();
 
   const onSubmit = (values) => {
-    dispatch(Signup(values.email, values.password, values.nama));
+    dispatch(SignupAdmin(values.email, values.password, values.nama));
     console.log(values);
   };
 
@@ -92,7 +92,7 @@ export default function FormSignUp() {
                     //to validate required
                     errors.password && (
                       <div className="invalid-feedback">
-                        {errors.password.message}
+                        {errors.nama.password}
                       </div>
                     )
                   }
@@ -120,7 +120,7 @@ export default function FormSignUp() {
                     //to validate required
                     errors.password2 && (
                       <div className="invalid-feedback">
-                        {errors.password2.message}
+                        {errors.nama.password2}
                       </div>
                     )
                   }

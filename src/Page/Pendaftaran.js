@@ -37,7 +37,7 @@ const Daftar = (props) => {
   //to check if user already registered
   React.useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:8081/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -85,7 +85,7 @@ const Daftar = (props) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8080/${endpoint}`, {
+      const response = await fetch(`http://localhost:8081/${endpoint}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
@@ -135,7 +135,7 @@ const Daftar = (props) => {
           }
         `,
       };
-      const responseFinish = await fetch("http://localhost:8080/graphql", {
+      const responseFinish = await fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

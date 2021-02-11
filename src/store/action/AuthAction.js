@@ -57,7 +57,7 @@ export const Signup = (email, password, name) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +99,7 @@ export const Login = (email, password) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export const SignupAdmin = (email, password, name) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -183,7 +183,7 @@ export const LoginAdmin = (email, password) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

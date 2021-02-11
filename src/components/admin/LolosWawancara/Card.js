@@ -22,7 +22,7 @@ const Card = (props) => {
   const batalkanLolosWawancara = async (pendaftarId) => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8080/graphql",
+        "http://localhost:8081/graphql",
         "POST",
         JSON.stringify({
           query: ` 
@@ -51,7 +51,7 @@ const Card = (props) => {
   const kirimEmail = async (pendaftarId) => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8080/email",
+        "http://localhost:8081/email",
         "POST",
         JSON.stringify({ pendaftarId }),
         {

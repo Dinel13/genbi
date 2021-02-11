@@ -31,7 +31,7 @@ const Pendaftar = (props) => {
       setPendaftar(from);
     } else {
       setIsLoading(true);
-      fetch("http://localhost:8080/graphql", {
+      fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + admin,
@@ -60,7 +60,7 @@ const Pendaftar = (props) => {
 
   const lolosWawancaraHandler = (pendaftarId, terima) => {
     setIsLoading(true);
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:8081/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + admin,
@@ -123,7 +123,7 @@ const Pendaftar = (props) => {
   const submitNilaiSatu = async () => {
     try {
       setIsLoading(false);
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + admin,
@@ -155,7 +155,7 @@ const Pendaftar = (props) => {
   const submitNilaiDua = async () => {
     try {
       setIsLoading(false);
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + admin,
@@ -214,7 +214,7 @@ const Pendaftar = (props) => {
           <div className="sticky-top" style={{ maxWidth: "380px" }}>
             <figure className="figure p-3 rounded shadow  ">
               <img
-                src={"http://localhost:8080/" + pendaftar.foto}
+                src={"http://localhost:8081/" + pendaftar.foto}
                 className="figure-img img-fluid rounded"
                 alt={pendaftar.nama}
               />
@@ -616,7 +616,7 @@ const Pendaftar = (props) => {
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">KTP</p>
               <img
-                src={"http://localhost:8080/" + pendaftar.ktp}
+                src={"http://localhost:8081/" + pendaftar.ktp}
                 className="figure-img img-fluid rounded col-9"
                 alt={pendaftar.nama}
               />
@@ -624,7 +624,7 @@ const Pendaftar = (props) => {
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">KTM</p>
               <img
-                src={"http://localhost:8080/" + pendaftar.ktm}
+                src={"http://localhost:8081/" + pendaftar.ktm}
                 className="figure-img img-fluid rounded col-9"
                 alt={pendaftar.nama}
               />
@@ -634,7 +634,7 @@ const Pendaftar = (props) => {
               {pendaftar.nilai ? (
                 <a
                   className="stretched-link fw-bold"
-                  href={"http://localhost:8080/" + pendaftar.nilai}
+                  href={"http://localhost:8081/" + pendaftar.nilai}
                 >
                   Lihat file
                 </a>
@@ -647,7 +647,7 @@ const Pendaftar = (props) => {
               {pendaftar.rekening ? (
                 <a
                   className="stretched-link fw-bold"
-                  href={"http://localhost:8080/" + pendaftar.rekening}
+                  href={"http://localhost:8081/" + pendaftar.rekening}
                 >
                   Lihat file
                 </a>
@@ -660,7 +660,7 @@ const Pendaftar = (props) => {
               {pendaftar.beasiswaLain ? (
                 <a
                   className="stretched-link fw-bold"
-                  href={"http://localhost:8080/" + pendaftar.beasiswaLain}
+                  href={"http://localhost:8081/" + pendaftar.beasiswaLain}
                 >
                   Lihat file
                 </a>
@@ -675,7 +675,7 @@ const Pendaftar = (props) => {
                   {pendaftar.rekomendasi ? (
                     <a
                       className="stretched-link fw-bold"
-                      href={"http://localhost:8080/" + pendaftar.rekomendasi}
+                      href={"http://localhost:8081/" + pendaftar.rekomendasi}
                     >
                       Lihat file
                     </a>
@@ -688,7 +688,7 @@ const Pendaftar = (props) => {
                   {pendaftar.rekomendasi2 ? (
                     <a
                       className="stretched-link fw-bold"
-                      href={"http://localhost:8080/" + pendaftar.rekomendasi2}
+                      href={"http://localhost:8081/" + pendaftar.rekomendasi2}
                     >
                       Lihat file
                     </a>
@@ -701,7 +701,7 @@ const Pendaftar = (props) => {
                   {pendaftar.toeflFile ? (
                     <a
                       className="stretched-link fw-bold"
-                      href={"http://localhost:8080/" + pendaftar.toeflFile}
+                      href={"http://localhost:8081/" + pendaftar.toeflFile}
                     >
                       Lihat file
                     </a>
@@ -717,7 +717,7 @@ const Pendaftar = (props) => {
                   {pendaftar.rekomendasi ? (
                     <a
                       className="stretched-link fw-bold"
-                      href={"http://localhost:8080/" + pendaftar.rekomendasi}
+                      href={"http://localhost:8081/" + pendaftar.rekomendasi}
                     >
                       Lihat file
                     </a>
@@ -730,7 +730,7 @@ const Pendaftar = (props) => {
                   {pendaftar.mampu ? (
                     <a
                       className="stretched-link fw-bold"
-                      href={"http://localhost:8080/" + pendaftar.mampu}
+                      href={"http://localhost:8081/" + pendaftar.mampu}
                     >
                       Lihat file
                     </a>

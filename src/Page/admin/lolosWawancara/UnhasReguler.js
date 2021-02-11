@@ -20,7 +20,7 @@ const UnhasReguler = (props) => {
   const { setActive } = props;
   useEffect(() => {
     setActive("wawUnh");
-    fetch("http://localhost:8080/graphql", {
+    fetch("http://localhost:8081/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + admin,
