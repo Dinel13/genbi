@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route , Redirect} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./App.css";
@@ -25,7 +25,6 @@ const App = () => {
   useEffect(() => {
     const storedDataUser = JSON.parse(localStorage.getItem("userData"));
     const storedDataAdmin = JSON.parse(localStorage.getItem("adminData"));
-    console.log(storedDataAdmin);
     if (storedDataUser && storedDataUser.token) {
       dispatch(AuthWithData(storedDataUser.userId, storedDataUser.token));
     }
@@ -34,7 +33,7 @@ const App = () => {
         AuthAdminWithData(storedDataAdmin.adminId, storedDataAdmin.admin)
       );
     }
-  },[dispatch]);
+  }, [dispatch]);
 
   let routes;
   if (token) {
@@ -45,6 +44,12 @@ const App = () => {
         </Route>
         <Route path="/pendaftaran" exact>
           <Pendaftaran />
+        </Route>
+        <Route path="/signup" exact>
+          <Redirect to="/pendaftaran" />
+        </Route>
+        <Route path="/login" exact>
+          <Redirect to="/pendaftaran" />
         </Route>
         <Route path="*">
           <Defult />
@@ -59,6 +64,9 @@ const App = () => {
         </Route>
         <Route path="/admin">
           <Admin />
+        </Route>
+        <Route path="/login-admin" exact>
+          <Redirect to="/admin"/>
         </Route>
         <Route path="*">
           <Defult />

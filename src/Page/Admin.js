@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
-import print from "print-js";
+//import print from "print-js";
 
 import Main from "../components/admin/Main";
 import SideBar from "../components/admin/SideBar";
@@ -21,8 +21,10 @@ import WawancaraUnm from "./admin/lolosWawancara/Unm";
 const Admin = (props) => {
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState("");
-  const [title, setTitle] = useState("");
-  const [elementId, setElementId] = useState("");
+
+  /*
+ to print pdf
+ const [elementId, setElementId] = useState("");
   const [pdfHeader, setPdfHeader] = useState("");
 
   console.log(elementId);
@@ -36,11 +38,16 @@ const Admin = (props) => {
     });
   };
 
+        <Main export={exportToPdf} id={elementId} header={pdfHeader}>
+
+
+  */
+
   return (
     <div className="container-fluid">
       <div className="row">
         <SideBar url={url} active={active} />
-        <Main title={title} export={exportToPdf} id={elementId} header={pdfHeader}>
+        <Main>
           <Switch>
             <Route path={path} exact>
               <div className="container">
@@ -55,56 +62,42 @@ const Admin = (props) => {
             </Route>
             {/* pendaftar */}
             <Route path={`${path}/pendaftar-unhas-ungulan`}>
-              <PendaftarUnhasUngulan
-                setActive={setActive}
-                setTitle={setTitle}
-                setElementId={setElementId}
-                setPdfHeader={setPdfHeader}
-              />
+              <PendaftarUnhasUngulan setActive={setActive} />
             </Route>
             <Route path={`${path}/pendaftar-unhas-reguler`}>
-              <PendaftarUnhasReguler
-                setActive={setActive}
-                setTitle={setTitle}
-              />
+              <PendaftarUnhasReguler setActive={setActive} />
             </Route>
             <Route path={`${path}/pendaftar-unm`}>
-              <PendaftarUnm setActive={setActive} setTitle={setTitle} />
+              <PendaftarUnm setActive={setActive} />
             </Route>
             <Route path={`${path}/pendaftar-uinam`}>
-              <PendaftarUinam setActive={setActive} setTitle={setTitle} />
+              <PendaftarUinam setActive={setActive} />
             </Route>
             {/* berkas */}
             <Route path={`${path}/lolos-berkas-unhas-ungulan`}>
-              <BerkasUnhasUngulan setActive={setActive} setTitle={setTitle} />
+              <BerkasUnhasUngulan setActive={setActive} />
             </Route>
             <Route path={`${path}/lolos-berkas-unhas-reguler`}>
-              <BerkasUnhasReguler setActive={setActive} setTitle={setTitle} />
+              <BerkasUnhasReguler setActive={setActive} />
             </Route>
             <Route path={`${path}/lolos-berkas-unm`}>
-              <BerkasUnm setActive={setActive} setTitle={setTitle} />
+              <BerkasUnm setActive={setActive} />
             </Route>
             <Route path={`${path}/lolos-berkas-uinam`}>
-              <BerkasUinam setActive={setActive} setTitle={setTitle} />
+              <BerkasUinam setActive={setActive} />
             </Route>
             {/* wawancara */}
             <Route path={`${path}/lolos-wawancara-unhas-ungulan`}>
-              <WawancaraUnhasUngulan
-                setActive={setActive}
-                setTitle={setTitle}
-              />
+              <WawancaraUnhasUngulan setActive={setActive} />
             </Route>
             <Route path={`${path}/lolos-wawancara-unhas-reguler`}>
-              <WawancaraUnhasReguler
-                setActive={setActive}
-                setTitle={setTitle}
-              />
+              <WawancaraUnhasReguler setActive={setActive} />
             </Route>
             <Route path={`${path}/lolos-wawancara-unm`}>
-              <WawancaraUnm setActive={setActive} setTitle={setTitle} />
+              <WawancaraUnm setActive={setActive} />
             </Route>
             <Route path={`${path}/lolos-wawancara-uinam`}>
-              <WawancaraUinam setActive={setActive} setTitle={setTitle} />
+              <WawancaraUinam setActive={setActive} />
             </Route>
           </Switch>
         </Main>

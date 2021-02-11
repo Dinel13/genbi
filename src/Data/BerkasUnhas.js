@@ -7,6 +7,7 @@
       nilai1: 40,
       nilai2: 20,
       id: "55dadasd",
+      lolosBerkas : true
     },
     {
       nama: "huddin",

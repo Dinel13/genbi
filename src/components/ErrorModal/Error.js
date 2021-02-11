@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./modal.css";
+//style provide from app.css
 
 const Modal = (props) => {
   const [modal, setModal] = useState(false);
-  const { setModall } = props;
+  const {setModall} = props
 
   //to get the id of modal
   useEffect(() => {
@@ -13,16 +13,11 @@ const Modal = (props) => {
   //to hide the modal when clicked outside the modal
   useEffect(() => {
     window.onclick = function (event) {
-      if (event.target === modal) {
+      if (event.target == modal) {
         setModall(false);
       }
     };
-  }, [modal, setModall]);
-
-  const yakinHandler = () => {
-    props.onYakin();
-    props.setModall(false);
-  };
+  }, [modal,setModall]);
 
   return (
     <div id="myModall" className="modalll">
@@ -30,7 +25,7 @@ const Modal = (props) => {
         <div className="modal-content shadow-lg">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              {props.header}
+              <strong>Mohon maah!</strong>
             </h5>
             <button
               className="btn-close"
@@ -39,7 +34,7 @@ const Modal = (props) => {
               }}
             ></button>
           </div>
-          <div className="modal-body">{props.body}</div>
+          <div className="modal-body">{props.message}</div>
           <div className="modal-footer">
             <button
               className="btn btn-secondary"
@@ -47,14 +42,7 @@ const Modal = (props) => {
                 props.setModall(false);
               }}
             >
-              Batal
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={yakinHandler}
-            >
-              Yakin
+              Abaikan
             </button>
           </div>
         </div>
