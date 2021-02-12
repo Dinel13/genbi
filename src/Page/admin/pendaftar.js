@@ -378,11 +378,11 @@ const Pendaftar = (props) => {
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">
               <p className="pe-1 col-3">Hobi</p>
               <p className="fw-bold col-3">
-                {pendaftar.hobby + "fsdfsd fdsfsdffsaf fasf"}
+                {pendaftar.hobby}
               </p>
               <p className="pe-1 col-3">Cita-cita</p>
               <p className="fw-bold col-3">
-                {pendaftar.cita + "sfgsdfs dsfas"}
+                {pendaftar.cita}
               </p>
             </div>
             <div className="list-group-item mx-3 d-inline-flex pt-3 pb-0">

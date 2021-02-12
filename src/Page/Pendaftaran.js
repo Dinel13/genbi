@@ -209,18 +209,8 @@ const Daftar = (props) => {
     </>
   ) : (
     <div className="container">
-      <button onClick={test}>test</button>
       <div className="position-fixed bottom-0 end-0">
         <div className="pe-4 pb-4">
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              console.log(Math.round(watchAll.ktp[0].size / 1000));
-              console.log(watchAll.sertifikat);
-            }}
-          >
-            cek
-          </button>
           <button className="btn btn-primary" onClick={simpanHandler}>
             simpan
           </button>
