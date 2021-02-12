@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import Pendaftar from "../pendaftar";
 import { Unhas } from "../../../Data/WawancaraUnhas";
 import Card from "../../../components/admin/LolosWawancara/Card";
-import image from "../../../images/sala.jpg";
 import Modal from "../../../shared/Modal";
 import ErrorModal from "../../../components/ErrorModal/Error";
 import Loading from "../../../components/Loading/Loading";
@@ -81,7 +80,7 @@ const UnhasReguler = (props) => {
           ) : Unhas ? (
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2  row-cols-lg-3 g-3">
               {Unhas.map((item) => (
-                <Card data={item} key={item.id} url={url} image={image} />
+                <Card data={item} key={item.id} url={url} image={item.foto}  />
               ))}
             </div>
           ) : (

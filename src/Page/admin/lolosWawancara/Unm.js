@@ -6,7 +6,6 @@ import print from "print-js";
 import Pendaftar from "../pendaftar";
 import { Unhas } from "../../../Data/WawancaraUnhas";
 import Card from "../../../components/admin/LolosWawancara/Card";
-import image from "../../../images/sala.jpg";
 import Modal from "../../../shared/Modal";
 import ErrorModal from "../../../components/ErrorModal/Error";
 import Loading from "../../../components/Loading/Loading";
@@ -115,7 +114,7 @@ const Unm = (props) => {
                     data={item}
                     key={item.id}
                     url={url}
-                    image={image}
+                    image={item.foto}
                     removeFromData={() => removeFromData(item.id)}
                   />
                 ))}

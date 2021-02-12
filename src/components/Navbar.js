@@ -11,7 +11,7 @@ const Navbar = (props) => {
   const history = useHistory();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-4">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3">
       <div className="container-fluid">
         <Link className="navbar-brand ms-3 pe-2" to="/">
           <img

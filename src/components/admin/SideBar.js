@@ -5,7 +5,7 @@ const SideBar = (props) => {
   const { url, active } = props;
   return (
     <nav className="col-12 col-md-3 col-lg-2 bg-light border-end shadow">
-      <div className="row sticky-top">
+      <div className="row">
         <h5 className="col-12 card-title px-3 pt-3 pb-2 mb-0 card-header">
           Pendaftar
         </h5>
