@@ -273,32 +273,47 @@ const Beranda = () => {
             <div className="col-lg-4 col-md-6 text-start">
               <h2>Visi</h2>
               <p className="text-muted ">
-                Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
-                dan menyebarluaskan kebijakan Bank Indonesia.
+                Menjadi GenBI terbaik dan sebagai komunitas penerima beasiswa
+                yang memiliki anggota yang aktif, kreatif, bertangung jawab
+                serta mampu memberi kontribusi nyata
               </p>
             </div>
             <div className="col-lg-4 col-md-6 text-start">
               <h2>Misi</h2>
               <ol>
                 <li className="text-muted">
-                  Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
-                  dan menyebarluaskan kebijakan Bank Indonesia.
+                  Meningkatkan kebersamaan dan rasa kekeluargaan diantara
+                  seluruh elemen genBI.
                 </li>
                 <li className="text-muted">
-                  Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
-                  dan menyebarluaskan kebijakan Bank Indonesia.
+                  Membangun koordinasi aktif dan berkesinambungan dengan seluruh
+                  elemen.
                 </li>
                 <li className="text-muted">
-                  Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
-                  dan menyebarluaskan kebijakan Bank Indonesia.
+                  Menetapkan program kerja yang inklusif dan bermanfaat bagi
+                  masyarakat secara umum.
+                </li>
+                <li className="text-muted">
+                  Mengoptimalkan fungsi dan tugas dari struktur GenBI.
                 </li>
               </ol>
             </div>
             <div className="col-lg-4 col-md-6 text-start">
-              <h2>Misi</h2>
+              <h2>Penjabaran Misi</h2>
               <p className="text-muted ">
-                Sebagai garda depan Bank Indonesia untuk membantu menyampaikan
-                dan menyebarluaskan kebijakan Bank Indonesia.
+                Kebersamaan dan kekeluargaan menjnadi sebuah permasalhana yang
+                cukup signifikan , yang mempengaruhi proses pelaksanaan program
+                kerja dan keaktifan. UNtuk itu, peningkatan rasa kebersamaan dan
+                kekeluargaan di GenBI melalui program kerja ataupun di luar dari
+                kegiatan genBI
+              </p>
+              <p className="text-muted ">
+                Upaya Bank Indonesia dalam hal kepedulian sosial tercermin dalam
+                program sosial bank indonesia (PSBI). Dalam paparan disebutkan
+                bahwa genBI berperan sebagai front liner dalam mengkomunikasikan
+                kebijakan BI kepada masyarakat. OLeh karenanya, Program kerja
+                yang hadir bersifat mempublikasikan kebijakan BI yang dapat
+                dicerna oleh masyarakat
               </p>
             </div>
           </div>
