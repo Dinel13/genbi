@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 import { LoginAdmin } from "../../store/action/AuthAction";
 import { useHistory } from "react-router-dom";
 
+import ErrorModal from "../../components/ErrorModal/Error";
+import Loading from "../../components/Loading/Loading";
+
 export default function FormLogin() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm();
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (values) => {
-    const test = await dispatch(LoginAdmin(values.email, values.password));
+    const test = await dispatch(LoginAdmin(values.email, values.password, setError, setIsLoading));
     test && history.replace("/admin");
   };
 
-  return (
+  return error ? (
+    <ErrorModal message={error} setModall={setError} />
+  ) : isLoading ? (
+    <Loading />
+  ) : (
     <div>
       <div className="container mt-3 main">
         <div className="row justify-content-md-center">

@@ -22,27 +22,6 @@ const Admin = (props) => {
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState("");
 
-  /*
- to print pdf
- const [elementId, setElementId] = useState("");
-  const [pdfHeader, setPdfHeader] = useState("");
-
-  console.log(elementId);
-
-  const exportToPdf = (id, header) => {
-    print({
-      printable: id,
-      type: "html",
-      header: header,
-      style: ".btn-primary { color: red; } .ggg{color : black;} ",
-    });
-  };
-
-        <Main export={exportToPdf} id={elementId} header={pdfHeader}>
-
-
-  */
-
   return (
     <div className="container-fluid">
       <div className="row">

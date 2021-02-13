@@ -21,7 +21,7 @@ const Unm = (props) => {
   
   useEffect(() => {
     setActive("wawUnm");
-    fetch("http://localhost:8081/graphql", {
+    fetch("http://47.254.192.86:85/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + admin,

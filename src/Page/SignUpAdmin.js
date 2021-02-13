@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 import {  SignupAdmin } from "../store/action/AuthAction";
 import { Link } from "react-router-dom";
 
+import ErrorModal from "../components/ErrorModal/Error";
+import Loading from "../components/Loading/Loading";
+
 export default function FormSignUp() {
   const dispatch = useDispatch();
   const { register, errors, handleSubmit, getValues } = useForm();
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (values) => {
-    dispatch(SignupAdmin(values.email, values.password, values.nama));
+    dispatch(SignupAdmin(values.email, values.password, values.nama, setError, setIsLoading));
     console.log(values);
   };
 
-  return (
+  return error ? (
+    <ErrorModal message={error} setModall={setError} />
+  ) : isLoading ? (
+    <Loading />
+  ) : (
     <div className="container mt-3 main">
       <div className="row justify-content-md-center">
         <div className="card px-0 mt-4 col-md-8 col-lg-6 shadow-lg">

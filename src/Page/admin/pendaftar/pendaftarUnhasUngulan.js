@@ -19,7 +19,7 @@ const PendaftarUnhasUngulan = (props) => {
   const { setActive } = props;
   useEffect(() => {
     setActive("dafUnh");
-    fetch("http://localhost:8081/graphql", {
+    fetch("http://47.254.192.86:85/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + admin,

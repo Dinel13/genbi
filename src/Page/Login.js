@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 import { Login } from "../store/action/AuthAction";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ErrorModal from "../components/ErrorModal/Error";
+import Loading from "../components/Loading/Loading";
 
 const FormLogin = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = (values) => {
-    dispatch(Login(values.email, values.password));
-    history.replace("/pendaftaran");
+    dispatch(Login(values.email, values.password, setError, setIsLoading));
   };
-  return (
+  return error ? (
+    <ErrorModal message={error} setModall={setError} />
+  ) : isLoading ? (
+    <Loading />
+  ) : (
     <div>
       <div className="container mt-3 main">
         <div className="row justify-content-md-center">

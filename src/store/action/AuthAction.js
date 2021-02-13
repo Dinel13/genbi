@@ -42,8 +42,9 @@ export const AuthAdminWithData = (adminId, admin, name) => {
   };
 };
 
-export const Signup = (email, password, name) => {
+export const Signup = (email, password, name, setError, setIsLoading) => {
   return async (dispatch) => {
+    setIsLoading(true);
     const graphqlQuery = {
       query: `
         mutation {
@@ -57,7 +58,7 @@ export const Signup = (email, password, name) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8081/graphql", {
+      const response = await fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,14 +79,17 @@ export const Signup = (email, password, name) => {
           resData.data.createUser.email
         )
       );
+      setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+      setError(err.message);
     }
   };
 };
 
-export const Login = (email, password) => {
+export const Login = (email, password, setError, setIsLoading) => {
   return async (dispatch) => {
+    setIsLoading(true);
     const graphqlQuery = {
       query: `
         query {
@@ -99,7 +103,7 @@ export const Login = (email, password) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8081/graphql", {
+      const response = await fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,15 +122,18 @@ export const Login = (email, password) => {
           resData.data.login.email
         )
       );
+      setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+      setError(err.message);
     }
   };
 };
 
 //for admin
-export const SignupAdmin = (email, password, name) => {
+export const SignupAdmin = (email, password, name, setError, setIsLoading) => {
   return async (dispatch) => {
+    setIsLoading(true);
     const graphqlQuery = {
       query: `
         mutation {
@@ -139,7 +146,7 @@ export const SignupAdmin = (email, password, name) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8081/graphql", {
+      const response = await fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -163,14 +170,17 @@ export const SignupAdmin = (email, password, name) => {
           resData.data.createAdmin.name
         )
       );
+      setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+      setError(err.message);
     }
   };
 };
 
-export const LoginAdmin = (email, password) => {
+export const LoginAdmin = (email, password, setError, setIsLoading) => {
   return async (dispatch) => {
+    setIsLoading(true)
     const graphqlQuery = {
       query: `
         query {
@@ -183,7 +193,7 @@ export const LoginAdmin = (email, password) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8081/graphql", {
+      const response = await fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -205,8 +215,10 @@ export const LoginAdmin = (email, password) => {
           resData.data.loginAdmin.name
         )
       );
+      setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+      setError(err.message);
     }
   };
 };

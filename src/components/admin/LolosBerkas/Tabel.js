@@ -20,7 +20,7 @@ const Tabel = (props) => {
   /* to handel terima atau batal the pendaftar*/
   const lolosWawancaraHandler = (pendaftarId, terima) => {
     setIsLoading(true);
-    fetch("http://localhost:8081/graphql", {
+    fetch("http://47.254.192.86:85/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + admin,
