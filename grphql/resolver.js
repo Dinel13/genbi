@@ -180,6 +180,9 @@ module.exports = {
         updatedAt: createdPendaftar.updatedAt.toISOString(),
       };
     } catch (error) {
+      return {
+        id : error
+      }
       console.log(error);
     }
   },

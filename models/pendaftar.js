@@ -65,7 +65,7 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     arahan: {
-      type: Boolean,
+      type: String,
       requireq: false,
     },
     bergenbi: {
@@ -130,7 +130,7 @@ const pendaftarSchema = new Schema(
       requireq: false,
     },
     kontribusi: {
-      type: Boolean,
+      type: String,
       requireq: false,
     },
     kosan: {
