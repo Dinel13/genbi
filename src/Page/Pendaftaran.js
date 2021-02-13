@@ -37,7 +37,8 @@ const Daftar = (props) => {
   //to check if user already registered
   React.useEffect(() => {
     setIsLoading(true);
-    fetch("http://47.254.192.86:85/graphql", {
+   // fetch("http://47.254.192.86:85/graphql", {
+    fetch("http://localhost:8081/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -63,7 +64,6 @@ const Daftar = (props) => {
   }, [userId, token]);
 
   const onSubmit = async (values) => {
-    console.log(values);
     setIsLoading(true);
     let endpoint = "file";
     const formData = new FormData();
@@ -85,7 +85,8 @@ const Daftar = (props) => {
     }
 
     try {
-      const response = await fetch(`http://47.254.192.86:85/${endpoint}`, {
+    
+      const response = await fetch(`http://localhost:8081/${endpoint}`, {  // fetch(`http://47.254.192.86:85/${endpoint}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
@@ -135,7 +136,7 @@ const Daftar = (props) => {
           }
         `,
       };
-      const responseFinish = await fetch("http://47.254.192.86:85/graphql", {
+      const responseFinish = await fetch("http://localhost:8081/graphql", {// fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
@@ -147,16 +148,17 @@ const Daftar = (props) => {
       if (resDataFinish.errors) {
         throw new Error(resDataFinish.errors[0].message);
       }
-      setPendaftar(resDataFinish.data.pendaftar);
+      setPendaftar(resDataFinish.data.createPendaftar);
+      console.log(resDataFinish.data.createPendaftar);
       setIsLoading(false);
-      localStorage.removeItem("dataPendaftar");
+     // localStorage.removeItem("dataPendaftar");
     } catch (err) {
       setPendaftar(false);
       setIsLoading(false);
       setIsError(err);
     }
   };
-  const test = () => localStorage.removeItem("dataPendaftar");
+  
   //to save data form to local storage
   const simpanHandler = async () => {
     localStorage.setItem(
