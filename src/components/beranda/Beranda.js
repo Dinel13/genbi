@@ -1,10 +1,5 @@
 import React from "react";
 import "./beranda.css";
-import satu from "../../images/satu.jpeg";
-import dua from "../../images/dua.jpeg";
-import tiga from "../../images/tiga.jpeg";
-import sulsel from "../../images/sulsel.png";
-import bi from "../../images/bi.png";
 
 const Beranda = () => {
   return (
@@ -26,7 +21,9 @@ const Beranda = () => {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src={satu}
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/satu.jpeg"
+              }
               style={{ filter: "brightness(45%)" }}
               className="d-block img-fluid"
               alt="genbi sulsel"
@@ -44,7 +41,9 @@ const Beranda = () => {
           </div>
           <div className="carousel-item">
             <img
-              src={dua}
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/dua.jpeg"
+              }
               style={{ filter: "brightness(45%)" }}
               className="d-block img-fluid"
               alt="genbi sulsel"
@@ -53,7 +52,9 @@ const Beranda = () => {
             <div className="container">
               <div className="carousel-caption text-start">
                 <img
-                  src={bi}
+                  src={
+                    "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/bi.png"
+                  }
                   className="img-fluid bi pb-3"
                   style={{}}
                   alt="bank indonesia"
@@ -69,7 +70,9 @@ const Beranda = () => {
           </div>
           <div className="carousel-item">
             <img
-              src={tiga}
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/tiga.jpeg"
+              }
               style={{ filter: "brightness(45%)" }}
               className="d-block img-fluid"
               alt="genbi sulsel"
@@ -83,9 +86,16 @@ const Beranda = () => {
                   yang lebih baik melalui kegiatan yang diselenggarakan.
                 </p>
                 <p>
-                  <a className="btn btn-lg btn-primary" href="#" role="button">
+                  <button
+                    className="btn btn-lg btn-primary"
+                    onClick={() =>
+                      window.alert(
+                        " Belum ada data, masih dalam tahap pengembangan"
+                      )
+                    }
+                  >
                     Gallery kegiatan
-                  </a>
+                  </button>
                 </p>
               </div>
             </div>
@@ -164,22 +174,14 @@ const Beranda = () => {
         </p>
         <div className="row">
           <div className="col-lg-4 col-md-6">
-            <svg
-              className="bd-placeholder-img rounded-circle"
-              width="140"
-              height="140"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 140x140"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#777" />
-              <text x="50%" y="50%" fill="#777" dy=".3em">
-                140x140
-              </text>
-            </svg>
+            <img
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/front-removebg-preview.png"
+              }
+              alt="front liner"
+              style={{ maxHeight: "300px" }}
+              className="radius-image img-fluid"
+            />
 
             <h2 className="fw-bolder mb-0 mt-3">Front Liners</h2>
             <p className="text-muted textt">
@@ -188,44 +190,29 @@ const Beranda = () => {
             </p>
           </div>
           <div className="col-lg-4 col-md-6">
-            <svg
-              className="bd-placeholder-img rounded-circle"
-              width="140"
-              height="140"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 140x140"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#777" />
-              <text x="50%" y="50%" fill="#777" dy=".3em">
-                140x140
-              </text>
-            </svg>
+            <img
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/change.png"
+              }
+              alt="front liner"
+              style={{ maxHeight: "300px" }}
+              className="radius-image img-fluid"
+            />
+
             <h2 className="fw-bolder mb-0 mt-3">Agent of Change</h2>
             <p className="text-muted textt">
               Sebagai agen pembawa perubahan menuju masyarakat yang lebih baik.
             </p>
           </div>
           <div className="col-lg-4 col-md-6">
-            <svg
-              className="bd-placeholder-img rounded-circle"
-              width="140"
-              height="140"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 140x140"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#777" />
-              <text x="50%" y="50%" fill="#777" dy=".3em">
-                140x140
-              </text>
-            </svg>
+            <img
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/leader-removebg-preview.png"
+              }
+              alt="front liner"
+              style={{ maxHeight: "300px" }}
+              className="radius-image img-fluid"
+            />
             <h2 className="fw-bolder mb-0 mt-3">Future Leader</h2>
             <p className="text-muted textt">
               Sebagai wadah pengembangan diri sehingga mahasiswa mampu menjadi
@@ -244,8 +231,8 @@ const Beranda = () => {
           <div className="row">
             <div className="col-lg-6 text-center mt-0 ">
               <img
-                src={sulsel}
-                alt=""
+                src="https://raw.githubusercontent.com/Dinel13/genbi/dataImage/sulsel.png"
+                alt="genbi sulsel"
                 style={{ maxHeight: "630px" }}
                 className="radius-image img-fluid"
               />
@@ -319,36 +306,27 @@ const Beranda = () => {
       </div>
       <div className="container mt-5">
         <div className="row ">
-          <h1 className="fw-bold text-center mb-5">Lima Deputi GenBI Sulsel</h1>
+          <h1 className="fw-bold text-center mb-5">Empat Deputi GenBI</h1>
           <div className="col-md-7 order-md-2">
             <h2 className="featurette-heading">
               <span className="text-muted">Deputi </span>
               Pendidikan
             </h2>
             <p className="lead">
-              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
-              ligula porta felis euismod semper. Praesent commodo cursus magna,
-              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-              commodo.
+              Deputi pendidikan adalah deputi yang ........ ligula porta felis
+              euismod semper. Praesent commodo cursus magna, vel scelerisque
+              nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
             </p>
           </div>
           <div className="col-md-5 order-md-1 text-center">
-            <svg
-              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="300"
-              height="300"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 500x500"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#eee" />
-              <text x="50%" y="50%" fill="#aaa" dy=".3em">
-                300x530
-              </text>
-            </svg>
+            <img
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/didik-removebg-preview.png"
+              }
+              alt="pendiddikan"
+              style={{ maxHeight: "300px" }}
+              className="radius-image img-fluid"
+            />
           </div>
         </div>
 
@@ -361,29 +339,21 @@ const Beranda = () => {
               Linkungan Hidup
             </h2>
             <p className="lead">
-              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
-              ligula porta felis euismod semper. Praesent commodo cursus magna,
-              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              Deputi Linkungan Hidup adalah deputi yang ........ ligula porta
+              felis euismod semper. Praesent commodo cursus magna, vel
+              scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
               commodo.
             </p>
           </div>
           <div className="col-md-5 text-center">
-            <svg
-              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="300"
-              height="300"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 500x500"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#eee" />
-              <text x="50%" y="50%" fill="#aaa" dy=".3em">
-                500x500
-              </text>
-            </svg>
+            <img
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/lh.png"
+              }
+              alt="lingkungan hidup"
+              style={{ maxHeight: "300px" }}
+              className="radius-image img-fluid"
+            />
           </div>
         </div>
 
@@ -396,29 +366,21 @@ const Beranda = () => {
               Kesehatan
             </h2>
             <p className="lead">
-              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
-              ligula porta felis euismod semper. Praesent commodo cursus magna,
-              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              deputi kesehatan adalah deputi yang ....... Vestibulum id ligula
+              porta felis euismod semper. Praesent commodo cursus magna, vel
+              scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
               commodo.
             </p>
           </div>
           <div className="col-md-5 text-center order-md-1">
-            <svg
-              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="300"
-              height="300"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 500x500"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#eee" />
-              <text x="50%" y="50%" fill="#aaa" dy=".3em">
-                500x500
-              </text>
-            </svg>
+            <img
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/sehat.png"
+              }
+              alt="kesehatan"
+              style={{ maxHeight: "300px" }}
+              className="radius-image img-fluid"
+            />
           </div>
         </div>
 
@@ -431,66 +393,23 @@ const Beranda = () => {
               Kewirausahaan
             </h2>
             <p className="lead">
-              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
-              ligula porta felis euismod semper. Praesent commodo cursus magna,
-              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              deputi kewirausahaan adalah ........ Vestibulum id ligula porta
+              felis euismod semper. Praesent commodo cursus magna, vel
+              scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
               commodo.
             </p>
           </div>
           <div className="col-md-5 text-center">
-            <svg
-              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="300"
-              height="300"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 500x500"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#eee" />
-              <text x="50%" y="50%" fill="#aaa" dy=".3em">
-                500x500
-              </text>
-            </svg>
+            <img
+              src={
+                "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/kwu-removebg-preview.png"
+              }
+              alt="kesehatan"
+              style={{ maxHeight: "300px" }}
+              className="radius-image img-fluid"
+            />
           </div>
         </div>
-        <hr className="featurette-divider" />
-
-        <div className="row featurette">
-          <div className="col-md-7 order-md-2">
-            <h2 className="featurette-heading">
-              <span className="text-muted">Deputi </span>
-              Public Relation and Multimedia
-            </h2>
-            <p className="lead">
-              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
-              ligula porta felis euismod semper. Praesent commodo cursus magna,
-              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-              commodo.
-            </p>
-          </div>
-          <div className="col-md-5 text-center order-md-1">
-            <svg
-              className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="300"
-              height="300"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: 500x500"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#eee" />
-              <text x="50%" y="50%" fill="#aaa" dy=".3em">
-                500x500
-              </text>
-            </svg>
-          </div>
-        </div>
-
         <hr className="featurette-divider" />
       </div>
     </div>
