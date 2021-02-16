@@ -1,7 +1,7 @@
 # GenBi Project:
 This isi a project to GenBI or Generasi Baru Indonesia spesially for sulawesi selatan region. GenBI is a comunity of schoalrship awardee of Bank Indonesia. This project include Back-end and Front-end. :metal:
 
-This project wa creted to become a simulation to regis Bank Indonesia Scholarship with easy way
+This project wa creted to become a simulation to regis Bank Indonesia Scholarship with easy way. and also look forward to have a fiture to make user can upload a articel.
 
 Back-end project was creted with 
 1. javascript
