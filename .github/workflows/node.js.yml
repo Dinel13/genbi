@@ -18,9 +18,10 @@ jobs:
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        passphrase: ""
+        password: ${{ secrets.SSH_PASSWORD }}
+        #key: ${{ secrets.SSH_KEY }}
+        #port: ${{ secrets.SSH_PORT }}
+        #passphrase: ""
         script: |
           cd /var/www/genbib
           git pull
