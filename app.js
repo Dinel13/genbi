@@ -14,16 +14,15 @@ const graphqlSchema = require("./grphql/schema");
 const graphqlResolver = require("./grphql/resolver");
 
 const app = express();
-app.use(cors({origin : '*'}))
 
 app.use(bodyParser.json()); // application/json
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
+  res.header("Access-Control-Allow-Origin", "http://genbisulsel.cyou");
+  res.header(
     "Access-Control-Allow-Methods",
     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
   );
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
@@ -65,7 +64,10 @@ const storageAll = multer.diskStorage({
       cb(null, "public/rekomendasi2");
     } else if (file.fieldname === "toeflFile") {
       cb(null, "public/toefl");
-    }
+    } else {
+cb(null, "public/toefl");
+
+}
   },
   filename: (req, file, cb) => {
     cb(null, file.fieldname + Date.now() + path.extname(file.originalname));
@@ -96,7 +98,7 @@ const filterAll = (file, cb) => {
   }
 };
 
-app.put(
+app.use(
   "/file",
   multer({
     storage: storageAll,
@@ -109,14 +111,6 @@ app.put(
   }).fields([
     {
       name: "rekomendasi",
-      maxCount: 1,
-    },
-    {
-      name: "rekomendasi2",
-      maxCount: 1,
-    },
-    {
-      name: "toeflFile",
       maxCount: 1,
     },
     {
@@ -155,18 +149,18 @@ app.put(
     if (!req.files) {
       return res.status(200).json({ message: "No file provided!" });
     }
-    if (req.body.oldPath) {
-      clearImage(req.body.oldPath);
-    }
+  //  if (req.body.oldPath) {
+//      clearImage(req.body.oldPath);
+  //  }
     return res.status(201).json({
       message: "File stored.",
-      ktm: req.files.ktm[0].path,
-      ktp: req.files.ktp[0].path,
-      foto: req.files.foto[0].path,
-      rekening: req.files.rekening[0].path,
-      rekomendasi: req.files.rekomendasi[0].path,
-      mampu: req.files.mampu[0].path,
-      transkip: req.files.transkip[0].path,
+    //  ktm: req.files.ktm[0].path,
+    //  ktp: req.files.ktp[0].path,
+    //  foto: req.files.foto[0].path,
+    //  rekening: req.files.rekening[0].path,
+    //  rekomendasi: req.files.rekomendasi[0].path,
+    //  mampu: req.files.mampu[0].path,
+    //  transkip: req.files.transkip[0].path,
     });
   }
 );
