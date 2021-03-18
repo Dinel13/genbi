@@ -42,7 +42,7 @@ app.use(
 );
 
 app.get("/test", (req, res, next) => {
-  res.status(200).json({ message: "mantap, test success" });
+  res.status(200).json({ message: "yahoo, test success " });
 })
 
 const storageAll = multer.diskStorage({

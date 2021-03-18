@@ -23,6 +23,4 @@ jobs:
         script: |
           cd /var/www/genbib
           git pull
-          npm install --production
-          pm2 restart app
 
