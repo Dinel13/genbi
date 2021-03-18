@@ -58,7 +58,7 @@ export const Signup = (email, password, name, setError, setIsLoading) => {
       `,
     };
     try {
-      const response = await fetch("http://localhost:8081/graphql", {// fetch("http://47.254.192.86:85/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", { //fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export const Login = (email, password, setError, setIsLoading) => {
       `,
     };
     try {
-      const response = await fetch("http://47.254.192.86:85/graphql", {
+      const response = await fetch("http://localhost:8081/graphql", { // fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

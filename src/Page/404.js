@@ -11,7 +11,7 @@ const Defult = () => {
       <div className="text-center mt-6">
         <div className="alert alert-danger">
           <h3>
-            Alamat <code>{location.pathname}</code> Tidak tersedia
+            Alamat <code>{location.pathname}</code> Tidak tersedia lagi
           </h3>
           <hr/>
           <h5 className="text-muted">

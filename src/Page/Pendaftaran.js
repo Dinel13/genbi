@@ -37,7 +37,7 @@ const Daftar = (props) => {
   //to check if user already registered
   React.useEffect(() => {
     setIsLoading(true);
-   // fetch("http://47.254.192.86:85/graphql", {
+    // fetch("http://47.254.192.86:85/graphql", {
     fetch("http://localhost:8081/graphql", {
       method: "POST",
       headers: {
@@ -75,6 +75,7 @@ const Daftar = (props) => {
     formData.append("transkip", values.nilai[0]);
     formData.append("rekomendasi", values.rekomendasi[0]);
     formData.append("beasiswaLain", values.beasiswaLain[0]);
+    formData.append("data", values);
     if (values.jenisBeasiswa === "ungulan") {
       endpoint = "unggulan";
       formData.append("rekomendasi2", values.rekomendasi2[0]);
@@ -85,9 +86,10 @@ const Daftar = (props) => {
     }
 
     try {
-    
-      const response = await fetch(`http://localhost:8081/${endpoint}`, {  // fetch(`http://47.254.192.86:85/${endpoint}`, {
+      const response = await fetch(`http://localhost:8081/${endpoint}`, {
+        //fetch(`http://47.254.192.86:85/${endpoint}`, {
         method: "PUT",
+        mode: "no-cors",
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -136,7 +138,9 @@ const Daftar = (props) => {
           }
         `,
       };
+      /*
       const responseFinish = await fetch("http://localhost:8081/graphql", {// fetch("http://47.254.192.86:85/graphql", {
+        mode: "no-cors",
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
@@ -151,14 +155,15 @@ const Daftar = (props) => {
       setPendaftar(resDataFinish.data.createPendaftar);
       console.log(resDataFinish.data.createPendaftar);
       setIsLoading(false);
-     // localStorage.removeItem("dataPendaftar");
+       */
+      // localStorage.removeItem("dataPendaftar");
     } catch (err) {
       setPendaftar(false);
       setIsLoading(false);
       setIsError(err);
     }
   };
-  
+
   //to save data form to local storage
   const simpanHandler = async () => {
     localStorage.setItem(
@@ -202,7 +207,8 @@ const Daftar = (props) => {
     <Loading />
   ) : pendaftar ? (
     <>
-      <Modal notFull={true}
+      <Modal
+        notFull={true}
         header="Selamat, Pendaftaran anda berhasil"
         body="Pengumuman dapat di lihat di laman ini dan email anda pada
     tanggal 20 Februari 2020"
