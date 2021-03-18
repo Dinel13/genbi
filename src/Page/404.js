@@ -13,6 +13,7 @@ const Defult = () => {
           <h3>
             Alamat <code>{location.pathname}</code> Tidak tersedia lagi
           </h3>
+          <p>test</p>
           <hr/>
           <h5 className="text-muted">
             Periksa kembali alamat url yang anda tuju
