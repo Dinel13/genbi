@@ -20,6 +20,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
+        passphrase: ""
         script: |
           cd /var/www/genbib
           git pull
