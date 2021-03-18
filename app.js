@@ -41,6 +41,10 @@ app.use(
   express.static(path.join(__dirname, "public"))
 );
 
+app.get("/test", (req, res, next) => {
+  res.status(200).json({ message: "mantap, test success" });
+})
+
 const storageAll = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === "ktm") {
