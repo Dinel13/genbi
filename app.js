@@ -15,6 +15,9 @@ const User = require("./models/user");
 const Pendaftar = require("./models/pendaftar");
 
 const app = express();
+
+app.use(bodyParser.json()); // application/json
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
@@ -27,8 +30,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-app.use(bodyParser.json()); // application/json
 
 app.use(auth);
 
