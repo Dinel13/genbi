@@ -11,12 +11,12 @@ const nodemailer = require("nodemailer");
 const auth = require("./middleware/auth");
 const graphqlSchema = require("./grphql/schema");
 const graphqlResolver = require("./grphql/resolver");
+const User = require("./models/user");
+const Pendaftar = require("./models/pendaftar");
 
 const app = express();
-
-app.use(bodyParser.json()); // application/json
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://genbisulsel.cyou");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Methods",
     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
@@ -27,6 +27,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use(bodyParser.json()); // application/json
 
 app.use(auth);
 
@@ -152,18 +154,37 @@ app.use(
     if (!req.files) {
       return res.status(200).json({ message: "No file provided!" });
     }
+    try {
+      const user = await User.findById(req.userId);
+      if (!user) {
+        const error = new Error("Invalid user.");
+        error.code = 401;
+        throw error;
+      }
+      const pendaftar = new Pendaftar({
+        ...pendaftarInput,
+      });
+      const createdPendaftar = await pendaftar.save();
+      user.pendaftar = createdPendaftar;
+      await user.save();
+    } catch (error) {
+      return {
+        id : error
+      }
+      console.log(error);
+    }
   //  if (req.body.oldPath) {
 //      clearImage(req.body.oldPath);
   //  }
     return res.status(201).json({
       message: "File stored.",
-    //  ktm: req.files.ktm[0].path,
-    //  ktp: req.files.ktp[0].path,
-    //  foto: req.files.foto[0].path,
-    //  rekening: req.files.rekening[0].path,
-    //  rekomendasi: req.files.rekomendasi[0].path,
-    //  mampu: req.files.mampu[0].path,
-    //  transkip: req.files.transkip[0].path,
+      ktm: req.files.ktm[0].path,
+      ktp: req.files.ktp[0].path,
+      foto: req.files.foto[0].path,
+      rekening: req.files.rekening[0].path,
+      rekomendasi: req.files.rekomendasi[0].path,
+      mampu: req.files.mampu[0].path,
+      transkip: req.files.transkip[0].path,
     });
   }
 );
