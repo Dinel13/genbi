@@ -24,6 +24,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/satu.jpeg"
               }
+              loading="lazy"
               style={{ filter: "brightness(45%)" }}
               className="d-block img-fluid"
               alt="genbi sulsel"
@@ -44,6 +45,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/dua.jpeg"
               }
+              loading="lazy"
               style={{ filter: "brightness(45%)" }}
               className="d-block img-fluid"
               alt="genbi sulsel"
@@ -55,6 +57,7 @@ const Beranda = () => {
                   src={
                     "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/bi.png"
                   }
+                  loading="lazy"
                   className="img-fluid bi pb-3"
                   style={{}}
                   alt="bank indonesia"
@@ -73,6 +76,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/tiga.jpeg"
               }
+              loading="lazy"
               style={{ filter: "brightness(45%)" }}
               className="d-block img-fluid"
               alt="genbi sulsel"
@@ -134,6 +138,7 @@ const Beranda = () => {
             <img
               src="https://genbiunhas.org/storage/web_assets/genbi.png"
               alt=""
+              loading="lazy"
               style={{ maxHeight: "530px" }}
               className="radius-image img-fluid"
             />
@@ -209,6 +214,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/leader-removebg-preview.png"
               }
+              loading="lazy"
               alt="front liner"
               style={{ maxHeight: "300px" }}
               className="radius-image img-fluid"
@@ -233,6 +239,7 @@ const Beranda = () => {
               <img
                 src="https://raw.githubusercontent.com/Dinel13/genbi/dataImage/sulsel.png"
                 alt="genbi sulsel"
+                loading="lazy"
                 style={{ maxHeight: "630px" }}
                 className="radius-image img-fluid"
               />
@@ -338,6 +345,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/didik-removebg-preview.png"
               }
+              loading="lazy"
               alt="pendiddikan"
               style={{ maxHeight: "300px" }}
               className="radius-image img-fluid"
@@ -365,6 +373,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/lh.png"
               }
+              loading="lazy"
               alt="lingkungan hidup"
               style={{ maxHeight: "300px" }}
               className="radius-image img-fluid"
@@ -392,6 +401,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/sehat.png"
               }
+              loading="lazy"
               alt="kesehatan"
               style={{ maxHeight: "300px" }}
               className="radius-image img-fluid"
@@ -419,6 +429,7 @@ const Beranda = () => {
               src={
                 "https://raw.githubusercontent.com/Dinel13/genbi/dataImage/kwu-removebg-preview.png"
               }
+              loading="lazy"
               alt="kesehatan"
               style={{ maxHeight: "300px" }}
               className="radius-image img-fluid"

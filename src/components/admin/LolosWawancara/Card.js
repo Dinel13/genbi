@@ -92,6 +92,7 @@ const Card = (props) => {
           <div className="col-lg-4">
             <img
               src={props.image}
+              loading="lazy"
               className="figure-img img-fluid rounded"
               alt={data.nama}
             />
