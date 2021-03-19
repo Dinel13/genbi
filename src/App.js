@@ -1,19 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect , Suspense} from "react";
 import { Switch, Route , Redirect} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./App.css";
 
 import Navbar from "./components/Navbar";
-import SignUp from "./Page/SignUp";
-import Login from "./Page/Login";
-import LoginAdmin from "./Page/admin/Login";
-import Home from "./Page/Home";
-import Pendaftaran from "./Page/Pendaftaran";
+//import SignUp from "./Page/SignUp";
+//import Login from "./Page/Login";
+//import LoginAdmin from "./Page/admin/Login";
+//import Home from "./Page/Home";
+//import Pendaftaran from "./Page/Pendaftaran";
 import Footer from "./components/Footer";
-import Admin from "./Page/Admin";
-import Defult from "./Page/404";
+//import Admin from "./Page/Admin";
+//import Defult from "./Page/404";
 import { AuthAdminWithData, AuthWithData } from "./store/action/AuthAction";
+import Loading from "./components/Loading/Loading";
+
+//lazy load
+const SignUp = React.lazy(() => import("./Page/SignUp"))
+const Login = React.lazy(() => import("./Page/Login"))
+const LoginAdmin = React.lazy(() => import("./Page/admin/Login"))
+const Home = React.lazy(() => import("./Page/Home"))
+const Pendaftaran = React.lazy(() => import("./Page/Pendaftaran"))
+const Admin = React.lazy(() => import("./Page/Admin"))
+const Defult = React.lazy(() => import("./Page/404"))
 
 const App = () => {
   const dispatch = useDispatch();
@@ -100,7 +110,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <main>{routes}</main>
+      <main> <Suspense fallback={<Loading />} >{routes}</Suspense></main>
       <Footer />
     </>
   );

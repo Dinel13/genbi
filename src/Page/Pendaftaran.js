@@ -37,8 +37,7 @@ const Daftar = (props) => {
   //to check if user already registered
   React.useEffect(() => {
     setIsLoading(true);
-    // fetch("http://47.254.192.86:85/graphql", {
-    fetch("http://localhost:8081/graphql", {
+    fetch("http://47.254.192.86:85/graphql", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -86,10 +85,8 @@ const Daftar = (props) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8081/${endpoint}`, {
-        //fetch(`http://47.254.192.86:85/${endpoint}`, {
+      const response = await fetch(`http://47.254.192.86:85/${endpoint}`, {
         method: "PUT",
-        mode: "no-cors",
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -99,6 +96,7 @@ const Daftar = (props) => {
       if (resData.errors) {
         throw new Error(resData.errors[0].message);
       }
+      console.log(resData);
       const graphqlQuery = {
         query: `
         mutation {
@@ -138,24 +136,24 @@ const Daftar = (props) => {
           }
         `,
       };
-      /*
-      const responseFinish = await fetch("http://localhost:8081/graphql", {// fetch("http://47.254.192.86:85/graphql", {
-        mode: "no-cors",
+
+      const responseFinish = await fetch("http://47.254.192.86:85/graphql", {
         method: "POST",
         headers: {
-          Authorization: "Bearer " + token,
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify(graphqlQuery),
       });
       const resDataFinish = await responseFinish.json();
       if (resDataFinish.errors) {
-        throw new Error(resDataFinish.errors[0].message);
+        //throw new Error(resDataFinish.errors[0].message);
+        console.log(resDataFinish.errors[0].message);
       }
       setPendaftar(resDataFinish.data.createPendaftar);
       console.log(resDataFinish.data.createPendaftar);
       setIsLoading(false);
-       */
+
       // localStorage.removeItem("dataPendaftar");
     } catch (err) {
       setPendaftar(false);
